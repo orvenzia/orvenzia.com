@@ -88,6 +88,17 @@
     .small{opacity:.8;font-size:.9rem;margin-top:8px}
     /* Safety: prevent mobile overflow from inline styles */
     html, body {max-width: 100%; overflow-x: hidden;}
+    .process-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 18px;
+}
+
+@media (max-width: 760px) {
+  .process-grid {
+    grid-template-columns: 1fr;
+  }
+}
   </style>
   <script type="application/ld+json">
   {
