@@ -61,6 +61,12 @@
     .hero p{color:var(--muted);max-width:760px}
     .hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
     .trust{margin-top:20px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;color:var(--muted)}
+    @media (max-width: 500px) {
+  .trust {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
     .trust .tick{width:18px;height:18px;border-radius:5px;background:linear-gradient(180deg,var(--brand),#118e68);display:inline-flex;align-items:center;justify-content:center;color:#03261d;font-size:13px;font-weight:800}
     .vprop{padding:22px;border-radius:16px;border:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.02)}
     .vprop h4{margin:8px 0 6px}
