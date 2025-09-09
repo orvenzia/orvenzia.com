@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=5">
+  <link rel="stylesheet" href="styles.css?v=9">
 </head>
 <body>
   <!-- Header -->
@@ -50,12 +50,39 @@
           <a class="btn primary" href="#pricing">See packages</a>
           <a class="btn" href="#process">How it works</a>
         </div>
+
+        <!-- TRUST: each item keeps tick + label together -->
         <div class="trust">
-          <span class="tick">✓</span> <span>CSRD/ESRS concepts simplified</span>
-          <span class="tick">✓</span> <span>Supplier-ready questionnaires</span>
-          <span class="tick">✓</span> <span>PDF + data workbook deliverables</span>
+          <span class="trust-item">
+            <span class="tick" aria-hidden="true">
+              <svg class="icon-check" viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                <path class="check" d="M9.2 16.4L5.6 12.8L4.2 14.2L9.2 19.2L20 8.4L18.6 7L9.2 16.4Z"></path>
+              </svg>
+            </span>
+            <span>CSRD/ESRS concepts simplified</span>
+          </span>
+
+          <span class="trust-item">
+            <span class="tick" aria-hidden="true">
+              <svg class="icon-check" viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                <path class="check" d="M9.2 16.4L5.6 12.8L4.2 14.2L9.2 19.2L20 8.4L18.6 7L9.2 16.4Z"></path>
+              </svg>
+            </span>
+            <span>Supplier-ready questionnaires</span>
+          </span>
+
+          <span class="trust-item">
+            <span class="tick" aria-hidden="true">
+              <svg class="icon-check" viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                <path class="check" d="M9.2 16.4L5.6 12.8L4.2 14.2L9.2 19.2L20 8.4L18.6 7L9.2 16.4Z"></path>
+              </svg>
+            </span>
+            <span>PDF + data workbook deliverables</span>
+          </span>
         </div>
       </div>
+
+      <!-- Carousel card -->
       <div class="card hero-carousel">
         <div class="carousel" aria-label="Testimonials carousel">
           <div class="slides" id="slides">
@@ -320,13 +347,14 @@
       });
     }
 
-    // Simple carousel
+    // Simple carousel (fixed width slides)
     let index=0; const slides=document.getElementById('slides');
-    setInterval(()=>{ 
+    const advance = ()=>{
       if (!slides) return;
-      index=(index+1)%3; 
-      slides.style.transform=`translateX(-${index*100}%)`; 
-    },6000);
+      index=(index+1)%slides.children.length;
+      slides.style.transform=`translateX(-${index*100}%)`;
+    };
+    setInterval(advance,6000);
 
     // FAQ toggles
     document.querySelectorAll('.faq-item').forEach(item=>{
@@ -356,23 +384,6 @@ Context: ${data.message}`
       );
       window.location.href = `mailto:support@orvenzia.com?subject=${subject}&body=${body}`;
     }
-
-    // MOBILE GUARD: strip fixed px dimensions on small screens
-    (function(){
-      try{
-        if (window.matchMedia && window.matchMedia('(max-width: 980px)').matches){
-          Array.from(document.querySelectorAll('[style]')).forEach(function(el){
-            var s = el.getAttribute('style'); if(!s) return;
-            var s2 = s
-              .replace(/\bwidth\s*:\s*\d+px;?/gi,'')
-              .replace(/\bmin-width\s*:\s*\d+px;?/gi,'')
-              .replace(/\bmax-width\s*:\s*\d+px;?/gi,'')
-              .replace(/\bheight\s*:\s*\d+px;?/gi,'');
-            if(s2!==s) el.setAttribute('style', s2.trim());
-          });
-        }
-      }catch(e){}
-    })();
   </script>
 </body>
 </html>
