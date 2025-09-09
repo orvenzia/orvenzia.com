@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://orvenzia.com/</loc></url>
-  <url><loc>https://orvenzia.com/index.html</loc></url>
-  <url><loc>https://orvenzia.com/about.html</loc></url>
-  <url><loc>https://orvenzia.com/services.html</loc></url>
-  <url><loc>https://orvenzia.com/cases.html</loc></url>
-  <url><loc>https://orvenzia.com/resources.html</loc></url>
-  <url><loc>https://orvenzia.com/contact.html</loc></url>
+  <url><loc>https://www.orvenzia.com/</loc></url>
+  <url><loc>https://www.orvenzia.com/services.html</loc></url>
+  <url><loc>https://www.orvenzia.com/screening.html</loc></url>
+  <url><loc>https://www.orvenzia.com/process.html</loc></url>
+  <url><loc>https://www.orvenzia.com/pricing.html</loc></url>
+  <url><loc>https://www.orvenzia.com/cases.html</loc></url>
+  <url><loc>https://www.orvenzia.com/about.html</loc></url>
+  <url><loc>https://www.orvenzia.com/contact.html</loc></url>
+  <url><loc>https://www.orvenzia.com/privacy.html</loc></url>
 </urlset>
