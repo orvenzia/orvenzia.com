@@ -1,5 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
+  <!-- === MOBILE HOTFIX (add before </head>) === -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  /* Sanity: no sideways scroll on mobile */
+  html, body { max-width: 100%; overflow-x: hidden; }
+
+  /* Media-safe media */
+  img, video, iframe, svg, canvas { max-width:100%; height:auto; display:block; }
+
+  /* Touch targets */
+  button, .btn, input, textarea, select { min-height:44px; }
+
+  /* Containers never overflow */
+  [class*="container"], main, section, header, footer {
+    max-width: min(1180px, 100%);
+    padding-left: clamp(12px, 4vw, 24px);
+    padding-right: clamp(12px, 4vw, 24px);
+    margin-left:auto; margin-right:auto;
+  }
+
+  /* Typography scales on small screens */
+  h1{font-size:clamp(1.6rem,6vw,3rem); line-height:1.15}
+  h2{font-size:clamp(1.3rem,5vw,2.2rem); line-height:1.2}
+  p, li{font-size:clamp(.98rem,2.7vw,1.06rem)}
+
+  /* Stack multi-column layouts on mobile */
+  @media (max-width:980px){
+    .grid, .row, .columns { display:grid; grid-template-columns:1fr; gap:16px; }
+    /* If you have grid-2/3 utilities they’ll collapse too */
+    .grid-2, .grid-3 { grid-template-columns:1fr !important; }
+  }
+
+  /* SPECIFIC: 5-step process */
+  .process-grid{ display:grid; grid-template-columns:repeat(5, minmax(0,1fr)); gap:18px; }
+  @media (max-width:980px){ .process-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:760px){ .process-grid{ grid-template-columns:1fr; } }
+
+  /* Mobile nav */
+  @media (max-width:760px){
+    nav[aria-label="Primary"]{ display:none !important; }
+    .hamburger{ display:inline-flex !important; }
+    .mobile-menu.show{ display:flex !important; }
+  }
+</style>
+<script>
+  // Remove fixed px widths on small screens (non-destructive)
+  (function(){
+    try{
+      if (window.matchMedia && window.matchMedia('(max-width: 980px)').matches){
+        Array.from(document.querySelectorAll('[style]')).forEach(function(el){
+          var s = el.getAttribute('style'); if(!s) return;
+          var s2 = s
+            .replace(/\bwidth\s*:\s*\d+px;?/gi,'')
+            .replace(/\bmin-width\s*:\s*\d+px;?/gi,'')
+            .replace(/\bmax-width\s*:\s*\d+px;?/gi,'')
+            .replace(/\bheight\s*:\s*\d+px;?/gi,'');
+          if(s2!==s) el.setAttribute('style', s2.trim());
+        });
+      }
+    }catch(e){}
+  })();
+</script>
+<!-- === /MOBILE HOTFIX === -->
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
