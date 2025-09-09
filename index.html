@@ -9,21 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=3">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "name": "Orvenzia ESG",
-    "url": "https://orvenzia.com/",
-    "logo": "https://orvenzia.com/logo.png",
-    "description": "ESG screening and readiness reports for European SMEs, aligned with CSRD/ESRS.",
-    "areaServed": "EU",
-    "serviceType": "ESG Readiness Assessment",
-    "knowsAbout": ["CSRD", "ESRS", "EU Taxonomy", "Scope 1 2 3", "Supplier data collection"],
-    "email": "support@orvenzia.com"
-  }
-  </script>
+  <link rel="stylesheet" href="styles.css?v=5">
 </head>
 <body>
   <!-- Header -->
@@ -54,7 +40,7 @@
   <!-- Hero -->
   <section class="hero">
     <div class="container grid grid-2" style="align-items:center">
-      <div>
+      <div class="text-wrap">
         <span class="pill">Audit‑friendly • CSRD/ESRS aligned • EU‑ready</span>
         <h2>ESG readiness that wins enterprise buyers.</h2>
         <p>
@@ -70,20 +56,24 @@
           <span class="tick">✓</span> <span>PDF + data workbook deliverables</span>
         </div>
       </div>
-      <div>
-        <div class="card" style="padding:22px">
-          <div class="carousel" aria-label="Testimonials carousel">
-            <div class="slides" id="slides">
-              <div class="slide">
-                <h3 style="margin:0">“Made us buyer‑ready in weeks.”</h3>
+      <div class="card hero-carousel">
+        <div class="carousel" aria-label="Testimonials carousel">
+          <div class="slides" id="slides">
+            <div class="slide">
+              <div class="slide-inner">
+                <h3>“Made us buyer‑ready in weeks.”</h3>
                 <p class="pc-feat">"Orvenzia mapped our gaps to ESRS, drafted policies, and created a supplier survey we still use. Our largest customer approved us on first try." — <strong>Ops Director, Logistics SME</strong></p>
               </div>
-              <div class="slide">
-                <h3 style="margin:0">“Everything decision‑makers need.”</h3>
+            </div>
+            <div class="slide">
+              <div class="slide-inner">
+                <h3>“Everything decision‑makers need.”</h3>
                 <p class="pc-feat">"Clear metrics, practical actions, and a sharp 90‑day plan. Exactly what procurement wanted to see." — <strong>COO, Manufacturing</strong></p>
               </div>
-              <div class="slide">
-                <h3 style="margin:0">“Supplier data made simple.”</h3>
+            </div>
+            <div class="slide">
+              <div class="slide-inner">
+                <h3>“Supplier data made simple.”</h3>
                 <p class="pc-feat">"They set up our supplier questionnaire and tracking sheet. Collection rates jumped from 22% to 81% in one month." — <strong>Head of Supply</strong></p>
               </div>
             </div>
@@ -366,6 +356,23 @@ Context: ${data.message}`
       );
       window.location.href = `mailto:support@orvenzia.com?subject=${subject}&body=${body}`;
     }
+
+    // MOBILE GUARD: strip fixed px dimensions on small screens
+    (function(){
+      try{
+        if (window.matchMedia && window.matchMedia('(max-width: 980px)').matches){
+          Array.from(document.querySelectorAll('[style]')).forEach(function(el){
+            var s = el.getAttribute('style'); if(!s) return;
+            var s2 = s
+              .replace(/\bwidth\s*:\s*\d+px;?/gi,'')
+              .replace(/\bmin-width\s*:\s*\d+px;?/gi,'')
+              .replace(/\bmax-width\s*:\s*\d+px;?/gi,'')
+              .replace(/\bheight\s*:\s*\d+px;?/gi,'');
+            if(s2!==s) el.setAttribute('style', s2.trim());
+          });
+        }
+      }catch(e){}
+    })();
   </script>
 </body>
 </html>
