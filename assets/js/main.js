@@ -1,1 +1,6 @@
-document.addEventListener('DOMContentLoaded',()=>{document.getElementById('navToggle')?.addEventListener('click',()=>document.getElementById('nav').classList.toggle('show'));});
+
+document.addEventListener('DOMContentLoaded', function(){
+  const t = document.getElementById('navToggle');
+  const n = document.getElementById('nav');
+  t?.addEventListener('click', ()=> n.classList.toggle('show'));
+});
