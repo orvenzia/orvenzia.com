@@ -10,12 +10,28 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=1">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Orvenzia ESG",
+    "url": "https://orvenzia.com/",
+    "logo": "https://orvenzia.com/logo.png",
+    "description": "ESG screening and readiness reports for European SMEs, aligned with CSRD/ESRS.",
+    "areaServed": "EU",
+    "serviceType": "ESG Readiness Assessment",
+    "knowsAbout": ["CSRD", "ESRS", "EU Taxonomy", "Scope 1 2 3", "Supplier data collection"],
+    "email": "support@orvenzia.com"
+  }
+  </script>
 </head>
 <body>
-  <!-- Indholdet af din side (samme som før) -->
   <header>
     <div class="container nav">
-      <a class="brand" href="#"><span class="logo"></span><h1>Orvenzia ESG</h1></a>
+      <a class="brand" href="#">
+        <span class="logo" aria-hidden="true"></span>
+        <h1 aria-label="Orvenzia ESG">Orvenzia ESG</h1>
+      </a>
       <nav aria-label="Primary">
         <a class="badge" href="#value">Why Orvenzia</a>
         <a class="badge" href="#process">Process</a>
@@ -34,34 +50,312 @@
     </div>
   </header>
 
-  <main>
-    <!-- resten af sektionerne her -->
-    <section id="process" class="section">
-      <div class="container card" style="padding:28px">
-        <h3>Our 5‑step process</h3>
-        <div class="process-grid">
-          <div class="step card" style="padding:18px"><div class="n">1</div><div><strong>Screening</strong></div></div>
-          <div class="step card" style="padding:18px"><div class="n">2</div><div><strong>Evidence</strong></div></div>
-          <div class="step card" style="padding:18px"><div class="n">3</div><div><strong>Gap analysis</strong></div></div>
-          <div class="step card" style="padding:18px"><div class="n">4</div><div><strong>Report</strong></div></div>
-          <div class="step card" style="padding:18px"><div class="n">5</div><div><strong>90‑day plan</strong></div></div>
+  <section class="hero">
+    <div class="container grid grid-2" style="align-items:center">
+      <div>
+        <span class="pill">Audit‑friendly • CSRD/ESRS aligned • EU‑ready</span>
+        <h2>ESG readiness that wins enterprise buyers.</h2>
+        <p>
+          We turn your current practices into a concise, credible <strong>ESG Readiness Report</strong> — including a fast <strong>screening</strong>, supplier data capture, and a clear <strong>90‑day improvement plan</strong>. Designed so large customers can say “yes” faster.
+        </p>
+        <div class="hero-cta">
+          <a class="btn primary" href="#pricing">See packages</a>
+          <a class="btn" href="#process">How it works</a>
+        </div>
+        <div class="trust">
+          <span class="tick">✓</span> <span>CSRD/ESRS concepts simplified</span>
+          <span class="tick">✓</span> <span>Supplier-ready questionnaires</span>
+          <span class="tick">✓</span> <span>PDF + data workbook deliverables</span>
         </div>
       </div>
-    </section>
-  </main>
+      <div>
+        <div class="card" style="padding:22px">
+          <div class="carousel" aria-label="Testimonials carousel">
+            <div class="slides" id="slides">
+              <div class="slide">
+                <h3 style="margin:0">“Made us buyer‑ready in weeks.”</h3>
+                <p class="pc-feat">"Orvenzia mapped our gaps to ESRS, drafted policies, and created a supplier survey we still use. Our largest customer approved us on first try." — <strong>Ops Director, Logistics SME</strong></p>
+              </div>
+              <div class="slide">
+                <h3 style="margin:0">“Everything decision‑makers need.”</h3>
+                <p class="pc-feat">"Clear metrics, practical actions, and a sharp 90‑day plan. Exactly what procurement wanted to see." — <strong>COO, Manufacturing</strong></p>
+              </div>
+              <div class="slide">
+                <h3 style="margin:0">“Supplier data made simple.”</h3>
+                <p class="pc-feat">"They set up our supplier questionnaire and tracking sheet. Collection rates jumped from 22% to 81% in one month." — <strong>Head of Supply</strong></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="sr-only">Carousel rotates every 6 seconds</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="value" class="section">
+    <div class="container grid grid-3">
+      <div class="vprop">
+        <span class="badge">Outcome #1</span>
+        <h4>Buyer‑ready ESG pack</h4>
+        <p>Polished PDF report + data workbook: KPIs, policies, risks/controls, and a crisp executive summary mapped to ESRS concepts.</p>
+      </div>
+      <div class="vprop">
+        <span class="badge">Outcome #2</span>
+        <h4>Supplier questionnaires</h4>
+        <p>Ready‑to‑send supplier survey (scope 1–3 inputs, social & governance basics) with response tracker and reminders.</p>
+      </div>
+      <div class="vprop">
+        <span class="badge">Outcome #3</span>
+        <h4>90‑day plan</h4>
+        <p>Prioritized actions with owners, effort/impact scores, and simple templates to implement improvements fast.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="process" class="section">
+    <div class="container card" style="padding:28px">
+      <h3 style="margin-top:0">Our 5‑step process</h3>
+      <div class="process-grid">
+        <div class="step card" style="padding:18px">
+          <div class="n">1</div>
+          <div>
+            <strong>Screening (45–60 min)</strong>
+            <p>11 key questions to benchmark current state vs. ESRS expectations.</p>
+          </div>
+        </div>
+        <div class="step card" style="padding:18px">
+          <div class="n">2</div>
+          <div>
+            <strong>Evidence capture</strong>
+            <p>We collect policies, metrics, and supplier inputs with a guided checklist.</p>
+          </div>
+        </div>
+        <div class="step card" style="padding:18px">
+          <div class="n">3</div>
+          <div>
+            <strong>Gap analysis</strong>
+            <p>Material topics, KPIs, risks/controls; prioritized with effort/impact.</p>
+          </div>
+        </div>
+        <div class="step card" style="padding:18px">
+          <div class="n">4</div>
+          <div>
+            <strong>Readiness report</strong>
+            <p>Polished PDF + XLSX workbook, buyer‑facing and audit‑friendly.</p>
+          </div>
+        </div>
+        <div class="step card" style="padding:18px">
+          <div class="n">5</div>
+          <div>
+            <strong>90‑day plan</strong>
+            <p>Clear owners, timelines, and templates to execute immediately.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing" class="section">
+    <div class="container">
+      <div class="grid grid-3">
+        <div class="card price-card">
+          <span class="badge">Starter</span>
+          <h3>Screening</h3>
+          <div class="price">€390 <small>one‑time</small></div>
+          <ul class="pc-feat">
+            <li>11‑question ESG screening (live)</li>
+            <li>Scorecard + maturity snapshot</li>
+            <li>Buyer‑ready highlights page</li>
+            <li>Upgrade credit to any higher plan</li>
+          </ul>
+          <a class="btn" href="#contact">Start screening</a>
+        </div>
+        <div class="card price-card" style="outline:2px solid var(--brand);outline-offset:0">
+          <span class="badge pc-pop">Most popular</span>
+          <span class="badge">Core</span>
+          <h3>Readiness Report</h3>
+          <div class="price">€1,490 <small>2–3 weeks</small></div>
+          <ul class="pc-feat">
+            <li>Everything in Starter</li>
+            <li>Buyer‑facing PDF (20–30 pages)</li>
+            <li>ESRS‑mapped KPI table</li>
+            <li>Policy drafts (code of conduct, environment, DEI)</li>
+            <li>90‑day improvement plan</li>
+          </ul>
+          <a class="btn primary" href="#contact">Get buyer‑ready</a>
+        </div>
+        <div class="card price-card">
+          <span class="badge">Plus</span>
+          <h3>Suppliers + Toolkit</h3>
+          <div class="price">€2,490 <small>3–5 weeks</small></div>
+          <ul class="pc-feat">
+            <li>Everything in Core</li>
+            <li>Supplier survey (scope 1–3 + S/G)</li>
+            <li>Tracker (XLSX/Sheets) + reminders</li>
+            <li>Board‑ready KPI dashboard template</li>
+            <li>Quarterly progress check‑in (1×)</li>
+          </ul>
+          <a class="btn" href="#contact">Scale with suppliers</a>
+        </div>
+      </div>
+      <div class="container" style="margin-top:16px">
+        <p class="badge">Optional: Enterprise & ongoing support on request</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid grid-3">
+      <div class="card" style="padding:18px">
+        <h4 style="margin:0 0 8px">Bonus: Procurement‑friendly summary</h4>
+        <p class="pc-feat">A 1‑pager with your key ESG claims, KPIs, and contacts—perfect for RFPs and supplier portals.</p>
+      </div>
+      <div class="card" style="padding:18px">
+        <h4 style="margin:0 0 8px">Templates you keep</h4>
+        <p class="pc-feat">Policy drafts, KPI tables, supplier surveys, and dashboards you can edit and reuse.</p>
+      </div>
+      <div class="card" style="padding:18px">
+        <h4 style="margin:0 0 8px">Implementation support</h4>
+        <p class="pc-feat">Light coaching on rolling out actions in 90 days—optional ongoing support available.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="section">
+    <div class="container grid grid-2">
+      <div class="faq-item">
+        <div class="faq-q"><strong>Are you “CSRD‑compliant” after this?</strong><span>+</span></div>
+        <div class="faq-a"><p>CSRD applies to larger companies; SMEs are often indirectly affected via customers. Our output is <em>aligned</em> to ESRS concepts so buyers can evaluate you quickly. If you are directly in scope, we outline your path to full reporting.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><strong>How much time do we need to spend?</strong><span>+</span></div>
+        <div class="faq-a"><p>Expect 1 hour for screening, 2–4 hours to share evidence, and short reviews of drafts. We handle the heavy lifting.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><strong>What formats do we get?</strong><span>+</span></div>
+        <div class="faq-a"><p>PDF report, XLSX/Sheets workbook for KPIs and suppliers, and editable policy documents (DOCX/Google Docs).</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><strong>Data privacy & GDPR?</strong><span>+</span></div>
+        <div class="faq-a"><p>We use EU‑hosted tools upon request and sign a DPA. Sensitive data is minimized and stored with least‑privilege access.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <div class="container grid grid-2" style="align-items:center">
+      <div class="card" style="padding:22px">
+        <h3 style="margin-top:0">Book a 20‑minute fit call</h3>
+        <p class="pc-feat">We’ll assess your buyer context, scope, and timeline—and advise on the fastest route to “approved supplier”.</p>
+        <form onsubmit="submitForm(event)">
+          <div class="grid" style="grid-template-columns:1fr 1fr;gap:12px">
+            <div>
+              <label class="sr-only" for="name">Name</label>
+              <input id="name" name="name" required placeholder="Your name" />
+            </div>
+            <div>
+              <label class="sr-only" for="email">Email</label>
+              <input id="email" name="email" type="email" required placeholder="Work email" />
+            </div>
+            <div>
+              <label class="sr-only" for="company">Company</label>
+              <input id="company" name="company" placeholder="Company" />
+            </div>
+            <div>
+              <label class="sr-only" for="size">Company size</label>
+              <input id="size" name="size" placeholder="Employees (approx.)" />
+            </div>
+            <div style="grid-column:1/-1">
+              <label class="sr-only" for="message">Context</label>
+              <textarea id="message" name="message" rows="4" placeholder="What triggered the ESG request? (RFP, key customer, bank, board, etc.)"></textarea>
+            </div>
+          </div>
+          <div style="margin-top:12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+            <button class="btn primary" type="submit">Request call</button>
+            <span class="badge">Response in ≤ 24h</span>
+          </div>
+        </form>
+      </div>
+      <div>
+        <h3>What you’ll walk away with</h3>
+        <ul class="pc-feat">
+          <li>Clarity on your buyer’s expectations</li>
+          <li>A tailored scope & timeline</li>
+          <li>Example outputs (PDF + workbook)</li>
+        </ul>
+        <div class="card" style="padding:16px;margin-top:10px">
+          <strong>Prefer email?</strong>
+          <p class="pc-feat">Write us at <a href="mailto:support@orvenzia.com">support@orvenzia.com</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <footer>
-    <div class="container"><p>© <span id="year"></span> Orvenzia. CVR: 45828697 · Email: support@orvenzia.com</p></div>
+    <div class="container grid grid-3">
+      <div>
+        <div class="brand"><span class="logo" aria-hidden="true"></span><h1 style="margin:0">Orvenzia ESG</h1></div>
+        <p style="margin-top:10px">Aalborg, Denmark · Serving EU/UK</p>
+        <p>© <span id="year"></span> Orvenzia. All rights reserved.</p>
+      </div>
+      <div>
+        <p><strong>Compliance</strong></p>
+        <p class="pc-feat">Aligned with CSRD/ESRS concepts · EU Taxonomy aware · GDPR ready (DPA on request)</p>
+      </div>
+      <div>
+        <p><strong>Links</strong></p>
+        <p class="pc-feat"><a href="#pricing">Pricing</a> · <a href="#faq">FAQ</a> · <a href="#contact">Contact</a></p>
+      </div>
+    </div>
+    <div class="container"><div class="small">CVR: 45828697 · Email: <a href="mailto:support@orvenzia.com">support@orvenzia.com</a></div></div>
   </footer>
 
   <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
+    // Mobile menu toggle
     const menuBtn = document.getElementById('menuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
-    if(menuBtn){
-      menuBtn.addEventListener('click', ()=>{
+    if (menuBtn) {
+      menuBtn.addEventListener('click', () => {
         mobileMenu.classList.toggle('show');
+        menuBtn.setAttribute('aria-expanded', mobileMenu.classList.contains('show'));
       });
+    }
+
+    // Simple carousel
+    let index=0; const slides=document.getElementById('slides');
+    setInterval(()=>{ 
+      if (!slides) return;
+      index=(index+1)%3; 
+      slides.style.transform=`translateX(-${index*100}%)`; 
+    },6000);
+
+    // FAQ toggles
+    document.querySelectorAll('.faq-item').forEach(item=>{
+      const q=item.querySelector('.faq-q');
+      const a=item.querySelector('.faq-a');
+      q.addEventListener('click',()=>{
+        const open = a.style.maxHeight && a.style.maxHeight !== '0px';
+        document.querySelectorAll('.faq-a').forEach(x=>x.style.maxHeight='0px');
+        a.style.maxHeight = open ? '0px' : a.scrollHeight + 'px';
+      });
+    });
+
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Contact form (mailto prefill)
+    function submitForm(e){
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(e.target).entries());
+      const subject = encodeURIComponent('ESG Readiness — Fit call');
+      const body = encodeURIComponent(
+        `Name: ${data.name}
+Email: ${data.email}
+Company: ${data.company}
+Size: ${data.size}
+Context: ${data.message}`
+      );
+      window.location.href = `mailto:support@orvenzia.com?subject=${subject}&body=${body}`;
     }
   </script>
 </body>
