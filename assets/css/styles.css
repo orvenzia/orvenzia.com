@@ -1,6 +1,6 @@
 
 :root{
-  --bg:#ffffff; --mutebg:#fafafa; --text:#111; --muted:#6d6f76; --accent:#d4af37;
+  --bg:#ffffff; --mutebg:#fafafa; --text:#111; --muted:#6d6f76; --accent:#007a3d;
   --line:#e6e6ec; --shadow:0 12px 28px rgba(0,0,0,.06); --maxw:1200px; --radius:16px;
 }
 *{box-sizing:border-box}
@@ -25,7 +25,7 @@ h1,h2,h3,h4{font-family:"Playfair Display",serif;font-weight:600;line-height:1.2
 .nav-toggle{display:none;background:none;border:0;width:44px;height:44px;position:relative}
 .nav-toggle span{position:absolute;left:12px;right:12px;height:2px;background:#222;border-radius:2px;transition:.2s}
 .nav-toggle span:nth-child(1){top:14px} .nav-toggle span:nth-child(2){top:21px} .nav-toggle span:nth-child(3){top:28px}
-.hero{padding:120px 0 80px;background:linear-gradient(180deg,#fff,#fef9f2),url('assets/img/hero-bg.jpg') center/cover no-repeat;border-bottom:1px solid var(--line)}
+.hero{padding:120px 0 80px;background:linear-gradient(180deg,#fff,#fef9f2),url("../img/hero-green.jpg") center/cover no-repeat;border-bottom:1px solid var(--line)}
 .hero .hero-copy{max-width:820px;background:rgba(255,255,255,.85);padding:24px;border-left:4px solid var(--accent);border-radius:12px;box-shadow:var(--shadow)}
 .cta-row{display:flex;gap:12px;margin:16px 0 8px;flex-wrap:wrap}
 .strip{display:flex;gap:18px;flex-wrap:wrap;margin-top:16px}
