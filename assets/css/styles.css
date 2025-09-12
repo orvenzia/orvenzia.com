@@ -17,8 +17,26 @@
   --line:#e6e6ec; --shadow:0 12px 28px rgba(0,0,0,.06); --maxw:1200px; --radius:16px;
 }
 *{box-sizing:border-box}
-html,body{margin:0;padding:0;background:var(--bg);color:var(--text);
-  font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.75}
+html,
+body {
+  background-image: url('../images/background.jpg'); /* tilpas stien hvis nødvendigt */
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;       /* udfylder altid hele skærmen på desktop */
+  background-attachment: fixed; /* desktop */
+  min-height: 100vh;            /* fylder altid hele viewporten */
+}
+
+/* Mobil fallback */
+@media only screen and (max-width: 768px) {
+  body {
+    background-attachment: scroll; /* fallback til mobil */
+    background-size: contain;      /* viser hele billedet uden beskæring */
+    background-position: top center;
+    min-height: 100vh;
+  }
+}
+
 img{max-width:100%;display:block} a{color:inherit;text-decoration:none} a:hover{opacity:.9}
 .container{max-width:var(--maxw);padding:0 24px;margin:0 auto}
 .muted{color:var(--muted)}
@@ -50,7 +68,26 @@ h1,h2,h3,h4{font-family:"Playfair Display",serif;font-weight:600;line-height:1.2
 .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
 .card .icon{width:40px;height:40px;margin-bottom:12px}
 .page-hero{padding:64px 0;border-bottom:1px solid var(--line);background:var(--mutebg)}
-.page-body{padding:48px 0}
+.page-
+body {
+  background-image: url('../images/background.jpg'); /* tilpas stien hvis nødvendigt */
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;       /* udfylder altid hele skærmen på desktop */
+  background-attachment: fixed; /* desktop */
+  min-height: 100vh;            /* fylder altid hele viewporten */
+}
+
+/* Mobil fallback */
+@media only screen and (max-width: 768px) {
+  body {
+    background-attachment: scroll; /* fallback til mobil */
+    background-size: contain;      /* viser hele billedet uden beskæring */
+    background-position: top center;
+    min-height: 100vh;
+  }
+}
+
 .narrow{max-width:860px}
 .kicker{letter-spacing:.12em;text-transform:uppercase;color:#6d6f76;font-size:.88rem;margin-bottom:.25rem}
 .timeline{display:grid;gap:16px}
@@ -150,7 +187,26 @@ blockquote{margin:.5rem 0 0;font-style:italic}
 
 
 html{ font-size:16px; }
-body{ font-family: Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; line-height:1.6; color:var(--ink); }
+
+body {
+  background-image: url('../images/background.jpg'); /* tilpas stien hvis nødvendigt */
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;       /* udfylder altid hele skærmen på desktop */
+  background-attachment: fixed; /* desktop */
+  min-height: 100vh;            /* fylder altid hele viewporten */
+}
+
+/* Mobil fallback */
+@media only screen and (max-width: 768px) {
+  body {
+    background-attachment: scroll; /* fallback til mobil */
+    background-size: contain;      /* viser hele billedet uden beskæring */
+    background-position: top center;
+    min-height: 100vh;
+  }
+}
+
 h1,h2{ font-family:"Playfair Display",serif; letter-spacing:-0.01em; }
 h1{ font-weight:700; font-size:clamp(2rem, 2.6vw + 1rem, 3.25rem); line-height:1.15; }
 h2{ font-weight:700; font-size:clamp(1.5rem, 1.2vw + 1rem, 2.125rem); }
@@ -176,3 +232,18 @@ h2{ font-weight:700; font-size:clamp(1.5rem, 1.2vw + 1rem, 2.125rem); }
   color:#fff;
 }
 
+
+
+/* Parallax background setup */
+.parallax-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../images/background.jpg'); /* tilpas stien hvis nødvendigt */
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: -1; /* bag alt indhold */
+}
