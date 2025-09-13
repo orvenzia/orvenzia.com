@@ -205,3 +205,24 @@ body::before{
   background:
     linear-gradient(180deg, rgba(0,168,120,.42) 0%, rgba(0,168,120,.12) 55%, rgba(0,168,120,0) 100%) !important;
 }
+
+
+/* === Hero Baggrund Orvenzia === */
+
+/* Desktop-standard */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: url("../img/hero-orvenzia.png") no-repeat center top;
+  background-size: cover;
+  z-index: -1;
+}
+
+/* Mobil-baggrund */
+@media (max-width: 768px) {
+  body::before {
+    background: url("../img/mobile-hero.png") no-repeat center top;
+    background-size: cover;
+  }
+}
