@@ -176,3 +176,37 @@ h2{ font-weight:700; font-size:clamp(1.5rem, 1.2vw + 1rem, 2.125rem); }
   color:#fff;
 }
 
+
+
+/* === Global lastbil-baggrund på hele siden === */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  position: relative;
+  z-index: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("../img/lastbil.jpg") no-repeat center top;
+  background-size: cover;
+  z-index: -1;
+}
+
+/* Gør sektioner gennemsigtige så baggrunden ses */
+section, .section, .content, .container {
+  background: transparent !important;
+}
+
+/* Tilføj læsbarhed: hvid overlay bag tekstblokke */
+.section-text {
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 12px;
+  padding: 24px;
+}
