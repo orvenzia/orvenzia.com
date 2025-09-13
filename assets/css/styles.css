@@ -228,75 +228,38 @@ body::before {
 }
 
 
-/* --- Transparent two-box hero --- */
-.hero {
-  background: linear-gradient(135deg, #0a3d2f 0%, #0f5b3d 100%);
-  padding: 80px 10%;
-}
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  align-items: stretch;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-.hero-card {
-  background: rgba(255,255,255,0.9); /* semi-transparent */
-  border-radius: 16px;
-  padding: 40px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-  backdrop-filter: blur(8px);
-}
-.hero-card h1 {
-  font-size: 2.6rem;
-  font-weight: 700;
-  color: #0a3d2f;
-  margin-bottom: 20px;
-  line-height: 1.2;
-}
-.hero-illustration img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 12px;
-}
-.hero-cta {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
+/* --- Hybrid CTA Buttons (solid primary + glass secondary) --- */
 .btn-primary {
   background: #00a86b;
   color: #fff;
-  padding: 16px 24px;
-  border-radius: 8px;
+  padding: 16px 26px;
+  border-radius: 12px;
   font-weight: 600;
-  text-align: center;
   text-decoration: none;
   font-size: 1.1rem;
+  box-shadow: 0 4px 16px rgba(0,168,107,0.4);
+  transition: all 0.3s ease;
 }
-.btn-primary:hover { background: #008f5c; }
+.btn-primary:hover {
+  background: #00925d;
+  box-shadow: 0 6px 20px rgba(0,168,107,0.6);
+}
+
 .btn-ghost {
-  background: rgba(255,255,255,0.8);
+  background: rgba(255,255,255,0.2);
   color: #00a86b;
-  border: 2px solid #00a86b;
-  padding: 14px 22px;
-  border-radius: 8px;
+  border: 2px solid rgba(0,168,107,0.4);
+  padding: 14px 24px;
+  border-radius: 12px;
   font-weight: 600;
-  text-align: center;
   text-decoration: none;
+  font-size: 1.05rem;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: all 0.3s ease;
 }
-.btn-ghost:hover { background: rgba(0,168,107,0.05); }
-.microcopy {
-  font-size: 0.95rem;
-  color: #333;
-}
-@media (max-width: 900px) {
-  .hero-grid { grid-template-columns: 1fr; }
-}
-
-
-/* --- Variant: green outline for hero cards --- */
-.hero-card {
-  border: 2px solid #00a86b; /* grøn outline */
+.btn-ghost:hover {
+  background: rgba(0,168,107,0.15);
+  color: #008f5c;
+  border-color: rgba(0,168,107,0.6);
 }
