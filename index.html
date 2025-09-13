@@ -1,145 +1,197 @@
 <!DOCTYPE html>
-
-<html lang="en">
+<html lang="da">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>ESG Consulting for SMEs | Orvenzia — ESG Readiness Experts</title>
-<meta content="ESG consulting and ESG readiness services for SMEs in Europe. Pass supplier ESG assessments, deliver buyer-facing ESG reports and Scope 3 data." name="description"/>
-<link href="https://www.orvenzia.com/" rel="canonical"/>
-<meta content="index,follow" name="robots"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&amp;family=Montserrat:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
-<link href="assets/css/styles.css?v=20250910" rel="stylesheet"/>
-<meta content="ESG Consulting for SMEs | Orvenzia — ESG Readiness Experts" property="og:title"/><meta content="ESG consulting and ESG readiness services for SMEs in Europe. Pass supplier ESG assessments, deliver buyer-facing ESG reports and Scope 3 data." property="og:description"/>
-<meta content="https://www.orvenzia.com/" property="og:url"/><meta content="website" property="og:type"/><meta content="Orvenzia" property="og:site_name"/>
-<meta content="summary_large_image" name="twitter:card"/>
-<script type="application/ld+json">
-{"@context": "https://schema.org", "@type": "Organization", "name": "Orvenzia", "url": "https://www.orvenzia.com", "email": "support@orvenzia.com", "telephone": "+45 20 96 83 24", "vatID": "45828697", "sameAs": ["https://www.linkedin.com/in/jimmi-thim"]}
-{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.orvenzia.com/"}, {"@type": "ListItem", "position": 2, "name": "ESG Consulting for SMEs", "item": "https://www.orvenzia.com/"}]}
-</script>
-<link as="image" href="assets/img/hero-green.png" rel="preload"/><meta content="https://orvenzia.com/assets/img/og-hero.jpg" property="og:image"/></head>
-<body id="top"><a class="skip-link" href="#main"></a>
-<header class="site-header">
-<div class="container header-inner">
-<a class="logo" href="index.html"><span class="logo-mark">O</span><span class="logo-type">Orvenzia</span></a>
-<nav class="nav" id="nav">
-<a href="services.html">Services</a>
-<a href="screening.html">Screening</a>
-<a href="process.html">Process</a>
-<a href="pricing.html">Pricing</a>
-<a href="cases.html">Cases</a>
-<a href="for-buyers.html">For Buyers</a>
-<a href="resources.html">Insights</a>
-<a href="about.html">About</a>
-<a href="faq.html">FAQ</a>
-<a class="btn btn-outline" href="contact.html">Contact</a>
-</nav>
-<button aria-label="Toggle menu" class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
-</div>
-</header>
-<main id="main">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ESG-rådgivning for SMV’er | Orvenzia — Buyer‑ready på 14 dage</title>
+  <meta name="description" content="Orvenzia hjælper SMV’er med at blive buyer‑ready på ESG: hurtig screening, baseline‑rapport og praktisk implementering. Få en gratis ESG‑screening på 3 minutter." />
+  <link rel="icon" href="/assets/img/favicon.ico">
+  <meta property="og:title" content="Orvenzia — ESG-rådgivning for SMV’er" />
+  <meta property="og:description" content="Bliv buyer‑ready på ESG. Gratis screening på 3 minutter. Rapport inden 5 arbejdsdage." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/assets/img/hero-green.png" />
+  <meta property="og:url" content="https://orvenzia.com/" />
+  <link rel="preload" as="image" href="/assets/img/hero-orvenzia.png" />
+  <link rel="stylesheet" href="/assets/css/styles.css?v=opt1" />
+  <style>
+    :root {
+      --green:#15a34a;
+      --green-600:#16a34a;
+      --green-700:#15803d;
+      --bg: #0b1b12;
+      --text:#f8fafc;
+      --muted:#cbd5e1;
+      --card: rgba(255,255,255,.08);
+      --card-ghost: rgba(255,255,255,.06);
+      --shadow: 0 10px 30px rgba(0,0,0,.25);
+    }
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;scroll-behavior:smooth}
+    a{color:var(--text);text-decoration:none}
+    .container{max-width:1120px;margin:0 auto;padding:0 16px}
+    .hero{position:relative;min-height:88vh;display:flex;align-items:center;overflow:hidden}
+    .hero::before{
+      content:"";position:absolute;inset:0;
+      background: radial-gradient(60% 60% at 70% 40%, rgba(21,163,74,.32), transparent 60%),
+                  linear-gradient(to bottom, rgba(0,0,0,.35), rgba(0,0,0,.65));
+      z-index:1
+    }
+    .hero img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(1.05) contrast(1.05)}
+    .hero-inner{position:relative;z-index:2}
+    .eyebrow{display:inline-block;padding:.25rem .6rem;border:1px solid rgba(255,255,255,.25);border-radius:999px;font-size:.85rem;color:var(--muted);backdrop-filter:blur(4px);background:rgba(255,255,255,.04)}
+    h1.hero-title{font-size:clamp(2rem,5vw,3.2rem);line-height:1.1;margin:.8rem 0 .6rem;font-weight:800;letter-spacing:-.01em}
+    .sub{font-size:clamp(1.05rem,2.5vw,1.25rem);color:var(--muted);max-width:56ch}
+    .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:1.2rem}
+    .btn{display:inline-flex;align-items:center;gap:.6rem;padding:.9rem 1.1rem;border-radius:14px;font-weight:700;box-shadow:var(--shadow)}
+    .btn-primary{background:linear-gradient(180deg,var(--green-600),var(--green-700));border:1px solid rgba(0,0,0,.2)}
+    .btn-ghost{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18)}
+    .btn span.arrow{font-size:1.2rem}
+    .trust{display:flex;gap:18px;flex-wrap:wrap;align-items:center;margin-top:1.1rem;color:var(--muted);font-size:.95rem}
+    .grid{display:grid;gap:16px}
+    .cards-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    @media (max-width:900px){.cards-3{grid-template-columns:1fr}}
+    .card{background:var(--card);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:18px}
+    .card.trans{background:var(--card-ghost)}
+    .card h3{margin:.2rem 0 .3rem;font-size:1.25rem}
+    .kicker{color:var(--muted);font-size:.9rem;margin-bottom:.2rem}
+    section{padding:42px 0}
+    .caps{text-transform:uppercase;letter-spacing:.08em;font-size:.8rem;color:var(--muted)}
+    .list{display:flex;flex-direction:column;gap:8px;color:var(--muted)}
+    .check::before{content:"✓";margin-right:.6rem}
+    .split{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center}
+    @media (max-width:980px){.split{grid-template-columns:1fr}}
+    .badge{height:34px;opacity:.85}
+    footer{border-top:1px solid rgba(255,255,255,.12);padding:28px 0;color:var(--muted)}
+    .sr-only{position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden}
+  </style>
 
-<section class="hero">
-  <div class="hero-container">
-    <div class="hero-grid">
-      <!-- Venstre boks -->
-      <div class="hero-card hero-left">
-        <h1>Buyer-ready ESG Action<br>Plan in 30–60 Days</h1>
-        <div class="hero-illustration">
-          <img src="assets/img/hook-illustration.png" 
-               alt="5-min screening → baseline → 30–60-day action plan">
-        </div>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"Orvenzia",
+    "url":"https://orvenzia.com/",
+    "logo":"https://orvenzia.com/assets/img/favicon.ico",
+    "description":"ESG-rådgivning og readiness for SMV’er. Screening, baseline-rapport og implementering.",
+    "sameAs":["https://www.linkedin.com/company/orvenzia"],
+    "areaServed":"EU",
+    "contactPoint":{"@type":"ContactPoint","email":"support@orvenzia.com","contactType":"customer support","areaServed":"EU"}
+  }
+  </script>
+</head>
+<body>
+  <a class="sr-only" href="#main">Skip to content</a>
+
+  <!-- HERO -->
+  <header class="hero" role="banner" aria-label="Orvenzia ESG hero">
+    <img class="bg" src="/assets/img/hero-orvenzia.png" alt="" loading="eager" />
+    <div class="container hero-inner">
+      <span class="eyebrow">ESG Readiness for SMEs</span>
+      <h1 class="hero-title">Bliv buyer‑ready på ESG — uden bureaukrati</h1>
+      <p class="sub">Gratis screening på 3 minutter. Få en baseline‑rapport inden for <strong>5 arbejdsdage</strong> og en klar plan for, hvad der skal til for at bestå buyer‑krav.</p>
+      <div class="cta-row">
+        <a href="/process.html#screening" class="btn btn-primary" aria-label="Start gratis screening">Start gratis screening <span class="arrow">→</span></a>
+        <a href="/pricing.html" class="btn btn-ghost" aria-label="Se priser og pakker">Se priser &amp; pakker</a>
       </div>
-      <!-- Højre boks -->
-      <div class="hero-card hero-right">
-        <div class="hero-cta">
-          <a class="btn-primary" href="screening.html">Start Free Screening</a>
-          <a class="btn-ghost" href="services.html">See ESG Packages</a>
-          <p class="microcopy">
-            Not a full ESG report — a buyer-ready action plan to pass buyer ESG checks.
-          </p>
-        </div>
+      <div class="trust">
+        <img class="badge" src="/assets/img/badges/orvenzia-ready.png" alt="Orvenzia Ready badge" loading="lazy" />
+        <span>Trusted by SMEs in Denmark &amp; EU · SLA: 5–14 dage · CSRD-aligned</span>
       </div>
     </div>
-  </div>
-</section>
+  </header>
 
-<section class="section">
-<div class="container">
-<p class="kicker">What we offer</p>
-<div class="grid-4">
-<div class="card">
-<img alt="ESG screening for SMEs" class="icon" src="assets/img/icons/screening.svg"/>
-<h3>ESG Competitiveness Screening (Free)</h3>
-<p>11 decisive questions → OCI score (0–100). If ≥70: buyer‑ready.</p>
-</div>
-<div class="card">
-<img alt="ESG reporting for SMEs" class="icon" src="assets/img/icons/report.svg"/>
-<h3>Board‑Ready ESG Advisory Report</h3>
-<p>Concise ESG report with KPI set and a 30/60/90‑day roadmap.</p>
-</div>
-<div class="card">
-<img alt="Supplier ESG assessment support" class="icon" src="assets/img/icons/implementation.svg"/>
-<h3>Supplier ESG Assessment Fast‑Track</h3>
-<p>“ESG Evidence Pack” tailored to enterprise questionnaires.</p>
-</div>
-<div class="card">
-<img alt="Scope 3 for SMEs" class="icon" src="assets/img/icons/scope3.svg"/>
-<h3>Scope 3 for SMEs</h3>
-<p>Practical upstream data flows and supplier engagement.</p>
-</div>
-</div>
-</div>
-</section>
-</main>
-<footer class="site-footer">
-<div class="container footer-grid">
-<div>
-<div class="logo footer-logo"><span class="logo-mark">O</span><span class="logo-type">Orvenzia</span></div>
-<p class="muted">ESG consulting &amp; ESG readiness services for SMEs in Europe.</p>
-<p class="muted">CVR: 45828697</p>
-<div class="badge"><span class="ring"></span><span>OCI ≥ 70 → Orvenzia Ready</span></div>
-</div>
-<div>
-<h4>Company</h4>
-<ul>
-<li><a href="about.html">About</a></li>
-<li><a href="services.html">Services</a></li>
-<li><a href="process.html">Process</a></li>
-<li><a href="pricing.html">Pricing</a></li>
-<li><a href="cases.html">Cases</a></li>
-</ul>
-</div>
-<div>
-<h4>Contact</h4>
-<ul>
-<li><a href="tel:+4520968324">+45 20 96 83 24</a></li>
-<li><a href="mailto:support@orvenzia.com">support@orvenzia.com</a></li>
-<li><a href="https://www.linkedin.com/in/jimmi-thim" rel="noopener" target="_blank">LinkedIn</a></li>
-</ul>
-</div>
-<div>
-<h4>Key Topics</h4>
-<ul>
-<li><a href="services.html#readiness">ESG Readiness Consulting</a></li>
-<li><a href="services.html#reporting">ESG Reporting for SMEs</a></li>
-<li><a href="services.html#scope3">Scope 3 Data &amp; Suppliers</a></li>
-<li><a href="screening.html">ESG Competitiveness Screening</a></li>
-</ul>
-</div>
-</div>
-<div class="container footer-bottom">
-<span>© 2025 Orvenzia. All rights reserved.</span>
-<nav class="subnav">
-<a href="privacy.html">Privacy</a>
-<a href="confidentiality.html">Confidentiality</a>
-<a href="dpa.html">DPA</a>
-<a href="accessibility.html">Accessibility</a>
-<a href="sitemap.xml">Sitemap</a>
-</nav>
-</div>
-</footer>
-<script src="assets/js/main.js?v=20250910"></script>
+  <main id="main">
+    <!-- SERVICES -->
+    <section>
+      <div class="container">
+        <div class="grid cards-3">
+          <article class="card trans">
+            <div class="kicker caps">01 — Screening</div>
+            <h3>Gratis ESG‑screening (3 min.)</h3>
+            <p class="sub">Få en readiness‑score og prioriteret liste med næste skridt.</p>
+            <ul class="list">
+              <li class="check">11 spørgsmål · klar score og farvegauge</li>
+              <li class="check">Resultat pr. e‑mail (PDF)</li>
+              <li class="check">Anbefalet næste skridt</li>
+            </ul>
+            <p><a class="btn btn-ghost" href="/process.html#screening">Start screening →</a></p>
+          </article>
+          <article class="card trans">
+            <div class="kicker caps">02 — Baseline</div>
+            <h3>Baseline‑rapport</h3>
+            <p class="sub">1–2 sider med buyer‑akseptable formuleringer, huller og “what to fix now”.</p>
+            <ul class="list">
+              <li class="check">Levering: 5 arbejdsdage</li>
+              <li class="check">“Minimum evidence set” pr. emne</li>
+              <li class="check">Formulering klar til kundekrav</li>
+            </ul>
+            <p><a class="btn btn-ghost" href="/pricing.html#baseline">Se eksempel &amp; pris →</a></p>
+          </article>
+          <article class="card trans">
+            <div class="kicker caps">03 — Advisory</div>
+            <h3>Advisory &amp; implementering</h3>
+            <p class="sub">Gap‑analyse, politikker, leverandørtemplates og roll‑out—klar til audit.</p>
+            <ul class="list">
+              <li class="check">SLA: 7–14 dage (afhænger af scope)</li>
+              <li class="check">Kundeklar dokumentation og beviser</li>
+              <li class="check">Scope 3 fast‑track til SME</li>
+            </ul>
+            <p><a class="btn btn-ghost" href="/process.html#advisory">Sådan arbejder vi →</a></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROOF / TESTIMONIALS -->
+    <section>
+      <div class="container split">
+        <div>
+          <div class="kicker caps">Dokumenteret effekt</div>
+          <h2>“Vi bestod leverandør‑screeningen uden ekstra runder.”</h2>
+          <p class="sub">Orvenzia leverer korte, præcise dokumenter, der matcher buyer‑forventninger. Derfor undgår vores kunder dyre forsinkelser og tabte ordrer.</p>
+          <ul class="list">
+            <li class="check">Buyer‑klare tekster og politikker</li>
+            <li class="check">Konkret evidensliste pr. krav</li>
+            <li class="check">Tydelig ansvar/roller og tidsplan</li>
+          </ul>
+          <p><a class="btn btn-primary" href="/contact.html">Tal med en rådgiver <span class="arrow">→</span></a></p>
+        </div>
+        <div class="card">
+          <div class="kicker caps">Resultater</div>
+          <h3>Hvad du kan forvente på 14 dage</h3>
+          <ul class="list">
+            <li class="check">Baseline‑rapport (1–2 sider)</li>
+            <li class="check">3–5 buyer‑klare politikudkast</li>
+            <li class="check">Leverandørskemaer + procesbeskrivelser</li>
+            <li class="check">Scope 3 light baseline (SMV)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEO COPY -->
+    <section>
+      <div class="container">
+        <div class="card">
+          <div class="kicker caps">ESG for SMV’er</div>
+          <h2>ESG‑screening, ESG‑readiness og CSRD‑alignment til mindre virksomheder</h2>
+          <p>Vi hjælper små og mellemstore virksomheder med at blive <strong>buyer‑ready på ESG</strong>. Vores metode kombinerer en hurtig <em>ESG‑screening</em> med en kort, handlingsorienteret <em>baseline‑rapport</em> og praktisk <em>implementering</em>. Du får konkrete tekster, evidens og proces, der passer til typiske kundekrav (CSR/ESG, Code of Conduct, leverandør‑questionnaires og audits). Orvenzia arbejder pragmatisk og tidseffektivt, så din virksomhed hurtigt kan dokumentere <strong>CSRD‑aligned</strong> praksis uden unødigt bureaukrati.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap">
+        <div>© 2025 Orvenzia — CVR 45828697 · support@orvenzia.com</div>
+        <nav style="display:flex;gap:14px">
+          <a href="/privacy.html">Privacy</a>
+          <a href="/dpa.html">DPA</a>
+          <a href="/accessibility.html">Accessibility</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
