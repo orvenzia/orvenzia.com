@@ -317,3 +317,8 @@ body::before {
   .hero-left h1 { font-size: 2.2rem; text-align: center; }
   .hero-cta { align-items: center; text-align: center; }
 }
+
+/* Light overlay for hero background */
+.hero::before {
+  background: rgba(255,255,255,0.18);
+}
