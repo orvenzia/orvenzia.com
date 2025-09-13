@@ -282,3 +282,25 @@ footer {
     padding: 24px 12px;
   }
 }
+
+
+/* === Baggrundsbillede fix til iOS/alle browsere === */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  position: relative;
+  z-index: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("../img/background.jpg") no-repeat center center;
+  background-size: cover;
+  z-index: -1;
+}
