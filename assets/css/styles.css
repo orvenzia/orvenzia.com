@@ -227,9 +227,58 @@ body::before {
   }
 }
 
-/* --- Orvenzia hero upgrade --- */
-.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
-@media(max-width: 900px){.hero-grid{grid-template-columns:1fr;gap:28px}}
-.hero-illustration{margin:0;text-align:center}
-.hero-illustration img{max-width:100%;height:auto;border-radius:16px;box-shadow:0 16px 48px rgba(0,0,0,.12)}
-.microcopy{margin-top:12px;color:#4d5b68;font-size:.95rem}
+
+/* --- Orvenzia hero final layout --- */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 40px;
+  align-items: center;
+  padding: 60px 10%;
+}
+.hero-left h1 {
+  font-size: 2.6rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 30px;
+  color: #003366;
+}
+.hero-illustration img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 10px 32px rgba(0,0,0,0.1);
+}
+.hero-cta {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.hero-cta .btn-primary {
+  background: #00a86b;
+  color: #fff;
+  padding: 16px 24px;
+  border-radius: 6px;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+}
+.hero-cta .btn-ghost {
+  background: transparent;
+  color: #003366;
+  border: 2px solid #003366;
+  padding: 14px 22px;
+  border-radius: 6px;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+}
+.hero-cta .microcopy {
+  font-size: 0.95rem;
+  color: #4d5b68;
+  margin-top: 8px;
+}
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; text-align: center; }
+  .hero-right { margin-top: 30px; }
+}
