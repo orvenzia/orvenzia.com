@@ -228,38 +228,28 @@ body::before {
 }
 
 
-/* --- Hybrid CTA Buttons (solid primary + glass secondary) --- */
-.btn-primary {
-  background: #00a86b;
-  color: #fff;
-  padding: 16px 26px;
-  border-radius: 12px;
-  font-weight: 600;
-  text-decoration: none;
-  font-size: 1.1rem;
-  box-shadow: 0 4px 16px rgba(0,168,107,0.4);
-  transition: all 0.3s ease;
-}
-.btn-primary:hover {
-  background: #00925d;
-  box-shadow: 0 6px 20px rgba(0,168,107,0.6);
+/* --- Universal Glassmorphism Style --- */
+.glass-card {
+  background: rgba(255, 255, 255, 0.55);
+  border-radius: 20px;
+  padding: 30px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.2);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
 }
 
-.btn-ghost {
-  background: rgba(255,255,255,0.2);
-  color: #00a86b;
-  border: 2px solid rgba(0,168,107,0.4);
-  padding: 14px 24px;
-  border-radius: 12px;
-  font-weight: 600;
-  text-decoration: none;
-  font-size: 1.05rem;
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  transition: all 0.3s ease;
+/* Apply glass style to hero cards */
+.hero-card {
+  composes: glass-card;
 }
-.btn-ghost:hover {
-  background: rgba(0,168,107,0.15);
-  color: #008f5c;
-  border-color: rgba(0,168,107,0.6);
+
+/* Optional: services, pricing, etc. */
+.services .card,
+.pricing .card,
+.cases .card,
+.process .step,
+.faq .item,
+.insights .post {
+  composes: glass-card;
 }
