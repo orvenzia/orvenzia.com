@@ -217,9 +217,143 @@
 window.reportTexts = {"GREEN": {"title": "\ud83d\udfe2 GREEN \u2013 Leading", "status": "Your ESG readiness is fully aligned with buyer requirements. No immediate action required.", "recommendation": "\u27a1\ufe0f Light Update Subscription \u2013 Stay aligned with regulatory alerts and periodic check-ins.", "outcome": "Maintain your leading position without extra workload while signaling strong compliance."}, "LIGHT_GREEN": {"title": "\ud83d\udfe2 LIGHT GREEN \u2013 Strong", "status": "You meet buyer expectations with only minor gaps typically identified in audits.", "recommendation": "\u27a1\ufe0f Baseline Report (\u20ac379; <10 days) \u2013 Document alignment and address minor improvements.", "outcome": "You gain audit-ready proof and prevent slipping into 'Not Buyer Ready'."}, "YELLOW": {"title": "\ud83d\udfe1 YELLOW \u2013 Lagging / Not Buyer Ready", "status": "Your ESG baseline exists but key policies and documentation are missing. Buyers see this as risk.", "recommendation": "\u27a1\ufe0f Baseline Report (\u20ac379; <10 days) \u2013 For quick documentation fixes.\n\u27a1\ufe0f Core Report (\u20ac1,329; 30\u201360 days) \u2013 For deeper policy gaps.", "outcome": "You get a clear gap list and a rapid path to buyer readiness."}, "ORANGE": {"title": "\ud83d\udfe0 ORANGE \u2013 At Risk", "status": "Significant ESG gaps are present, which can directly impact tenders and buyer reviews.", "recommendation": "\u27a1\ufe0f Core Report (\u20ac1,329; 30\u201360 days) \u2013 Includes prioritized gap analysis, templates, and roadmap.", "outcome": "Fast reduction of risk and restored eligibility for buyer approval."}, "RED": {"title": "\ud83d\udd34 RED \u2013 Critical", "status": "Your current ESG posture blocks buyer eligibility and increases commercial risk.", "recommendation": "\u27a1\ufe0f Core Report (\u20ac1,329; 30\u201360 days) \u2013 Minimum path forward.\n\u27a1\ufe0f Enterprise Report (\u20ac2,239\u20133,689; 60\u2013120 days) \u2013 Comprehensive turnaround with policies, training, and roadmap.", "outcome": "Controlled transformation to achieve buyer-acceptable status quickly."}}; <10 days) \u2013 Document alignment and address minor improvements.", "outcome": "You gain audit-ready proof and prevent slipping into 'Not Buyer Ready'."}, "YELLOW": {"title": "\ud83d\udfe1 YELLOW \u2013 Lagging / Not Buyer Ready", "status": "Your ESG baseline exists but key policies and documentation are missing. Buyers see this as risk.", "recommendation": "\u27a1\ufe0f Baseline Report (\u20ac379; <10 days) \u2013 For quick documentation fixes.\n\u27a1\ufe0f Core Report (\u20ac1,329; 30\u201360 days) \u2013 For deeper policy gaps.", "outcome": "You get a clear gap list and a rapid path to buyer readiness."}, "ORANGE": {"title": "\ud83d\udfe0 ORANGE \u2013 At Risk", "status": "Significant ESG gaps are present, which can directly impact tenders and buyer reviews.", "recommendation": "\u27a1\ufe0f Core Report (\u20ac1,329; 30\u201360 days) \u2013 Includes prioritized gap analysis, templates, and roadmap.", "outcome": "Fast reduction of risk and restored eligibility for buyer approval."}, "RED": {"title": "\ud83d\udd34 RED \u2013 Critical", "status": "Your current ESG posture blocks buyer eligibility and increases commercial risk.", "recommendation": "\u27a1\ufe0f Core Report (\u20ac1,329; 30\u201360 days) \u2013 Minimum path forward.\n\u27a1\ufe0f Enterprise Report (\u20ac2,239\u20133,689; 60\u2013120 days) \u2013 Comprehensive turnaround with policies, training, and roadmap.", "outcome": "Controlled transformation to achieve buyer-acceptable status quickly."}};
 window.SCREENING_BACKEND_URL = "%%REPLACE_WITH_YOUR_APPS_SCRIPT_WEBAPP_URL%%";
 </script>
-<script src="assets/js/screening.js"></script>
+<script src="assets/js/screening.js?v=2025-09-15-1"></script>
 <script src="assets/js/main.js"></script>
 <script src="assets/js/menu.js"></script>
+<script>
+/* --- Orvenzia Screening Failsafe Bootstrap --- */
+(function(){
+  if (window.__orvenziaScreeningReady) return; // ekstern js allerede ok
+  function ready(fn){ document.readyState!=='loading'?fn():document.addEventListener('DOMContentLoaded',fn);}
+  ready(function(){
+    const form = document.getElementById('screening-form');
+    const seeBtn = document.getElementById('see-result');
+    const resultWrap = document.getElementById('result-wrap');
+    const resultCard = document.getElementById('result-card');
+    const companyEl = document.getElementById('company');
+    const emailEl = document.getElementById('email');
+    const mailStatus = document.getElementById('mail-status');
+    if (!form || !seeBtn || !resultCard) return;
+
+    // vægte 1:1 med Excel (Yes/Planned/No hvor relevant)
+    const W = [
+      {yes:4,no:0}, {yes:4,no:0}, {yes:7,planned:3.5,no:0}, {yes:3,planned:1.5,no:0},
+      {yes:12,no:0}, {yes:8,no:0}, {yes:2,planned:1,no:0}, {yes:4,no:0},
+      {yes:6,planned:3,no:0}, {yes:12,no:0}, {yes:12,planned:6,no:0},
+      {yes:11,planned:5.5,no:0}, {yes:15,planned:7.5,no:0}
+    ];
+    const MAX = W.reduce((s,w)=>s+(w.yes||0),0);
+
+    function gaugeSVG(pct){
+      const angle = (pct/100)*180;
+      return `<svg width="360" height="200" viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+        <path d="M30,180 A150,150 0 0,1 150,30" stroke="#e53935" stroke-width="18" fill="none" />
+        <path d="M150,30 A150,150 0 0,1 270,180" stroke="#fb8c00" stroke-width="18" fill="none" />
+        <path d="M60,180 A120,120 0 0,1 120,60" stroke="#fdd835" stroke-width="18" fill="none" />
+        <path d="M120,60 A120,120 0 0,1 210,60" stroke="#8bc34a" stroke-width="18" fill="none" />
+        <path d="M210,60 A120,120 0 0,1 300,180" stroke="#43a047" stroke-width="18" fill="none" />
+        <g transform="translate(180,180) rotate(${angle})"><rect x="-2" y="-130" width="4" height="130" fill="#111"/><circle cx="0" cy="0" r="6" fill="#111"/></g>
+      </svg>`;
+    }
+
+    function levelFor(p){
+      if (p>=99) return 'GREEN';
+      if (p>=80) return 'LIGHT_GREEN';
+      if (p>=60) return 'YELLOW';
+      if (p>=40) return 'ORANGE';
+      return 'RED';
+    }
+
+    function textsFor(key){
+      return (window.reportTexts && window.reportTexts[key]) || {
+        title:key, status:'', recommendation:'', outcome:''
+      };
+    }
+
+    async function computeAndRender(e){
+      e && e.preventDefault();
+      const company = (companyEl?.value||'').trim();
+      const email   = (emailEl?.value||'').trim();
+      if (!company || !email){
+        alert('Please enter company and work email.');
+        return;
+      }
+      // saml svar og beregn
+      let raw=0; const answers=[];
+      for (let i=0;i<W.length;i++){
+        const name=`q${i+1}`;
+        const chosen= form.querySelector(`[name=${name}]:checked`);
+        if (!chosen){ alert('Please answer all questions.'); return; }
+        const pts = parseFloat(chosen.dataset.points||'0');
+        raw += pts; answers.push({q:name, answer:chosen.value, points:pts});
+      }
+      const pct = Math.round((raw/MAX)*100);
+      const level = levelFor(pct);
+      const T = textsFor(level);
+      const dateStr = new Date().toLocaleDateString(undefined,{year:'numeric',month:'short',day:'2-digit'});
+
+      // render on-page
+      resultCard.innerHTML = `
+        <div class="report-head">
+          <div class="brand-row"><span class="logo-mark">O</span><span class="logo-type">Orvenzia</span></div>
+          <h2 class="report-title">ESG Readiness Screening Score</h2>
+          <div class="meta-grid"><div><strong>Company:</strong> ${company}</div><div><strong>Date:</strong> ${dateStr}</div></div>
+        </div>
+        <div class="score-row">
+          <div class="gauge"><div class="gauge-needle" style="--val:${pct}"></div></div>
+          <div class="score-text"><div class="big-score">${pct}<span class="u">/100</span></div><div class="level-title">${T.title}</div></div>
+        </div>
+        <div class="report-body">
+          <p class="status"><strong>Status:</strong> ${T.status}</p>
+          <p class="rec"><strong>Recommendation:</strong><br>${(T.recommendation||'').replaceAll('\\n','<br>')}</p>
+          <p class="outcome"><strong>Outcome:</strong> ${T.outcome}</p>
+        </div>
+        <div class="report-cta"><a class="btn" href="pricing.html">See pricing</a><a class="btn btn-outline" href="contact.html">Contact</a></div>
+      `;
+      resultWrap.classList.add('show');
+      resultWrap.scrollIntoView({behavior:'smooth'});
+
+      // send til backend hvis sat
+      if (window.SCREENING_BACKEND_URL && !String(window.SCREENING_BACKEND_URL).includes('REPLACE')){
+        const pdfHtml = `
+          <html><head><meta charset="utf-8"><title>Orvenzia Screening Report</title>
+          <style>body{font-family:Arial,sans-serif;color:#111}.brand{display:flex;align-items:center;gap:8px;font-size:20px}.logo-mark{display:inline-block;width:28px;height:28px;border-radius:50%;background:#004d40;color:#fff;text-align:center;line-height:28px;font-weight:700}h1{font-size:22px;margin:8px 0 2px}.meta{font-size:12px;color:#555;margin-bottom:10px}.score{font-size:28px;font-weight:800;margin:8px 0}.level{font-weight:700;margin-bottom:10px}.section p{margin:6px 0}.gauge-wrap{display:flex;justify-content:center;margin:8px 0}</style></head><body>
+            <div class="brand"><span class="logo-mark">O</span><strong>Orvenzia</strong></div>
+            <h1>ESG Readiness Screening Score</h1>
+            <div class="meta">Company: ${company} &nbsp;•&nbsp; Date: ${dateStr}</div>
+            <div class="score">${pct} / 100</div>
+            <div class="gauge-wrap">${gaugeSVG(pct)}</div>
+            <div class="level">${T.title}</div>
+            <div class="section"><p><strong>Status:</strong> ${T.status}</p></div>
+            <div class="section"><p><strong>Recommendation:</strong><br>${(T.recommendation||'').replaceAll('\\n','<br>')}</p></div>
+            <div class="section"><p><strong>Outcome:</strong> ${T.outcome}</p></div>
+          </body></html>`;
+        mailStatus && (mailStatus.textContent='Sending your report...');
+        try{
+          const resp = await fetch(window.SCREENING_BACKEND_URL, {
+            method:'POST', headers:{'Content-Type':'application/json'},
+            body: JSON.stringify({company,email,score:pct,level,answers,reportHtml:pdfHtml})
+          });
+          const json = await resp.json().catch(()=>({}));
+          mailStatus && (mailStatus.textContent = (json.status==='ok'?'Report sent. Check your inbox.':'Could not send email. Please contact support@orvenzia.com.'));
+        }catch(err){
+          console.error(err);
+          mailStatus && (mailStatus.textContent='Network error while sending email.');
+        }
+      }
+    }
+
+    // slå HTML5 native validation fra (så vores JS altid kører)
+    form.setAttribute('novalidate','novalidate');
+
+    form.addEventListener('submit', computeAndRender);
+    seeBtn.addEventListener('click', function(e){ e.preventDefault(); computeAndRender(e); });
+
+    window.__orvenziaScreeningReady = true;
+  });
+})();
+</script>
+
 </body>
 </html>
 <div id="error-banner" style="display:none;margin-top:10px;padding:10px;border-radius:10px;background:#ffecec;color:#b00020;font-weight:600;"></div>
