@@ -722,22 +722,22 @@ footer {
 
 
 
-/* --- Updated Color Palette and Section Styles (Full Version) --- */
+/* --- Light Theme Overrides --- */
 body {
-  background-color: #1a2420;
-  color: #fff;
+  background-color: #ffffff;
+  color: #000;
 }
 
 body, section {
-  background: linear-gradient(rgba(255,255,255,0.12), rgba(255,255,255,0.12)), url('../img/bg.jpg') center/cover no-repeat;
+  background: linear-gradient(rgba(255,255,255,0.25), rgba(255,255,255,0.25)), url('../img/bg.jpg') center/cover no-repeat;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: #fff;
+  color: #000;
 }
 
 p, li, span {
-  color: #d1d1d1;
+  color: #222;
 }
 
 a {
@@ -749,11 +749,12 @@ a:hover {
 
 .btn.btn-primary {
   background-color: #2ecc71;
-  color: #fff;
+  color: #000;
   border: none;
 }
 .btn.btn-primary:hover {
   background-color: #27ae60;
+  color: #000;
 }
 
 .btn.btn-outline {
@@ -767,15 +768,16 @@ a:hover {
 }
 
 .section {
-  background: rgba(255,255,255,0.05);
+  background: rgba(255,255,255,0.8);
   border-radius: 12px;
   padding: 40px 20px;
   margin-bottom: 40px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .site-footer {
-  background-color: #1a2420;
-  color: #fff;
+  background-color: rgba(255,255,255,0.9);
+  color: #000;
 }
 .site-footer a {
   color: #2ecc71;
@@ -788,13 +790,15 @@ a:hover {
   background: #2ecc71;
 }
 .badge-oci .badge-text {
-  color: #fff;
+  color: #000;
 }
 
-/* Tooltip adjustment */
+/* Tooltip adjustment for light theme */
 .timeline .step::after {
-  background: rgba(46,204,113,0.9);
-  color: #fff;
+  background: rgba(255,255,255,0.95);
+  color: #000;
+  border: 1px solid #2ecc71;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 }
 
 /* Mobile tooltip positioning */
