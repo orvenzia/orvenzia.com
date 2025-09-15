@@ -689,3 +689,11 @@ footer {
 .timeline-step::before {
   background: rgba(20, 120, 80, 0.95); /* lighter tooltip background */
 }
+
+
+/* === Compact sections on process page (keep content size) === */
+.page-process .process-timeline { padding-top: 28px; padding-bottom: 28px; }
+.page-process .process-timeline .section-title { margin-bottom: 22px; }
+.page-process .cta-hero { padding-top: 56px; padding-bottom: 56px; }
+.page-process .timeline { gap: 22px; }
+.page-process .timeline-step .icon { width: 72px; height: 72px; } /* ensure icon size unchanged */
