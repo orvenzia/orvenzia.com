@@ -880,3 +880,47 @@ body.page-screening .screening-wrap form { width: 100%; }
 
 /* Active nav link */
 .nav a.active { text-decoration: underline; text-underline-offset: 4px; }
+
+
+
+/* === Screening V2 (native) === */
+.form-card { background: rgba(255,255,255,0.86); border-radius: 20px; padding: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+.form-grid { display: grid; gap: 18px; }
+.form-row { display: grid; gap: 8px; }
+.q-label { font-weight: 600; }
+.inline { display: flex; gap: 18px; align-items: center; }
+
+.progress { --pct: 0%; background: #eee; height: 10px; border-radius: 999px; position: relative; overflow: hidden; }
+.progress::before { content: ""; position: absolute; inset: 0; width: var(--pct); background: var(--accent); }
+.progress-text { font-size: 12px; margin-top: 6px; color: #555 }
+
+#result-wrap { display: none; margin-top: 28px; }
+#result-wrap.show { display: block; }
+.report-card { background: rgba(255,255,255,0.92); border-radius: 24px; padding: 24px; box-shadow: 0 14px 36px rgba(0,0,0,0.1); }
+.report-head .report-title { margin: 6px 0 12px; }
+.meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; color: #444; }
+.score-row { display: grid; grid-template-columns: 180px 1fr; gap: 24px; align-items: center; }
+
+/* Semi-circle gauge */
+.gauge { position: relative; width: 180px; height: 90px; border-radius: 180px 180px 0 0; background: conic-gradient(
+  #e53935 0 36deg, #fb8c00 36deg 72deg, #fdd835 72deg 108deg, #8bc34a 108deg 144deg, #43a047 144deg 180deg
+); overflow: hidden; }
+.gauge::after { content: ""; position: absolute; inset: 12px 12px -90px 12px; background: #fff; border-radius: 180px 180px 0 0; }
+.gauge-needle { --val: 0; position: absolute; left: 50%; bottom: 0; width: 2px; height: 90px; background: #111;
+  transform-origin: bottom center; transform: translateX(-50%) rotate(calc((var(--val) / 100) * 180deg)); }
+.big-score { font-size: 42px; font-weight: 800; line-height: 1; }
+.big-score .u { font-size: 16px; color: #666; margin-left: 4px; }
+.level-title { font-weight: 700; margin-top: 6px; }
+
+.report-body p { margin: 10px 0; }
+.report-cta { margin-top: 12px; display: flex; gap: 12px; }
+
+@media (max-width: 768px){
+  .score-row { grid-template-columns: 1fr; }
+  .meta-grid { grid-template-columns: 1fr; }
+}
+
+
+
+/* Screening v4 minor helpers */
+.muted { color:#555; opacity: .9; }
