@@ -720,3 +720,92 @@ footer {
   .footer-bottom .container { flex-direction: column; align-items: flex-start; gap: 8px; }
 }
 
+
+
+/* --- Updated Color Palette and Section Styles (Full Version) --- */
+body {
+  background-color: #1a2420;
+  color: #fff;
+}
+
+body, section {
+  background: linear-gradient(rgba(255,255,255,0.12), rgba(255,255,255,0.12)), url('../img/bg.jpg') center/cover no-repeat;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #fff;
+}
+
+p, li, span {
+  color: #d1d1d1;
+}
+
+a {
+  color: #2ecc71;
+}
+a:hover {
+  color: #27ae60;
+}
+
+.btn.btn-primary {
+  background-color: #2ecc71;
+  color: #fff;
+  border: none;
+}
+.btn.btn-primary:hover {
+  background-color: #27ae60;
+}
+
+.btn.btn-outline {
+  border: 1px solid #2ecc71;
+  color: #2ecc71;
+  background: transparent;
+}
+.btn.btn-outline:hover {
+  border-color: #27ae60;
+  color: #27ae60;
+}
+
+.section {
+  background: rgba(255,255,255,0.05);
+  border-radius: 12px;
+  padding: 40px 20px;
+  margin-bottom: 40px;
+}
+
+.site-footer {
+  background-color: #1a2420;
+  color: #fff;
+}
+.site-footer a {
+  color: #2ecc71;
+}
+.site-footer a:hover {
+  color: #27ae60;
+}
+
+.badge-oci .badge-dot {
+  background: #2ecc71;
+}
+.badge-oci .badge-text {
+  color: #fff;
+}
+
+/* Tooltip adjustment */
+.timeline .step::after {
+  background: rgba(46,204,113,0.9);
+  color: #fff;
+}
+
+/* Mobile tooltip positioning */
+@media (max-width: 768px) {
+  .timeline .step::after {
+    bottom: auto;
+    top: 110%;
+    transform: translateX(-50%);
+  }
+  .timeline .step:hover::after {
+    transform: translateX(-50%) translateY(5px);
+  }
+}
+
