@@ -813,3 +813,34 @@ a:hover {
   }
 }
 
+
+
+/* --- Menu text fix for Light Theme --- */
+.navbar a, 
+.navbar ul li a, 
+.topmenu a {
+  color: #000 !important;
+}
+
+.navbar a:hover, 
+.navbar ul li a:hover, 
+.topmenu a:hover {
+  color: #27ae60 !important;
+}
+
+
+
+/* --- Menu text fix for Light Theme (no green hover) --- */
+.navbar a, 
+.navbar ul li a, 
+.topmenu a {
+  color: #000 !important;
+}
+
+.navbar a:hover, 
+.navbar ul li a:hover, 
+.topmenu a:hover {
+  color: #000 !important;
+  text-decoration: underline;
+}
+
