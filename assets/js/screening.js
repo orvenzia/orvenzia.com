@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const emailEl = document.getElementById('email');
   const progress = document.getElementById('progress');
   const mailStatus = document.getElementById('mail-status');
+  const errorBanner = document.getElementById('error-banner');
+  function showError(msg){ if(!errorBanner) return; errorBanner.textContent = msg; errorBanner.style.display='block'; }
 
   const weights = [{"yes": 4.0, "no": 0.0}, {"yes": 4.0, "no": 0.0}, {"yes": 7.0, "planned": 3.5, "no": 0.0}, {"yes": 3.0, "planned": 1.5, "no": 0.0}, {"yes": 12.0, "no": 0.0}, {"yes": 8.0, "no": 0.0}, {"yes": 2.0, "planned": 1.0, "no": 0.0}, {"yes": 4.0, "no": 0.0}, {"yes": 6.0, "planned": 3.0, "no": 0.0}, {"yes": 12.0, "no": 0.0}, {"yes": 12.0, "planned": 6.0, "no": 0.0}, {"yes": 11.0, "planned": 5.5, "no": 0.0}, {"yes": 15.0, "planned": 7.5, "no": 0.0}];
   const totalQuestions = weights.length;
@@ -25,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return true;
   }
 
-  form.addEventListener('submit', async (e) => {
+  async function computeAndRender(e){
     e.preventDefault();
     if (!validateTop()) {
       alert('Please enter company and work email.');
@@ -117,6 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // Send to backend (Apps Script)
     mailStatus.textContent = 'Sending your report...';
     try {
+      if(!window.SCREENING_BACKEND_URL || window.SCREENING_BACKEND_URL.includes('REPLACE')){ throw new Error('Backend URL not configured'); }
       const resp = await fetch(window.SCREENING_BACKEND_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -133,9 +136,14 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (err) {
       console.error(err);
       mailStatus.textContent = 'Network error while sending email.';
+      showError(err.message || 'Unexpected error. Open console for details.');
     }
-  });
+  }
 
+
+
+  form.addEventListener('submit', (e)=>{ e.preventDefault(); computeAndRender(e); });
+  document.getElementById('see-result')?.addEventListener('click', (e)=>{ e.preventDefault(); computeAndRender(e); });
 
 function gaugeSVG(pct){
   const angle = (pct/100)*180;
