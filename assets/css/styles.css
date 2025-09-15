@@ -770,7 +770,7 @@ footer {
 
 
 
-/* === NAV FIX (GPT) === */
+/* === Mobile nav fixes (final) === */
 @media (max-width: 680px) {
   .nav {
     display: none !important;
@@ -780,11 +780,36 @@ footer {
     right: 0;
     background: #fff;
     border-top: 1px solid var(--line);
+    box-shadow: 0 8px 24px rgba(0,0,0,.08);
     flex-direction: column;
     padding: 12px 16px;
     z-index: 999;
   }
-  .nav.active {
-    display: flex !important;
-  }
+  .nav.active { display: flex !important; }
+  .nav a { padding: 10px; text-align: left; }
+  .nav a.btn { margin-top: 8px; background: var(--accent); color: #fff !important; text-align: center; }
+  .nav-toggle{display:block}
+  body.menu-open { overflow: hidden; }
 }
+
+/* === Case Anonymization Notice === */
+.case-notice {
+  background: #f5f5f5;
+  color: #444;
+  font-size: 0.95rem;
+  padding: 12px 18px;
+  border-left: 4px solid var(--accent);
+  margin-bottom: 24px;
+  border-radius: 6px;
+}
+
+/* === Screening page full-width form === */
+body.page-screening .section { padding: 0; }
+body.page-screening .screening-wrap { max-width: 1100px; margin: 0 auto; padding: 24px 16px; }
+body.page-screening .screening-wrap form { width: 100%; }
+
+/* === OCI legend styling === */
+.oci-legend { margin-top: 24px; border: 1px solid var(--line); border-radius: 8px; padding: 16px 18px; background: #fff; }
+.oci-legend h3 { margin-top: 0; font-size: 1.1rem; }
+.oci-legend ul { margin: 8px 0 0 18px; }
+.oci-legend li { margin: 4px 0; }
