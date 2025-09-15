@@ -826,3 +826,25 @@ body.page-screening .screening-wrap form { width: 100%; }
 /* Cards and grids tidy spacing */
 .grid-4, .grid-3, .grid-2 { gap: 24px; }
 .card .icon { width: 40px; height: 40px; display: block; margin-bottom: 8px; }
+
+
+/* Premium Offer Grid Styles (final6) */
+.section-offer { background:#f9fafb; padding:80px 0; }
+.section-offer h2 { text-align:center; font-size:2rem; margin-bottom:40px; }
+
+.offer-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:28px; margin-top:32px; }
+.offer-card { background:#fff; border-radius:14px; padding:32px 20px; box-shadow:0 4px 12px rgba(0,0,0,.06);
+              text-align:center; position:relative; overflow:hidden;
+              transition:transform 0.2s ease, box-shadow 0.2s ease; }
+.offer-card::before { content:""; position:absolute; top:0; left:0; right:0; height:6px; background:#1b7c3c; transition:background 0.3s ease; }
+.offer-card:hover { transform:translateY(-6px); box-shadow:0 8px 20px rgba(0,0,0,.12); }
+.offer-card:hover::before { background:#14562a; }
+.offer-card h3 { font-size:1.15rem; font-weight:600; margin:20px 0 0; }
+
+.offer-cta { margin-top:40px; text-align:center; }
+.btn-offer { background:#1b7c3c; color:#fff !important; font-size:1.1rem; font-weight:600; padding:14px 34px; border-radius:10px; text-decoration:none; display:inline-block; box-shadow:0 4px 12px rgba(0,0,0,.08); transition:all 0.25s ease; }
+.btn-offer:hover { background:#14562a; transform:translateY(-3px); box-shadow:0 6px 18px rgba(0,0,0,.12); }
+
+@media(max-width:1200px){ .offer-grid{grid-template-columns:repeat(3,1fr);} }
+@media(max-width:768px){ .offer-grid{grid-template-columns:repeat(2,1fr);} }
+@media(max-width:480px){ .offer-grid{grid-template-columns:1fr;} }
