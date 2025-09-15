@@ -770,10 +770,10 @@ footer {
 
 
 
-/* === Mobile nav fixes (GPT) === */
+/* === NAV FIX (GPT) === */
 @media (max-width: 680px) {
   .nav {
-    display: none; /* hidden by default */
+    display: none !important;
     position: absolute;
     top: 72px;
     left: 0;
@@ -785,16 +785,6 @@ footer {
     z-index: 999;
   }
   .nav.active {
-    display: flex; /* show only when active */
-  }
-  .nav a {
-    padding: 10px;
-    text-align: left;
-  }
-  .nav a.btn {
-    margin-top: 8px;
-    background: var(--accent);
-    color: #fff !important;
-    text-align: center;
+    display: flex !important;
   }
 }
