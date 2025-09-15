@@ -630,3 +630,46 @@ footer {
   opacity: 1;
   transform: translateX(-50%) translateY(-16px);
 }
+
+
+/* === Polished Process Page === */
+.page-process .process-timeline {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  padding: 40px 20px;
+}
+
+.page-process .timeline-step h3,
+.page-process .timeline-step p {
+  color: #fff;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+}
+
+/* Tooltip styling */
+.timeline-step::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-12px);
+  background: #0a472e;
+  color: #fff;
+  font-size: 0.82rem;
+  line-height: 1.4;
+  padding: 10px 14px;
+  border-radius: 6px;
+  width: 220px;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+  z-index: 10;
+}
+
+.timeline-step:hover::before {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-18px);
+}
