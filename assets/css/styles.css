@@ -689,3 +689,29 @@ footer {
 .timeline-step::before {
   background: rgba(20, 120, 80, 0.95); /* lighter tooltip background */
 }
+
+
+/* === Final Clean + Lightened Greens === */
+.page-process .process-timeline {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  padding: 40px 20px;
+}
+
+.page-process .cta-hero {
+  background: rgba(40, 150, 100, 0.85); /* lighter green */
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 80px 20px;
+}
+
+.page-process .timeline-step h3,
+.page-process .timeline-step p {
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+}
+
+.timeline-step::before {
+  background: rgba(40, 150, 100, 0.95); /* lighter tooltip background */
+}
