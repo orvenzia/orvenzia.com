@@ -673,3 +673,19 @@ footer {
   opacity: 1;
   transform: translateX(-50%) translateY(-18px);
 }
+
+
+/* === Lightened Colors for Process Page === */
+.page-process .process-timeline {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+}
+
+.page-process .cta-hero {
+  background: rgba(20, 120, 80, 0.85); /* lighter green */
+  backdrop-filter: blur(10px);
+}
+
+.timeline-step::before {
+  background: rgba(20, 120, 80, 0.95); /* lighter tooltip background */
+}
