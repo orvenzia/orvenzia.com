@@ -715,3 +715,10 @@ footer {
 .timeline-step::before {
   background: rgba(40, 150, 100, 0.95); /* lighter tooltip background */
 }
+
+
+/* CTA summary block (injected fix) */
+.section.cta-summary { padding: 64px 0; background: rgba(255,255,255,0.08); }
+.section.cta-summary .process-bullets { margin: 16px 0 24px; padding-left: 20px; }
+.section.cta-summary .cta-row { display:flex; gap:16px; flex-wrap:wrap; margin-top:12px; }
+.btn.btn-outline { border:1px solid currentColor; background: transparent; }
