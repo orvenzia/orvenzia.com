@@ -546,3 +546,87 @@ body::before {
   height: 60px;
   background: linear-gradient(to bottom, rgba(10,71,46,0.9) 0%, rgba(10,71,46,0) 100%);
 }
+
+
+/* === Process page polish === */
+.page-process .process-timeline {
+  background: rgba(255,255,255,0.78);
+  backdrop-filter: blur(8px);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.page-process .cta-hero {
+  background: rgba(10,71,46,0.85);
+  backdrop-filter: blur(8px);
+  border-radius: 16px;
+  box-shadow: 0 12px 36px rgba(10,71,46,0.25);
+}
+
+.page-process main {
+  padding-bottom: 60px;
+}
+
+.page-fade-bottom {
+  height: 80px;
+  background: linear-gradient(to bottom, rgba(10,71,46,0.15) 0%, rgba(10,71,46,0.00) 100%);
+  margin-top: 20px;
+}
+
+/* Reduce hard edges between sections */
+.page-process .process-timeline + .cta-hero {
+  margin-top: 48px;
+}
+
+/* Make all generic white sections on process page slightly translucent */
+.page-process section {
+  background-color: transparent;
+}
+
+/* Ensure footer spacing is consistent */
+footer {
+  padding-top: 40px;
+}
+
+
+/* === Compact timeline spacing === */
+.page-process .process-timeline {
+  padding: 40px 20px;
+}
+
+.page-process .process-timeline .section-title {
+  margin-bottom: 30px;
+}
+
+/* === Tooltip for timeline steps === */
+.timeline-step {
+  position: relative;
+  cursor: pointer;
+}
+
+.timeline-step::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-10px);
+  background: #0a472e;
+  color: #fff;
+  font-size: 0.82rem;
+  line-height: 1.3;
+  padding: 8px 12px;
+  border-radius: 6px;
+  white-space: normal;
+  width: 200px;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  z-index: 10;
+}
+
+.timeline-step:hover::before {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-16px);
+}
