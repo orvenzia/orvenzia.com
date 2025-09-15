@@ -744,3 +744,26 @@ footer {
 }
 .nav-links li { margin:10px 0; }
 .nav-links a.active { font-weight:bold; border-bottom:2px solid green; }
+
+/* Responsive Navigation Fix */
+.menu-toggle { display: none; cursor: pointer; font-size: 28px; }
+@media (max-width: 768px) {
+  .nav-links { display: none; flex-direction: column; background: rgba(255,255,255,0.95); padding: 15px; border-radius: 8px; position: relative; top: 0; right: 0; }
+  .nav-links.active { display: flex; }
+  .menu-toggle { display: block; margin-left: auto; }
+  .navbar { display:flex; align-items:center; justify-content:space-between; }
+}
+.nav-links li { margin:10px 0; }
+.nav-links a.active { font-weight:bold; border-bottom:2px solid green; }
+
+/* Smooth animation for mobile menu */
+@media (max-width: 768px) {
+  .nav-links {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out;
+  }
+  .nav-links.active {
+    max-height: 500px; /* enough height to show links */
+  }
+}
