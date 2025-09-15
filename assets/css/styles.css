@@ -322,3 +322,28 @@ body::before {
 .hero::before {
   background: rgba(255,255,255,0.18);
 }
+
+
+/* --- Responsive Nav Fix (added by ChatGPT) --- */
+@media (max-width: 768px) {
+  nav.nav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 0;
+  }
+
+  nav.nav a {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  nav.nav a.btn {
+    text-align: center;
+    border: none;
+  }
+}
