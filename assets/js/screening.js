@@ -1,4 +1,4 @@
-// screening.js — Orvenzia Screening v6.3 (final med ny /exec URL)
+// screening.js — Orvenzia Screening v6.4 (final med gauge-fix + korrekt backend URL)
 
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('screening-form');
@@ -34,48 +34,46 @@ document.addEventListener('DOMContentLoaded', () => {
     return 'RED';
   }
 
-  // Farvet gauge med korrekt vinkel (−90° → +90°)
-function gaugeSVG(score) {
-  // Map score til zone (farve + label)
-  const zones = [
-    { min: 0,   max: 39,  color: "#e53935" }, // Red
-    { min: 40,  max: 59,  color: "#fb8c00" }, // Orange
-    { min: 60,  max: 79,  color: "#fdd835" }, // Yellow
-    { min: 80,  max: 98,  color: "#8bc34a" }, // Light Green
-    { min: 99,  max: 100, color: "#43a047" }  // Green
-  ];
+  // Gauge med rene farvezoner (ingen gradient)
+  function gaugeSVG(score) {
+    const angle = -90 + (score / 100) * 180;
 
-  // Find zone for score
-  const zone = zones.find(z => score >= z.min && score <= z.max) || zones[0];
+    const zones = [
+      { min: 0,   max: 39,  color: "#e53935" }, // Red
+      { min: 40,  max: 59,  color: "#fb8c00" }, // Orange
+      { min: 60,  max: 79,  color: "#fdd835" }, // Yellow
+      { min: 80,  max: 98,  color: "#8bc34a" }, // Light Green
+      { min: 99,  max: 100, color: "#43a047" }  // Green
+    ];
 
-  // Beregn vinkel (−90° til +90°)
-  const angle = -90 + (score / 100) * 180;
+    const arcFor = (min, max) => {
+      const startAngle = -90 + (min / 100) * 180;
+      const endAngle   = -90 + (max / 100) * 180;
+      const r = 150;
+      const cx = 180, cy = 180;
+      const x1 = cx + r * Math.cos(startAngle * Math.PI/180);
+      const y1 = cy + r * Math.sin(startAngle * Math.PI/180);
+      const x2 = cx + r * Math.cos(endAngle * Math.PI/180);
+      const y2 = cy + r * Math.sin(endAngle * Math.PI/180);
+      return { x1, y1, x2, y2, large: (endAngle-startAngle)>180?1:0 };
+    };
 
-  // SVG (glat baggrund, tydelig nål, zone-markering)
-  return `
-    <svg width="360" height="200" viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
-      <!-- Baggrundsbuens farvezoner -->
-      <path d="M30,180 A150,150 0 0,1 330,180"
-            stroke="url(#grad)" stroke-width="20" fill="none" />
-      <defs>
-        <linearGradient id="grad" x1="0%" y1="100%" x2="100%" y2="0%">
-          <stop offset="0%"   stop-color="#e53935"/>
-          <stop offset="25%"  stop-color="#fb8c00"/>
-          <stop offset="50%"  stop-color="#fdd835"/>
-          <stop offset="75%"  stop-color="#8bc34a"/>
-          <stop offset="100%" stop-color="#43a047"/>
-        </linearGradient>
-      </defs>
+    let arcs = "";
+    zones.forEach(z => {
+      const a = arcFor(z.min, z.max);
+      arcs += `<path d="M${a.x1},${a.y1} A150,150 0 ${a.large},1 ${a.x2},${a.y2}" stroke="${z.color}" stroke-width="20" fill="none"/>`;
+    });
 
-      <!-- Nålen -->
-      <g transform="translate(180,180) rotate(${angle})">
-        <line x1="0" y1="0" x2="0" y2="-110" stroke="#222" stroke-width="4" />
-        <circle cx="0" cy="0" r="8" fill="#222" />
-        <circle cx="0" cy="0" r="6" fill="${zone.color}" />
-      </g>
-    </svg>`;
-}
-
+    return `
+      <svg width="360" height="200" viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+        ${arcs}
+        <g transform="translate(180,180) rotate(${angle})">
+          <line x1="0" y1="0" x2="0" y2="-120" stroke="#222" stroke-width="4" />
+          <circle cx="0" cy="0" r="8" fill="#222" />
+          <circle cx="0" cy="0" r="6" fill="#fff" />
+        </g>
+      </svg>`;
+  }
 
   async function computeAndRender(e){
     e && e.preventDefault();
@@ -138,7 +136,6 @@ function gaugeSVG(score) {
         <p><strong>Outcome:</strong> ${T.outcome}</p>
       </body></html>`;
 
-    // Send til backend
     try {
       const backendUrl = "https://script.google.com/macros/s/AKfycbyjJPhK1krK-hXzdkQivpWl2Waj3YY7MFzDxLRkSy3iT9Kh5yi0YZHByikgDYjxfD8Q/exec";
       mailStatus.textContent = 'Sending your report...';
