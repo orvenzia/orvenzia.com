@@ -1,19 +1,13 @@
 /**
- * Orvenzia ESG Screening Backend – Benchmark Style
- * - doPost: Modtager data fra screening.js og sender Word-rapport
- * - doGet: Simpel debug-besked hvis du åbner URL i browser
+ * Orvenzia ESG Screening Backend – Benchmark Style 1:1
+ * Kunden ser kun barometer + score.
+ * support@orvenzia.com modtager en Word-rapport med farvet statusboks,
+ * grafisk barometer og tabel over alle svar.
  */
 
 const OWNER_EMAIL = "support@orvenzia.com";
 
-// === GET til browser-test ===
-function doGet(e) {
-  return ContentService.createTextOutput(
-    JSON.stringify({ status: "ok", message: "Backend is running. Use POST to submit data." })
-  ).setMimeType(ContentService.MimeType.JSON);
-}
-
-// === POST fra frontend ===
+// === Entry Point ===
 function doPost(e) {
   try {
     const data = JSON.parse(e.postData.contents);
@@ -34,7 +28,7 @@ function doPost(e) {
       attachments: [wordFile.getAs(MimeType.MICROSOFT_WORD)]
     });
 
-    // 4. Svar til frontend
+    // 4. Return simpelt svar til frontend
     return ContentService.createTextOutput(
       JSON.stringify({ score: scorePercent, status: status })
     ).setMimeType(ContentService.MimeType.JSON);
@@ -84,11 +78,11 @@ function createBenchmarkReport(lead, answers, score, status, color, tableData) {
   const doc = DocumentApp.create(`Baseline_Report_${lead.company || "Client"}`);
   const body = doc.getBody();
 
-  // Titel
+  // Title
   body.appendParagraph("Baseline ESG Readiness Analysis")
       .setHeading(DocumentApp.ParagraphHeading.HEADING1);
 
-  // Kundeinfo
+  // Client info
   body.appendParagraph(`Company: ${lead.company || "Unknown"}`);
   body.appendParagraph(`Contact: ${lead.name || ""} – ${lead.email || ""}`);
 
@@ -96,9 +90,11 @@ function createBenchmarkReport(lead, answers, score, status, color, tableData) {
   const statusBox = body.appendParagraph(`Readiness Score: ${score}/100 → ${status}`);
   statusBox.setBackgroundColor(color).setBold(true).setAlignment(DocumentApp.HorizontalAlignment.CENTER);
 
-  // Barometer
+  // Indsæt barometer
   const gaugeImg = generateGauge(score);
   body.appendImage(gaugeImg).setWidth(400).setHeight(200);
+
+  body.appendParagraph(" ");
 
   // Benchmark
   body.appendParagraph("Benchmark").setHeading(DocumentApp.ParagraphHeading.HEADING2);
@@ -107,13 +103,15 @@ function createBenchmarkReport(lead, answers, score, status, color, tableData) {
     `Your score of ${score} is ${score < 70 ? "below" : "above"} average.`
   );
 
-  // Tabel med svar
+  // Tabel med alle svar
   body.appendParagraph("Screening Answers").setHeading(DocumentApp.ParagraphHeading.HEADING2);
   const table = body.appendTable([["Question", "Answer", "Points"]]);
   table.setBorderWidth(1);
-  tableData.forEach(row => { table.appendTableRow(row); });
+  tableData.forEach(row => {
+    table.appendTableRow(row);
+  });
 
-  // Strengths / Weaknesses / Planned
+  // Strengths/Weaknesses/In Progress
   body.appendParagraph("Readiness Overview").setHeading(DocumentApp.ParagraphHeading.HEADING2);
   addSection(body, "Strengths", answers, "yes", "✔️ Implemented");
   addSection(body, "Weaknesses", answers, "no", "❌ Missing");
@@ -141,7 +139,7 @@ function createBenchmarkReport(lead, answers, score, status, color, tableData) {
   return DriveApp.getFileById(doc.getId());
 }
 
-// === Hjælpefunktioner ===
+// === Sektioner ===
 function addSection(body, title, answers, match, label) {
   body.appendParagraph(title).setHeading(DocumentApp.ParagraphHeading.HEADING3);
   Object.entries(answers).forEach(([q, ans]) => {
@@ -151,8 +149,9 @@ function addSection(body, title, answers, match, label) {
   });
 }
 
+// === Gauge (SVG → PNG) ===
 function generateGauge(score) {
-  const angle = -90 + (score / 100) * 180;
+  const angle = -90 + (score / 100) * 180; // pilens vinkel
   const svg = `
   <svg xmlns="http://www.w3.org/2000/svg" width="400" height="200">
     <path d="M20 180 A160 160 0 0 1 380 180" fill="none" stroke="#FF0000" stroke-width="30"/>
