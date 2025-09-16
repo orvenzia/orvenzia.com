@@ -1,4 +1,4 @@
-// screening.js — Orvenzia Screening v6.2 med din Web App URL
+// screening.js — Orvenzia Screening v6.2 (final)
 
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('screening-form');
@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const mailStatus = document.getElementById('mail-status');
   const errorBanner = document.getElementById('error-banner');
 
-  // Vægte 1:1 med Excel (Yes / Planned / No kun hvor relevant)
+  // Vægte 1:1 med Excel (Yes/Planned/No hvor relevant)
   const weights = [
     {yes:4.0,no:0.0},                         // Q1
     {yes:4.0,no:0.0},                         // Q2
@@ -25,14 +25,13 @@ document.addEventListener('DOMContentLoaded', () => {
     {yes:11.0,planned:5.5,no:0.0},            // Q12
     {yes:15.0,planned:7.5,no:0.0},            // Q13
   ];
-
   const totalQuestions = weights.length;
-  const maxScore = weights.reduce((sum,w)=> sum + (w.yes||0), 0);
+  const maxScore = weights.reduce((s,w)=> s + (w.yes||0), 0);
 
   function showError(msg){
     if(!errorBanner) return;
     errorBanner.textContent = msg;
-    errorBanner.style.display='block';
+    errorBanner.style.display = 'block';
   }
 
   function levelFor(pct){
@@ -43,18 +42,24 @@ document.addEventListener('DOMContentLoaded', () => {
     return 'RED';
   }
 
-  // FARVET SVG gauge
+  // FARVET gauge med korrekt vinkel (−90° → +90°)
   function gaugeSVG(pct){
-    const angle = (pct/100)*180;
+    const angle = -90 + (pct/100)*180;
     return `
       <svg width="360" height="200" viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+        <!-- RED 0-39 -->
         <path d="M30,180 A150,150 0 0,1 102,60" stroke="#e53935" stroke-width="18" fill="none" />
+        <!-- ORANGE 40-59 -->
         <path d="M102,60 A150,150 0 0,1 180,30" stroke="#fb8c00" stroke-width="18" fill="none" />
+        <!-- YELLOW 60-79 -->
         <path d="M180,30 A150,150 0 0,1 258,60" stroke="#fdd835" stroke-width="18" fill="none" />
+        <!-- LIGHT GREEN 80-98 -->
         <path d="M258,60 A150,150 0 0,1 330,180" stroke="#8bc34a" stroke-width="18" fill="none" />
+        <!-- GREEN 99-100 -->
         <path d="M328,176 A150,150 0 0,1 330,180" stroke="#43a047" stroke-width="18" fill="none" />
+        <!-- needle -->
         <g transform="translate(180,180) rotate(${angle})">
-          <rect x="-2" y="-130" width="4" height="130" fill="#111"/>
+          <rect x="-2" y="-110" width="4" height="110" fill="#111"/>
           <circle cx="0" cy="0" r="6" fill="#111"/>
         </g>
       </svg>`;
@@ -66,10 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const company = (companyEl?.value || '').trim();
     const email   = (emailEl?.value || '').trim();
-    if(!company || !email){
-      alert('Please enter company and work email.');
-      return;
-    }
+    if(!company || !email){ alert('Please enter company and work email.'); return; }
 
     // Beregn score
     let raw = 0;
@@ -82,17 +84,14 @@ document.addEventListener('DOMContentLoaded', () => {
       raw += pts;
       answers.push({ q: name, answer: sel.value, points: pts });
     });
-    if (answers.length < totalQuestions){
-      alert('Please answer all questions.');
-      return;
-    }
+    if (answers.length < totalQuestions){ alert('Please answer all questions.'); return; }
 
     const pct = Math.round((raw / maxScore) * 100);
     const level = levelFor(pct);
     const T = (window.reportTexts && window.reportTexts[level]) || { title: level, status:'', recommendation:'', outcome:'' };
     const dateStr = new Date().toLocaleDateString(undefined, {year:'numeric', month:'short', day:'2-digit'});
 
-    // VIS RESULTATET (med farvet gauge)
+    // Vis resultat (med farvet gauge)
     resultCard.innerHTML = `
       <div class="report-head">
         <div class="brand-row"><span class="logo-mark">O</span><span class="logo-type">Orvenzia</span></div>
@@ -116,26 +115,40 @@ document.addEventListener('DOMContentLoaded', () => {
     resultWrap.classList.add('show');
     resultWrap.scrollIntoView({ behavior:'smooth' });
 
-    // PDF til mail
+    // PDF-HTML (samme gauge)
     const pdfHtml = `
-      <html><head><meta charset="utf-8"><title>Orvenzia Screening Report</title></head><body>
+      <html><head><meta charset="utf-8"><title>Orvenzia Screening Report</title>
+      <style>
+        body { font-family: Arial, sans-serif; color:#111; }
+        .brand { display:flex; align-items:center; gap:8px; font-size:20px; }
+        .logo-mark { display:inline-block; width:28px; height:28px; border-radius:50%; background:#004d40; color:#fff; text-align:center; line-height:28px; font-weight:700; }
+        h1 { font-size:22px; margin:8px 0 2px; }
+        .meta { font-size:12px; color:#555; margin-bottom:10px; }
+        .score { font-size:28px; font-weight:800; margin:8px 0; }
+        .level { font-weight:700; margin-bottom:10px; }
+        .section p { margin:6px 0; }
+        .gauge-wrap{ display:flex; justify-content:center; margin:8px 0; }
+      </style></head><body>
+        <div class="brand"><span class="logo-mark">O</span><strong>Orvenzia</strong></div>
         <h1>ESG Readiness Screening Score</h1>
-        <div>Company: ${company} — Date: ${dateStr}</div>
-        <div>${pct}/100 (${T.title})</div>
-        ${gaugeSVG(pct)}
-        <p><strong>Status:</strong> ${T.status}</p>
-        <p><strong>Recommendation:</strong><br>${T.recommendation}</p>
-        <p><strong>Outcome:</strong> ${T.outcome}</p>
-      </body></html>`;
+        <div class="meta">Company: ${company} &nbsp;•&nbsp; Date: ${dateStr}</div>
+        <div class="score">${pct} / 100</div>
+        <div class="gauge-wrap">${gaugeSVG(pct)}</div>
+        <div class="level">${T.title}</div>
+        <div class="section"><p><strong>Status:</strong> ${T.status}</p></div>
+        <div class="section"><p><strong>Recommendation:</strong><br>${(T.recommendation||'').replaceAll('\\n','<br>')}</p></div>
+        <div class="section"><p><strong>Outcome:</strong> ${T.outcome}</p></div>
+      </body></html>
+    `;
 
-    // SEND til Apps Script backend
+    // SEND til backend — CORS-sikkert (no-cors + text/plain)
     try {
       const backendUrl = "https://script.google.com/macros/s/AKfycbxXWz4hUIr0aDvvQhXDdV_E5tsGdX8SXIctPVaRUaaYDH3TV-OnOSE9Sc6zExz6zX-u/exec";
       mailStatus.textContent = 'Sending your report...';
 
       await fetch(backendUrl, {
         method: 'POST',
-        mode: 'no-cors',  // undgår CORS fejl
+        mode: 'no-cors',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify({ company, email, score: pct, level, answers, reportHtml: pdfHtml })
       });
