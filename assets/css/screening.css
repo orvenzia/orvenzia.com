@@ -1,0 +1,18 @@
+/* Error banner + states */
+.error-banner {
+  display: none;
+  background: #ffebee;
+  border: 1px solid #ffcdd2;
+  color: #c62828;
+  padding: 12px 14px;
+  border-radius: 10px;
+  margin: 12px 0 16px;
+  font-weight: 600;
+}
+.error-banner.show { display: block; }
+
+/* submitting state */
+#screening-form.submitting button[type="submit"] {
+  opacity: .6;
+  pointer-events: none;
+}
