@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Send til backend
     try {
       mailStatus.textContent = 'Sending report...';
-      const response = await fetch("DIN_EXEC_URL", {
+      const response = await fetch("https://script.google.com/macros/s/AKfycbx97ufOko6lNELzTN6trPYcwaWEVm2ZxMgLaO6fMPfMrCCLlQPSo8jB7zQLoBzn34zglg/exec", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ lead: {company, email}, answers })
