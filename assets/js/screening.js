@@ -1,127 +1,138 @@
-/* ESG Screening – robust backend integration v7.1 */
-(function () {
+// screening.js — Orvenzia Screening v6.3 (final med ny /exec URL)
+
+document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('screening-form');
+  const resultWrap = document.getElementById('result-wrap');
+  const resultCard = document.getElementById('result-card');
+  const companyEl = document.getElementById('company');
+  const emailEl = document.getElementById('email');
   const mailStatus = document.getElementById('mail-status');
   const errorBanner = document.getElementById('error-banner');
-  const submitBtn = document.getElementById('submitBtn');
 
-  if (!form) return console.warn('screening.js: #screening-form not found');
+  // Vægte 1:1 fra Excel
+  const weights = [
+    {yes:4.0,no:0.0}, {yes:4.0,no:0.0}, {yes:7.0,planned:3.5,no:0.0},
+    {yes:3.0,planned:1.5,no:0.0}, {yes:12.0,no:0.0}, {yes:8.0,no:0.0},
+    {yes:2.0,planned:1.0,no:0.0}, {yes:4.0,no:0.0}, {yes:6.0,planned:3.0,no:0.0},
+    {yes:12.0,no:0.0}, {yes:12.0,planned:6.0,no:0.0},
+    {yes:11.0,planned:5.5,no:0.0}, {yes:15.0,planned:7.5,no:0.0}
+  ];
+  const totalQuestions = weights.length;
+  const maxScore = weights.reduce((s,w)=> s + (w.yes||0), 0);
 
-  function getAnswer(name) {
-    const el = form.querySelector(`[name="${name}"]`);
-    if (!el) return '';
-    if (el instanceof HTMLSelectElement) return el.value || '';
-    const radios = form.querySelectorAll(`input[name="${name}"]`);
-    if (radios && radios.length) {
-      const checked = Array.from(radios).find(r => r.checked);
-      return checked ? checked.value : '';
-    }
-    return '';
+  function showError(msg){
+    if(!errorBanner) return;
+    errorBanner.textContent = msg;
+    errorBanner.style.display='block';
   }
 
-  function validEmail(email) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  function levelFor(pct){
+    if (pct >= 99) return 'GREEN';
+    if (pct >= 80) return 'LIGHT_GREEN';
+    if (pct >= 60) return 'YELLOW';
+    if (pct >= 40) return 'ORANGE';
+    return 'RED';
   }
 
-  // Basic scoring: yes=2, planned=1, no=0 -> normalize to 0..100
-  function computeScore(answers) {
-    const keys = Object.keys(answers);
-    let sum = 0;
-    keys.forEach(k => {
-      const v = (answers[k] || '').toLowerCase();
-      if (v === 'yes') sum += 2;
-      else if (v === 'planned') sum += 1;
-      else sum += 0;
+  // Farvet gauge med korrekt vinkel (−90° → +90°)
+  function gaugeSVG(pct){
+    const angle = -90 + (pct/100)*180;
+    return `
+      <svg width="360" height="200" viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+        <path d="M30,180 A150,150 0 0,1 102,60" stroke="#e53935" stroke-width="18" fill="none" />
+        <path d="M102,60 A150,150 0 0,1 180,30" stroke="#fb8c00" stroke-width="18" fill="none" />
+        <path d="M180,30 A150,150 0 0,1 258,60" stroke="#fdd835" stroke-width="18" fill="none" />
+        <path d="M258,60 A150,150 0 0,1 330,180" stroke="#8bc34a" stroke-width="18" fill="none" />
+        <path d="M328,176 A150,150 0 0,1 330,180" stroke="#43a047" stroke-width="18" fill="none" />
+        <g transform="translate(180,180) rotate(${angle})">
+          <rect x="-2" y="-110" width="4" height="110" fill="#111"/>
+          <circle cx="0" cy="0" r="6" fill="#111"/>
+        </g>
+      </svg>`;
+  }
+
+  async function computeAndRender(e){
+    e && e.preventDefault();
+    if(errorBanner) errorBanner.style.display='none';
+
+    const company = (companyEl?.value || '').trim();
+    const email   = (emailEl?.value || '').trim();
+    if(!company || !email){ alert('Please enter company and work email.'); return; }
+
+    // Beregn score
+    let raw = 0;
+    const answers = [];
+    weights.forEach((w,idx)=>{
+      const sel = form.querySelector(`[name=q${idx+1}]:checked`);
+      if(!sel) return;
+      const pts = parseFloat(sel.dataset.points || '0');
+      raw += pts;
+      answers.push({ q:`q${idx+1}`, answer: sel.value, points: pts });
     });
-    const max = keys.length * 2;
-    const score = Math.round((sum / max) * 100);
-    return score;
-  }
+    if (answers.length < totalQuestions){ alert('Please answer all questions.'); return; }
 
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    errorBanner && errorBanner.classList.remove('show');
-    if (errorBanner) errorBanner.textContent = '';
-    if (mailStatus) mailStatus.textContent = '';
+    const pct = Math.round((raw / maxScore) * 100);
+    const level = levelFor(pct);
+    const T = (window.reportTexts && window.reportTexts[level]) || {title: level,status:'',recommendation:'',outcome:''};
+    const dateStr = new Date().toLocaleDateString(undefined,{year:'numeric',month:'short',day:'2-digit'});
 
-    const company = (form.querySelector('#company')?.value || '').trim();
-    const email = (form.querySelector('#email')?.value || '').trim();
-    if (!company || !validEmail(email)) {
-      alert('Please enter a company and a valid work email.');
-      return;
-    }
+    // Vis resultat
+    resultCard.innerHTML = `
+      <div class="report-head">
+        <div class="brand-row"><span class="logo-mark">O</span><span class="logo-type">Orvenzia</span></div>
+        <h2 class="report-title">ESG Readiness Screening Score</h2>
+        <div class="meta-grid"><div><strong>Company:</strong> ${company}</div><div><strong>Date:</strong> ${dateStr}</div></div>
+      </div>
+      <div class="score-row">
+        <div class="gauge-wrap">${gaugeSVG(pct)}</div>
+        <div class="score-text">
+          <div class="big-score">${pct}<span class="u">/100</span></div>
+          <div class="level-title">${T.title}</div>
+        </div>
+      </div>
+      <div class="report-body">
+        <p class="status"><strong>Status:</strong> ${T.status}</p>
+        <p class="rec"><strong>Recommendation:</strong><br>${(T.recommendation||'').replaceAll('\\n','<br>')}</p>
+        <p class="outcome"><strong>Outcome:</strong> ${T.outcome}</p>
+      </div>
+      <div class="report-cta"><a class="btn" href="pricing.html">See pricing</a><a class="btn btn-outline" href="contact.html">Contact</a></div>
+    `;
+    resultWrap.classList.add('show');
+    resultWrap.scrollIntoView({ behavior:'smooth' });
 
-    const answers = {};
-    for (let i = 1; i <= 13; i++) {
-      answers['q' + i] = getAnswer('q' + i);
-      if (!answers['q' + i]) {
-        alert('Please answer question ' + i);
-        return;
-      }
-    }
+    // PDF til mail
+    const pdfHtml = `
+      <html><head><meta charset="utf-8"><title>Orvenzia Screening Report</title></head><body>
+        <h1>ESG Readiness Screening Score</h1>
+        <div>Company: ${company} — Date: ${dateStr}</div>
+        <div>${pct}/100 (${T.title})</div>
+        ${gaugeSVG(pct)}
+        <p><strong>Status:</strong> ${T.status}</p>
+        <p><strong>Recommendation:</strong><br>${T.recommendation}</p>
+        <p><strong>Outcome:</strong> ${T.outcome}</p>
+      </body></html>`;
 
-    const score = computeScore(answers);
-    try { localStorage.setItem('esg_last_score', String(score)); } catch(_) {}
-
-    form.classList.add('submitting');
-    if (submitBtn) submitBtn.disabled = true;
-    if (mailStatus) mailStatus.textContent = 'Sending report...';
-
-    const payload = { 
-      lead: { company, email }, 
-      answers, 
-      meta: { score, ts: new Date().toISOString(), ua: navigator.userAgent } 
-    };
-
+    // Send til backend
     try {
-      const ENDPOINT = (window && window.SCREENING_BACKEND_URL)
-        ? window.SCREENING_BACKEND_URL
-        : 'https://script.google.com/macros/s/REPLACE_WITH_YOUR_DEPLOYMENT_ID/exec';
+      const backendUrl = "https://script.google.com/macros/s/AKfycbxlIwOuln-pXXmisgSq4vo6vwJWA0CeChiBhx_RM05qJmPXcCCZsr50a901Xg_QYrVS/exec";
+      mailStatus.textContent = 'Sending your report...';
 
-      const controller = new AbortController();
-      const t = setTimeout(() => controller.abort(), 12000);
-
-      const resp = await fetch(ENDPOINT, {
+      await fetch(backendUrl, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-        signal: controller.signal
-      }).catch(err => { throw new Error('Network error: ' + err.message); });
-      clearTimeout(t);
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({ company, email, score:pct, level, answers, reportHtml: pdfHtml })
+      });
 
-      const ct = resp.headers.get('content-type') || '';
-      let data, isJSON = false;
-      if (ct.includes('application/json')) {
-        data = await resp.json(); isJSON = true;
-      } else {
-        const text = await resp.text();
-        try { data = JSON.parse(text); isJSON = true; }
-        catch { data = { ok: resp.ok, status: resp.status, text }; }
-      }
-
-      if (!resp.ok || (isJSON && data && data.ok === false)) {
-        const msg = isJSON ? JSON.stringify(data) : (data.text || 'Unknown server error');
-        throw new Error('HTTP ' + resp.status + ' — ' + msg);
-      }
-
-      console.log('Backend response:', data);
-      if (mailStatus) mailStatus.textContent = 'Report sent.';
-      setTimeout(() => {
-        alert('Thanks! Your readiness score is ' + score + '. We emailed your summary.');
-      }, 200);
-
+      mailStatus.textContent = 'Report sent. Check your inbox.';
     } catch (err) {
       console.error(err);
-      if (mailStatus) mailStatus.textContent = 'Error sending report.';
-      if (errorBanner) {
-        errorBanner.textContent = String(err && err.message ? err.message : err);
-        errorBanner.classList.add('show');
-      } else {
-        alert('Failed to send: ' + (err && err.message ? err.message : err));
-      }
-    } finally {
-      form.classList.remove('submitting');
-      if (submitBtn) submitBtn.disabled = false;
+      mailStatus.textContent = 'Network error while sending email.';
+      showError(err.message || 'Unexpected error');
     }
-  });
-})();
+  }
+
+  form.setAttribute('novalidate','novalidate');
+  form.addEventListener('submit', (e)=>{ e.preventDefault(); computeAndRender(e); });
+  document.getElementById('see-result')?.addEventListener('click', (e)=>{ e.preventDefault(); computeAndRender(e); });
+});
