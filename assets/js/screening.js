@@ -1,4 +1,4 @@
-// screening.js — Orvenzia Screening v6.2 med din Web App URL
+// screening.js — Orvenzia Screening v6.3 (final med ny /exec URL)
 
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('screening-form');
@@ -9,25 +9,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const mailStatus = document.getElementById('mail-status');
   const errorBanner = document.getElementById('error-banner');
 
-  // Vægte 1:1 med Excel (Yes / Planned / No kun hvor relevant)
+  // Vægte 1:1 fra Excel
   const weights = [
-    {yes:4.0,no:0.0},                         // Q1
-    {yes:4.0,no:0.0},                         // Q2
-    {yes:7.0,planned:3.5,no:0.0},             // Q3
-    {yes:3.0,planned:1.5,no:0.0},             // Q4
-    {yes:12.0,no:0.0},                        // Q5
-    {yes:8.0,no:0.0},                         // Q6
-    {yes:2.0,planned:1.0,no:0.0},             // Q7
-    {yes:4.0,no:0.0},                         // Q8
-    {yes:6.0,planned:3.0,no:0.0},             // Q9
-    {yes:12.0,no:0.0},                        // Q10
-    {yes:12.0,planned:6.0,no:0.0},            // Q11
-    {yes:11.0,planned:5.5,no:0.0},            // Q12
-    {yes:15.0,planned:7.5,no:0.0},            // Q13
+    {yes:4.0,no:0.0}, {yes:4.0,no:0.0}, {yes:7.0,planned:3.5,no:0.0},
+    {yes:3.0,planned:1.5,no:0.0}, {yes:12.0,no:0.0}, {yes:8.0,no:0.0},
+    {yes:2.0,planned:1.0,no:0.0}, {yes:4.0,no:0.0}, {yes:6.0,planned:3.0,no:0.0},
+    {yes:12.0,no:0.0}, {yes:12.0,planned:6.0,no:0.0},
+    {yes:11.0,planned:5.5,no:0.0}, {yes:15.0,planned:7.5,no:0.0}
   ];
-
   const totalQuestions = weights.length;
-  const maxScore = weights.reduce((sum,w)=> sum + (w.yes||0), 0);
+  const maxScore = weights.reduce((s,w)=> s + (w.yes||0), 0);
 
   function showError(msg){
     if(!errorBanner) return;
@@ -43,9 +34,9 @@ document.addEventListener('DOMContentLoaded', () => {
     return 'RED';
   }
 
-  // FARVET SVG gauge
+  // Farvet gauge med korrekt vinkel (−90° → +90°)
   function gaugeSVG(pct){
-    const angle = (pct/100)*180;
+    const angle = -90 + (pct/100)*180;
     return `
       <svg width="360" height="200" viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
         <path d="M30,180 A150,150 0 0,1 102,60" stroke="#e53935" stroke-width="18" fill="none" />
@@ -54,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <path d="M258,60 A150,150 0 0,1 330,180" stroke="#8bc34a" stroke-width="18" fill="none" />
         <path d="M328,176 A150,150 0 0,1 330,180" stroke="#43a047" stroke-width="18" fill="none" />
         <g transform="translate(180,180) rotate(${angle})">
-          <rect x="-2" y="-130" width="4" height="130" fill="#111"/>
+          <rect x="-2" y="-110" width="4" height="110" fill="#111"/>
           <circle cx="0" cy="0" r="6" fill="#111"/>
         </g>
       </svg>`;
@@ -66,33 +57,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const company = (companyEl?.value || '').trim();
     const email   = (emailEl?.value || '').trim();
-    if(!company || !email){
-      alert('Please enter company and work email.');
-      return;
-    }
+    if(!company || !email){ alert('Please enter company and work email.'); return; }
 
     // Beregn score
     let raw = 0;
     const answers = [];
     weights.forEach((w,idx)=>{
-      const name = `q${idx+1}`;
-      const sel = form.querySelector(`[name=${name}]:checked`);
+      const sel = form.querySelector(`[name=q${idx+1}]:checked`);
       if(!sel) return;
       const pts = parseFloat(sel.dataset.points || '0');
       raw += pts;
-      answers.push({ q: name, answer: sel.value, points: pts });
+      answers.push({ q:`q${idx+1}`, answer: sel.value, points: pts });
     });
-    if (answers.length < totalQuestions){
-      alert('Please answer all questions.');
-      return;
-    }
+    if (answers.length < totalQuestions){ alert('Please answer all questions.'); return; }
 
     const pct = Math.round((raw / maxScore) * 100);
     const level = levelFor(pct);
-    const T = (window.reportTexts && window.reportTexts[level]) || { title: level, status:'', recommendation:'', outcome:'' };
-    const dateStr = new Date().toLocaleDateString(undefined, {year:'numeric', month:'short', day:'2-digit'});
+    const T = (window.reportTexts && window.reportTexts[level]) || {title: level,status:'',recommendation:'',outcome:''};
+    const dateStr = new Date().toLocaleDateString(undefined,{year:'numeric',month:'short',day:'2-digit'});
 
-    // VIS RESULTATET (med farvet gauge)
+    // Vis resultat
     resultCard.innerHTML = `
       <div class="report-head">
         <div class="brand-row"><span class="logo-mark">O</span><span class="logo-type">Orvenzia</span></div>
@@ -128,16 +112,16 @@ document.addEventListener('DOMContentLoaded', () => {
         <p><strong>Outcome:</strong> ${T.outcome}</p>
       </body></html>`;
 
-    // SEND til Apps Script backend
+    // Send til backend
     try {
-      const backendUrl = "https://script.google.com/macros/s/AKfycbxXWz4hUIr0aDvvQhXDdV_E5tsGdX8SXIctPVaRUaaYDH3TV-OnOSE9Sc6zExz6zX-u/exec";
+      const backendUrl = "https://script.google.com/macros/s/AKfycbxlIwOuln-pXXmisgSq4vo6vwJWA0CeChiBhx_RM05qJmPXcCCZsr50a901Xg_QYrVS/exec";
       mailStatus.textContent = 'Sending your report...';
 
       await fetch(backendUrl, {
         method: 'POST',
-        mode: 'no-cors',  // undgår CORS fejl
+        mode: 'no-cors',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify({ company, email, score: pct, level, answers, reportHtml: pdfHtml })
+        body: JSON.stringify({ company, email, score:pct, level, answers, reportHtml: pdfHtml })
       });
 
       mailStatus.textContent = 'Report sent. Check your inbox.';
