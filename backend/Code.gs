@@ -1,166 +1,202 @@
-/**
- * Orvenzia ESG Screening Backend – Benchmark Style 1:1
- * Kunden ser kun barometer + score.
- * support@orvenzia.com modtager en Word-rapport med farvet statusboks,
- * grafisk barometer og tabel over alle svar.
+/** Orvenzia Screening Backend – Full Auto Report with 5 Barometers
+ * Deploy as Web App: Execute as Me; Who has access: Anyone
  */
 
-const OWNER_EMAIL = "support@orvenzia.com";
+// ========== KONFIGURATION ==========
+const OWNER_EMAIL = "support@orvenzia.com"; 
+const TEMPLATE_ID = "DIN_SKABELON_FILE_ID"; // <-- INDSÆT Google Docs skabelon-ID
 
-// === Entry Point ===
+// Barometer-billeder (INDSÆT dine 5 Drive file IDs)
+const BAROMETER = {
+  GREEN:      "FILE_ID_GREEN",       // 99–100
+  LIGHTGREEN: "FILE_ID_LIGHTGREEN",  // 80–98
+  YELLOW:     "FILE_ID_YELLOW",      // 60–79
+  ORANGE:     "FILE_ID_ORANGE",      // 40–59
+  RED:        "FILE_ID_RED"          // 0–39
+};
+
+// ========== HOVEDFUNKTION ==========
 function doPost(e) {
   try {
-    const data = JSON.parse(e.postData.contents);
-    const lead = data.lead || {};
-    const answers = data.answers || {};
+    if (!e || !e.postData) {
+      return ContentService.createTextOutput(JSON.stringify({ ok: false, error: "No data" }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
 
-    // 1. Beregn score
-    const { scorePercent, status, color, answerTable } = calculateScore(answers);
+    var data = JSON.parse(e.postData.contents);
+    var lead = data.lead || {};
+    var answers = data.answers || {};
+    var meta = data.meta || {};
 
-    // 2. Opret Word-rapport i benchmark-stil
-    const wordFile = createBenchmarkReport(lead, answers, scorePercent, status, color, answerTable);
+    // 1) Score & level
+    var score = computeScore(answers);
+    var level = getLevel(score);
+    var benchmark = getBenchmarkText(score);
 
-    // 3. Send rapport til dig
+    // (valgfrit) log til Sheet
+    logToSheet(lead, score, level, answers, meta);
+
+    // 2) Generér rapport (Word)
+    var wordFile = generateReport(lead, score, level, benchmark, answers);
+
+    // 3) Mail til ejer (med rapport)
     MailApp.sendEmail({
       to: OWNER_EMAIL,
-      subject: `New ESG Baseline Report – ${lead.company || "Client"} (${status})`,
-      body: "Attached is the automatically generated Baseline ESG Readiness Analysis (Word).",
-      attachments: [wordFile.getAs(MimeType.MICROSOFT_WORD)]
+      subject: "New ESG Screening: " + (lead.company || "Unknown"),
+      htmlBody: "<p>Ny screening er gennemført.</p>"
+              + "<p><b>Company:</b> " + (lead.company || "(n/a)") + "<br>"
+              + "<b>Email:</b> " + (lead.email || "(n/a)") + "<br>"
+              + "<b>Score:</b> " + score + " (" + level + ")</p>"
+              + "<p>Se vedhæftet rapport.</p>",
+      attachments: [wordFile]
     });
 
-    // 4. Return simpelt svar til frontend
-    return ContentService.createTextOutput(
-      JSON.stringify({ score: scorePercent, status: status })
-    ).setMimeType(ContentService.MimeType.JSON);
+    // 4) Mail til kunden (kort kvittering)
+    if (lead.email) {
+      MailApp.sendEmail({
+        to: lead.email,
+        subject: "Your ESG Screening Result",
+        htmlBody: "<p>Tak for at gennemføre ESG-screeningen.</p>"
+                + "<p>Din score: <b>" + score + "/100</b> – " + level + ".</p>"
+                + "<p>Vi kontakter dig med næste skridt.</p>"
+      });
+    }
+
+    return ContentService.createTextOutput(JSON.stringify({ ok: true, score: score, level: level }))
+      .setMimeType(ContentService.MimeType.JSON);
 
   } catch (err) {
-    return ContentService.createTextOutput(
-      JSON.stringify({ error: String(err) })
-    ).setMimeType(ContentService.MimeType.JSON);
+    return ContentService.createTextOutput(JSON.stringify({ ok: false, error: String(err) }))
+      .setMimeType(ContentService.MimeType.JSON);
   }
 }
 
-// === Beregning ===
-function calculateScore(answers) {
-  let totalScore = 0, maxScore = 0;
-  const weights = {
-    q1: 4, q2: 4, q3: 3.5, q4: 1.5, q5: 4,
-    q6: 4, q7: 4, q8: 4, q9: 4, q10: 4,
-    q11: 4, q12: 4, q13: 4
+// ========== HJÆLPEFUNKTIONER ==========
+
+// (valgfrit) Log til Google Sheet
+function logToSheet(lead, score, level, answers, meta){
+  try{
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var sh = ss.getSheetByName('Screening') || ss.insertSheet('Screening');
+    if (sh.getLastRow() === 0){
+      sh.appendRow(['Timestamp','Company','Email','Score','Level','Answers(JSON)','UserAgent']);
+    }
+    sh.appendRow([new Date(), lead.company||'', lead.email||'', score, level, JSON.stringify(answers), (meta.ua||'')]);
+  } catch(e) {
+    // fail silently
+  }
+}
+
+// Scoring (YES=2, PLANNED=1, NO=0 → normaliseret 0..100)
+function computeScore(a) {
+  var WEIGHTS = { q1: 2, q2: 2, q3: 2, q4: 2, q5: 2, q6: 2, q7: 2, q8: 2, q9: 2, q10: 2, q11: 2, q12: 2, q13: 2 };
+  var sum = 0, max = 0;
+  for (var k in WEIGHTS) {
+    var v = (a[k] || "").toLowerCase();
+    var w = WEIGHTS[k];
+    max += w * 2;
+    if (v === "yes") sum += w * 2;
+    else if (v === "planned") sum += w * 1;
+  }
+  return Math.round((sum / (max || 1)) * 100);
+}
+
+// Score → Level
+function getLevel(score) {
+  if (score >= 99) return "Leading";
+  if (score >= 80) return "Strong";
+  if (score >= 60) return "Lagging / Not Buyer Ready";
+  if (score >= 40) return "At Risk";
+  return "Critical";
+}
+
+// Dynamisk benchmark tekst (du kan finjustere formuleringerne frit)
+function getBenchmarkText(score) {
+  if (score >= 99) {
+    return "Your company is fully aligned with buyer requirements. Focus on maintaining compliance.";
+  } else if (score >= 80) {
+    return "You are close to buyer alignment. Minor improvements are recommended to stay audit-ready.";
+  } else if (score >= 60) {
+    return "Gaps remain in your ESG readiness. Address missing policies and documentation to improve buyer acceptance.";
+  } else if (score >= 40) {
+    return "Significant gaps exist. Buyer acceptance is unlikely without targeted improvements.";
+  } else {
+    return "Critical gaps in ESG readiness. Immediate action is required to reach buyer compliance.";
+  }
+}
+
+// Individuelle detaljer (✅ ⚠️ ❌)
+function buildDetails(answers) {
+  var questions = {
+    q1: "Documented ESG policy",
+    q2: "Energy consumption tracking",
+    q3: "Waste management procedure",
+    q4: "Supplier code of conduct",
+    q5: "Scope 1–2 emissions tracking",
+    q6: "Scope 3 emissions tracking",
+    q7: "Health & safety policy",
+    q8: "Diversity & inclusion policy",
+    q9: "Anti-corruption/whistleblowing",
+    q10: "Data protection (GDPR)",
+    q11: "Water use tracking",
+    q12: "Waste & recycling rates",
+    q13: "Sharing ESG KPIs with buyers"
   };
 
-  const tableData = [];
-
-  Object.keys(weights).forEach(q => {
-    maxScore += weights[q];
-    const ans = (answers[q] || "").toLowerCase();
-    let points = 0;
-    if (ans === "yes") points = weights[q];
-    if (ans === "planned") points = weights[q] * 0.5;
-    totalScore += points;
-
-    tableData.push([q, ans || "n/a", points.toFixed(1) + " / " + weights[q]]);
-  });
-
-  const scorePercent = Math.round((totalScore / maxScore) * 100);
-  let status = "", color = "#FF0000";
-  if (scorePercent >= 99) { status = "GREEN (Leading)"; color = "#008000"; }
-  else if (scorePercent >= 80) { status = "LIGHT GREEN (Strong)"; color = "#00B050"; }
-  else if (scorePercent >= 60) { status = "YELLOW (Lagging)"; color = "#FFD966"; }
-  else if (scorePercent >= 40) { status = "ORANGE (At Risk)"; color = "#ED7D31"; }
-  else { status = "RED (Critical)"; color = "#FF0000"; }
-
-  return { scorePercent, status, color, answerTable: tableData };
+  var details = "";
+  for (var key in questions) {
+    var ans = (answers[key] || "").toLowerCase();
+    var status = "❌ No";
+    if (ans === "yes") status = "✅ Yes";
+    else if (ans === "planned") status = "⚠️ Planned";
+    details += questions[key] + ": " + status + "\\n";
+  }
+  return details;
 }
 
-// === Rapport med Benchmark layout ===
-function createBenchmarkReport(lead, answers, score, status, color, tableData) {
-  const doc = DocumentApp.create(`Baseline_Report_${lead.company || "Client"}`);
-  const body = doc.getBody();
+// Vælg barometer ud fra score
+function getBarometerFileId(score) {
+  if (score >= 99) return BAROMETER.GREEN;
+  if (score >= 80) return BAROMETER.LIGHTGREEN;
+  if (score >= 60) return BAROMETER.YELLOW;
+  if (score >= 40) return BAROMETER.ORANGE;
+  return BAROMETER.RED;
+}
 
-  // Title
-  body.appendParagraph("Baseline ESG Readiness Analysis")
-      .setHeading(DocumentApp.ParagraphHeading.HEADING1);
+// Generér Word-rapport
+function generateReport(lead, score, level, benchmark, answers) {
+  var file = DriveApp.getFileById(TEMPLATE_ID).makeCopy("ESG Report - " + (lead.company || "Company"));
+  var docId = file.getId();
+  var doc = DocumentApp.openById(docId);
+  var body = doc.getBody();
 
-  // Client info
-  body.appendParagraph(`Company: ${lead.company || "Unknown"}`);
-  body.appendParagraph(`Contact: ${lead.name || ""} – ${lead.email || ""}`);
+  // 1) Erstat tekst-placeholders 1:1
+  body.replaceText("{{COMPANY}}", lead.company || "");
+  body.replaceText("{{EMAIL}}", lead.email || "");
+  body.replaceText("{{SCORE}}", score.toString());
+  body.replaceText("{{LEVEL}}", level);
+  body.replaceText("{{BENCHMARK}}", benchmark);
+  body.replaceText("{{DETAILS}}", buildDetails(answers));
 
-  // Statusboks
-  const statusBox = body.appendParagraph(`Readiness Score: ${score}/100 → ${status}`);
-  statusBox.setBackgroundColor(color).setBold(true).setAlignment(DocumentApp.HorizontalAlignment.CENTER);
+  // 2) Indsæt barometerbillede dér hvor {{BAROMETER}} står
+  var barometerId = getBarometerFileId(score);
+  var barometerImg = DriveApp.getFileById(barometerId).getBlob();
 
-  // Indsæt barometer
-  const gaugeImg = generateGauge(score);
-  body.appendImage(gaugeImg).setWidth(400).setHeight(200);
-
-  body.appendParagraph(" ");
-
-  // Benchmark
-  body.appendParagraph("Benchmark").setHeading(DocumentApp.ParagraphHeading.HEADING2);
-  body.appendParagraph(
-    "Peers in your industry typically score 70–75 at baseline. " +
-    `Your score of ${score} is ${score < 70 ? "below" : "above"} average.`
-  );
-
-  // Tabel med alle svar
-  body.appendParagraph("Screening Answers").setHeading(DocumentApp.ParagraphHeading.HEADING2);
-  const table = body.appendTable([["Question", "Answer", "Points"]]);
-  table.setBorderWidth(1);
-  tableData.forEach(row => {
-    table.appendTableRow(row);
-  });
-
-  // Strengths/Weaknesses/In Progress
-  body.appendParagraph("Readiness Overview").setHeading(DocumentApp.ParagraphHeading.HEADING2);
-  addSection(body, "Strengths", answers, "yes", "✔️ Implemented");
-  addSection(body, "Weaknesses", answers, "no", "❌ Missing");
-  addSection(body, "In Progress", answers, "planned", "⚠️ Planned");
-
-  // Buyer Lens
-  body.appendParagraph("Buyer Lens & Risk Assessment").setHeading(DocumentApp.ParagraphHeading.HEADING2);
-  if (score >= 80) {
-    body.appendParagraph("Low buyer risk. Likely to pass ESG audits with only minor improvements needed.");
-  } else if (score >= 60) {
-    body.appendParagraph("Moderate buyer risk. Buyer may request documented improvements before approval.");
+  // Find paragraf med {{BAROMETER}} og indsæt billedet på den placering
+  var found = body.findText("\\{\\{BAROMETER\\}\\}");
+  if (found) {
+    var el = found.getElement();
+    el.asText().setText(""); // ryd placeholder
+    // Indsæt billedet ved at indsætte en ny paragraf efter elementets paragraf
+    var parent = el.getParent();
+    var p = parent.insertParagraph(parent.getChildIndex(el) + 1, "");
+    p.appendInlineImage(barometerImg).setWidth(400);
   } else {
-    body.appendParagraph("High buyer risk. ESG weaknesses could block tenders or partnerships.");
+    // fallback: bare append i bunden (sker sjældent)
+    body.appendImage(barometerImg).setWidth(400);
   }
 
-  // Quick Wins
-  body.appendParagraph("Quick Wins & Next Steps").setHeading(DocumentApp.ParagraphHeading.HEADING2);
-  body.appendListItem("Draft Waste Management Policy");
-  body.appendListItem("Define CO₂ reduction targets");
-  body.appendListItem("Introduce Diversity & Equality guidelines");
-  body.appendListItem("Request a Baseline Report (€379) for documentation");
-  body.appendListItem("Move towards Core Report (€1,329) for action planning");
-
   doc.saveAndClose();
-  return DriveApp.getFileById(doc.getId());
-}
-
-// === Sektioner ===
-function addSection(body, title, answers, match, label) {
-  body.appendParagraph(title).setHeading(DocumentApp.ParagraphHeading.HEADING3);
-  Object.entries(answers).forEach(([q, ans]) => {
-    if (ans.toLowerCase() === match) {
-      body.appendListItem(`${q}: ${label}`);
-    }
-  });
-}
-
-// === Gauge (SVG → PNG) ===
-function generateGauge(score) {
-  const angle = -90 + (score / 100) * 180; // pilens vinkel
-  const svg = `
-  <svg xmlns="http://www.w3.org/2000/svg" width="400" height="200">
-    <path d="M20 180 A160 160 0 0 1 380 180" fill="none" stroke="#FF0000" stroke-width="30"/>
-    <path d="M20 180 A160 160 0 0 1 140 20" fill="none" stroke="#ED7D31" stroke-width="30"/>
-    <path d="M140 20 A160 160 0 0 1 260 20" fill="none" stroke="#FFD966" stroke-width="30"/>
-    <path d="M260 20 A160 160 0 0 1 380 180" fill="none" stroke="#00B050" stroke-width="30"/>
-    <line x1="200" y1="180" x2="${200 + 120 * Math.cos(angle * Math.PI/180)}" y2="${180 + -120 * Math.sin(angle * Math.PI/180)}"
-          stroke="#000000" stroke-width="5"/>
-    <circle cx="200" cy="180" r="8" fill="#000000"/>
-  </svg>`;
-  return Utilities.newBlob(svg, "image/svg+xml", "gauge.svg").getAs("image/png");
+  // Konverter til .docx og returnér
+  return DriveApp.getFileById(docId).getAs(MimeType.MICROSOFT_WORD);
 }
