@@ -17,7 +17,7 @@ const REPORT_TEXTS = {
     title: "🟢 Leading",
     status: "Fully aligned with buyer requirements; no immediate action required.",
     recommendation: "Consider Subscription (regulatory alerts + periodic check-ins).",
-    outcome: "Maintain green status without extra workload."
+    outcome: "Maintain leading status without extra workload."
   },
   LIGHT_GREEN: {
     title: "🟢 Strong",
@@ -45,6 +45,7 @@ const REPORT_TEXTS = {
   }
 };
 
+// ----------- Helpers -----------
 function showError(msg){
   const b=document.getElementById('error-banner');
   b.textContent=msg||'Unexpected error.'; 
@@ -80,37 +81,54 @@ function levelFromPct(pct){
   return "RED";
 }
 
+// ----------- Gauge -----------
 function gaugeSVG(pct){
   const angle=-90+(pct/100)*180;
-  return `<svg width="260" height="150" viewBox="0 0 360 200">
-    <path d="M30,180 A150,150 0 0,1 330,180" stroke="#ddd" stroke-width="18" fill="none"/>
-    <line x1="180" y1="180" x2="${180+140*Math.cos(angle*Math.PI/180)}" y2="${180+140*Math.sin(angle*Math.PI/180)}" stroke="#111" stroke-width="6" stroke-linecap="round"/>
+  return `<svg width="300" height="160" viewBox="0 0 360 200" class="gauge-svg">
+    <!-- Farvezoner -->
+    <path d="M30,180 A150,150 0 0,1 102,56" stroke="#d32f2f" stroke-width="18" fill="none"/> <!-- Red -->
+    <path d="M102,56 A150,150 0 0,1 180,30" stroke="#f57c00" stroke-width="18" fill="none"/> <!-- Orange -->
+    <path d="M180,30 A150,150 0 0,1 258,56" stroke="#fbc02d" stroke-width="18" fill="none"/> <!-- Yellow -->
+    <path d="M258,56 A150,150 0 0,1 330,180" stroke="#8bc34a" stroke-width="18" fill="none"/> <!-- Light Green -->
+    <path d="M330,180 A150,150 0 0,1 30,180" stroke="#388e3c" stroke-width="18" fill="none"/> <!-- Green -->
+
+    <!-- Nålen -->
+    <line x1="180" y1="180" 
+          x2="${180+140*Math.cos(angle*Math.PI/180)}" 
+          y2="${180+140*Math.sin(angle*Math.PI/180)}" 
+          stroke="#111" stroke-width="6" stroke-linecap="round"/>
     <circle cx="180" cy="180" r="9" fill="#111"/>
-    <text x="35" y="185" font-size="12">0</text>
-    <text x="325" y="185" font-size="12">100</text>
+
+    <!-- Labels -->
+    <text x="35" y="185" font-size="12" fill="#444">0</text>
+    <text x="325" y="185" font-size="12" fill="#444">100</text>
   </svg>`;
 }
 
+// ----------- Resultatkort -----------
 function renderResult(pct, company){
   const level = levelFromPct(pct);
   const t = REPORT_TEXTS[level];
+  const today = new Date().toLocaleDateString("en-GB");
+
   document.getElementById('result-card').innerHTML = `
-    <div class="report-card-inner" style="font-family:Montserrat,Arial,sans-serif;padding:20px;border-radius:12px;border:1px solid #eee;box-shadow:0 2px 6px rgba(0,0,0,0.08)">
-      <h2 style="margin:0 0 10px;font-size:20px">${t.title}</h2>
-      <p style="margin:0 0 5px;color:#555"><strong>Company:</strong> ${company||"-"}</p>
-      <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin:20px 0">
+    <div class="report-card-inner">
+      <h2 class="report-title">${t.title}</h2>
+      <p class="report-meta"><strong>Company:</strong> ${company||"-"} 
+         <span class="report-date"><strong>Date:</strong> ${today}</span></p>
+      <div class="report-flex">
         <div class="gauge">${gaugeSVG(pct)}</div>
-        <div style="text-align:center">
-          <div style="font-size:2.2em;font-weight:700">${pct}%</div>
-          <div style="font-size:1.1em;color:#444">Readiness</div>
+        <div class="score-block">
+          <div class="score-value">${pct}%</div>
+          <div class="score-label">Readiness</div>
         </div>
       </div>
-      <div style="margin-top:15px">
+      <div class="report-text">
         <p><strong>Status:</strong> ${t.status}</p>
         <p><strong>Recommendation:</strong> ${t.recommendation}</p>
         <p><strong>Outcome:</strong> ${t.outcome}</p>
       </div>
-      <div style="margin-top:20px;display:flex;gap:12px;flex-wrap:wrap">
+      <div class="report-cta">
         <a href="pricing.html" class="btn">See pricing</a>
         <a href="contact.html" class="btn btn-outline">Contact us</a>
       </div>
@@ -118,7 +136,7 @@ function renderResult(pct, company){
   document.getElementById('result-wrap').style.display = 'block';
 }
 
-// Event handlers
+// ----------- Event handlers -----------
 document.getElementById('see-result').addEventListener('click',()=>{
   const lead={company:company.value.trim(), email:email.value.trim()};
   if(!lead.company||!lead.email){showError("Fill out company + email"); return;}
@@ -126,7 +144,7 @@ document.getElementById('see-result').addEventListener('click',()=>{
   if(!ans){showError("Answer all 13 questions"); return;}
   const pct=computeScore(ans); 
   renderResult(pct, lead.company);
-  document.getElementById('screening-form').submit(); // send til backend (Apps Script)
+  document.getElementById('screening-form').submit(); // send til backend
 });
 
 document.getElementById('screening-form').addEventListener('reset',()=>{
