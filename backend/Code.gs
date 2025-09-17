@@ -1,5 +1,5 @@
 /** === CONFIG === */
-const OWNER_EMAIL = "support@orvenzia.com";   // <- DIN mail
+const OWNER_EMAIL = "support@orvenzia.com";   // <- din mail
 const BRAND_NAME = "Orvenzia ESG";
 
 const WEIGHT_YES = 1.0;
@@ -50,28 +50,54 @@ const RECOMMENDATIONS = {
 /** === MAIN ENTRY === */
 function doPost(e) {
   try {
-    const raw = e.postData.contents;
+    const raw = e.postData && e.postData.contents ? e.postData.contents : "{}";
     const data = JSON.parse(raw);
 
-    const lead = data.lead || {};
-    const answers = data.answers || {};
+    // --- Normaliser lead ---
+    const lead = data.lead || {
+      company: data.company || "",
+      email: data.email || ""
+    };
 
-    const result = calculateScore(answers);
+    // --- Normaliser answers til objekt {q1:"yes",...} ---
+    let answersObj = {};
+    if (Array.isArray(data.answers)) {
+      data.answers.forEach(o => {
+        if (o && o.q) answersObj[o.q] = String(o.answer || "").toLowerCase();
+      });
+    } else if (data.answers && typeof data.answers === "object") {
+      answersObj = Object.fromEntries(
+        Object.entries(data.answers).map(([k,v]) => [k, String(v||"").toLowerCase()])
+      );
+    }
 
-    // Send til kunden (kun score + anbefaling)
-    sendCustomerMail(lead, result);
+    // --- Score ---
+    let result;
+    if (typeof data.score === "number") {
+      const pct = Math.round(data.score);
+      const level = LEVELS.find(l => pct >= l.min && pct <= l.max) || LEVELS[LEVELS.length-1];
+      result = {
+        percent: pct,
+        key: level.key,
+        headline: level.headline,
+        recommendation: RECOMMENDATIONS[level.key]
+      };
+    } else {
+      result = calculateScore(answersObj);
+    }
 
-    // Send til dig (fulde svar + score)
-    sendOwnerMail(lead, answers, result);
+    // --- Send mails ---
+    if (lead.email) sendCustomerMail(lead, result);
+    sendOwnerMail(lead, answersObj, result);
 
     return ContentService
-      .createTextOutput(JSON.stringify({status:"ok", score: result}))
+      .createTextOutput(JSON.stringify({ status: "ok", score: result }))
       .setMimeType(ContentService.MimeType.JSON);
 
   } catch (err) {
     Logger.log("Fejl i doPost: " + err);
     return ContentService
-      .createTextOutput(JSON.stringify({status:"error", message: err.toString()}))
+      .createTextOutput(JSON.stringify({ status:"error", message: String(err) }))
       .setMimeType(ContentService.MimeType.JSON);
   }
 }
@@ -89,7 +115,6 @@ function calculateScore(answers) {
   });
 
   const pct = Math.round((total / max) * 100);
-
   let level = LEVELS.find(l => pct >= l.min && pct <= l.max);
   if (!level) level = LEVELS[LEVELS.length-1];
 
