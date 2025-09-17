@@ -21,8 +21,8 @@
 
 .headline-card{ 
   position:relative; overflow:hidden;
-  border-radius:18px; border:1px solid var(--line);
-  background: linear-gradient(180deg, #0a3d2f 0%, #0f5b3d 46%, #124c3f 100%);
+  border-radius:18px; border:1px solid rgba(255,255,255,.08);
+  background: linear-gradient(160deg, #0a3d2f 0%, #0f5b3d 50%, #124c3f 100%);
   color:#fff; padding:36px; display:flex; flex-direction:column; justify-content:space-between;
   box-shadow:0 18px 44px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.08);
 }
@@ -31,17 +31,17 @@
 .headline-card .cta-row{ margin-top:16px }
 .headline-card .cta-row .btn{ margin-right:10px; }
 .headline-badges{ display:flex; gap:12px; flex-wrap:wrap; margin-top:18px }
-.badge{ font-size:12px; padding:8px 12px; border-radius:999px; border:1px solid rgba(255,255,255,.22); background:rgba(255,255,255,.06) }
+.badge{ font-size:12px; padding:6px 10px; border-radius:999px; border:1px solid rgba(255,255,255,.18); background:rgba(255,255,255,.04); display:inline-flex; align-items:center; gap:6px }
 
 .stack{ display:grid; grid-template-rows: repeat(3, 1fr); gap:28px }
 .proof-card{ 
   background:linear-gradient(180deg, #ffffff 0%, #fbfcfd 100%);
-  border:1px solid var(--line); border-radius:18px; padding:22px;
+  border:1px solid var(--line); border-radius:18px; padding:20px;
   box-shadow:0 14px 34px rgba(0,0,0,.06), inset 0 1px 0 rgba(255,255,255,.6);
 }
 .proof-card h3{ font-size:18px; margin:0 0 6px }
 .proof{ font-size:14px; color:var(--muted) }
-.proof img{ width:28px; height:28px; margin-bottom:8px; opacity:.9 }
+.proof-card img{ width:28px; height:28px; margin-bottom:8px; opacity:.9 }
 
 .cards-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap:28px; margin-top:18px }
 @media (max-width: 1080px){ .cards-grid{ grid-template-columns: repeat(2, 1fr) } }
@@ -52,7 +52,7 @@
   border-radius:18px; border:1px solid var(--line);
   background: linear-gradient(180deg, #fff 0%, #fbfcfd 100%);
   box-shadow: 0 14px 34px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.6);
-  padding:22px;
+  padding:20px;
 }
 .premium-card .hdr{ display:flex; align-items:center; gap:10px; margin-bottom:6px }
 .premium-card .hdr img{ width:22px; height:22px; }
@@ -69,6 +69,12 @@
 .cta-card .btn{ margin:6px }
 
 @media (min-width: 1080px){ .sticky-side{ position:sticky; top:96px } }
+
+@media (max-width:640px){
+  .headline-card{ padding:24px }
+  .headline-card h1{ font-size: clamp(28px, 8vw, 40px) }
+  .headline-badges{ gap:8px }
+}
 </style>
 
 <meta property="og:title" content="Why Orvenzia | Buyer‑Ready ESG"/>
