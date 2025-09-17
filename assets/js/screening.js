@@ -1,138 +1,107 @@
-// screening.js — Orvenzia Screening v6.3 (final med ny /exec URL)
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("screeningForm");
+  const resultContainer = document.getElementById("resultContainer");
+  const scoreDisplay = document.getElementById("scoreDisplay");
+  const levelDisplay = document.getElementById("levelDisplay");
 
-document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('screening-form');
-  const resultWrap = document.getElementById('result-wrap');
-  const resultCard = document.getElementById('result-card');
-  const companyEl = document.getElementById('company');
-  const emailEl = document.getElementById('email');
-  const mailStatus = document.getElementById('mail-status');
-  const errorBanner = document.getElementById('error-banner');
-
-  // Vægte 1:1 fra Excel
-  const weights = [
-    {yes:4.0,no:0.0}, {yes:4.0,no:0.0}, {yes:7.0,planned:3.5,no:0.0},
-    {yes:3.0,planned:1.5,no:0.0}, {yes:12.0,no:0.0}, {yes:8.0,no:0.0},
-    {yes:2.0,planned:1.0,no:0.0}, {yes:4.0,no:0.0}, {yes:6.0,planned:3.0,no:0.0},
-    {yes:12.0,no:0.0}, {yes:12.0,planned:6.0,no:0.0},
-    {yes:11.0,planned:5.5,no:0.0}, {yes:15.0,planned:7.5,no:0.0}
+  // Alle spørgsmål (q1..q13)
+  const QUESTIONS = [
+    "q1","q2","q3","q4","q5","q6",
+    "q7","q8","q9","q10","q11","q12","q13"
   ];
-  const totalQuestions = weights.length;
-  const maxScore = weights.reduce((s,w)=> s + (w.yes||0), 0);
 
-  function showError(msg){
-    if(!errorBanner) return;
-    errorBanner.textContent = msg;
-    errorBanner.style.display='block';
+  // Level definitioner
+  const LEVELS = [
+    { min: 99, max: 100, key: "green",       label: "Leading (99–100)" },
+    { min: 80, max: 98,  key: "light_green", label: "Strong (80–98)" },
+    { min: 60, max: 79,  key: "yellow",      label: "Lagging / Not Ready (60–79)" },
+    { min: 40, max: 59,  key: "orange",      label: "At Risk (40–59)" },
+    { min: 0,  max: 39,  key: "red",         label: "Critical (0–39)" },
+  ];
+
+  function determineLevel(pct) {
+    return LEVELS.find(l => pct >= l.min && pct <= l.max) || LEVELS[LEVELS.length-1];
   }
 
-  function levelFor(pct){
-    if (pct >= 99) return 'GREEN';
-    if (pct >= 80) return 'LIGHT_GREEN';
-    if (pct >= 60) return 'YELLOW';
-    if (pct >= 40) return 'ORANGE';
-    return 'RED';
+  // Beregn score
+  function calculateScore(answers) {
+    let total = 0;
+    let max = QUESTIONS.length;
+    answers.forEach(a => {
+      if (a.answer === "yes") total += 1.0;
+      else if (a.answer === "planned") total += 0.5;
+      else total += 0;
+    });
+    const pct = Math.round((total / max) * 100);
+    return { percent: pct, level: determineLevel(pct) };
   }
 
-  // Farvet gauge med korrekt vinkel (−90° → +90°)
-  function gaugeSVG(pct){
-    const angle = -90 + (pct/100)*180;
-    return `
-      <svg width="360" height="200" viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
-        <path d="M30,180 A150,150 0 0,1 102,60" stroke="#e53935" stroke-width="18" fill="none" />
-        <path d="M102,60 A150,150 0 0,1 180,30" stroke="#fb8c00" stroke-width="18" fill="none" />
-        <path d="M180,30 A150,150 0 0,1 258,60" stroke="#fdd835" stroke-width="18" fill="none" />
-        <path d="M258,60 A150,150 0 0,1 330,180" stroke="#8bc34a" stroke-width="18" fill="none" />
-        <path d="M328,176 A150,150 0 0,1 330,180" stroke="#43a047" stroke-width="18" fill="none" />
-        <g transform="translate(180,180) rotate(${angle})">
-          <rect x="-2" y="-110" width="4" height="110" fill="#111"/>
-          <circle cx="0" cy="0" r="6" fill="#111"/>
-        </g>
-      </svg>`;
-  }
+  form.addEventListener("submit", async (ev) => {
+    ev.preventDefault();
 
-  async function computeAndRender(e){
-    e && e.preventDefault();
-    if(errorBanner) errorBanner.style.display='none';
+    const company = document.getElementById("company").value.trim();
+    const email = document.getElementById("email").value.trim();
 
-    const company = (companyEl?.value || '').trim();
-    const email   = (emailEl?.value || '').trim();
-    if(!company || !email){ alert('Please enter company and work email.'); return; }
+    // Saml svar
+    const answers = [];
+    QUESTIONS.forEach(q => {
+      const val = (document.querySelector(`input[name="${q}"]:checked`) || {}).value || "";
+      answers.push({ q, answer: val });
+    });
 
     // Beregn score
-    let raw = 0;
-    const answers = [];
-    weights.forEach((w,idx)=>{
-      const sel = form.querySelector(`[name=q${idx+1}]:checked`);
-      if(!sel) return;
-      const pts = parseFloat(sel.dataset.points || '0');
-      raw += pts;
-      answers.push({ q:`q${idx+1}`, answer: sel.value, points: pts });
-    });
-    if (answers.length < totalQuestions){ alert('Please answer all questions.'); return; }
+    const { percent, level } = calculateScore(answers);
 
-    const pct = Math.round((raw / maxScore) * 100);
-    const level = levelFor(pct);
-    const T = (window.reportTexts && window.reportTexts[level]) || {title: level,status:'',recommendation:'',outcome:''};
-    const dateStr = new Date().toLocaleDateString(undefined,{year:'numeric',month:'short',day:'2-digit'});
+    // Vis resultat til kunden
+    resultContainer.style.display = "block";
+    scoreDisplay.textContent = percent + "%";
+    levelDisplay.textContent = level.label;
 
-    // Vis resultat
-    resultCard.innerHTML = `
-      <div class="report-head">
-        <div class="brand-row"><span class="logo-mark">O</span><span class="logo-type">Orvenzia</span></div>
-        <h2 class="report-title">ESG Readiness Screening Score</h2>
-        <div class="meta-grid"><div><strong>Company:</strong> ${company}</div><div><strong>Date:</strong> ${dateStr}</div></div>
-      </div>
-      <div class="score-row">
-        <div class="gauge-wrap">${gaugeSVG(pct)}</div>
-        <div class="score-text">
-          <div class="big-score">${pct}<span class="u">/100</span></div>
-          <div class="level-title">${T.title}</div>
-        </div>
-      </div>
-      <div class="report-body">
-        <p class="status"><strong>Status:</strong> ${T.status}</p>
-        <p class="rec"><strong>Recommendation:</strong><br>${(T.recommendation||'').replaceAll('\\n','<br>')}</p>
-        <p class="outcome"><strong>Outcome:</strong> ${T.outcome}</p>
-      </div>
-      <div class="report-cta"><a class="btn" href="pricing.html">See pricing</a><a class="btn btn-outline" href="contact.html">Contact</a></div>
+    // Byg HTML til rapport (valgfrit hvis du genererer PDF)
+    let pdfHtml = `
+      <h2>${company}</h2>
+      <p><b>Score:</b> ${percent}%</p>
+      <p><b>Level:</b> ${level.label}</p>
+      <ul>
+        ${answers.map(a => `<li>${a.q}: ${a.answer}</li>`).join("")}
+      </ul>
     `;
-    resultWrap.classList.add('show');
-    resultWrap.scrollIntoView({ behavior:'smooth' });
 
-    // PDF til mail
-    const pdfHtml = `
-      <html><head><meta charset="utf-8"><title>Orvenzia Screening Report</title></head><body>
-        <h1>ESG Readiness Screening Score</h1>
-        <div>Company: ${company} — Date: ${dateStr}</div>
-        <div>${pct}/100 (${T.title})</div>
-        ${gaugeSVG(pct)}
-        <p><strong>Status:</strong> ${T.status}</p>
-        <p><strong>Recommendation:</strong><br>${T.recommendation}</p>
-        <p><strong>Outcome:</strong> ${T.outcome}</p>
-      </body></html>`;
+    // --- SEND TIL BACKEND ---
+    const backendUrl = window.SCREENING_BACKEND_URL;
 
-    // Send til backend
     try {
-      const backendUrl = "https://script.google.com/macros/s/AKfycbzYK3CKZtGDxscAURjpLuhkR-7hRbN5iuT3qJN45yGuVVNScIr6PibleIsBUP65lYQw9A/exec";
-      mailStatus.textContent = 'Sending your report...';
-
-      await fetch(backendUrl, {
+      const response = await fetch(backendUrl, {
         method: 'POST',
-        mode: 'no-cors',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify({ company, email, score:pct, level, answers, reportHtml: pdfHtml })
+        body: JSON.stringify({
+          lead: { company, email },
+          answers: Object.fromEntries(answers.map(o => [o.q, o.answer])),
+          score: percent,
+          level: level.key,
+          reportHtml: pdfHtml
+        })
       });
 
-      mailStatus.textContent = 'Report sent. Check your inbox.';
-    } catch (err) {
-      console.error(err);
-      mailStatus.textContent = 'Network error while sending email.';
-      showError(err.message || 'Unexpected error');
-    }
-  }
+      const txt = await response.text();
+      let parsed;
+      try {
+        parsed = JSON.parse(txt);
+      } catch {
+        console.error("Raw backend response:", txt);
+        alert("Unknown backend response");
+        return;
+      }
 
-  form.setAttribute('novalidate','novalidate');
-  form.addEventListener('submit', (e)=>{ e.preventDefault(); computeAndRender(e); });
-  document.getElementById('see-result')?.addEventListener('click', (e)=>{ e.preventDefault(); computeAndRender(e); });
+      console.log("Backend response:", parsed);
+      if (parsed.status === "ok") {
+        alert("Report sent successfully!");
+      } else {
+        alert("Error: " + parsed.message);
+      }
+    } catch (err) {
+      console.error("Fetch error:", err);
+      alert("Error sending report: " + err.message);
+    }
+  });
 });
