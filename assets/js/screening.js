@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Send til backend
     try {
-      const backendUrl = "https://script.google.com/macros/s/AKfycbxlIwOuln-pXXmisgSq4vo6vwJWA0CeChiBhx_RM05qJmPXcCCZsr50a901Xg_QYrVS/exec";
+      const backendUrl = "https://script.google.com/macros/s/AKfycbxxMMDTeZPQPtW_V2btRFTptTVvulSEK3Lstwfjum7swOvaC6v75G9-XhohOn3f3Hy66Q/exec";
       mailStatus.textContent = 'Sending your report...';
 
       await fetch(backendUrl, {
