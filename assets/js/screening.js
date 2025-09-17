@@ -91,7 +91,7 @@ function gaugeSVG(pct){
     <path d="M30,180 A150,150 0 0,1 330,180" 
           stroke="#f3f3f3" stroke-width="26" fill="none"/>
 
-    <!-- Farvezoner -->
+    <!-- Farvezoner med gradient -->
     <path d="M30,180 A150,150 0 0,1 110,60" stroke="url(#gradRed)" stroke-width="26" fill="none" stroke-linecap="round"/>
     <path d="M110,60 A150,150 0 0,1 180,30" stroke="url(#gradOrange)" stroke-width="26" fill="none" stroke-linecap="round"/>
     <path d="M180,30 A150,150 0 0,1 250,60" stroke="url(#gradYellow)" stroke-width="26" fill="none" stroke-linecap="round"/>
@@ -100,19 +100,19 @@ function gaugeSVG(pct){
     <!-- Gradients -->
     <defs>
       <linearGradient id="gradRed" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stop-color="#d32f2f"/>
+        <stop offset="0%" stop-color="#b71c1c"/>
         <stop offset="100%" stop-color="#f44336"/>
       </linearGradient>
       <linearGradient id="gradOrange" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stop-color="#ef6c00"/>
+        <stop offset="0%" stop-color="#e65100"/>
         <stop offset="100%" stop-color="#ff9800"/>
       </linearGradient>
       <linearGradient id="gradYellow" x1="0%" y1="0%" x2="100%" y2="0%">
         <stop offset="0%" stop-color="#fbc02d"/>
-        <stop offset="100%" stop-color="#fff176"/>
+        <stop offset="100%" stop-color="#fff59d"/>
       </linearGradient>
       <linearGradient id="gradGreen" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stop-color="#4caf50"/>
+        <stop offset="0%" stop-color="#2e7d32"/>
         <stop offset="100%" stop-color="#81c784"/>
       </linearGradient>
     </defs>
