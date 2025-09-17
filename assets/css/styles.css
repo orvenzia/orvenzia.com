@@ -909,3 +909,54 @@ content: attr(data-tooltip);
 opacity: 1;
   transform: translateX(-50%) translateY(-16px);
 }
+
+
+/* === SLA tooltip fix v2 (exact placement over each card) === */
+.hover-card{ position: relative; overflow: visible; }
+.hover-card[data-tooltip]::before{
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 12px);
+  transform: translate(-50%, 8px) scale(.98);
+  transform-origin: 50% 100%;
+  background: #0a472e;
+  color: #fff;
+  font-weight: 700;
+  font-size: 13.5px;
+  line-height: 1;
+  padding: 10px 14px;
+  border-radius: 10px;
+  box-shadow: 0 12px 24px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.15);
+  pointer-events: none;
+  white-space: nowrap;
+  opacity: 0;
+  z-index: 60;
+  transition: opacity .18s ease, transform .18s ease;
+}
+.hover-card[data-tooltip]::after{
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 6px);
+  width: 12px; height: 12px;
+  background: #0a472e;
+  border-radius: 2px;
+  transform: translateX(-50%) rotate(45deg);
+  box-shadow: 2px 2px 4px rgba(0,0,0,.18);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 59;
+  transition: opacity .18s ease;
+}
+.hover-card[data-tooltip]:hover::before,
+.hover-card[data-tooltip]:focus-within::before{ opacity: 1; transform: translate(-50%, 0) scale(1); }
+.hover-card[data-tooltip]:hover::after,
+.hover-card[data-tooltip]:focus-within::after{ opacity: 1; }
+
+/* Ensure wrappers don't clip tooltip */
+.cards, .card-grid, .services-grid, .features, .row, .grid{ overflow: visible; }
+@media (prefers-reduced-motion: reduce){
+  .hover-card[data-tooltip]::before,
+  .hover-card[data-tooltip]::after{ transition: none !important; }
+}
