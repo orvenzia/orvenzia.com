@@ -1,170 +1,51 @@
-/** === CONFIG === */
-const OWNER_EMAIL = "support@orvenzia.com";   // <- din mail
-const BRAND_NAME = "Orvenzia ESG";
+// Orvenzia ESG Screening Backend (Google Apps Script)
+const SPREADSHEET_ID = 'REPLACE_WITH_YOUR_GOOGLE_SHEET_ID';
+const OWNER_EMAIL = 'support@orvenzia.com';
 
-const WEIGHT_YES = 1.0;
-const WEIGHT_PLANNED = 0.5;
-const WEIGHT_NO = 0.0;
-
-const EXPECTED_QUESTION_KEYS = [
-  "q1","q2","q3","q4","q5","q6",
-  "q7","q8","q9","q10","q11","q12","q13"
-];
-
-const LEVELS = [
-  { min: 99, max: 100, key: "green",       headline: "Leading (99–100)" },
-  { min: 80, max: 98,  key: "light_green", headline: "Strong (80–98)" },
-  { min: 60, max: 79,  key: "yellow",      headline: "Lagging / Not Ready (60–79)" },
-  { min: 40, max: 59,  key: "orange",      headline: "At Risk (40–59)" },
-  { min: 0,  max: 39,  key: "red",         headline: "Critical (0–39)" },
-];
-
-const RECOMMENDATIONS = {
-  green: `
-<b>Status:</b> Fully aligned with buyer requirements.<br>
-<b>Recommendation:</b> Light Update Subscription (alerts + check-ins).<br>
-<b>Outcome:</b> Maintain green status without extra workload.
-  `,
-  light_green: `
-<b>Status:</b> Meets buyer expectations with minor improvements.<br>
-<b>Recommendation:</b> Baseline Report (1–2 pages, €379; &lt;10 days).<br>
-<b>Outcome:</b> Audit-ready proof; prevents slipping.
-  `,
-  yellow: `
-<b>Status:</b> Core elements exist, but gaps create buyer risk.<br>
-<b>Recommendation:</b> Baseline Report (€379) or Core Report (€1,329).<br>
-<b>Outcome:</b> Clear roadmap to readiness.
-  `,
-  orange: `
-<b>Status:</b> Significant gaps likely to affect tenders.<br>
-<b>Recommendation:</b> Core Report (€1,329; 30–60 days).<br>
-<b>Outcome:</b> Full action plan needed.
-  `,
-  red: `
-<b>Status:</b> Critical gaps.<br>
-<b>Recommendation:</b> Enterprise Report (full plan + training).<br>
-<b>Outcome:</b> Urgent intervention required.
-  `
-};
-
-/** === MAIN ENTRY === */
 function doPost(e) {
   try {
-    const raw = e.postData && e.postData.contents ? e.postData.contents : "{}";
-    const data = JSON.parse(raw);
+    const data = JSON.parse(e.postData.contents);
+    const company = data.company || '';
+    const email = data.email || '';
+    const score = data.score || 0;
+    const level = data.level || '';
+    const answers = data.answers || [];
+    const reportHtml = data.reportHtml || '';
 
-    // --- Normaliser lead ---
-    const lead = data.lead || {
-      company: data.company || "",
-      email: data.email || ""
-    };
+    const blob = Utilities.newBlob(reportHtml, 'text/html', 'report.html');
+    const pdf = blob.getAs('application/pdf').setName(`Orvenzia_ESG_Report_${company}.pdf`);
 
-    // --- Normaliser answers til objekt {q1:"yes",...} ---
-    let answersObj = {};
-    if (Array.isArray(data.answers)) {
-      data.answers.forEach(o => {
-        if (o && o.q) answersObj[o.q] = String(o.answer || "").toLowerCase();
-      });
-    } else if (data.answers && typeof data.answers === "object") {
-      answersObj = Object.fromEntries(
-        Object.entries(data.answers).map(([k,v]) => [k, String(v||"").toLowerCase()])
-      );
+    MailApp.sendEmail({
+      to: email,
+      replyTo: OWNER_EMAIL,
+      name: 'Orvenzia Support',
+      subject: `Your ESG Screening Report (${score}/100)`,
+      htmlBody: `<p>Dear ${company},</p>
+                 <p>Your ESG screening score is <strong>${score}/100</strong> (${level}).</p>
+                 <p>Your full report is attached as PDF.</p>
+                 <p>Best regards,<br>Orvenzia Support</p>`,
+      attachments: [pdf]
+    });
+
+    MailApp.sendEmail({
+      to: OWNER_EMAIL,
+      replyTo: OWNER_EMAIL,
+      name: 'Orvenzia System',
+      subject: `New ESG Lead: ${company} (${score}/100)`,
+      htmlBody: `<p>Company: ${company}<br>Email: ${email}<br>Score: ${score}/100 (${level})</p>
+                 <p>Answers:<br><pre>${JSON.stringify(answers, null, 2)}</pre></p>`,
+      attachments: [pdf]
+    });
+
+    if (SPREADSHEET_ID && SPREADSHEET_ID !== 'REPLACE_WITH_YOUR_GOOGLE_SHEET_ID') {
+      const sheet = SpreadsheetApp.openById(SPREADSHEET_ID).getActiveSheet();
+      sheet.appendRow([new Date(), company, email, score, level, JSON.stringify(answers)]);
     }
 
-    // --- Score ---
-    let result;
-    if (typeof data.score === "number") {
-      const pct = Math.round(data.score);
-      const level = LEVELS.find(l => pct >= l.min && pct <= l.max) || LEVELS[LEVELS.length-1];
-      result = {
-        percent: pct,
-        key: level.key,
-        headline: level.headline,
-        recommendation: RECOMMENDATIONS[level.key]
-      };
-    } else {
-      result = calculateScore(answersObj);
-    }
-
-    // --- Send mails ---
-    if (lead.email) sendCustomerMail(lead, result);
-    sendOwnerMail(lead, answersObj, result);
-
-    return ContentService
-      .createTextOutput(JSON.stringify({ status: "ok", score: result }))
-      .setMimeType(ContentService.MimeType.JSON);
-
+    return ContentService.createTextOutput(JSON.stringify({status:'ok'}))
+                         .setMimeType(ContentService.MimeType.JSON);
   } catch (err) {
-    Logger.log("Fejl i doPost: " + err);
-    return ContentService
-      .createTextOutput(JSON.stringify({ status:"error", message: String(err) }))
-      .setMimeType(ContentService.MimeType.JSON);
+    return ContentService.createTextOutput(JSON.stringify({status:'error', message:String(err)}))
+                         .setMimeType(ContentService.MimeType.JSON);
   }
-}
-
-/** === SCORING === */
-function calculateScore(answers) {
-  let total = 0;
-  let max = EXPECTED_QUESTION_KEYS.length;
-
-  EXPECTED_QUESTION_KEYS.forEach(q => {
-    const val = (answers[q] || "").toLowerCase();
-    if (val === "yes") total += WEIGHT_YES;
-    else if (val === "planned") total += WEIGHT_PLANNED;
-    else total += WEIGHT_NO;
-  });
-
-  const pct = Math.round((total / max) * 100);
-  let level = LEVELS.find(l => pct >= l.min && pct <= l.max);
-  if (!level) level = LEVELS[LEVELS.length-1];
-
-  return {
-    percent: pct,
-    key: level.key,
-    headline: level.headline,
-    recommendation: RECOMMENDATIONS[level.key]
-  };
-}
-
-/** === MAILS === */
-function sendCustomerMail(lead, result) {
-  const email = lead.email;
-  if (!email) return;
-
-  const subject = `${BRAND_NAME} – Screening Result (${result.headline})`;
-  const body = `
-  <p>Dear ${lead.company || "participant"},</p>
-  <p>Thank you for completing the ${BRAND_NAME} screening.</p>
-  <p><b>Your ESG Readiness Score:</b> ${result.percent}%</p>
-  <p><b>Level:</b> ${result.headline}</p>
-  <p>${result.recommendation}</p>
-  <p>Best regards,<br>${BRAND_NAME} Team</p>
-  `;
-
-  GmailApp.sendEmail(email, subject, "", {
-    htmlBody: body,
-    replyTo: OWNER_EMAIL
-  });
-}
-
-function sendOwnerMail(lead, answers, result) {
-  const subject = `SCREENING LOG – ${lead.company || "Unknown"} (${result.headline})`;
-
-  let answerList = "";
-  EXPECTED_QUESTION_KEYS.forEach(q => {
-    answerList += `<li>${q}: ${answers[q] || "-"}</li>`;
-  });
-
-  const body = `
-  <p><b>Company:</b> ${lead.company || "-"}<br>
-  <b>Email:</b> ${lead.email || "-"}</p>
-  <p><b>Score:</b> ${result.percent}% (${result.headline})</p>
-  <p><b>Answers:</b></p>
-  <ul>${answerList}</ul>
-  `;
-
-  GmailApp.sendEmail(OWNER_EMAIL, subject, "", {
-    htmlBody: body,
-    replyTo: lead.email || OWNER_EMAIL
-  });
 }
