@@ -83,9 +83,22 @@
 .gauge-needle {
   fill: #111;
   transform-origin: 180px 180px;
-  transition: transform 1s cubic-bezier(0.68,-0.55,0.27,1.55); /* smooth spring */
+  transition: transform 1.2s cubic-bezier(0.68,-0.55,0.27,1.55);
+  filter: drop-shadow(0px 2px 3px rgba(0,0,0,0.4));
 }
 
 .gauge-center {
   fill: #111;
+  stroke: #fff;
+  stroke-width: 2;
 }
+
+.score-value {
+  font-size: 2.8em;
+  font-weight: 700;
+}
+
+.score-value.red { color: #e53935; }
+.score-value.orange { color: #fb8c00; }
+.score-value.yellow { color: #fbc02d; }
+.score-value.green { color: #43a047; }
