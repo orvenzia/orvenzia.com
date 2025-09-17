@@ -1,5 +1,6 @@
-// === Orvenzia ESG Screening frontend ===
+// === Orvenzia ESG Screening — premium frontend ===
 
+// 1) Scoring-vægte (matcher backend)
 const W = {
   q1:{yes:4,planned:0,no:0},   q2:{yes:4,planned:0,no:0},
   q3:{yes:7,planned:3.5,no:0}, q4:{yes:3,planned:1.5,no:0},
@@ -10,62 +11,73 @@ const W = {
   q13:{yes:10,planned:0,no:0}
 };
 
+// 2) Tekster (mini-rapport)
 const REPORT_TEXTS = {
   GREEN: {
-    title: "🟢 Leading",
+    title: "Leading",
     status: "Fully aligned with buyer requirements; no immediate action required.",
     recommendation: "Consider Subscription (regulatory alerts + periodic check-ins).",
     outcome: "Maintain leading status without extra workload."
   },
   LIGHT_GREEN: {
-    title: "🟢 Strong",
+    title: "Strong",
     status: "Meets buyer expectations with minor improvements, typically found in audits.",
     recommendation: "Baseline Report (1–2 pages, €379; delivery <10 days) to document alignment and pinpoint fixes.",
     outcome: "Audit-ready proof; prevents slipping to “Not Buyer Ready”."
   },
   YELLOW: {
-    title: "🟡 Not Buyer Ready",
+    title: "Not Buyer Ready",
     status: "Core elements exist, but missing policies/documentation create buyer risk.",
     recommendation: "Start with Baseline Report (€379; <10 days). Alternatively, Core Report (2–8 pages, €1,729; 30–60 days).",
     outcome: "Clear gap list → rapid path to buyer readiness."
   },
   ORANGE: {
-    title: "🟠 At Risk",
+    title: "At Risk",
     status: "Significant gaps, likely to affect tenders and buyer reviews.",
     recommendation: "Core Report (€1,729; 30–60 days) with prioritized gap analysis, templates, and roadmap.",
     outcome: "Fast risk reduction and restored buyer eligibility."
   },
   RED: {
-    title: "🔴 Critical",
+    title: "Critical",
     status: "Current posture blocks buyer eligibility and escalates commercial risk.",
     recommendation: "Minimum: Core Report (€1,729; 30–60 days). Best: Enterprise Report (6–15 pages, €2,439–4,989; 60–120 days).",
     outcome: "Controlled turnaround to buyer-acceptable status quickly."
   }
 };
 
+// 3) Farver/præsentation per level
+const LEVEL_META = {
+  GREEN:       { chip: "🟢", color: "#2e7d32" },
+  LIGHT_GREEN: { chip: "🟢", color: "#7cb342" },
+  YELLOW:      { chip: "🟡", color: "#f9a825" },
+  ORANGE:      { chip: "🟠", color: "#ef6c00" },
+  RED:         { chip: "🔴", color: "#d32f2f" }
+};
+
+// ---------- Helpers ----------
 function showError(msg){
-  const b=document.getElementById('error-banner');
-  b.textContent=msg||'Unexpected error.'; 
-  b.style.display='block';
-  setTimeout(()=> b.style.display='none',6000);
+  const b = document.getElementById('error-banner');
+  b.textContent = msg || 'Unexpected error.';
+  b.style.display = 'block';
+  setTimeout(()=> b.style.display='none', 6000);
 }
 
 function collectAnswers(){
-  const a={}; 
-  for(let i=1;i<=13;i++){
-    const el=document.querySelector(`input[name="q${i}"]:checked`);
-    if(!el) return null; 
-    a["q"+i]=el.value.toLowerCase();
-  } 
+  const a = {};
+  for (let i=1;i<=13;i++){
+    const el = document.querySelector(`input[name="q${i}"]:checked`);
+    if(!el) return null;
+    a["q"+i] = el.value.toLowerCase();
+  }
   return a;
 }
 
 function computeScore(ans){
-  let sum=0,max=0;
+  let sum=0, max=0;
   Object.keys(W).forEach(k=>{
-    const w=W[k]; 
-    max+=Math.max(w.yes||0,w.planned||0,w.no||0); 
-    sum+=(w[ans[k]]||0);
+    const w=W[k];
+    max += Math.max(w.yes||0,w.planned||0,w.no||0);
+    sum += (w[ans[k]]||0);
   });
   return Math.round((sum/(max||1))*100);
 }
@@ -78,104 +90,168 @@ function levelFromPct(pct){
   return "RED";
 }
 
-// -------- Gauge med animation --------
-function gaugeSVG(pct){
-  const angle=-90+(pct/100)*180;
-  const cx=180, cy=180, r=150;
-  const x2=cx+(r-25)*Math.cos(angle*Math.PI/180);
-  const y2=cy+(r-25)*Math.sin(angle*Math.PI/180);
+// ---------- Gauge utils ----------
+const DEG = Math.PI/180;
+function arcPath(cx,cy,r,startDeg,endDeg){
+  const x1 = cx + r * Math.cos(startDeg*DEG);
+  const y1 = cy + r * Math.sin(startDeg*DEG);
+  const x2 = cx + r * Math.cos(endDeg*DEG);
+  const y2 = cy + r * Math.sin(endDeg*DEG);
+  const largeArc = (endDeg - startDeg) > 180 ? 1 : 0;
+  return `M${x1.toFixed(1)},${y1.toFixed(1)} A${r},${r} 0 ${largeArc},1 ${x2.toFixed(1)},${y2.toFixed(1)}`;
+}
+
+// ---------- Gauge (5 zoner + animation) ----------
+function gaugeSVG(){
+  const cx=180, cy=180, r=150, w=26;
+  const seg = 36; // 180° / 5 segmenter
+  const start = -90;
+
+  const parts = [
+    { from: start + 0*seg, to: start + 1*seg, stroke: "url(#gRed)"   },
+    { from: start + 1*seg, to: start + 2*seg, stroke: "url(#gOrange)"},
+    { from: start + 2*seg, to: start + 3*seg, stroke: "url(#gYellow)"},
+    { from: start + 3*seg, to: start + 4*seg, stroke: "url(#gLGreen)"},
+    { from: start + 4*seg, to: start + 5*seg, stroke: "url(#gGreen)" }
+  ];
 
   return `
-  <svg width="340" height="200" viewBox="0 0 360 200" class="gauge-svg">
-    <!-- Baggrund -->
-    <path d="M30,180 A150,150 0 0,1 330,180" 
-          stroke="#f3f3f3" stroke-width="26" fill="none"/>
-
-    <!-- Farvezoner med gradient -->
-    <path d="M30,180 A150,150 0 0,1 110,60" stroke="url(#gradRed)" stroke-width="26" fill="none" stroke-linecap="round"/>
-    <path d="M110,60 A150,150 0 0,1 180,30" stroke="url(#gradOrange)" stroke-width="26" fill="none" stroke-linecap="round"/>
-    <path d="M180,30 A150,150 0 0,1 250,60" stroke="url(#gradYellow)" stroke-width="26" fill="none" stroke-linecap="round"/>
-    <path d="M250,60 A150,150 0 0,1 330,180" stroke="url(#gradGreen)" stroke-width="26" fill="none" stroke-linecap="round"/>
-
-    <!-- Gradients -->
+  <svg width="360" height="210" viewBox="0 0 360 210" class="gauge-svg" aria-hidden="true">
+    <!-- Glow/blur defs -->
     <defs>
-      <linearGradient id="gradRed" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stop-color="#b71c1c"/>
-        <stop offset="100%" stop-color="#f44336"/>
-      </linearGradient>
-      <linearGradient id="gradOrange" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stop-color="#e65100"/>
-        <stop offset="100%" stop-color="#ff9800"/>
-      </linearGradient>
-      <linearGradient id="gradYellow" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stop-color="#fbc02d"/>
-        <stop offset="100%" stop-color="#fff59d"/>
-      </linearGradient>
-      <linearGradient id="gradGreen" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stop-color="#2e7d32"/>
-        <stop offset="100%" stop-color="#81c784"/>
-      </linearGradient>
+      <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+        <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="rgba(0,0,0,0.25)"/>
+      </filter>
+      <linearGradient id="gRed"    x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#b71c1c"/><stop offset="100%" stop-color="#f44336"/></linearGradient>
+      <linearGradient id="gOrange" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#e65100"/><stop offset="100%" stop-color="#ff9800"/></linearGradient>
+      <linearGradient id="gYellow" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#fbc02d"/><stop offset="100%" stop-color="#fff59d"/></linearGradient>
+      <linearGradient id="gLGreen" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#66bb6a"/><stop offset="100%" stop-color="#a5d6a7"/></linearGradient>
+      <linearGradient id="gGreen"  x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#2e7d32"/><stop offset="100%" stop-color="#66bb6a"/></linearGradient>
+      <linearGradient id="bgGrad"  x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffffffcc"/><stop offset="100%" stop-color="#ffffffee"/></linearGradient>
     </defs>
 
-    <!-- Nålen -->
-    <polygon id="needle" points="${cx-6},${cy} ${x2},${y2} ${cx+6},${cy}" class="gauge-needle"/>
-    <circle cx="${cx}" cy="${cy}" r="10" class="gauge-center"/>
+    <!-- Glasagtig baggrundsbue -->
+    <path d="${arcPath(cx,cy,r, -90, 90)}" stroke="url(#bgGrad)" stroke-width="${w}" fill="none" filter="url(#softShadow)" opacity="0.85"/>
 
-    <!-- Labels -->
-    <text x="40" y="195" font-size="13" fill="#666">0</text>
-    <text x="310" y="195" font-size="13" fill="#666">100</text>
+    <!-- Farvezoner -->
+    ${parts.map(p => `<path d="${arcPath(cx,cy,r, p.from, p.to)}" stroke="${p.stroke}" stroke-width="${w}" fill="none" stroke-linecap="round"/>`).join("")}
+
+    <!-- Ticks -->
+    ${[0,25,50,75,100].map(pct=>{
+      const ang = -90 + pct*1.8;
+      const x1 = cx + (r-8) * Math.cos(ang*DEG);
+      const y1 = cy + (r-8) * Math.sin(ang*DEG);
+      const x2 = cx + (r-18)* Math.cos(ang*DEG);
+      const y2 = cy + (r-18)* Math.sin(ang*DEG);
+      return `<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="#bbb" stroke-width="2"/>`;
+    }).join("")}
+
+    <!-- Nålen: liggende mod højre som udgangspunkt, roteres via CSS -->
+    <g id="needle" class="gauge-needle" transform="rotate(-90 180 180)">
+      <polygon points="${cx-12},${cy-6} ${cx+r-24},${cy} ${cx-12},${cy+6}" />
+      <circle cx="${cx}" cy="${cy}" r="9" class="gauge-center"/>
+    </g>
+
+    <!-- End-labels -->
+    <text x="38"  y="202" font-size="12" fill="#666">0</text>
+    <text x="306" y="202" font-size="12" fill="#666">100</text>
   </svg>`;
 }
 
-// -------- Resultatkort --------
+// Animate procenttal (0 → pct)
+function animatePercent(el, end, ms){
+  const start = 0, t0 = performance.now(), dur = ms||900;
+  function tick(ts){
+    const p = Math.min((ts - t0)/dur, 1);
+    el.textContent = Math.round(start + (end-start)*p) + "%";
+    if (p<1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+// ---------- Render resultat ----------
 function renderResult(pct, company){
   const level = levelFromPct(pct);
+  const meta = LEVEL_META[level];
   const t = REPORT_TEXTS[level];
   const today = new Date().toLocaleDateString("en-GB");
 
-  document.getElementById('result-card').innerHTML = `
-    <div class="report-card-inner">
-      <h2 class="report-title">${t.title}</h2>
-      <p class="report-meta"><strong>Company:</strong> ${company||"-"} 
-         <span class="report-date"><strong>Date:</strong> ${today}</span></p>
+  // Indsæt kortet
+  const card = `
+    <div class="report-card-inner" style="--level-color:${meta.color}">
+      <div class="report-head">
+        <div class="level-chip">
+          <span class="dot" aria-hidden="true"></span>
+          <strong>${t.title}</strong>
+        </div>
+        <div class="report-date"><strong>Date:</strong> ${today}</div>
+      </div>
+
+      <p class="report-meta"><strong>Company:</strong> ${company || "-"}</p>
+
       <div class="report-flex">
-        <div class="gauge">${gaugeSVG(pct)}</div>
+        <div class="gauge">${gaugeSVG()}</div>
         <div class="score-block">
-          <div class="score-value">${pct}%</div>
+          <div id="scoreVal" class="score-value">${pct}%</div>
           <div class="score-label">Readiness</div>
         </div>
       </div>
+
       <div class="report-text">
         <p><strong>Status:</strong> ${t.status}</p>
         <p><strong>Recommendation:</strong> ${t.recommendation}</p>
         <p><strong>Outcome:</strong> ${t.outcome}</p>
       </div>
+
       <div class="report-cta">
         <a href="pricing.html" class="btn">See pricing</a>
         <a href="contact.html" class="btn btn-outline">Contact us</a>
       </div>
-    </div>`;
+    </div>
+  `;
+  const wrap = document.getElementById('result-card');
+  wrap.innerHTML = card;
   document.getElementById('result-wrap').style.display = 'block';
 
-  // Animation på nålen
-  const needle = document.querySelector('#needle');
+  // 1) Farv tal + animation
+  const scoreEl = document.getElementById('scoreVal');
+  scoreEl.style.color = meta.color;
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches){
+    animatePercent(scoreEl, pct, 900);
+  } else {
+    scoreEl.textContent = pct + "%";
+  }
+
+  // 2) Drej nålen smooth til pct
+  const needle = document.getElementById('needle');
+  const target = -90 + pct*1.8; // 0–100 → -90..+90
   if (needle){
-    needle.style.transform = "rotate(-90deg)";
-    setTimeout(()=> needle.style.transform = `rotate(${ -90+(pct/100)*180 }deg)`, 50);
+    // Startposition (hold hvis første rendering)
+    needle.style.transform = `rotate(-90deg)`;
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches){
+      // kick animation i næste frame
+      requestAnimationFrame(()=> { needle.style.transform = `rotate(${target}deg)`;});
+    } else {
+      needle.style.transform = `rotate(${target}deg)`;
+    }
   }
 }
 
-// -------- Event handlers --------
-document.getElementById('see-result').addEventListener('click',()=>{
-  const lead={company:company.value.trim(), email:email.value.trim()};
-  if(!lead.company||!lead.email){showError("Fill out company + email"); return;}
-  const ans=collectAnswers(); 
-  if(!ans){showError("Answer all 13 questions"); return;}
-  const pct=computeScore(ans); 
+// ---------- Event handlers ----------
+document.getElementById('see-result').addEventListener('click', ()=>{
+  const lead = { company: company.value.trim(), email: email.value.trim() };
+  if(!lead.company || !lead.email){ showError("Fill out company + email"); return; }
+
+  const ans = collectAnswers();
+  if(!ans){ showError("Answer all 13 questions"); return; }
+
+  const pct = computeScore(ans);
   renderResult(pct, lead.company);
+
+  // Send til Apps Script uden at reloade (form/iframe)
   document.getElementById('screening-form').submit();
 });
 
-document.getElementById('screening-form').addEventListener('reset',()=>{
+document.getElementById('screening-form').addEventListener('reset', ()=>{
   document.getElementById('result-wrap').style.display='none';
 });
