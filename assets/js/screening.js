@@ -104,7 +104,7 @@ function arcPath(cx,cy,r,startDeg,endDeg){
 // ---------- Gauge (5 zoner + animation) ----------
 function gaugeSVG(){
   const cx=180, cy=180, r=150, w=26;
-  const seg = 36; // 180° / 5 segmenter
+  const seg = 36; // 180° / 5
   const start = -90;
 
   const parts = [
@@ -115,9 +115,16 @@ function gaugeSVG(){
     { from: start + 4*seg, to: start + 5*seg, stroke: "url(#gGreen)" }
   ];
 
+  const DEG = Math.PI/180;
+  const arcPath = (cx,cy,r,a1,a2)=>{
+    const x1 = cx + r*Math.cos(a1*DEG), y1 = cy + r*Math.sin(a1*DEG);
+    const x2 = cx + r*Math.cos(a2*DEG), y2 = cy + r*Math.sin(a2*DEG);
+    const largeArc = (a2-a1)>180 ? 1 : 0;
+    return `M${x1.toFixed(1)},${y1.toFixed(1)} A${r},${r} 0 ${largeArc},1 ${x2.toFixed(1)},${y2.toFixed(1)}`;
+  };
+
   return `
   <svg width="360" height="210" viewBox="0 0 360 210" class="gauge-svg" aria-hidden="true">
-    <!-- Glow/blur defs -->
     <defs>
       <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
         <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="rgba(0,0,0,0.25)"/>
@@ -130,33 +137,34 @@ function gaugeSVG(){
       <linearGradient id="bgGrad"  x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffffffcc"/><stop offset="100%" stop-color="#ffffffee"/></linearGradient>
     </defs>
 
-    <!-- Glasagtig baggrundsbue -->
-    <path d="${arcPath(cx,cy,r, -90, 90)}" stroke="url(#bgGrad)" stroke-width="${w}" fill="none" filter="url(#softShadow)" opacity="0.85"/>
+    <!-- ALT roteres 90° mod venstre her -->
+    <g transform="rotate(-90 180 180)">
+      <!-- glasagtig baggrund -->
+      <path d="${arcPath(cx,cy,r,-90,90)}" stroke="url(#bgGrad)" stroke-width="${w}" fill="none" filter="url(#softShadow)" opacity="0.85"/>
 
-    <!-- Farvezoner -->
-    ${parts.map(p => `<path d="${arcPath(cx,cy,r, p.from, p.to)}" stroke="${p.stroke}" stroke-width="${w}" fill="none" stroke-linecap="round"/>`).join("")}
+      <!-- farvezoner -->
+      ${parts.map(p=>`<path d="${arcPath(cx,cy,r,p.from,p.to)}" stroke="${p.stroke}" stroke-width="${w}" fill="none" stroke-linecap="round"/>`).join('')}
 
-    <!-- Ticks -->
-    ${[0,25,50,75,100].map(pct=>{
-      const ang = -90 + pct*1.8;
-      const x1 = cx + (r-8) * Math.cos(ang*DEG);
-      const y1 = cy + (r-8) * Math.sin(ang*DEG);
-      const x2 = cx + (r-18)* Math.cos(ang*DEG);
-      const y2 = cy + (r-18)* Math.sin(ang*DEG);
-      return `<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="#bbb" stroke-width="2"/>`;
-    }).join("")}
+      <!-- ticks -->
+      ${[0,25,50,75,100].map(pct=>{
+        const ang=-90+pct*1.8, x1=cx+(r-8)*Math.cos(ang*DEG), y1=cy+(r-8)*Math.sin(ang*DEG),
+              x2=cx+(r-18)*Math.cos(ang*DEG), y2=cy+(r-18)*Math.sin(ang*DEG);
+        return `<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="#bbb" stroke-width="2"/>`;
+      }).join('')}
 
-    <!-- Nålen: liggende mod højre som udgangspunkt, roteres via CSS -->
-    <g id="needle" class="gauge-needle" transform="rotate(-90 180 180)">
-      <polygon points="${cx-12},${cy-6} ${cx+r-24},${cy} ${cx-12},${cy+6}" />
-      <circle cx="${cx}" cy="${cy}" r="9" class="gauge-center"/>
+      <!-- nålen (drejes via CSS/JS) -->
+      <g id="needle" class="gauge-needle">
+        <polygon points="${cx-12},${cy-6} ${cx+r-24},${cy} ${cx-12},${cy+6}" />
+        <circle cx="${cx}" cy="${cy}" r="9" class="gauge-center"/>
+      </g>
     </g>
 
-    <!-- End-labels -->
+    <!-- End-labels (bliver IKKE roteret) -->
     <text x="38"  y="202" font-size="12" fill="#666">0</text>
     <text x="306" y="202" font-size="12" fill="#666">100</text>
   </svg>`;
 }
+
 
 // Animate procenttal (0 → pct)
 function animatePercent(el, end, ms){
