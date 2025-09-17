@@ -882,7 +882,7 @@ body.page-screening .screening-wrap form { width: 100%; }
 
 @media (prefers-reduced-motion: reduce){ .hover-card  }
 
-/* === SLA tooltip (exact same as Process) === */
+
 .hover-card[data-tooltip]{ position: relative; cursor: pointer; }
 .hover-card[data-tooltip]::before{
 content: attr(data-tooltip);
@@ -911,7 +911,7 @@ opacity: 1;
 }
 
 
-/* === SLA tooltip fix v2 (exact placement over each card) === */
+
 .hover-card{ position: relative; overflow: visible; }
 .hover-card[data-tooltip]::before{
   content: attr(data-tooltip);
@@ -960,3 +960,154 @@ opacity: 1;
   .hover-card[data-tooltip]::before,
   .hover-card[data-tooltip]::after{ transition: none !important; }
 }
+
+
+
+
+article.card.hover-card,
+.hover-card .card{ position: relative; overflow: visible; }
+
+article.card.hover-card[data-tooltip]::before,
+.hover-card .card[data-tooltip]::before{
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 8px);
+  transform: translate(-50%, 8px) scale(.98);
+  transform-origin: 50% 100%;
+  background: #0a472e;
+  color: #fff;
+  font-weight: 700;
+  font-size: 13.5px;
+  line-height: 1;
+  padding: 10px 14px;
+  border-radius: 10px;
+  box-shadow: 0 12px 24px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.15);
+  pointer-events: none;
+  white-space: nowrap;
+  opacity: 0;
+  z-index: 60;
+  transition: opacity .18s ease, transform .18s ease;
+}
+article.card.hover-card[data-tooltip]::after,
+.hover-card .card[data-tooltip]::after{
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 3px);
+  width: 12px; height: 12px;
+  background: #0a472e;
+  border-radius: 2px;
+  transform: translateX(-50%) rotate(45deg);
+  box-shadow: 2px 2px 4px rgba(0,0,0,.18);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 59;
+  transition: opacity .18s ease;
+}
+article.card.hover-card[data-tooltip]:hover::before,
+article.card.hover-card[data-tooltip]:focus-within::before,
+.hover-card .card[data-tooltip]:hover::before,
+.hover-card .card[data-tooltip]:focus-within::before{ opacity: 1; transform: translate(-50%, 0) scale(1); }
+article.card.hover-card[data-tooltip]:hover::after,
+article.card.hover-card[data-tooltip]:focus-within::after,
+.hover-card .card[data-tooltip]:hover::after,
+.hover-card .card[data-tooltip]:focus-within::after{ opacity: 1; }
+
+/* make sure rows/grids don't clip */
+.cards, .card-grid, .services-grid, .features, .row, .grid, .offer-grid{ overflow: visible; }
+
+
+/* === SLA tooltip (strict per card element) === */
+.card.hover-card{ position: relative; overflow: visible; }
+.card.hover-card[data-tooltip]::before{
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 10px);
+  transform: translate(-50%, 8px) scale(.98);
+  transform-origin: 50% 100%;
+  background: #0a472e;
+  color: #fff;
+  font-weight: 700;
+  font-size: 13.5px;
+  line-height: 1;
+  padding: 10px 14px;
+  border-radius: 10px;
+  box-shadow: 0 12px 24px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.15);
+  pointer-events: none;
+  white-space: nowrap;
+  opacity: 0;
+  z-index: 60;
+  transition: opacity .18s ease, transform .18s ease;
+}
+.card.hover-card[data-tooltip]::after{
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 4px);
+  width: 12px; height: 12px;
+  background: #0a472e;
+  border-radius: 2px;
+  transform: translateX(-50%) rotate(45deg);
+  box-shadow: 2px 2px 4px rgba(0,0,0,.18);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 59;
+  transition: opacity .18s ease;
+}
+.card.hover-card[data-tooltip]:hover::before,
+.card.hover-card[data-tooltip]:focus-within::before{ opacity: 1; transform: translate(-50%, 0) scale(1); }
+.card.hover-card[data-tooltip]:hover::after,
+.card.hover-card[data-tooltip]:focus-within::after{ opacity: 1; }
+.services-grid, .cards, .card-grid, .row, .grid{ overflow: visible; }
+@media (prefers-reduced-motion: reduce){
+  .card.hover-card[data-tooltip]::before,
+  .card.hover-card[data-tooltip]::after{ transition: none !important; }
+}
+
+
+
+
+/* enable tooltip on .offer-card same style as card */
+.offer-card.hover-card{ position: relative; overflow: visible; }
+.offer-card.hover-card[data-tooltip]::before{
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 10px);
+  transform: translate(-50%, 8px) scale(.98);
+  transform-origin: 50% 100%;
+  background: #0a472e;
+  color: #fff;
+  font-weight: 700;
+  font-size: 13.5px;
+  line-height: 1;
+  padding: 10px 14px;
+  border-radius: 10px;
+  box-shadow: 0 12px 24px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.15);
+  pointer-events: none;
+  white-space: nowrap;
+  opacity: 0;
+  z-index: 60;
+  transition: opacity .18s ease, transform .18s ease;
+}
+.offer-card.hover-card[data-tooltip]::after{
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 4px);
+  width: 12px; height: 12px;
+  background: #0a472e;
+  border-radius: 2px;
+  transform: translateX(-50%) rotate(45deg);
+  box-shadow: 2px 2px 4px rgba(0,0,0,.18);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 59;
+  transition: opacity .18s ease;
+}
+.offer-card.hover-card[data-tooltip]:hover::before,
+.offer-card.hover-card[data-tooltip]:focus-within::before{ opacity: 1; transform: translate(-50%, 0) scale(1); }
+.offer-card.hover-card[data-tooltip]:hover::after,
+.offer-card.hover-card[data-tooltip]:focus-within::after{ opacity: 1; }
