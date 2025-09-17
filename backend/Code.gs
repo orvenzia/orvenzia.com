@@ -1,29 +1,25 @@
-/** Orvenzia ESG Screening Backend – Baseline Report (no barometer)
- * Deploy as Web App: Execute as Me; Who has access: Anyone
- */
+/** Orvenzia ESG Screening Backend – Baseline Report (no barometer) */
 
-// ========== KONFIG ==========
-const OWNER_EMAIL = "support@orvenzia.com";
-const TEMPLATE_ID = "https://docs.google.com/document/d/1Sj4t15edHcOhQ1K-_un6oiA261yaEEAejF0AACyJHqE/edit?tab=t.0"; // <-- indsæt Google Docs skabelon-ID
+const OWNER_EMAIL = "support@orvenzia.com"; 
+const TEMPLATE_ID = "1Sj4t15edHcOhQ1K-_un6oiA261yaEEAejF0AACyJHqE"; // <- Sæt dit Google Docs skabelon-ID ind
 
-// ========== ENDPOINT ==========
 function doPost(e) {
   try {
     if (!e || !e.postData) {
       return jsonOut({ ok: false, error: "No data" });
     }
+
     var data = JSON.parse(e.postData.contents);
     var lead = data.lead || {};
     var answers = data.answers || {};
 
-    // Score + level
     var score = computeScore(answers);
     var level = getLevel(score);
 
-    // Generér baseline-rapport
+    // Generer baseline rapport
     var docxBlob = generateReport(lead, score, level, answers);
 
-    // Mail til ejer (rapport vedhæftet)
+    // Send til ejer
     MailApp.sendEmail({
       to: OWNER_EMAIL,
       subject: "New ESG Screening: " + (lead.company || "Unknown"),
@@ -35,7 +31,7 @@ function doPost(e) {
       attachments: [docxBlob]
     });
 
-    // Mail til kunden (kort kvittering)
+    // Kort kvittering til kunden
     if (lead.email) {
       MailApp.sendEmail({
         to: lead.email,
@@ -53,7 +49,7 @@ function doPost(e) {
   }
 }
 
-// ========== HJÆLPEFUNKT. ==========
+// --- helpers ---
 function jsonOut(obj) {
   return ContentService.createTextOutput(JSON.stringify(obj))
     .setMimeType(ContentService.MimeType.JSON);
@@ -64,9 +60,9 @@ function computeScore(a) {
   var sum=0,max=0;
   for (var k in W) {
     var v=(a[k]||"").toLowerCase(), w=W[k];
-    max += w*2;
-    if (v==="yes") sum += w*2;
-    else if (v==="planned") sum += w*1;
+    max+=w*2;
+    if(v==="yes") sum+=w*2;
+    else if(v==="planned") sum+=w*1;
   }
   return Math.round((sum/(max||1))*100);
 }
@@ -86,91 +82,77 @@ function buildDetailsRows(answers){
     q7:"Health & safety policy", q8:"Diversity & inclusion policy", q9:"Anti-corruption/whistleblowing",
     q10:"Data protection (GDPR)", q11:"Water use tracking", q12:"Waste & recycling rates", q13:"Sharing ESG KPIs with buyers"
   };
-  var rows = [["Question","Status"]]; // header
+  var rows = [["Question","Status"]];
   for (var k in Q) {
-    var v = (answers[k]||"").toLowerCase();
-    var status = "❌ No";
-    if (v==="yes") status = "✅ Yes";
-    else if (v==="planned") status = "⚠️ Planned";
+    var v=(answers[k]||"").toLowerCase();
+    var status="❌ No";
+    if(v==="yes") status="✅ Yes";
+    else if(v==="planned") status="⚠️ Planned";
     rows.push([Q[k], status]);
   }
   return rows;
 }
 
-// Luksus søjlediagram
 function makeChart(title, value, max){
-  var data = Charts.newDataTable()
-    .addColumn(Charts.ColumnType.STRING, "Label")
-    .addColumn(Charts.ColumnType.NUMBER, "Value")
-    .addRow([title, value])
+  var data=Charts.newDataTable()
+    .addColumn(Charts.ColumnType.STRING,"Label")
+    .addColumn(Charts.ColumnType.NUMBER,"Value")
+    .addRow([title,value])
     .build();
-
-  var chart = Charts.newColumnChart()
+  var chart=Charts.newColumnChart()
     .setDataTable(data)
-    .setOption("legend", "none")
-    .setOption("title", title)
-    .setOption("titleTextStyle", {color:"#228B22", fontSize:16, bold:true})
-    .setOption("backgroundColor", "#FFFFFF")
-    .setOption("vAxis", {
-      viewWindow: {min:0, max:max},
-      gridlines: {count: 0},
-      baselineColor: "#CCCCCC",
-      textStyle: {color:"#666666"}
-    })
-    .setOption("hAxis", {
-      textStyle: {color:"#666666"}
-    })
-    .setOption("bar", {groupWidth:"50%"})
-    .setOption("colors", ["#228B22"])
-    .setDimensions(400, 300)
+    .setOption("legend","none")
+    .setOption("title",title)
+    .setOption("titleTextStyle",{color:"#228B22",fontSize:16,bold:true})
+    .setOption("backgroundColor","#FFFFFF")
+    .setOption("vAxis",{viewWindow:{min:0,max:max},gridlines:{count:0},baselineColor:"#CCCCCC",textStyle:{color:"#666"}})
+    .setOption("hAxis",{textStyle:{color:"#666"}})
+    .setOption("bar",{groupWidth:"50%"})
+    .setOption("colors",["#228B22"])
+    .setDimensions(400,300)
     .build();
-
   return chart.getAs("image/png");
 }
 
 function insertImageAtPlaceholder(body, placeholder, blob, widthPx){
   var found = body.findText("\\{\\{"+placeholder+"\\}\\}");
-  if (!found) return false;
-  var el = found.getElement().asText();
+  if(!found) return false;
+  var el=found.getElement().asText();
   el.setText("");
-  var p = el.getParent().asParagraph();
+  var p=el.getParent().asParagraph();
   p.appendInlineImage(blob).setWidth(widthPx);
   return true;
 }
 
 function insertTableAtPlaceholder(body, placeholder, rows){
-  var found = body.findText("\\{\\{"+placeholder+"\\}\\}");
-  if (!found) return false;
-  var el = found.getElement().asText();
+  var found=body.findText("\\{\\{"+placeholder+"\\}\\}");
+  if(!found) return false;
+  var el=found.getElement().asText();
   el.setText("");
-  var p = el.getParent().asParagraph();
-  var tbl = p.getParent().insertTable(p.getParent().getChildIndex(p)+1, rows);
+  var p=el.getParent().asParagraph();
+  var tbl=p.getParent().insertTable(p.getParent().getChildIndex(p)+1,rows);
   tbl.getRow(0).editAsText().setBold(true).setForegroundColor("#228B22");
   return true;
 }
 
-// ========== DOKUMENT ==========
 function generateReport(lead, score, level, answers){
-  var file = DriveApp.getFileById(TEMPLATE_ID).makeCopy("Baseline ESG Report - " + (lead.company||"Company"));
-  var docId = file.getId();
-  var doc = DocumentApp.openById(docId);
-  var body = doc.getBody();
+  var file=DriveApp.getFileById(TEMPLATE_ID).makeCopy("Baseline ESG Report - "+(lead.company||"Company"));
+  var docId=file.getId();
+  var doc=DocumentApp.openById(docId);
+  var body=doc.getBody();
 
   body.replaceText("\\{\\{COMPANY\\}\\}", lead.company||"");
   body.replaceText("\\{\\{EMAIL\\}\\}", lead.email||"");
   body.replaceText("\\{\\{SCORE\\}\\}", String(score));
   body.replaceText("\\{\\{LEVEL\\}\\}", level);
 
-  // Detaljer
-  insertTableAtPlaceholder(body, "DETAILS_TABLE", buildDetailsRows(answers));
+  insertTableAtPlaceholder(body,"DETAILS_TABLE",buildDetailsRows(answers));
 
-  // Benchmark chart
-  var benchBlob = makeChart("Benchmark", score, 100);
-  insertImageAtPlaceholder(body, "CHART_BENCHMARK", benchBlob, 320);
+  var benchBlob=makeChart("Benchmark",score,100);
+  insertImageAtPlaceholder(body,"CHART_BENCHMARK",benchBlob,320);
 
-  // Score chart
-  var scoreBlob = makeChart("Score", score, 100);
-  insertImageAtPlaceholder(body, "CHART_SCORE", scoreBlob, 320);
+  var scoreBlob=makeChart("Score",score,100);
+  insertImageAtPlaceholder(body,"CHART_SCORE",scoreBlob,320);
 
   doc.saveAndClose();
   return DriveApp.getFileById(docId).getAs(MimeType.MICROSOFT_WORD);
