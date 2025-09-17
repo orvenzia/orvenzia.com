@@ -1,75 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>Screening — ESG Readiness | Orvenzia</title>
-
-  <!-- SEO og metadata -->
-  <meta content="ESG consulting and ESG readiness services for SMEs in Europe. Pass supplier ESG assessments, deliver buyer-facing ESG reports and Scope 3 data." name="description"/>
-  <link href="https://www.orvenzia.com/" rel="canonical"/>
-  <meta content="index,follow" name="robots"/>
-  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet"/>
-  <link href="assets/css/styles.css?v=20250910" rel="stylesheet"/>
-  <meta content="ESG Consulting for SMEs | Orvenzia — ESG Readiness Experts" property="og:title"/>
-  <meta content="ESG consulting and ESG readiness services for SMEs in Europe. Pass supplier ESG assessments, deliver buyer-facing ESG reports and Scope 3 data." property="og:description"/>
-  <meta content="https://www.orvenzia.com/" property="og:url"/>
-  <meta content="website" property="og:type"/>
-  <meta content="Orvenzia" property="og:site_name"/>
-  <meta content="summary_large_image" name="twitter:card"/>
-
-  <!-- Structured data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Orvenzia",
-    "url": "https://www.orvenzia.com",
-    "email": "support@orvenzia.com",
-    "telephone": "+45 20 96 83 24",
-    "vatID": "45828697",
-    "sameAs": ["https://www.linkedin.com/in/jimmi-thim"]
-  }
-  </script>
-
-  <link as="image" href="assets/img/hero-green.png" rel="preload"/>
-  <meta content="https://orvenzia.com/assets/img/og-hero.jpg" property="og:image"/>
-
-  <link rel="stylesheet" href="assets/css/styles.css?v=6.2">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Screening — ESG Readiness | Orvenzia</title>
+<meta content="ESG consulting and ESG readiness services for SMEs in Europe. Pass supplier ESG assessments, deliver buyer-facing ESG reports and Scope 3 data." name="description"/>
+<link href="https://www.orvenzia.com/" rel="canonical"/>
+<meta content="index,follow" name="robots"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&amp;family=Montserrat:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="assets/css/styles.css?v=20250910" rel="stylesheet"/>
+<meta content="ESG Consulting for SMEs | Orvenzia — ESG Readiness Experts" property="og:title"/>
+<meta content="ESG consulting and ESG readiness services for SMEs in Europe. Pass supplier ESG assessments, deliver buyer-facing ESG reports and Scope 3 data." property="og:description"/>
+<meta content="https://www.orvenzia.com/" property="og:url"/>
+<meta content="website" property="og:type"/>
+<meta content="Orvenzia" property="og:site_name"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<link as="image" href="assets/img/hero-green.png" rel="preload"/>
+<meta content="https://orvenzia.com/assets/img/og-hero.jpg" property="og:image"/>
 </head>
 <body>
 <header class="site-header">
-  <div class="container header-inner">
-    <a class="logo" href="index.html"><span class="logo-mark">O</span><span class="logo-type">Orvenzia</span></a>
-    <nav class="nav" id="nav">
-      <a href="services.html">Services</a>
-      <a href="screening.html" class="active">Screening</a>
-      <a href="process.html">Process</a>
-      <a href="pricing.html">Pricing</a>
-      <a href="cases.html">Cases</a>
-      <a href="for-buyers.html">For Buyers</a>
-      <a href="resources.html">Insights</a>
-      <a href="about.html">About</a>
-      <a href="faq.html">FAQ</a>
-      <a class="btn btn-outline" href="contact.html">Contact</a>
-    </nav>
-    <button aria-label="Toggle menu" class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
-  </div>
+<div class="container header-inner">
+<a class="logo" href="index.html"><span class="logo-mark">O</span><span class="logo-type">Orvenzia</span></a>
+<nav class="nav" id="nav">
+<a href="services.html">Services</a>
+<a href="screening.html">Screening</a>
+<a href="process.html">Process</a>
+<a href="pricing.html">Pricing</a>
+<a href="cases.html">Cases</a>
+<a href="for-buyers.html">For Buyers</a>
+<a href="resources.html">Insights</a>
+<a href="about.html">About</a>
+<a href="faq.html">FAQ</a>
+<a class="btn btn-outline" href="contact.html">Contact</a>
+</nav>
+<button aria-label="Toggle menu" class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+</div>
 </header>
 
 <main class="page">
   <section class="hero hero-compact">
     <div class="container">
       <h1 class="page-title">Free ESG Screening</h1>
-      <p class="lead">13 quick questions → instant Readiness Score & premium mini-report delivered to your inbox.</p>
+      <p class="lead">13 quick questions → instant Readiness Score & automatic mini-report by email.</p>
     </div>
   </section>
 
   <section class="section">
     <div class="container narrow">
       <div class="form-card">
-        <form id="screening-form" novalidate>
+        <!-- Formular med backend URL -->
+        <form id="screening-form" 
+              method="POST" 
+              action="https://script.google.com/macros/s/AKfycbxguXZO3CpaBqX0KiSdx0AMLNt2s8PYFU3DWDP-RsZNQZBdkVEOzvOIXHzuMlznqjMWZg/exec"
+              target="hidden_iframe" novalidate>
+
           <div class="form-grid">
             <div class="form-row">
               <label class="q-label" for="company">Company name <span class="muted">(required)</span></label>
@@ -81,199 +67,146 @@
             </div>
           </div>
 
-          <!-- spørgsmålene (q1..q13) -->
+          <!-- Alle 13 spørgsmål -->
           <div class="form-grid">
             <div class="form-row">
               <label class="q-label">Do you have a waste management policy or procedure?</label>
-              <div class="inline">
-                <label><input type="radio" name="q1" value="yes" required> Yes</label>
-                <label><input type="radio" name="q1" value="no"> No</label>
-              </div>
+              <div class="inline"><label><input type="radio" name="q1" value="yes" required> Yes</label> <label><input type="radio" name="q1" value="no"> No</label></div>
             </div>
 
             <div class="form-row">
               <label class="q-label">Have you mapped your company’s energy consumption (electricity, gas, heating)?</label>
-              <div class="inline">
-                <label><input type="radio" name="q2" value="yes" required> Yes</label>
-                <label><input type="radio" name="q2" value="no"> No</label>
-              </div>
+              <div class="inline"><label><input type="radio" name="q2" value="yes" required> Yes</label> <label><input type="radio" name="q2" value="no"> No</label></div>
             </div>
 
             <div class="form-row">
               <label class="q-label">Do you have reduction targets (CO₂ / energy)?</label>
-              <div class="inline">
-                <label><input type="radio" name="q3" value="yes" required> Yes</label>
-                <label><input type="radio" name="q3" value="planned"> Planned</label>
-                <label><input type="radio" name="q3" value="no"> No</label>
-              </div>
+              <div class="inline"><label><input type="radio" name="q3" value="yes" required> Yes</label> <label><input type="radio" name="q3" value="planned"> Planned</label> <label><input type="radio" name="q3" value="no"> No</label></div>
             </div>
 
             <div class="form-row">
-              <label class="q-label">Do you monitor environmental KPIs monthly/quarterly?</label>
-              <div class="inline">
-                <label><input type="radio" name="q4" value="yes" required> Yes</label>
-                <label><input type="radio" name="q4" value="planned"> Planned</label>
-                <label><input type="radio" name="q4" value="no"> No</label>
-              </div>
+              <label class="q-label">Do you have transport / logistics initiatives to reduce environmental impact?</label>
+              <div class="inline"><label><input type="radio" name="q4" value="yes" required> Yes</label> <label><input type="radio" name="q4" value="planned"> Planned</label> <label><input type="radio" name="q4" value="no"> No</label></div>
             </div>
 
             <div class="form-row">
-              <label class="q-label">Do you have a health & safety policy?</label>
-              <div class="inline">
-                <label><input type="radio" name="q5" value="yes" required> Yes</label>
-                <label><input type="radio" name="q5" value="no"> No</label>
-              </div>
+              <label class="q-label">Do you have a documented environmental / climate policy?</label>
+              <div class="inline"><label><input type="radio" name="q5" value="yes" required> Yes</label> <label><input type="radio" name="q5" value="no"> No</label></div>
             </div>
 
             <div class="form-row">
-              <label class="q-label">Do you track incidents / near-misses?</label>
-              <div class="inline">
-                <label><input type="radio" name="q6" value="yes" required> Yes</label>
-                <label><input type="radio" name="q6" value="no"> No</label>
-              </div>
+              <label class="q-label">Do you have an occupational health and safety policy?</label>
+              <div class="inline"><label><input type="radio" name="q6" value="yes" required> Yes</label> <label><input type="radio" name="q6" value="no"> No</label></div>
             </div>
 
             <div class="form-row">
-              <label class="q-label">Do you have an employee code of conduct?</label>
-              <div class="inline">
-                <label><input type="radio" name="q7" value="yes" required> Yes</label>
-                <label><input type="radio" name="q7" value="planned"> Planned</label>
-                <label><input type="radio" name="q7" value="no"> No</label>
-              </div>
+              <label class="q-label">Do you conduct employee satisfaction surveys?</label>
+              <div class="inline"><label><input type="radio" name="q7" value="yes" required> Yes</label> <label><input type="radio" name="q7" value="planned"> Planned</label> <label><input type="radio" name="q7" value="no"> No</label></div>
             </div>
 
             <div class="form-row">
-              <label class="q-label">Do you perform supplier screening (ESG/ethics)?</label>
-              <div class="inline">
-                <label><input type="radio" name="q8" value="yes" required> Yes</label>
-                <label><input type="radio" name="q8" value="no"> No</label>
-              </div>
+              <label class="q-label">Do you have equality and diversity guidelines?</label>
+              <div class="inline"><label><input type="radio" name="q8" value="yes" required> Yes</label> <label><input type="radio" name="q8" value="no"> No</label></div>
             </div>
 
             <div class="form-row">
-              <label class="q-label">Do you have Scope 3 mapped or a plan to do it?</label>
-              <div class="inline">
-                <label><input type="radio" name="q9" value="yes" required> Yes</label>
-                <label><input type="radio" name="q9" value="planned"> Planned</label>
-                <label><input type="radio" name="q9" value="no"> No</label>
-              </div>
+              <label class="q-label">Do you have a Supplier Code of Conduct?</label>
+              <div class="inline"><label><input type="radio" name="q9" value="yes" required> Yes</label> <label><input type="radio" name="q9" value="planned"> Planned</label> <label><input type="radio" name="q9" value="no"> No</label></div>
             </div>
 
             <div class="form-row">
-              <label class="q-label">Do you have a documented whistleblower channel?</label>
-              <div class="inline">
-                <label><input type="radio" name="q10" value="yes" required> Yes</label>
-                <label><input type="radio" name="q10" value="no"> No</label>
-              </div>
+              <label class="q-label">Do you have an anti-corruption / ethics policy?</label>
+              <div class="inline"><label><input type="radio" name="q10" value="yes" required> Yes</label> <label><input type="radio" name="q10" value="no"> No</label></div>
             </div>
 
             <div class="form-row">
-              <label class="q-label">Is there a formal anti-corruption/anti-bribery policy?</label>
-              <div class="inline">
-                <label><input type="radio" name="q11" value="yes" required> Yes</label>
-                <label><input type="radio" name="q11" value="no"> No</label>
-              </div>
+              <label class="q-label">Do you have a whistleblower system?</label>
+              <div class="inline"><label><input type="radio" name="q11" value="yes" required> Yes</label> <label><input type="radio" name="q11" value="planned"> Planned</label> <label><input type="radio" name="q11" value="no"> No</label></div>
             </div>
 
             <div class="form-row">
-              <label class="q-label">Do you have a data privacy policy and access controls?</label>
-              <div class="inline">
-                <label><input type="radio" name="q12" value="yes" required> Yes</label>
-                <label><input type="radio" name="q12" value="planned"> Planned</label>
-                <label><input type="radio" name="q12" value="no"> No</label>
-              </div>
+              <label class="q-label">Do you perform annual risk assessments?</label>
+              <div class="inline"><label><input type="radio" name="q12" value="yes" required> Yes</label> <label><input type="radio" name="q12" value="planned"> Planned</label> <label><input type="radio" name="q12" value="no"> No</label></div>
             </div>
 
             <div class="form-row">
-              <label class="q-label">Do you publish ESG information (website/report)?</label>
-              <div class="inline">
-                <label><input type="radio" name="q13" value="yes" required> Yes</label>
-                <label><input type="radio" name="q13" value="no"> No</label>
-              </div>
+              <label class="q-label">Do you collect Scope 3 supplier data / reporting?</label>
+              <div class="inline"><label><input type="radio" name="q13" value="yes" required> Yes</label> <label><input type="radio" name="q13" value="planned"> Planned</label> <label><input type="radio" name="q13" value="no"> No</label></div>
             </div>
           </div>
 
-          <div class="form-row" style="margin-top:10px">
-            <button class="btn" id="see-result" type="button">See your result</button>
-            <button class="btn btn-outline" type="submit">Send by email</button>
-            <span id="mail-status" class="muted" style="margin-left:10px;"></span>
+          <div class="form-row" style="margin-top:12px">
+            <button class="btn" id="see-result" type="button">See result</button>
+            <button class="btn btn-outline" type="reset">Reset</button>
           </div>
         </form>
       </div>
 
-      <div id="result-wrap" style="margin-top:20px;display:none;">
-        <div class="report-card" id="result-card"></div>
-      </div>
-
       <div id="error-banner" style="display:none;margin-top:10px;padding:10px;border-radius:10px;background:#ffecec;color:#b00020;font-weight:600;"></div>
+      <div id="result-wrap"><div class="report-card" id="result-card"></div></div>
     </div>
   </section>
 </main>
 
 <footer class="site-footer">
-  <div class="container footer-grid">
-    <div class="footer-brand">
-      <div class="brand-row">
-        <span aria-hidden="true" class="brand-dot"></span>
-        <strong>Orvenzia</strong>
-      </div>
-      <p>ESG consulting &amp; ESG readiness services for SMEs in Europe.</p>
-      <p>CVR: 45828697</p>
-      <div class="badge-oci">
-        <span aria-hidden="true" class="badge-dot"></span>
-        <span class="badge-text">OCI ≥ 80 → Orvenzia Ready</span>
-      </div>
-    </div>
-    <div class="footer-col">
-      <h4>Company</h4>
-      <ul>
-        <li><a href="/about.html">About</a></li>
-        <li><a href="/services.html">Services</a></li>
-        <li><a href="/process.html">Process</a></li>
-        <li><a href="/pricing.html">Pricing</a></li>
-        <li><a href="/cases.html">Cases</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Contact</h4>
-      <ul>
-        <li><a href="tel:+4520968324">+45 20 96 83 24</a></li>
-        <li><a href="mailto:support@orvenzia.com">support@orvenzia.com</a></li>
-        <li><a href="/contact.html#linkedin">LinkedIn</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Key Topics</h4>
-      <ul>
-        <li>ESG Readiness Consulting</li>
-        <li>ESG Reporting for SMEs</li>
-        <li>Scope 3 Data &amp; Suppliers</li>
-        <li>ESG Competitiveness Screening</li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <div class="container">
-      <div class="footer-bottom-left">© 2025 Orvenzia. All rights reserved. <br/><small>Case studies shown are anonymized on buyer request.</small></div>
-      <nav aria-label="Footer links" class="footer-bottom-links">
-        <a href="/privacy.html">Privacy</a>
-        <a href="/confidentiality.html">Confidentiality</a>
-        <a href="/dpa.html">DPA</a>
-        <a href="/accessibility.html">Accessibility</a>
-        <a href="/sitemap.xml">Sitemap</a>
-      </nav>
-    </div>
-  </div>
+<div class="container footer-grid">
+<div class="footer-brand">
+<div class="brand-row">
+<span aria-hidden="true" class="brand-dot"></span>
+<strong>Orvenzia</strong>
+</div>
+<p>ESG consulting &amp; ESG readiness services for SMEs in Europe.</p>
+<p>CVR: 45828697</p>
+<div class="badge-oci">
+<span aria-hidden="true" class="badge-dot"></span>
+<span class="badge-text">OCI ≥ 80 → Orvenzia Ready</span>
+</div>
+</div>
+<div class="footer-col">
+<h4>Company</h4>
+<ul>
+<li><a href="/about.html">About</a></li>
+<li><a href="/services.html">Services</a></li>
+<li><a href="/process.html">Process</a></li>
+<li><a href="/pricing.html">Pricing</a></li>
+<li><a href="/cases.html">Cases</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Contact</h4>
+<ul>
+<li><a href="tel:+4520968324">+45 20 96 83 24</a></li>
+<li><a href="mailto:support@orvenzia.com">support@orvenzia.com</a></li>
+<li><a href="/contact.html#linkedin">LinkedIn</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Key Topics</h4>
+<ul>
+<li>ESG Readiness Consulting</li>
+<li>ESG Reporting for SMEs</li>
+<li>Scope 3 Data &amp; Suppliers</li>
+<li>ESG Competitiveness Screening</li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">
+<div class="container">
+<div class="footer-bottom-left">© 2025 Orvenzia. All rights reserved. <br/><small>Case studies shown are anonymized on buyer request.</small></div>
+<nav aria-label="Footer links" class="footer-bottom-links">
+<a href="/privacy.html">Privacy</a>
+<a href="/confidentiality.html">Confidentiality</a>
+<a href="/dpa.html">DPA</a>
+<a href="/accessibility.html">Accessibility</a>
+<a href="/sitemap.xml">Sitemap</a>
+</nav>
+</div>
+</div>
 </footer>
 
-<!-- Backend URL og tekster -->
-<script>
-  window.SCREENING_BACKEND_URL = "https://script.google.com/macros/s/AKfycbyoO_nM7Moh3CFjW6hT57WNyjYxePdHYGkFbuKqiuyh3J7P1sqJhqrxLtMl1IxvqEy_9A/exec";
-</script>
+<!-- Skjult iframe så submit ikke loader siden -->
+<iframe name="hidden_iframe" style="display:none;"></iframe>
 
-<!-- Scripts -->
-<script src="assets/js/screening.js?v=6.2"></script>
-<script src="assets/js/main.js?v=6.2"></script>
-<script src="assets/js/menu.js?v=6.2"></script>
+<script src="assets/js/screening.js?v=1.0"></script>
 </body>
 </html>
