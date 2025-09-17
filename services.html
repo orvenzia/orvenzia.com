@@ -1,152 +1,415 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>ESG Services for SMEs | Readiness, Reporting, Scope 3 | Orvenzia</title>
-<meta content="ESG services for SMEs: ESG readiness consulting, ESG reporting, supplier ESG assessments and Scope 3 data support." name="description"/>
-<link href="https://www.orvenzia.com/services.html" rel="canonical"/>
-<meta content="index,follow" name="robots"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&amp;family=Montserrat:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
-<link href="assets/css/styles.css?v=20250910" rel="stylesheet"/>
-<meta content="ESG Services for SMEs | Readiness, Reporting, Scope 3 | Orvenzia" property="og:title"/><meta content="ESG services for SMEs: ESG readiness consulting, ESG reporting, supplier ESG assessments and Scope 3 data support." property="og:description"/>
-<meta content="https://www.orvenzia.com/services.html" property="og:url"/><meta content="website" property="og:type"/><meta content="Orvenzia" property="og:site_name"/>
-<meta content="summary_large_image" name="twitter:card"/>
-<script type="application/ld+json">
-{"@context": "https://schema.org", "@type": "Organization", "name": "Orvenzia", "url": "https://www.orvenzia.com", "email": "support@orvenzia.com", "telephone": "+45 20 96 83 24", "vatID": "45828697", "sameAs": ["https://www.linkedin.com/in/jimmi-thim"]}
-{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.orvenzia.com/"}, {"@type": "ListItem", "position": 2, "name": "ESG Services for SMEs", "item": "https://www.orvenzia.com/services.html"}]}
-{"@context": "https://schema.org", "@type": "Service", "serviceType": "ESG Readiness Consulting", "provider": {"@type": "Organization", "name": "Orvenzia", "url": "https://www.orvenzia.com"}, "areaServed": "Europe", "description": "Readiness baseline, risk mapping and documentation for supplier ESG assessments."}
-{"@context": "https://schema.org", "@type": "Service", "serviceType": "ESG Reporting for SMEs", "provider": {"@type": "Organization", "name": "Orvenzia", "url": "https://www.orvenzia.com"}, "areaServed": "Europe", "description": "Board-ready ESG reports with pragmatic KPIs."}
-{"@context": "https://schema.org", "@type": "Service", "serviceType": "Scope 3 Data & Supplier ESG", "provider": {"@type": "Organization", "name": "Orvenzia", "url": "https://www.orvenzia.com"}, "areaServed": "Europe", "description": "Supplier engagement and Scope 3 data flows."}
-{"@context": "https://schema.org", "@type": "Service", "serviceType": "ESG Competitiveness Screening", "provider": {"@type": "Organization", "name": "Orvenzia", "url": "https://www.orvenzia.com"}, "areaServed": "Europe", "description": "11-question screening to produce an OCI score."}
-</script>
+<title>ESG Services for SMEs — Screening, Baseline, Core, Scope 3 | Orvenzia</title>
+<meta name="description" content="Select the right ESG service: Screening, Baseline, Core Action Plan, Scope 3 Fast-Track, and Enterprise Execution. Clear outcomes, SLAs, and buyer-ready documentation."/>
+<link rel="canonical" href="https://www.orvenzia.com/services.html"/>
+<meta name="robots" content="index,follow"/>
+
+<!-- Brand fonts + core styles -->
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="assets/css/styles.css?v=20250910"/>
+
+<!-- Page-specific light polish (tooltip fallback + premium details) -->
+<style>
+  /* Subtle premium hero */
+  .hero.hero-compact.services-hero{
+    background: radial-gradient(160% 120% at 10% 0%, #f7faf7 0%, #ffffff 42%, #f6f8fb 100%);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .hero.hero-compact.services-hero .page-title{ letter-spacing:-0.02em }
+  .hero.hero-compact.services-hero .lead{ max-width:920px }
+
+  /* Card grid harmony */
+  .services-grid{
+    display:grid; gap:22px;
+    grid-template-columns: repeat(12, 1fr);
+  }
+  .services-grid .span-4{ grid-column: span 4 }
+  @media (max-width: 960px){
+    .services-grid .span-4{ grid-column: span 6 }
+  }
+  @media (max-width: 640px){
+    .services-grid{ grid-template-columns: repeat(1,1fr) }
+    .services-grid .span-4{ grid-column: 1 / -1 }
+  }
+
+  /* Card body polish (leans on existing .card styles) */
+  .service-card{
+    position:relative; overflow:visible;
+    border-radius:18px;
+    background: linear-gradient(180deg, #fff 0%, #fbfcfd 100%);
+    box-shadow: 0 14px 34px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.6);
+    border: 1px solid rgba(0,0,0,0.06);
+    transition: transform .18s ease, box-shadow .18s ease;
+  }
+  .service-card:hover{ transform: translateY(-4px); box-shadow: 0 18px 40px rgba(0,0,0,0.10) }
+  .service-card .hdr{
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+    padding:16px 18px 0 18px;
+  }
+  .service-card h3{
+    font-family:'Playfair Display', serif; font-weight:700; font-size: clamp(20px, 2.3vw, 26px);
+    margin: 6px 18px 0 18px;
+  }
+  .service-card .tagline{ margin: 8px 18px 4px 18px; color:#424a42 }
+  .service-card .meta{
+    display:flex; align-items:center; gap:10px; margin: 10px 18px 0 18px; color:#2b2b2b; font-weight:700
+  }
+  .price-chip{
+    display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px;
+    background:#0a472e; color:#fff; font-weight:800; font-size:13px;
+    box-shadow: 0 10px 24px rgba(10,71,46,.25), inset 0 1px 0 rgba(255,255,255,.15);
+  }
+  .meta small{ font-weight:600; color:#5a5f5a }
+
+  .service-card .list{
+    margin: 12px 18px; padding-left: 18px; color:#212121
+  }
+  .service-card .actions{ display:flex; gap:10px; padding: 8px 18px 18px 18px }
+
+  /* Fallback SLA tooltip (identisk look som Process). Works if global tooltip CSS isn't present */
+  .card.hover-card[data-tooltip]{ position:relative; overflow:visible }
+  .card.hover-card[data-tooltip]::before{
+    content: attr(data-tooltip);
+    position:absolute; left:50%; bottom: calc(100% + 10px);
+    transform: translate(-50%, 8px) scale(.98); transform-origin: 50% 100%;
+    background:#0a472e; color:#fff; font-weight:700; font-size:13.5px; line-height:1;
+    padding:10px 14px; border-radius:10px; white-space:nowrap; pointer-events:none;
+    box-shadow: 0 12px 24px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.15);
+    opacity:0; z-index:60; transition: opacity .18s ease, transform .18s ease;
+  }
+  .card.hover-card[data-tooltip]::after{
+    content:""; position:absolute; left:50%; bottom: calc(100% + 4px);
+    width:12px; height:12px; background:#0a472e; border-radius:2px;
+    transform: translateX(-50%) rotate(45deg);
+    box-shadow: 2px 2px 4px rgba(0,0,0,.18); opacity:0; pointer-events:none; z-index:59;
+    transition: opacity .18s ease;
+  }
+  .card.hover-card[data-tooltip]:hover::before,
+  .card.hover-card[data-tooltip]:focus-within::before{ opacity:1; transform: translate(-50%, 0) scale(1) }
+  .card.hover-card[data-tooltip]:hover::after,
+  .card.hover-card[data-tooltip]:focus-within::after{ opacity:1 }
+  .services-grid{ overflow:visible } /* no clipping */
+  @media (prefers-reduced-motion: reduce){
+    .card.hover-card[data-tooltip]::before, .card.hover-card[data-tooltip]::after{ transition:none !important }
+  }
+
+  /* Comparison table polish */
+  .mini-compare{
+    margin-top: 10px; border:1px solid rgba(0,0,0,0.06); border-radius:14px; overflow:hidden;
+    background:#fff; box-shadow: 0 10px 28px rgba(0,0,0,.06);
+  }
+  .mini-compare table{ width:100%; border-collapse: collapse; font-size:14.5px }
+  .mini-compare th, .mini-compare td{ padding:12px 14px; border-bottom:1px solid #eef2f5; text-align:left }
+  .mini-compare th{ background:#f8faf9; font-weight:800; color:#0a472e }
+  .mini-compare tr:last-child td{ border-bottom:0 }
+</style>
+
+<!-- Open Graph -->
+<meta property="og:title" content="ESG Services for SMEs — Screening, Baseline, Core, Scope 3 | Orvenzia"/>
+<meta property="og:description" content="Choose the right ESG service with clear SLAs, outcomes and buyer-ready documentation."/>
+<meta property="og:url" content="https://www.orvenzia.com/services.html"/>
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="Orvenzia"/>
+<meta property="og:image" content="https://orvenzia.com/assets/img/og-hero.jpg"/>
+<meta name="twitter:card" content="summary_large_image"/>
+
 </head>
-<body id="top"><a class="skip-link" href="#main"></a>
+<body>
 <header class="site-header">
-<div class="container header-inner">
-<a class="logo" href="index.html"><span class="logo-mark">O</span><span class="logo-type">Orvenzia</span></a>
-<nav class="nav" id="nav">
-<a class="active" href="services.html">Services</a>
-<a href="screening.html">Screening</a>
-<a href="process.html">Process</a>
-<a href="pricing.html">Pricing</a>
-<a href="cases.html">Cases</a>
-<a href="for-buyers.html">For Buyers</a>
-<a href="resources.html">Insights</a>
-<a href="about.html">About</a>
-<a href="faq.html">FAQ</a>
-<a class="btn btn-outline" href="contact.html">Contact</a>
-</nav>
-<button aria-label="Toggle menu" class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
-</div>
+  <div class="container header-inner">
+    <a class="logo" href="index.html"><span class="logo-mark">O</span><span class="logo-type">Orvenzia</span></a>
+    <nav class="nav" id="nav">
+      <a href="services.html" aria-current="page">Services</a>
+      <a href="screening.html">Screening</a>
+      <a href="process.html">Process</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="cases.html">Cases</a>
+      <a href="for-buyers.html">For Buyers</a>
+      <a href="resources.html">Insights</a>
+      <a href="about.html">About</a>
+      <a href="faq.html">FAQ</a>
+      <a class="btn btn-outline" href="contact.html">Contact</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </div>
 </header>
-<main id="main">
-<section class="page-hero">
-<div class="container narrow">
-<p class="kicker">ESG Services</p>
-<h1>ESG Services for SMEs: Readiness, Reporting &amp; Scope 3</h1>
-<p class="lead">Buyer‑facing ESG consulting so you pass supplier assessments and win enterprise buyers.</p>
-</div>
-</section>
-<section class="container page-body">
-<div class="grid-2">
-<div class="card" id="readiness">
-<img alt="ESG readiness consulting" class="icon" src="assets/img/icons/policy.svg"/>
-<h2>ESG Readiness Consulting</h2>
-<p>Baseline policies, map risks and align to enterprise buyer standards.</p>
-<ul class="checks">
-<li>Material topics &amp; risk mapping</li>
-<li>Policy baseline &amp; documentation set</li>
-<li>Roadmap to pass ESG assessments</li>
-</ul>
-</div>
-<div class="card" id="reporting">
-<img alt="ESG reporting for SMEs" class="icon" src="assets/img/icons/report.svg"/>
-<h2>ESG Reporting for SMEs</h2>
-<p>Board‑ready ESG reporting with a practical KPI set.</p>
-<ul class="checks">
-<li>Lightweight, relevant KPIs</li>
-<li>Evidence trail (policies, data, process)</li>
-<li>Buyer‑facing format and wording</li>
-</ul>
-</div>
-<div class="card" id="scope3">
-<img alt="Scope 3 data SMEs" class="icon" src="assets/img/icons/scope3.svg"/>
-<h2>Scope 3 Data &amp; Supplier ESG</h2>
-<p>Supplier engagement and data collection flows to answer questionnaires efficiently.</p>
-<ul class="checks">
-<li>Supplier templates &amp; flows</li>
-<li>Upstream data guidance</li>
-<li>Risk‑based prioritisation</li>
-</ul>
-</div>
-<div class="card" id="screening">
-<img alt="ESG screening" class="icon" src="assets/img/icons/screening.svg"/>
-<h2>ESG Competitiveness Screening</h2>
-<p>11 focused questions. Instantly see where you stand and what to fix first.</p>
-<a class="btn btn-primary" href="screening.html">Start Free ESG Screening</a>
-</div>
-</div>
-</section>
+
+<main class="page">
+  <!-- Premium hero -->
+  <section class="hero hero-compact services-hero">
+    <div class="container">
+      <h1 class="page-title">ESG Services for SMEs — choose your path</h1>
+      <p class="lead">From a 5-minute screening to enterprise-grade execution. Buyer-ready documentation, clear SLAs, and actionable outcomes.</p>
+    </div>
+  </section>
+
+  <!-- Services grid -->
+  <section class="section">
+    <div class="container">
+      <div class="services-grid">
+        <!-- Screening -->
+        <article id="screening" class="card service-card hover-card span-4" data-tooltip="SLA: Instant">
+          <div class="hdr">
+            <span class="price-chip">Free</span>
+            <small class="muted">Lead-in diagnostic</small>
+          </div>
+          <h3>Free ESG Readiness Screening</h3>
+          <p class="tagline">13 questions → instant score & next step.</p>
+          <ul class="list">
+            <li>Readiness score (0–100) & colour level</li>
+            <li>Clear recommendation for next step</li>
+            <li>Mini-report sent automatically</li>
+          </ul>
+          <div class="actions">
+            <a class="btn" href="screening.html">Start screening</a>
+            <a class="btn btn-outline" href="process.html">See process</a>
+          </div>
+        </article>
+
+        <!-- Baseline -->
+        <article id="baseline" class="card service-card hover-card span-4" data-tooltip="SLA: 5–10 business days">
+          <div class="hdr">
+            <span class="price-chip">€379</span>
+            <small class="muted">1–2 pages</small>
+          </div>
+          <h3>Baseline Analysis</h3>
+          <p class="tagline">Buyer-friendly documentation in under 10 days.</p>
+          <ul class="list">
+            <li>Strengths, gaps & quick wins</li>
+            <li>Audit-ready wording for buyers</li>
+            <li>Clear path to “Buyer Ready”</li>
+          </ul>
+          <div class="actions">
+            <a class="btn" href="pricing.html">See pricing</a>
+            <a class="btn btn-outline" href="process.html">See process</a>
+          </div>
+        </article>
+
+        <!-- Core -->
+        <article id="core" class="card service-card hover-card span-4" data-tooltip="SLA: 30–60 days">
+          <div class="hdr">
+            <span class="price-chip">€1,729</span>
+            <small class="muted">2–8 pages</small>
+          </div>
+          <h3>Core Action Plan</h3>
+          <p class="tagline">Gapanalysis, policies & roadmap to buyer approval.</p>
+          <ul class="list">
+            <li>Prioritised roadmap</li>
+            <li>Policy drafts & templates</li>
+            <li>Audit/review-ready output</li>
+          </ul>
+          <div class="actions">
+            <a class="btn" href="pricing.html">See pricing</a>
+            <a class="btn btn-outline" href="process.html">See process</a>
+          </div>
+        </article>
+
+        <!-- Enterprise -->
+        <article id="enterprise" class="card service-card hover-card span-4" data-tooltip="SLA: 60–120 days">
+          <div class="hdr">
+            <span class="price-chip">€2,439–4,989</span>
+            <small class="muted">6–15 pages</small>
+          </div>
+          <h3>Enterprise Execution</h3>
+          <p class="tagline">Onsite + training + full documentation for complex buyers.</p>
+          <ul class="list">
+            <li>Onsite sessions & enablement</li>
+            <li>Processes & templates implemented</li>
+            <li>Buyer-ready documentation</li>
+          </ul>
+          <div class="actions">
+            <a class="btn" href="contact.html">Book introduction</a>
+            <a class="btn btn-outline" href="cases.html">See cases</a>
+          </div>
+        </article>
+
+        <!-- Scope 3 -->
+        <article id="scope3" class="card service-card hover-card span-4" data-tooltip="SLA: 30–90 days">
+          <div class="hdr">
+            <span class="price-chip">from €1,429</span>
+            <small class="muted">Supplier data</small>
+          </div>
+          <h3>Scope 3 Fast-Track</h3>
+          <p class="tagline">Pragmatic baseline with supplier templates & SME methods.</p>
+          <ul class="list">
+            <li>Supplier outreach + templates</li>
+            <li>Normalisation & estimation</li>
+            <li>Buyer-acceptable baseline</li>
+          </ul>
+          <div class="actions">
+            <a class="btn" href="pricing.html">See pricing</a>
+            <a class="btn btn-outline" href="contact.html">Contact us</a>
+          </div>
+        </article>
+
+        <!-- Subscription -->
+        <article id="subscription" class="card service-card hover-card span-4" data-tooltip="SLA: Ongoing (monthly)">
+          <div class="hdr">
+            <span class="price-chip">€99/month</span>
+            <small class="muted">After Baseline</small>
+          </div>
+          <h3>Subscription</h3>
+          <p class="tagline">Stay buyer-ready without extra headcount.</p>
+          <ul class="list">
+            <li>Regulatory updates</li>
+            <li>Ongoing documentation status</li>
+            <li>Buyer Q&A support</li>
+          </ul>
+          <div class="actions">
+            <a class="btn" href="contact.html">Contact us</a>
+            <a class="btn btn-outline" href="pricing.html">See pricing</a>
+          </div>
+        </article>
+      </div>
+
+      <!-- Mini comparison (quick selection) -->
+      <div class="mini-compare" style="margin-top:28px">
+        <table>
+          <thead>
+            <tr>
+              <th>Service</th>
+              <th>Best for</th>
+              <th>Primary outcome</th>
+              <th>SLA</th>
+              <th>From</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="#screening">Screening</a></td>
+              <td>Fast diagnostic</td>
+              <td>Score + next step</td>
+              <td>Instant</td>
+              <td>Free</td>
+            </tr>
+            <tr>
+              <td><a href="#baseline">Baseline</a></td>
+              <td>Light gaps / proof</td>
+              <td>1–2p buyer-ready doc</td>
+              <td>5–10 days</td>
+              <td>€379</td>
+            </tr>
+            <tr>
+              <td><a href="#core">Core</a></td>
+              <td>Significant gaps</td>
+              <td>2–8p action plan</td>
+              <td>30–60 days</td>
+              <td>€1,729</td>
+            </tr>
+            <tr>
+              <td><a href="#enterprise">Enterprise</a></td>
+              <td>Complex buyer setups</td>
+              <td>Onsite + full docs</td>
+              <td>60–120 days</td>
+              <td>€2,439–4,989</td>
+            </tr>
+            <tr>
+              <td><a href="#scope3">Scope 3</a></td>
+              <td>Supplier emissions</td>
+              <td>Buyer-acceptable baseline</td>
+              <td>30–90 days</td>
+              <td>from €1,429</td>
+            </tr>
+            <tr>
+              <td><a href="#subscription">Subscription</a></td>
+              <td>Stay buyer-ready</td>
+              <td>Updates + support</td>
+              <td>Monthly</td>
+              <td>€99/month</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </section>
 </main>
-<script src="assets/js/main.js?v=20250910"></script>
+
 <footer class="site-footer">
-<div class="container footer-grid">
-<div class="footer-brand">
-<div class="brand-row">
-<span aria-hidden="true" class="brand-dot"></span>
-<strong>Orvenzia</strong>
-</div>
-<p>ESG consulting &amp; ESG readiness services for SMEs in Europe.</p>
-<p>CVR: 45828697</p>
-<div class="badge-oci">
-<span aria-hidden="true" class="badge-dot"></span>
-<span class="badge-text">OCI ≥ 80 → Orvenzia Ready</span>
-</div>
-</div>
-<div class="footer-col">
-<h4>Company</h4>
-<ul>
-<li><a href="/about.html">About</a></li>
-<li><a href="/services.html">Services</a></li>
-<li><a href="/process.html">Process</a></li>
-<li><a href="/pricing.html">Pricing</a></li>
-<li><a href="/cases.html">Cases</a></li>
-</ul>
-</div>
-<div class="footer-col">
-<h4>Contact</h4>
-<ul>
-<li><a href="tel:+4520968324">+45 20 96 83 24</a></li>
-<li><a href="mailto:support@orvenzia.com">support@orvenzia.com</a></li>
-<li><a href="/contact.html#linkedin">LinkedIn</a></li>
-</ul>
-</div>
-<div class="footer-col">
-<h4>Key Topics</h4>
-<ul>
-<li>ESG Readiness Consulting</li>
-<li>ESG Reporting for SMEs</li>
-<li>Scope 3 Data &amp; Suppliers</li>
-<li>ESG Competitiveness Screening</li>
-</ul>
-</div>
-</div>
-<div class="footer-bottom">
-<div class="container">
-<div class="footer-bottom-left">© 2025 Orvenzia. All rights reserved. <br/><small>Case studies shown are anonymized on buyer request.</small></div>
-<nav aria-label="Footer links" class="footer-bottom-links">
-<a href="/privacy.html">Privacy</a>
-<a href="/confidentiality.html">Confidentiality</a>
-<a href="/dpa.html">DPA</a>
-<a href="/accessibility.html">Accessibility</a>
-<a href="/sitemap.xml">Sitemap</a>
-</nav>
-</div>
-</div>
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <div class="brand-row"><span aria-hidden="true" class="brand-dot"></span><strong>Orvenzia</strong></div>
+      <p>ESG consulting & ESG readiness services for SMEs in Europe.</p>
+      <p>CVR: 45828697</p>
+      <div class="badge-oci"><span aria-hidden="true" class="badge-dot"></span><span class="badge-text">OCI ≥ 80 → Orvenzia Ready</span></div>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="/services.html">Services</a></li>
+        <li><a href="/process.html">Process</a></li>
+        <li><a href="/pricing.html">Pricing</a></li>
+        <li><a href="/cases.html">Cases</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:+4520968324">+45 20 96 83 24</a></li>
+        <li><a href="mailto:support@orvenzia.com">support@orvenzia.com</a></li>
+        <li><a href="/contact.html#linkedin">LinkedIn</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Key Topics</h4>
+      <ul>
+        <li>ESG Readiness Consulting</li>
+        <li>ESG Reporting for SMEs</li>
+        <li>Scope 3 Data & Suppliers</li>
+        <li>ESG Competitiveness Screening</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container">
+      <div class="footer-bottom-left">© 2025 Orvenzia. All rights reserved. <br/><small>Case studies shown are anonymized on buyer request.</small></div>
+      <nav class="footer-bottom-links" aria-label="Footer links">
+        <a href="/privacy.html">Privacy</a>
+        <a href="/confidentiality.html">Confidentiality</a>
+        <a href="/dpa.html">DPA</a>
+        <a href="/accessibility.html">Accessibility</a>
+        <a href="/sitemap.xml">Sitemap</a>
+      </nav>
+    </div>
+  </div>
 </footer>
-<script src="assets/js/menu.js"></script>
+
+<!-- Breadcrumb + ItemList schema (condensed) -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"BreadcrumbList",
+  "itemListElement":[
+    {"@type":"ListItem","position":1,"name":"Home","item":"https://www.orvenzia.com/"},
+    {"@type":"ListItem","position":2,"name":"Services","item":"https://www.orvenzia.com/services.html"}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"ItemList",
+  "name":"ESG Services",
+  "itemListOrder":"https://schema.org/ItemListOrderAscending",
+  "itemListElement":[
+    {"@type":"Service","position":1,"name":"Free ESG Readiness Screening","serviceType":"ESG Screening","provider":{"@type":"Organization","name":"Orvenzia"},"areaServed":"Europe","url":"https://www.orvenzia.com/services.html#screening","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"timeRequired":"PT0M"},
+    {"@type":"Service","position":2,"name":"Baseline Analysis","serviceType":"ESG Baseline","provider":{"@type":"Organization","name":"Orvenzia"},"areaServed":"Europe","url":"https://www.orvenzia.com/services.html#baseline","offers":{"@type":"Offer","price":"379","priceCurrency":"EUR"},"timeRequired":"P5D"},
+    {"@type":"Service","position":3,"name":"Core Action Plan","serviceType":"ESG Action Plan","provider":{"@type":"Organization","name":"Orvenzia"},"areaServed":"Europe","url":"https://www.orvenzia.com/services.html#core","offers":{"@type":"Offer","price":"1729","priceCurrency":"EUR"},"timeRequired":"P30D"},
+    {"@type":"Service","position":4,"name":"Enterprise Execution","serviceType":"ESG Execution","provider":{"@type":"Organization","name":"Orvenzia"},"areaServed":"Europe","url":"https://www.orvenzia.com/services.html#enterprise","offers":{"@type":"Offer","price":"2439-4989","priceCurrency":"EUR"},"timeRequired":"P60D"},
+    {"@type":"Service","position":5,"name":"Scope 3 Fast-Track","serviceType":"Scope 3","provider":{"@type":"Organization","name":"Orvenzia"},"areaServed":"Europe","url":"https://www.orvenzia.com/services.html#scope3","offers":{"@type":"Offer","price":"1429","priceCurrency":"EUR"},"timeRequired":"P30D"},
+    {"@type":"Service","position":6,"name":"Subscription","serviceType":"ESG Subscription","provider":{"@type":"Organization","name":"Orvenzia"},"areaServed":"Europe","url":"https://www.orvenzia.com/services.html#subscription","offers":{"@type":"Offer","price":"99","priceCurrency":"EUR"},"timeRequired":"P30D"}
+  ]
+}
+</script>
+
+<!-- Your existing site scripts -->
+<script src="assets/js/main.js?v=6.2"></script>
+<script src="assets/js/menu.js?v=6.2"></script>
 </body>
 </html>
