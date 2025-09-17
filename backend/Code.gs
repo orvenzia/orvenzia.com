@@ -13,7 +13,33 @@ function doPost(e) {
     var lead = data.lead || {};
     var answers = data.answers || {};
 
-    var score = computeScore(answers);
+    // Normalize lead
+    if (!lead.company && data.company) lead.company = data.company;
+    if (!lead.email && data.email) lead.email = data.email;
+
+    // Normalize answers (accept array or object or mixed)
+    if (Array.isArray && Array.isArray(answers)) {
+      var obj = {};
+      for (var i=0;i<answers.length;i++){
+        var it = answers[i] || {};
+        if (it.q && it.answer) obj[it.q] = String(it.answer);
+      }
+      answers = obj;
+    } else {
+      // flatten nested {q1:{answer:"yes"}} -> {q1:"yes"}
+      var flat = {};
+      for (var k in answers){
+        var v = answers[k];
+        flat[k] = (v && typeof v === 'object' && 'answer' in v) ? String(v.answer) : String(v||'');
+      }
+      answers = flat;
+    }
+
+    // Prefer meta.score if present
+    var incomingScore = (data.meta && typeof data.meta.score === 'number') ? data.meta.score : null;
+
+
+    var score = (incomingScore!=null) ? Math.round(incomingScore) : computeScore(answers);
     var level = getLevel(score);
 
     // Generer baseline rapport
