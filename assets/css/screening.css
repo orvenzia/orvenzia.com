@@ -1,18 +1,66 @@
-/* Error banner + states */
-.error-banner {
-  display: none;
-  background: #ffebee;
-  border: 1px solid #ffcdd2;
-  color: #c62828;
-  padding: 12px 14px;
-  border-radius: 10px;
-  margin: 12px 0 16px;
-  font-weight: 600;
-}
-.error-banner.show { display: block; }
+/* === Orvenzia ESG Screening styles === */
 
-/* submitting state */
-#screening-form.submitting button[type="submit"] {
-  opacity: .6;
-  pointer-events: none;
+.report-card-inner {
+  font-family: Montserrat, Arial, sans-serif;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #eee;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  background: #fff;
+}
+
+.report-title {
+  margin: 0 0 10px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.report-meta {
+  margin: 0 0 5px;
+  color: #555;
+  font-size: 14px;
+}
+
+.report-date {
+  float: right;
+}
+
+.report-flex {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+
+.score-block {
+  text-align: center;
+}
+
+.score-value {
+  font-size: 2.2em;
+  font-weight: 700;
+}
+
+.score-label {
+  font-size: 1.1em;
+  color: #444;
+}
+
+.report-text p {
+  margin: 6px 0;
+  font-size: 15px;
+}
+
+.report-cta {
+  margin-top: 20px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Gauge styling */
+.gauge-svg {
+  max-width: 100%;
+  height: auto;
 }
