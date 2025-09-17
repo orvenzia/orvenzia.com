@@ -1,185 +1,166 @@
-/** Orvenzia ESG Screening Backend – Baseline Report (no barometer) */
+/**
+ * Orvenzia ESG Screening Backend – Benchmark Style 1:1
+ * Kunden ser kun barometer + score.
+ * support@orvenzia.com modtager en Word-rapport med farvet statusboks,
+ * grafisk barometer og tabel over alle svar.
+ */
 
-const OWNER_EMAIL = "support@orvenzia.com"; 
-const TEMPLATE_ID = "1Sj4t15edHcOhQ1K-_un6oiA261yaEEAejF0AACyJHqE"; // <- Sæt dit Google Docs skabelon-ID ind
+const OWNER_EMAIL = "support@orvenzia.com";
 
+// === Entry Point ===
 function doPost(e) {
   try {
-    if (!e || !e.postData) {
-      return jsonOut({ ok: false, error: "No data" });
-    }
+    const data = JSON.parse(e.postData.contents);
+    const lead = data.lead || {};
+    const answers = data.answers || {};
 
-    var data = JSON.parse(e.postData.contents);
-    var lead = data.lead || {};
-    var answers = data.answers || {};
+    // 1. Beregn score
+    const { scorePercent, status, color, answerTable } = calculateScore(answers);
 
-    // Normalize lead
-    if (!lead.company && data.company) lead.company = data.company;
-    if (!lead.email && data.email) lead.email = data.email;
+    // 2. Opret Word-rapport i benchmark-stil
+    const wordFile = createBenchmarkReport(lead, answers, scorePercent, status, color, answerTable);
 
-    // Normalize answers (accept array or object or mixed)
-    if (Array.isArray && Array.isArray(answers)) {
-      var obj = {};
-      for (var i=0;i<answers.length;i++){
-        var it = answers[i] || {};
-        if (it.q && it.answer) obj[it.q] = String(it.answer);
-      }
-      answers = obj;
-    } else {
-      // flatten nested {q1:{answer:"yes"}} -> {q1:"yes"}
-      var flat = {};
-      for (var k in answers){
-        var v = answers[k];
-        flat[k] = (v && typeof v === 'object' && 'answer' in v) ? String(v.answer) : String(v||'');
-      }
-      answers = flat;
-    }
-
-    // Prefer meta.score if present
-    var incomingScore = (data.meta && typeof data.meta.score === 'number') ? data.meta.score : null;
-
-
-    var score = (incomingScore!=null) ? Math.round(incomingScore) : computeScore(answers);
-    var level = getLevel(score);
-
-    // Generer baseline rapport
-    var docxBlob = generateReport(lead, score, level, answers);
-
-    // Send til ejer
+    // 3. Send rapport til dig
     MailApp.sendEmail({
       to: OWNER_EMAIL,
-      subject: "New ESG Screening: " + (lead.company || "Unknown"),
-      htmlBody:
-        "<p>Ny screening gennemført.</p>" +
-        "<p><b>Company:</b> " + (lead.company || "(n/a)") + "<br>" +
-        "<b>Email:</b> " + (lead.email || "(n/a)") + "<br>" +
-        "<b>Score:</b> " + score + " (" + level + ")</p>",
-      attachments: [docxBlob]
+      subject: `New ESG Baseline Report – ${lead.company || "Client"} (${status})`,
+      body: "Attached is the automatically generated Baseline ESG Readiness Analysis (Word).",
+      attachments: [wordFile.getAs(MimeType.MICROSOFT_WORD)]
     });
 
-    // Kort kvittering til kunden
-    if (lead.email) {
-      MailApp.sendEmail({
-        to: lead.email,
-        subject: "Your ESG Screening Result",
-        htmlBody:
-          "<p>Tak for at gennemføre ESG-screeningen.</p>" +
-          "<p>Din score: <b>" + score + "/100</b> – " + level + ".</p>"
-      });
-    }
-
-    return jsonOut({ ok: true, score: score, level: level });
+    // 4. Return simpelt svar til frontend
+    return ContentService.createTextOutput(
+      JSON.stringify({ score: scorePercent, status: status })
+    ).setMimeType(ContentService.MimeType.JSON);
 
   } catch (err) {
-    return jsonOut({ ok: false, error: String(err) });
+    return ContentService.createTextOutput(
+      JSON.stringify({ error: String(err) })
+    ).setMimeType(ContentService.MimeType.JSON);
   }
 }
 
-// --- helpers ---
-function jsonOut(obj) {
-  return ContentService.createTextOutput(JSON.stringify(obj))
-    .setMimeType(ContentService.MimeType.JSON);
-}
-
-function computeScore(a) {
-  var W = { q1:2,q2:2,q3:2,q4:2,q5:2,q6:2,q7:2,q8:2,q9:2,q10:2,q11:2,q12:2,q13:2 };
-  var sum=0,max=0;
-  for (var k in W) {
-    var v=(a[k]||"").toLowerCase(), w=W[k];
-    max+=w*2;
-    if(v==="yes") sum+=w*2;
-    else if(v==="planned") sum+=w*1;
-  }
-  return Math.round((sum/(max||1))*100);
-}
-
-function getLevel(score){
-  if(score>=99) return "Leading";
-  if(score>=80) return "Strong";
-  if(score>=60) return "Lagging / Not Buyer Ready";
-  if(score>=40) return "At Risk";
-  return "Critical";
-}
-
-function buildDetailsRows(answers){
-  var Q = {
-    q1:"Documented ESG policy", q2:"Energy consumption tracking", q3:"Waste management procedure",
-    q4:"Supplier code of conduct", q5:"Scope 1–2 emissions tracking", q6:"Scope 3 emissions tracking",
-    q7:"Health & safety policy", q8:"Diversity & inclusion policy", q9:"Anti-corruption/whistleblowing",
-    q10:"Data protection (GDPR)", q11:"Water use tracking", q12:"Waste & recycling rates", q13:"Sharing ESG KPIs with buyers"
+// === Beregning ===
+function calculateScore(answers) {
+  let totalScore = 0, maxScore = 0;
+  const weights = {
+    q1: 4, q2: 4, q3: 3.5, q4: 1.5, q5: 4,
+    q6: 4, q7: 4, q8: 4, q9: 4, q10: 4,
+    q11: 4, q12: 4, q13: 4
   };
-  var rows = [["Question","Status"]];
-  for (var k in Q) {
-    var v=(answers[k]||"").toLowerCase();
-    var status="❌ No";
-    if(v==="yes") status="✅ Yes";
-    else if(v==="planned") status="⚠️ Planned";
-    rows.push([Q[k], status]);
+
+  const tableData = [];
+
+  Object.keys(weights).forEach(q => {
+    maxScore += weights[q];
+    const ans = (answers[q] || "").toLowerCase();
+    let points = 0;
+    if (ans === "yes") points = weights[q];
+    if (ans === "planned") points = weights[q] * 0.5;
+    totalScore += points;
+
+    tableData.push([q, ans || "n/a", points.toFixed(1) + " / " + weights[q]]);
+  });
+
+  const scorePercent = Math.round((totalScore / maxScore) * 100);
+  let status = "", color = "#FF0000";
+  if (scorePercent >= 99) { status = "GREEN (Leading)"; color = "#008000"; }
+  else if (scorePercent >= 80) { status = "LIGHT GREEN (Strong)"; color = "#00B050"; }
+  else if (scorePercent >= 60) { status = "YELLOW (Lagging)"; color = "#FFD966"; }
+  else if (scorePercent >= 40) { status = "ORANGE (At Risk)"; color = "#ED7D31"; }
+  else { status = "RED (Critical)"; color = "#FF0000"; }
+
+  return { scorePercent, status, color, answerTable: tableData };
+}
+
+// === Rapport med Benchmark layout ===
+function createBenchmarkReport(lead, answers, score, status, color, tableData) {
+  const doc = DocumentApp.create(`Baseline_Report_${lead.company || "Client"}`);
+  const body = doc.getBody();
+
+  // Title
+  body.appendParagraph("Baseline ESG Readiness Analysis")
+      .setHeading(DocumentApp.ParagraphHeading.HEADING1);
+
+  // Client info
+  body.appendParagraph(`Company: ${lead.company || "Unknown"}`);
+  body.appendParagraph(`Contact: ${lead.name || ""} – ${lead.email || ""}`);
+
+  // Statusboks
+  const statusBox = body.appendParagraph(`Readiness Score: ${score}/100 → ${status}`);
+  statusBox.setBackgroundColor(color).setBold(true).setAlignment(DocumentApp.HorizontalAlignment.CENTER);
+
+  // Indsæt barometer
+  const gaugeImg = generateGauge(score);
+  body.appendImage(gaugeImg).setWidth(400).setHeight(200);
+
+  body.appendParagraph(" ");
+
+  // Benchmark
+  body.appendParagraph("Benchmark").setHeading(DocumentApp.ParagraphHeading.HEADING2);
+  body.appendParagraph(
+    "Peers in your industry typically score 70–75 at baseline. " +
+    `Your score of ${score} is ${score < 70 ? "below" : "above"} average.`
+  );
+
+  // Tabel med alle svar
+  body.appendParagraph("Screening Answers").setHeading(DocumentApp.ParagraphHeading.HEADING2);
+  const table = body.appendTable([["Question", "Answer", "Points"]]);
+  table.setBorderWidth(1);
+  tableData.forEach(row => {
+    table.appendTableRow(row);
+  });
+
+  // Strengths/Weaknesses/In Progress
+  body.appendParagraph("Readiness Overview").setHeading(DocumentApp.ParagraphHeading.HEADING2);
+  addSection(body, "Strengths", answers, "yes", "✔️ Implemented");
+  addSection(body, "Weaknesses", answers, "no", "❌ Missing");
+  addSection(body, "In Progress", answers, "planned", "⚠️ Planned");
+
+  // Buyer Lens
+  body.appendParagraph("Buyer Lens & Risk Assessment").setHeading(DocumentApp.ParagraphHeading.HEADING2);
+  if (score >= 80) {
+    body.appendParagraph("Low buyer risk. Likely to pass ESG audits with only minor improvements needed.");
+  } else if (score >= 60) {
+    body.appendParagraph("Moderate buyer risk. Buyer may request documented improvements before approval.");
+  } else {
+    body.appendParagraph("High buyer risk. ESG weaknesses could block tenders or partnerships.");
   }
-  return rows;
-}
 
-function makeChart(title, value, max){
-  var data=Charts.newDataTable()
-    .addColumn(Charts.ColumnType.STRING,"Label")
-    .addColumn(Charts.ColumnType.NUMBER,"Value")
-    .addRow([title,value])
-    .build();
-  var chart=Charts.newColumnChart()
-    .setDataTable(data)
-    .setOption("legend","none")
-    .setOption("title",title)
-    .setOption("titleTextStyle",{color:"#228B22",fontSize:16,bold:true})
-    .setOption("backgroundColor","#FFFFFF")
-    .setOption("vAxis",{viewWindow:{min:0,max:max},gridlines:{count:0},baselineColor:"#CCCCCC",textStyle:{color:"#666"}})
-    .setOption("hAxis",{textStyle:{color:"#666"}})
-    .setOption("bar",{groupWidth:"50%"})
-    .setOption("colors",["#228B22"])
-    .setDimensions(400,300)
-    .build();
-  return chart.getAs("image/png");
-}
-
-function insertImageAtPlaceholder(body, placeholder, blob, widthPx){
-  var found = body.findText("\\{\\{"+placeholder+"\\}\\}");
-  if(!found) return false;
-  var el=found.getElement().asText();
-  el.setText("");
-  var p=el.getParent().asParagraph();
-  p.appendInlineImage(blob).setWidth(widthPx);
-  return true;
-}
-
-function insertTableAtPlaceholder(body, placeholder, rows){
-  var found=body.findText("\\{\\{"+placeholder+"\\}\\}");
-  if(!found) return false;
-  var el=found.getElement().asText();
-  el.setText("");
-  var p=el.getParent().asParagraph();
-  var tbl=p.getParent().insertTable(p.getParent().getChildIndex(p)+1,rows);
-  tbl.getRow(0).editAsText().setBold(true).setForegroundColor("#228B22");
-  return true;
-}
-
-function generateReport(lead, score, level, answers){
-  var file=DriveApp.getFileById(TEMPLATE_ID).makeCopy("Baseline ESG Report - "+(lead.company||"Company"));
-  var docId=file.getId();
-  var doc=DocumentApp.openById(docId);
-  var body=doc.getBody();
-
-  body.replaceText("\\{\\{COMPANY\\}\\}", lead.company||"");
-  body.replaceText("\\{\\{EMAIL\\}\\}", lead.email||"");
-  body.replaceText("\\{\\{SCORE\\}\\}", String(score));
-  body.replaceText("\\{\\{LEVEL\\}\\}", level);
-
-  insertTableAtPlaceholder(body,"DETAILS_TABLE",buildDetailsRows(answers));
-
-  var benchBlob=makeChart("Benchmark",score,100);
-  insertImageAtPlaceholder(body,"CHART_BENCHMARK",benchBlob,320);
-
-  var scoreBlob=makeChart("Score",score,100);
-  insertImageAtPlaceholder(body,"CHART_SCORE",scoreBlob,320);
+  // Quick Wins
+  body.appendParagraph("Quick Wins & Next Steps").setHeading(DocumentApp.ParagraphHeading.HEADING2);
+  body.appendListItem("Draft Waste Management Policy");
+  body.appendListItem("Define CO₂ reduction targets");
+  body.appendListItem("Introduce Diversity & Equality guidelines");
+  body.appendListItem("Request a Baseline Report (€379) for documentation");
+  body.appendListItem("Move towards Core Report (€1,329) for action planning");
 
   doc.saveAndClose();
-  return DriveApp.getFileById(docId).getAs(MimeType.MICROSOFT_WORD);
+  return DriveApp.getFileById(doc.getId());
+}
+
+// === Sektioner ===
+function addSection(body, title, answers, match, label) {
+  body.appendParagraph(title).setHeading(DocumentApp.ParagraphHeading.HEADING3);
+  Object.entries(answers).forEach(([q, ans]) => {
+    if (ans.toLowerCase() === match) {
+      body.appendListItem(`${q}: ${label}`);
+    }
+  });
+}
+
+// === Gauge (SVG → PNG) ===
+function generateGauge(score) {
+  const angle = -90 + (score / 100) * 180; // pilens vinkel
+  const svg = `
+  <svg xmlns="http://www.w3.org/2000/svg" width="400" height="200">
+    <path d="M20 180 A160 160 0 0 1 380 180" fill="none" stroke="#FF0000" stroke-width="30"/>
+    <path d="M20 180 A160 160 0 0 1 140 20" fill="none" stroke="#ED7D31" stroke-width="30"/>
+    <path d="M140 20 A160 160 0 0 1 260 20" fill="none" stroke="#FFD966" stroke-width="30"/>
+    <path d="M260 20 A160 160 0 0 1 380 180" fill="none" stroke="#00B050" stroke-width="30"/>
+    <line x1="200" y1="180" x2="${200 + 120 * Math.cos(angle * Math.PI/180)}" y2="${180 + -120 * Math.sin(angle * Math.PI/180)}"
+          stroke="#000000" stroke-width="5"/>
+    <circle cx="200" cy="180" r="8" fill="#000000"/>
+  </svg>`;
+  return Utilities.newBlob(svg, "image/svg+xml", "gauge.svg").getAs("image/png");
 }

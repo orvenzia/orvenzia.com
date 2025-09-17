@@ -114,14 +114,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Send til backend
     try {
-      const backendUrl = (window.SCREENING_BACKEND_URL && window.SCREENING_BACKEND_URL.trim()) || "PUT_YOUR_GAS_URL_HERE";
+      const backendUrl = "https://script.google.com/macros/s/AKfycbxlIwOuln-pXXmisgSq4vo6vwJWA0CeChiBhx_RM05qJmPXcCCZsr50a901Xg_QYrVS/exec";
       mailStatus.textContent = 'Sending your report...';
 
       await fetch(backendUrl, {
         method: 'POST',
         mode: 'no-cors',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify({ lead: { company, email }, meta: { score:pct, level }, answers: Object.fromEntries(answers.map(a => [a.q, a.answer])) })
+        body: JSON.stringify({ company, email, score:pct, level, answers, reportHtml: pdfHtml })
       });
 
       mailStatus.textContent = 'Report sent. Check your inbox.';
