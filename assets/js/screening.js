@@ -17,7 +17,7 @@ const REPORT_TEXTS = {
     title: "🟢 Leading",
     status: "Fully aligned with buyer requirements; no immediate action required.",
     recommendation: "Consider Subscription (regulatory alerts + periodic check-ins).",
-    outcome: "Maintain leading status without extra workload."
+    outcome: "Maintain green status without extra workload."
   },
   LIGHT_GREEN: {
     title: "🟢 Strong",
@@ -84,24 +84,31 @@ function levelFromPct(pct){
 // ----------- Gauge -----------
 function gaugeSVG(pct){
   const angle=-90+(pct/100)*180;
-  return `<svg width="300" height="160" viewBox="0 0 360 200" class="gauge-svg">
-    <!-- Farvezoner -->
-    <path d="M30,180 A150,150 0 0,1 102,56" stroke="#d32f2f" stroke-width="18" fill="none"/> <!-- Red -->
-    <path d="M102,56 A150,150 0 0,1 180,30" stroke="#f57c00" stroke-width="18" fill="none"/> <!-- Orange -->
-    <path d="M180,30 A150,150 0 0,1 258,56" stroke="#fbc02d" stroke-width="18" fill="none"/> <!-- Yellow -->
-    <path d="M258,56 A150,150 0 0,1 330,180" stroke="#8bc34a" stroke-width="18" fill="none"/> <!-- Light Green -->
-    <path d="M330,180 A150,150 0 0,1 30,180" stroke="#388e3c" stroke-width="18" fill="none"/> <!-- Green -->
+  const cx=180, cy=180, r=150;
 
-    <!-- Nålen -->
-    <line x1="180" y1="180" 
-          x2="${180+140*Math.cos(angle*Math.PI/180)}" 
-          y2="${180+140*Math.sin(angle*Math.PI/180)}" 
-          stroke="#111" stroke-width="6" stroke-linecap="round"/>
-    <circle cx="180" cy="180" r="9" fill="#111"/>
+  const x2=cx+(r-25)*Math.cos(angle*Math.PI/180);
+  const y2=cy+(r-25)*Math.sin(angle*Math.PI/180);
+
+  return `
+  <svg width="320" height="180" viewBox="0 0 360 200" class="gauge-svg">
+    <!-- Lys baggrundsbue -->
+    <path d="M30,180 A150,150 0 0,1 330,180" 
+          stroke="#eee" stroke-width="24" fill="none"/>
+
+    <!-- Farvezoner -->
+    <path d="M30,180 A150,150 0 0,1 110,60" stroke="#d32f2f" stroke-width="24" fill="none" stroke-linecap="round"/>
+    <path d="M110,60 A150,150 0 0,1 180,30" stroke="#f57c00" stroke-width="24" fill="none" stroke-linecap="round"/>
+    <path d="M180,30 A150,150 0 0,1 250,60" stroke="#fbc02d" stroke-width="24" fill="none" stroke-linecap="round"/>
+    <path d="M250,60 A150,150 0 0,1 330,180" stroke="#4caf50" stroke-width="24" fill="none" stroke-linecap="round"/>
+
+    <!-- Nålen (polygon for spids) -->
+    <polygon points="${cx-6},${cy} ${x2},${y2} ${cx+6},${cy}" 
+             class="gauge-needle"/>
+    <circle cx="${cx}" cy="${cy}" r="10" class="gauge-center"/>
 
     <!-- Labels -->
-    <text x="35" y="185" font-size="12" fill="#444">0</text>
-    <text x="325" y="185" font-size="12" fill="#444">100</text>
+    <text x="40" y="195" font-size="12" fill="#666">0</text>
+    <text x="310" y="195" font-size="12" fill="#666">100</text>
   </svg>`;
 }
 
@@ -144,7 +151,7 @@ document.getElementById('see-result').addEventListener('click',()=>{
   if(!ans){showError("Answer all 13 questions"); return;}
   const pct=computeScore(ans); 
   renderResult(pct, lead.company);
-  document.getElementById('screening-form').submit(); // send til backend
+  document.getElementById('screening-form').submit();
 });
 
 document.getElementById('screening-form').addEventListener('reset',()=>{
