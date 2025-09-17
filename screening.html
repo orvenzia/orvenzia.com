@@ -5,19 +5,20 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
   <title>Screening — ESG Readiness | Orvenzia</title>
 
-  <!-- SEO og metadata -->
-  <meta content="ESG consulting and ESG readiness services for SMEs in Europe. Pass supplier ESG assessments, deliver buyer-facing ESG reports and Scope 3 data." name="description"/>
-  <link href="https://www.orvenzia.com/" rel="canonical"/>
-  <meta content="index,follow" name="robots"/>
-  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <!-- SEO -->
+  <meta name="description" content="ESG consulting and ESG readiness services for SMEs in Europe. Pass supplier ESG assessments, deliver buyer-facing ESG reports and Scope 3 data."/>
+  <link rel="canonical" href="https://www.orvenzia.com/"/>
+  <meta name="robots" content="index,follow"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet"/>
-  <link href="assets/css/styles.css?v=20250910" rel="stylesheet"/>
-  <meta content="ESG Consulting for SMEs | Orvenzia — ESG Readiness Experts" property="og:title"/>
-  <meta content="ESG consulting and ESG readiness services for SMEs in Europe. Pass supplier ESG assessments, deliver buyer-facing ESG reports and Scope 3 data." property="og:description"/>
-  <meta content="https://www.orvenzia.com/" property="og:url"/>
-  <meta content="website" property="og:type"/>
-  <meta content="Orvenzia" property="og:site_name"/>
-  <meta content="summary_large_image" name="twitter:card"/>
+  <meta property="og:title" content="ESG Consulting for SMEs | Orvenzia — ESG Readiness Experts"/>
+  <meta property="og:description" content="ESG consulting and ESG readiness services for SMEs in Europe. Pass supplier ESG assessments, deliver buyer-facing ESG reports and Scope 3 data."/>
+  <meta property="og:url" content="https://www.orvenzia.com/"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:site_name" content="Orvenzia"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <link rel="preload" as="image" href="assets/img/hero-green.png"/>
+  <meta property="og:image" content="https://orvenzia.com/assets/img/og-hero.jpg"/>
 
   <!-- Structured data -->
   <script type="application/ld+json">
@@ -33,10 +34,32 @@
   }
   </script>
 
-  <link as="image" href="assets/img/hero-green.png" rel="preload"/>
-  <meta content="https://orvenzia.com/assets/img/og-hero.jpg" property="og:image"/>
-
+  <!-- Din globale stylesheet (behold hvis du har den) -->
   <link rel="stylesheet" href="assets/css/styles.css?v=6.2">
+
+  <style>
+    /* Minimale styles så det ser ordentligt ud uden afhængigheder */
+    .page .hero-compact { padding: 48px 0; background: #f7fbf8; }
+    .form-card { background:#fff; border:1px solid #e6e6e6; border-radius:16px; padding:20px; }
+    .form-grid { display:grid; gap:14px; }
+    .form-row { display:block; }
+    .q-label { font-weight:600; display:block; margin-bottom:6px; }
+    .inline label { margin-right:14px; }
+    .btn { cursor:pointer; border-radius:10px; padding:10px 14px; border:0; background:#0f6; color:#053; font-weight:600; }
+    .btn.btn-outline { background:#fff; color:#111; border:1px solid #ccc; }
+    #error-banner { display:none; margin-top:10px; padding:10px; border-radius:10px; background:#ffecec; color:#b00020; font-weight:600; }
+    #result-wrap { display:none; margin-top:20px; }
+    .report-card { border:1px solid #e6e6e6; border-radius:16px; padding:18px; background:#fff; }
+    .score-wrap { display:flex; align-items:center; gap:18px; flex-wrap:wrap; }
+    .score .big { font-size:34px; font-weight:800; line-height:1; }
+    .score .lbl { font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:#555; }
+    .muted { color:#666; font-size:13px; }
+    .container.narrow { max-width:840px; margin:0 auto; }
+    .input { width:100%; padding:10px 12px; border:1px solid #ddd; border-radius:10px; }
+    .brand-dot { width:10px;height:10px;background:#0a8f5b;border-radius:50%;display:inline-block;margin-right:6px; }
+    .footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:16px; }
+    @media (max-width: 900px) { .footer-grid { grid-template-columns:1fr 1fr; } }
+  </style>
 </head>
 <body>
 <header class="site-header">
@@ -81,8 +104,8 @@
             </div>
           </div>
 
-          <!-- spørgsmålene (q1..q13) -->
-          <div class="form-grid">
+          <div class="form-grid" style="margin-top:10px">
+            <!-- q1..q13 -->
             <div class="form-row">
               <label class="q-label">Do you have a waste management policy or procedure?</label>
               <div class="inline">
@@ -193,7 +216,7 @@
             </div>
           </div>
 
-          <div class="form-row" style="margin-top:10px">
+          <div class="form-row" style="margin-top:12px">
             <button class="btn" id="see-result" type="button">See your result</button>
             <button class="btn btn-outline" type="submit">Send by email</button>
             <span id="mail-status" class="muted" style="margin-left:10px;"></span>
@@ -201,11 +224,11 @@
         </form>
       </div>
 
-      <div id="result-wrap" style="margin-top:20px;display:none;">
+      <div id="error-banner"></div>
+
+      <div id="result-wrap">
         <div class="report-card" id="result-card"></div>
       </div>
-
-      <div id="error-banner" style="display:none;margin-top:10px;padding:10px;border-radius:10px;background:#ffecec;color:#b00020;font-weight:600;"></div>
     </div>
   </section>
 </main>
@@ -266,13 +289,167 @@
   </div>
 </footer>
 
-<!-- Backend URL og tekster -->
+<!-- INDSÆT DIN BACKEND-URL HER -->
 <script>
-  window.SCREENING_BACKEND_URL = "https://script.google.com/macros/s/AKfycbyoO_nM7Moh3CFjW6hT57WNyjYxePdHYGkFbuKqiuyh3J7P1sqJhqrxLtMl1IxvqEy_9A/exec";
+  // Sæt denne til din Google Apps Script Web App /exec URL
+  window.SCREENING_BACKEND_URL = "https://script.google.com/macros/s/REPLACE_WITH_YOUR_EXEC_ID/exec";
 </script>
 
-<!-- Scripts -->
-<script src="assets/js/screening.js?v=6.2"></script>
+<!-- INLINE screening.js så knapperne virker uden eksterne filer -->
+<script>
+(function(){
+  function $(sel){ return document.querySelector(sel); }
+  function $all(sel){ return Array.from(document.querySelectorAll(sel)); }
+  function showError(msg){
+    const b = $('#error-banner');
+    b.textContent = msg || 'Unexpected error';
+    b.style.display = 'block';
+    setTimeout(()=>{ b.style.display = 'none'; }, 7000);
+  }
+  function gaugeSVG(pct){
+    const angle = -90 + (pct/100)*180;
+    return `
+      <svg width="360" height="200" viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg" aria-label="Score gauge ${pct}%">
+        <path d="M30,180 A150,150 0 0,1 102,60" stroke="#e53935" stroke-width="18" fill="none" />
+        <path d="M102,60 A150,150 0 0,1 180,30" stroke="#fb8c00" stroke-width="18" fill="none" />
+        <path d="M180,30 A150,150 0 0,1 258,60" stroke="#fdd835" stroke-width="18" fill="none" />
+        <path d="M258,60 A150,150 0 0,1 330,180" stroke="#8bc34a" stroke-width="18" fill="none" />
+        <line x1="180" y1="180" x2="${180 + 140*Math.cos(angle*Math.PI/180)}" y2="${180 + 140*Math.sin(angle*Math.PI/180)}" stroke="#111" stroke-width="6" stroke-linecap="round"/>
+        <circle cx="180" cy="180" r="9" fill="#111"/>
+        <text x="35" y="185" font-size="12" fill="#333">0</text>
+        <text x="325" y="185" font-size="12" fill="#333">100</text>
+      </svg>`;
+  }
+  const weights = {
+    q1:{yes:4,planned:0,no:0}, q2:{yes:4,planned:0,no:0},
+    q3:{yes:7,planned:3.5,no:0}, q4:{yes:3,planned:1.5,no:0},
+    q5:{yes:12,planned:0,no:0}, q6:{yes:8,planned:0,no:0},
+    q7:{yes:2,planned:1,no:0}, q8:{yes:4,planned:0,no:0},
+    q9:{yes:6,planned:3,no:0}, q10:{yes:10,planned:0,no:0},
+    q11:{yes:12,planned:0,no:0}, q12:{yes:18,planned:9,no:0},
+    q13:{yes:10,planned:0,no:0}
+  };
+  function computeScore(ans){
+    const max = Object.values(weights).reduce((s,w)=>s+Math.max(w.yes||0,w.planned||0,w.no||0),0);
+    const sum = Object.entries(ans).reduce((acc,[k,v])=>acc+(weights[k]?.[v]||0),0);
+    const pct = Math.round((sum/(max||1))*100);
+    return {sum,max,pct};
+  }
+  function levelFromPct(pct){
+    if (pct>=99) return 'LEADING';
+    if (pct>=80) return 'STRONG';
+    if (pct>=60) return 'YELLOW';
+    if (pct>=40) return 'ORANGE';
+    return 'RED';
+  }
+  function levelText(level){
+    const map = {
+      LEADING:{title:"Green (99–100) – Leading",status:"Fully aligned with buyer requirements.",rec:"Light Update Subscription (alerts + periodic check-ins).",outcome:"Maintain green status without extra workload."},
+      STRONG:{title:"Light Green (80–98) – Strong",status:"Meets buyer expectations with minor improvements.",rec:"Baseline Report (€379; <10 days).",outcome:"Audit-ready proof; prevents slipping to “Not Buyer Ready”."},
+      YELLOW:{title:"Yellow (60–79) – Lagging / Not Buyer Ready",status:"Core elements exist, but missing documentation creates risk.",rec:"Baseline (€379; <10 days) or Core (2–8 pages, €1,329; 30–60 days).",outcome:"Clear gap list → rapid path to buyer readiness."},
+      ORANGE:{title:"Orange (40–59) – At Risk",status:"Significant gaps likely to affect tenders.",rec:"Core Report (€1,329; 30–60 days).",outcome:"Prioritized plan to reach buyer-ready status."},
+      RED:{title:"Red (0–39) – Critical",status:"Foundational ESG controls are missing.",rec:"Enterprise engagement with on-site support.",outcome:"Stabilize compliance and build essentials fast."}
+    };
+    return map[level];
+  }
+  function collectAnswers(){
+    const a = {};
+    for (let i=1;i<=13;i++){
+      const sel = document.querySelector(`input[name="q${i}"]:checked`);
+      if (!sel) return null;
+      a[`q${i}`] = sel.value.toLowerCase();
+    }
+    return a;
+  }
+  function renderResult(pct, lvl){
+    const T = levelText(lvl);
+    const html = `
+      <div class="score-wrap">
+        <div class="gauge">${gaugeSVG(pct)}</div>
+        <div class="score"><div class="big">${pct}%</div><div class="lbl">${lvl}</div></div>
+      </div>
+      <h3 style="margin-top:10px">${T.title}</h3>
+      <p><strong>Status:</strong> ${T.status}</p>
+      <p><strong>Recommended next step:</strong> ${T.rec}</p>
+      <p><strong>Outcome:</strong> ${T.outcome}</p>
+    `;
+    const card = document.getElementById('result-card');
+    card.innerHTML = html;
+    document.getElementById('result-wrap').style.display = 'block';
+  }
+  function getLead(){
+    return {
+      company: document.getElementById('company').value.trim(),
+      email: document.getElementById('email').value.trim()
+    };
+  }
+  function validateLead(lead){
+    if (!lead.company) return "Please enter your company name.";
+    if (!lead.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(lead.email)) return "Please enter a valid work email.";
+    return null;
+  }
+
+  // Button: See your result (no backend needed)
+  document.getElementById('see-result').addEventListener('click', function(e){
+    try{
+      const lead = getLead();
+      const err = validateLead(lead);
+      if (err){ showError(err); return; }
+      const answers = collectAnswers();
+      if (!answers){ showError('Please answer all 13 questions.'); return; }
+      const {pct} = computeScore(answers);
+      const lvl = levelFromPct(pct);
+      renderResult(pct, lvl);
+    }catch(ex){ console.error(ex); showError(ex.message||'Error'); }
+  });
+
+  // Form submit: send by email (backend)
+  document.getElementById('screening-form').addEventListener('submit', async function(e){
+    e.preventDefault();
+    try{
+      const lead = getLead();
+      const err = validateLead(lead);
+      if (err){ showError(err); return; }
+      const answers = collectAnswers();
+      if (!answers){ showError('Please answer all 13 questions.'); return; }
+
+      // Vis på siden også, så de får feedback
+      const {pct} = computeScore(answers);
+      const lvl = levelFromPct(pct);
+      renderResult(pct, lvl);
+
+      const url = (https://script.google.com/macros/s/AKfycbyoO_nM7Moh3CFjW6hT57WNyjYxePdHYGkFbuKqiuyh3J7P1sqJhqrxLtMl1IxvqEy_9A/exec||'').trim();
+      if (!url){ showError('Backend URL is not set. Insert your Apps Script /exec URL.'); return; }
+
+      const status = document.getElementById('mail-status');
+      status.textContent = 'Sending your report...';
+
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ lead, answers, meta:{ts:new Date().toISOString(), source:'screening.html'} })
+      });
+      let json = {};
+      try { json = await res.json(); } catch(_){}
+      if (!res.ok || !json.ok){
+        throw new Error(json.error || `HTTP ${res.status}`);
+      }
+      status.textContent = 'Report sent. Check your inbox.';
+    }catch(ex){
+      console.error(ex);
+      document.getElementById('mail-status').textContent = 'Failed to send.';
+      showError(ex.message||'Failed to send.');
+    }
+  });
+
+  // Bonus: log globale JS-fejl i banneret, så du kan se dem uden DevTools
+  window.addEventListener('error', function(e){
+    showError(e.message || 'Script error');
+  });
+})();
+</script>
+
+<!-- (valgfrit) dine øvrige scripts -->
 <script src="assets/js/main.js?v=6.2"></script>
 <script src="assets/js/menu.js?v=6.2"></script>
 </body>
