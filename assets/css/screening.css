@@ -1,23 +1,23 @@
 /* === Orvenzia ESG Screening styles === */
 
 .report-card-inner {
-  font-family: Montserrat, Arial, sans-serif;
-  padding: 20px;
-  border-radius: 12px;
+  font-family: 'Montserrat', Arial, sans-serif;
+  padding: 24px;
+  border-radius: 16px;
   border: 1px solid #eee;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
   background: #fff;
   transition: all 0.3s ease;
 }
 
 .report-title {
   margin: 0 0 10px;
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 700;
 }
 
 .report-meta {
-  margin: 0 0 5px;
+  margin: 0 0 10px;
   color: #555;
   font-size: 14px;
 }
@@ -29,7 +29,7 @@
 .report-flex {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 25px;
   flex-wrap: wrap;
   margin: 20px 0;
 }
@@ -39,8 +39,9 @@
 }
 
 .score-value {
-  font-size: 2.2em;
+  font-size: 2.6em;
   font-weight: 700;
+  color: #111;
 }
 
 .score-label {
@@ -51,13 +52,26 @@
 .report-text p {
   margin: 6px 0;
   font-size: 15px;
+  line-height: 1.5;
 }
 
 .report-cta {
-  margin-top: 20px;
+  margin-top: 24px;
   display: flex;
-  gap: 12px;
+  gap: 14px;
   flex-wrap: wrap;
+}
+
+.report-cta .btn {
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.25s ease;
+}
+
+.report-cta .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
 /* Gauge styling */
@@ -69,7 +83,7 @@
 .gauge-needle {
   fill: #111;
   transform-origin: 180px 180px;
-  transition: transform 1s ease-out;
+  transition: transform 1s cubic-bezier(0.68,-0.55,0.27,1.55); /* smooth spring */
 }
 
 .gauge-center {
