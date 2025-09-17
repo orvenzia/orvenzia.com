@@ -1,6 +1,5 @@
-// === Orvenzia ESG Screening frontend logic ===
+// === Orvenzia ESG Screening frontend ===
 
-// Samme vægte som backend
 const W = {
   q1:{yes:4,planned:0,no:0},   q2:{yes:4,planned:0,no:0},
   q3:{yes:7,planned:3.5,no:0}, q4:{yes:3,planned:1.5,no:0},
@@ -11,13 +10,12 @@ const W = {
   q13:{yes:10,planned:0,no:0}
 };
 
-// Tekster for de 5 readiness-levels
 const REPORT_TEXTS = {
   GREEN: {
     title: "🟢 Leading",
     status: "Fully aligned with buyer requirements; no immediate action required.",
     recommendation: "Consider Subscription (regulatory alerts + periodic check-ins).",
-    outcome: "Maintain green status without extra workload."
+    outcome: "Maintain leading status without extra workload."
   },
   LIGHT_GREEN: {
     title: "🟢 Strong",
@@ -45,12 +43,11 @@ const REPORT_TEXTS = {
   }
 };
 
-// ----------- Helpers -----------
 function showError(msg){
   const b=document.getElementById('error-banner');
   b.textContent=msg||'Unexpected error.'; 
   b.style.display='block';
-  setTimeout(()=> b.style.display='none',7000);
+  setTimeout(()=> b.style.display='none',6000);
 }
 
 function collectAnswers(){
@@ -81,38 +78,56 @@ function levelFromPct(pct){
   return "RED";
 }
 
-// ----------- Gauge -----------
+// -------- Gauge med animation --------
 function gaugeSVG(pct){
   const angle=-90+(pct/100)*180;
   const cx=180, cy=180, r=150;
-
   const x2=cx+(r-25)*Math.cos(angle*Math.PI/180);
   const y2=cy+(r-25)*Math.sin(angle*Math.PI/180);
 
   return `
-  <svg width="320" height="180" viewBox="0 0 360 200" class="gauge-svg">
-    <!-- Lys baggrundsbue -->
+  <svg width="340" height="200" viewBox="0 0 360 200" class="gauge-svg">
+    <!-- Baggrund -->
     <path d="M30,180 A150,150 0 0,1 330,180" 
-          stroke="#eee" stroke-width="24" fill="none"/>
+          stroke="#f3f3f3" stroke-width="26" fill="none"/>
 
     <!-- Farvezoner -->
-    <path d="M30,180 A150,150 0 0,1 110,60" stroke="#d32f2f" stroke-width="24" fill="none" stroke-linecap="round"/>
-    <path d="M110,60 A150,150 0 0,1 180,30" stroke="#f57c00" stroke-width="24" fill="none" stroke-linecap="round"/>
-    <path d="M180,30 A150,150 0 0,1 250,60" stroke="#fbc02d" stroke-width="24" fill="none" stroke-linecap="round"/>
-    <path d="M250,60 A150,150 0 0,1 330,180" stroke="#4caf50" stroke-width="24" fill="none" stroke-linecap="round"/>
+    <path d="M30,180 A150,150 0 0,1 110,60" stroke="url(#gradRed)" stroke-width="26" fill="none" stroke-linecap="round"/>
+    <path d="M110,60 A150,150 0 0,1 180,30" stroke="url(#gradOrange)" stroke-width="26" fill="none" stroke-linecap="round"/>
+    <path d="M180,30 A150,150 0 0,1 250,60" stroke="url(#gradYellow)" stroke-width="26" fill="none" stroke-linecap="round"/>
+    <path d="M250,60 A150,150 0 0,1 330,180" stroke="url(#gradGreen)" stroke-width="26" fill="none" stroke-linecap="round"/>
 
-    <!-- Nålen (polygon for spids) -->
-    <polygon points="${cx-6},${cy} ${x2},${y2} ${cx+6},${cy}" 
-             class="gauge-needle"/>
+    <!-- Gradients -->
+    <defs>
+      <linearGradient id="gradRed" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#d32f2f"/>
+        <stop offset="100%" stop-color="#f44336"/>
+      </linearGradient>
+      <linearGradient id="gradOrange" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#ef6c00"/>
+        <stop offset="100%" stop-color="#ff9800"/>
+      </linearGradient>
+      <linearGradient id="gradYellow" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#fbc02d"/>
+        <stop offset="100%" stop-color="#fff176"/>
+      </linearGradient>
+      <linearGradient id="gradGreen" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#4caf50"/>
+        <stop offset="100%" stop-color="#81c784"/>
+      </linearGradient>
+    </defs>
+
+    <!-- Nålen -->
+    <polygon id="needle" points="${cx-6},${cy} ${x2},${y2} ${cx+6},${cy}" class="gauge-needle"/>
     <circle cx="${cx}" cy="${cy}" r="10" class="gauge-center"/>
 
     <!-- Labels -->
-    <text x="40" y="195" font-size="12" fill="#666">0</text>
-    <text x="310" y="195" font-size="12" fill="#666">100</text>
+    <text x="40" y="195" font-size="13" fill="#666">0</text>
+    <text x="310" y="195" font-size="13" fill="#666">100</text>
   </svg>`;
 }
 
-// ----------- Resultatkort -----------
+// -------- Resultatkort --------
 function renderResult(pct, company){
   const level = levelFromPct(pct);
   const t = REPORT_TEXTS[level];
@@ -141,9 +156,16 @@ function renderResult(pct, company){
       </div>
     </div>`;
   document.getElementById('result-wrap').style.display = 'block';
+
+  // Animation på nålen
+  const needle = document.querySelector('#needle');
+  if (needle){
+    needle.style.transform = "rotate(-90deg)";
+    setTimeout(()=> needle.style.transform = `rotate(${ -90+(pct/100)*180 }deg)`, 50);
+  }
 }
 
-// ----------- Event handlers -----------
+// -------- Event handlers --------
 document.getElementById('see-result').addEventListener('click',()=>{
   const lead={company:company.value.trim(), email:email.value.trim()};
   if(!lead.company||!lead.email){showError("Fill out company + email"); return;}
