@@ -1514,3 +1514,13 @@ article.card.hover-card[data-tooltip]:focus-within::after,
   transform: translateY(0);
   font-weight: 800;
 }
+
+
+/* === Fix readability for "What we offer" section kicker === */
+.kicker{
+  color:#fff !important;
+  font-weight:700 !important;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  text-shadow:0 2px 4px rgba(0,0,0,0.5);
+}
