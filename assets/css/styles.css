@@ -1524,3 +1524,11 @@ article.card.hover-card[data-tooltip]:focus-within::after,
   text-transform:uppercase;
   text-shadow:0 2px 4px rgba(0,0,0,0.5);
 }
+
+
+/* === Fix ESG Action Plan left hero card cut-off === */
+.hero-card.hero-left, .hero-card.hero-left .hero-illustration{
+  height:auto !important;
+  overflow:visible !important;
+  padding-bottom:30px !important;
+}
