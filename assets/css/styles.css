@@ -1406,10 +1406,7 @@ article.card.hover-card[data-tooltip]:focus-within::after,
 /* Extra premium adjustments */
 
 /* Text outside cards on dark background */
-.section-muted, .section-muted p {
-  color: #f5f7f5;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
-}
+/* removed global .section-muted p override */
 
 /* Challenge card premium design */
 .section-muted .card {
@@ -1454,6 +1451,24 @@ article.card.hover-card[data-tooltip]:focus-within::after,
 /* Premium off-white subtext */
 .subtext-premium {
   color: #F5F5F5;
+  font-style: italic;
+  font-weight: 500;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+
+
+/* Fix: ensure card text is dark and readable */
+.section-muted .card h2,
+.section-muted .card p,
+.section-muted .card li {
+  color: #333 !important;
+  text-shadow: none !important;
+}
+
+/* Keep taglines premium and readable on dark bg */
+.subtext-premium {
+  color: #F5F5F5 !important;
   font-style: italic;
   font-weight: 500;
   text-shadow: 0 1px 2px rgba(0,0,0,0.5);
