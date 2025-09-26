@@ -40,7 +40,7 @@
 }
 
 
-/* === Header logo fixes === */
+/* === Header & Footer logo fixes === */
 header .logo img {
   max-height: 48px;
   width: auto;
@@ -52,5 +52,20 @@ header .logo img {
 header nav, header .logo {
   display: flex;
   align-items: center;
+}
+footer .footer-logo {
+  text-align: center;
+  margin: 20px 0;
+}
+footer .footer-logo img {
+  max-height: 70px;
+  width: auto;
+  display: block;
+  margin: 0 auto 10px auto;
+}
+footer .footer-logo .tagline {
+  font-size: 14px;
+  color: #ccc;
+  margin: 0;
 }
 
