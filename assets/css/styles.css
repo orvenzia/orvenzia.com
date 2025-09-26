@@ -1111,3 +1111,19 @@ article.card.hover-card[data-tooltip]:focus-within::after,
 .offer-card.hover-card[data-tooltip]:focus-within::before{ opacity: 1; transform: translate(-50%, 0) scale(1); }
 .offer-card.hover-card[data-tooltip]:hover::after,
 .offer-card.hover-card[data-tooltip]:focus-within::after{ opacity: 1; }
+
+
+/* === Header logo fixes === */
+header .logo img {
+  max-height: 48px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  vertical-align: middle;
+  margin: 0 12px 0 0;
+}
+header nav, header .logo {
+  display: flex;
+  align-items: center;
+}
+
