@@ -1145,3 +1145,14 @@ article.card.hover-card[data-tooltip]:focus-within::after,
 }
 
 .site-footer .footer-logo .badge-oci { margin-top: 4px; }
+
+/* Final footer grid alignment */
+.site-footer .container.footer-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: auto 1fr 1fr 1fr;
+  gap: 28px;
+  align-items: flex-start;
+}
