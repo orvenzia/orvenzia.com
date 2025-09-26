@@ -1156,3 +1156,84 @@ article.card.hover-card[data-tooltip]:focus-within::after,
   gap: 28px;
   align-items: flex-start;
 }
+
+
+/* === Footer polish (audit-premium) === */
+
+.site-footer { background: #f7f7f7; }
+
+/* Centreret grid med kontrollerede kolonnebredder */
+.site-footer .container.footer-grid {
+  max-width: 1160px;        /* match headerens indholdsbredde */
+  margin: 0 auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: minmax(240px,280px) 1fr 1fr 1fr;
+  gap: 36px;                 /* lidt mere luft mellem kolonner */
+  align-items: flex-start;
+}
+
+/* Logo-kolonne (venstre) */
+.site-footer .footer-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  max-width: 280px;          /* giver smuk linjelængde til teksten */
+}
+.site-footer .footer-logo img {
+  max-width: 96px;           /* en anelse mindre for mere balance */
+  height: auto;
+  border-radius: 14px;       /* matcher headerens runding + 1px */
+  background: var(--logo-bg);
+}
+.site-footer .footer-logo p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #444;
+  line-height: 1.55;
+}
+
+/* Badge: diskret og præcis */
+.site-footer .footer-logo .badge-oci {
+  margin-top: 6px;
+  padding: 12px 16px;
+  border-radius: 18px;
+  font-size: 0.95rem;
+}
+.site-footer .footer-logo .badge-oci .badge-dot {
+  width: 18px; height: 18px;
+}
+
+/* Højre kolonner: typografi & rytme */
+.site-footer .footer-col h4 {
+  margin: 0 0 10px;
+  font-size: 1.1rem;         /* en tand ned for mere ro */
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+.site-footer .footer-col ul { margin: 0; padding: 0; list-style: none; }
+.site-footer .footer-col ul li { margin: 7px 0; }
+.site-footer .footer-col a { text-decoration: none; }
+.site-footer .footer-col a:hover { text-decoration: underline; }
+
+/* Footer-bottom matcher samme bredde + pæn top-linje */
+.site-footer .footer-bottom { border-top: 1px solid rgba(0,0,0,.08); margin-top: 24px; }
+.site-footer .footer-bottom .container {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 16px 24px 28px;
+}
+
+/* Responsiv nedskalering */
+@media (max-width: 1024px) {
+  .site-footer .container.footer-grid {
+    grid-template-columns: 1fr 1fr;   /* 2 kolonner på tablet */
+    row-gap: 28px;
+  }
+  .site-footer .footer-logo { grid-column: 1 / -1; } /* logo-kolonne øverst */
+}
+@media (max-width: 640px) {
+  .site-footer .container.footer-grid { grid-template-columns: 1fr; }
+}
+
