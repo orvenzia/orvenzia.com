@@ -1129,3 +1129,17 @@ article.card.hover-card[data-tooltip]:focus-within::after,
   background: var(--logo-bg);
   display: block;
 }
+
+/* Footer container alignment */
+.site-footer .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Footer logo text styling */
+.site-footer .footer-logo p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #333;
+}
