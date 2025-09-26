@@ -1122,4 +1122,10 @@ article.card.hover-card[data-tooltip]:focus-within::after,
 .site-footer .footer-logo{display:flex;align-items:flex-start;justify-content:flex-start;}
 
 /* Footer logo image tweaks */
-.site-footer .footer-logo img{display:block;margin:0;border-radius:12px;background:var(--logo-bg);}
+.site-footer .footer-logo img {
+  max-width: 100px;
+  height: auto;
+  border-radius: 12px;
+  background: var(--logo-bg);
+  display: block;
+}
