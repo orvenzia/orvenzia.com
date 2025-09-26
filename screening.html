@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
@@ -10,7 +11,7 @@
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&amp;family=Montserrat:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
 <link href="assets/css/styles.css?v=20250910" rel="stylesheet"/>
-<link href="assets/css/screening.css?v=1.0" rel="stylesheet"/>  
+<link href="assets/css/screening.css?v=1.0" rel="stylesheet"/>
 <meta content="ESG Consulting for SMEs | Orvenzia — ESG Readiness Experts" property="og:title"/>
 <meta content="ESG consulting and ESG readiness services for SMEs in Europe. Pass supplier ESG assessments, deliver buyer-facing ESG reports and Scope 3 data." property="og:description"/>
 <meta content="https://www.orvenzia.com/" property="og:url"/>
@@ -19,7 +20,6 @@
 <meta content="summary_large_image" name="twitter:card"/>
 <link as="image" href="assets/img/hero-green.png" rel="preload"/>
 <meta content="https://orvenzia.com/assets/img/og-hero.jpg" property="og:image"/>
-
 <style>
 .screening-hero .container{
   display:inline-block;background:rgba(10,61,47,.42);
@@ -27,11 +27,11 @@
 }
 .screening-hero h1,.screening-hero .lead{ color:#fff; text-shadow:0 1px 2px rgba(0,0,0,.28) }
 </style>
-</head>
+<link href="assets/img/favicon-32.png" rel="icon" sizes="32x32" type="image/png"/><link href="assets/img/favicon-512.png" rel="icon" sizes="512x512" type="image/png"/></head>
 <body>
 <header class="site-header">
 <div class="container header-inner">
-<a class="logo" href="index.html"><span class="logo-mark">O</span><span class="logo-type">Orvenzia</span></a>
+<a class="logo" href="index.html"><span class="logo-mark">O</span><span class="logo-type">Orvenzia</span><img alt="Orvenzia – Trusted ESG Partner" height="auto" src="assets/img/logo-orvenzia.png" width="160"/></a>
 <nav class="nav" id="nav">
 <a href="services.html">Services</a>
 <a href="screening.html">Screening</a>
@@ -48,169 +48,152 @@
 <button aria-label="Toggle menu" class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
 </div>
 </header>
-
 <main class="page">
-  <section class="hero hero-compact">
-    <div class="container">
-      <h1 class="page-title">Free ESG Screening</h1>
-      <p class="lead">13 quick questions → instant Readiness Score & automatic mini-report by email.</p>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container narrow">
-      <div class="form-card">
-        <!-- Formular med backend URL -->
-        <form id="screening-form" 
-              method="POST" 
-              action="https://script.google.com/macros/s/AKfycbx7nzpDpU4LMiJ652erlwWIIIQQvp9-VvZ7Y-M4rzMDjmcLHyWW2YXqe43feHeeW0Bs/exec"
-              target="hidden_iframe" novalidate>
-
-          <div class="form-grid">
-            <div class="form-row">
-              <label class="q-label" for="company">Company name <span class="muted">(required)</span></label>
-              <input id="company" name="company" type="text" required placeholder="Acme A/S" class="input">
-            </div>
-            <div class="form-row">
-              <label class="q-label" for="email">Work email <span class="muted">(required)</span></label>
-              <input id="email" name="email" type="email" required placeholder="name@company.com" class="input">
-            </div>
-          </div>
-
-          <!-- Alle 13 spørgsmål -->
-          <div class="form-grid">
-            <div class="form-row">
-    <label class="q-label">Does the company have an environmental and climate policy? (Covers energy, CO₂, water and waste – documented and updated)</label>
-    <div class="inline">
-      <label><input type="radio" name="q1" value="yes" required> Yes</label>
-      <label><input type="radio" name="q1" value="planned"> Planned/Partially</label>
-      <label><input type="radio" name="q1" value="no"> No</label>
-    </div>
-  </div>
-
-  <div class="form-row">
-    <label class="q-label">Are energy, water, fuel and gas consumption measured and recorded? (kWh, m³, liters, tonnes – metered or collected from invoices)</label>
-    <div class="inline">
-      <label><input type="radio" name="q2" value="yes" required> Yes</label>
-      <label><input type="radio" name="q2" value="planned"> Planned/Partially</label>
-      <label><input type="radio" name="q2" value="no"> No</label>
-    </div>
-  </div>
-
-  <div class="form-row">
-    <label class="q-label">Has the company set reduction targets for energy and CO₂? (Time-bound, measurable, linked to operations)</label>
-    <div class="inline">
-      <label><input type="radio" name="q3" value="yes" required> Yes</label>
-      <label><input type="radio" name="q3" value="planned"> Planned/Partially</label>
-      <label><input type="radio" name="q3" value="no"> No</label>
-    </div>
-  </div>
-
-  <div class="form-row">
-    <label class="q-label">Is waste managed and recycled? (Selective sorting, % recycled, evidence packs)</label>
-    <div class="inline">
-      <label><input type="radio" name="q4" value="yes" required> Yes</label>
-      <label><input type="radio" name="q4" value="planned"> Planned/Partially</label>
-      <label><input type="radio" name="q4" value="no"> No</label>
-    </div>
-  </div>
-
-  <div class="form-row">
-    <label class="q-label">Are materials and resources managed? (EPDs for steel, concrete, asphalt etc.; recycled content where feasible)</label>
-    <div class="inline">
-      <label><input type="radio" name="q5" value="yes" required> Yes</label>
-      <label><input type="radio" name="q5" value="planned"> Planned/Partially</label>
-      <label><input type="radio" name="q5" value="no"> No</label>
-    </div>
-  </div>
-
-  <div class="form-row">
-    <label class="q-label">Is Scope 3 data from suppliers collected and reported? (Transport, packaging, purchased materials)</label>
-    <div class="inline">
-      <label><input type="radio" name="q6" value="yes" required> Yes</label>
-      <label><input type="radio" name="q6" value="planned"> Planned/Partially</label>
-      <label><input type="radio" name="q6" value="no"> No</label>
-    </div>
-  </div>
-
-  <div class="form-row">
-    <label class="q-label">Does the company manage occupational health and safety? (OHS policy, TRIR/LTIFR, audits, certifications)</label>
-    <div class="inline">
-      <label><input type="radio" name="q7" value="yes" required> Yes</label>
-      <label><input type="radio" name="q7" value="planned"> Planned/Partially</label>
-      <label><input type="radio" name="q7" value="no"> No</label>
-    </div>
-  </div>
-
-  <div class="form-row">
-    <label class="q-label">Are employee surveys or engagement assessments conducted? (Satisfaction, retention, culture)</label>
-    <div class="inline">
-      <label><input type="radio" name="q8" value="yes" required> Yes</label>
-      <label><input type="radio" name="q8" value="planned"> Planned/Partially</label>
-      <label><input type="radio" name="q8" value="no"> No</label>
-    </div>
-  </div>
-
-  <div class="form-row">
-    <label class="q-label">Are equality, diversity and inclusion addressed? (Guidelines, recruitment, gender/age/ethnicity KPIs)</label>
-    <div class="inline">
-      <label><input type="radio" name="q9" value="yes" required> Yes</label>
-      <label><input type="radio" name="q9" value="planned"> Planned/Partially</label>
-      <label><input type="radio" name="q9" value="no"> No</label>
-    </div>
-  </div>
-
-  <div class="form-row">
-    <label class="q-label">Does the company have a Supplier Code of Conduct (CoC)? (Coverage %, documented acceptance, right-to-audit)</label>
-    <div class="inline">
-      <label><input type="radio" name="q10" value="yes" required> Yes</label>
-      <label><input type="radio" name="q10" value="planned"> Planned/Partially</label>
-      <label><input type="radio" name="q10" value="no"> No</label>
-    </div>
-  </div>
-
-  <div class="form-row">
-    <label class="q-label">Is there a whistleblower system in place? (Anonymous, accessible, staff and suppliers)</label>
-    <div class="inline">
-      <label><input type="radio" name="q11" value="yes" required> Yes</label>
-      <label><input type="radio" name="q11" value="planned"> Planned/Partially</label>
-      <label><input type="radio" name="q11" value="no"> No</label>
-    </div>
-  </div>
-
-  <div class="form-row">
-    <label class="q-label">Does the company have an anti-corruption and ethics policy? (Organisation-wide, subcontractors included)</label>
-    <div class="inline">
-      <label><input type="radio" name="q12" value="yes" required> Yes</label>
-      <label><input type="radio" name="q12" value="planned"> Planned/Partially</label>
-      <label><input type="radio" name="q12" value="no"> No</label>
-    </div>
-  </div>
-
-  <div class="form-row">
-    <label class="q-label">Are ESG risks assessed at management/board level? (Annual risk assessments, board oversight, documented outcomes)</label>
-    <div class="inline">
-      <label><input type="radio" name="q13" value="yes" required> Yes</label>
-      <label><input type="radio" name="q13" value="planned"> Planned/Partially</label>
-      <label><input type="radio" name="q13" value="no"> No</label>
-    </div>
-  </div>
-          </div>
-
-          <div class="form-row" style="margin-top:12px">
-            <button class="btn" id="see-result" type="button">See result</button>
-            <button class="btn btn-outline" type="reset">Reset</button>
-          </div>
-        </form>
-      </div>
-
-      <div id="error-banner" style="display:none;margin-top:10px;padding:10px;border-radius:10px;background:#ffecec;color:#b00020;font-weight:600;"></div>
-      <div id="result-wrap"><div class="report-card" id="result-card"></div></div>
-    </div>
-  </section>
+<section class="hero hero-compact">
+<div class="container">
+<h1 class="page-title">Free ESG Screening</h1>
+<p class="lead">13 quick questions → instant Readiness Score &amp; automatic mini-report by email.</p>
+</div>
+</section>
+<section class="section">
+<div class="container narrow">
+<div class="form-card">
+<!-- Formular med backend URL -->
+<form action="https://script.google.com/macros/s/AKfycbx7nzpDpU4LMiJ652erlwWIIIQQvp9-VvZ7Y-M4rzMDjmcLHyWW2YXqe43feHeeW0Bs/exec" id="screening-form" method="POST" novalidate="" target="hidden_iframe">
+<div class="form-grid">
+<div class="form-row">
+<label class="q-label" for="company">Company name <span class="muted">(required)</span></label>
+<input class="input" id="company" name="company" placeholder="Acme A/S" required="" type="text"/>
+</div>
+<div class="form-row">
+<label class="q-label" for="email">Work email <span class="muted">(required)</span></label>
+<input class="input" id="email" name="email" placeholder="name@company.com" required="" type="email"/>
+</div>
+</div>
+<!-- Alle 13 spørgsmål -->
+<div class="form-grid">
+<div class="form-row">
+<label class="q-label">Does the company have an environmental and climate policy? (Covers energy, CO₂, water and waste – documented and updated)</label>
+<div class="inline">
+<label><input name="q1" required="" type="radio" value="yes"/> Yes</label>
+<label><input name="q1" type="radio" value="planned"/> Planned/Partially</label>
+<label><input name="q1" type="radio" value="no"/> No</label>
+</div>
+</div>
+<div class="form-row">
+<label class="q-label">Are energy, water, fuel and gas consumption measured and recorded? (kWh, m³, liters, tonnes – metered or collected from invoices)</label>
+<div class="inline">
+<label><input name="q2" required="" type="radio" value="yes"/> Yes</label>
+<label><input name="q2" type="radio" value="planned"/> Planned/Partially</label>
+<label><input name="q2" type="radio" value="no"/> No</label>
+</div>
+</div>
+<div class="form-row">
+<label class="q-label">Has the company set reduction targets for energy and CO₂? (Time-bound, measurable, linked to operations)</label>
+<div class="inline">
+<label><input name="q3" required="" type="radio" value="yes"/> Yes</label>
+<label><input name="q3" type="radio" value="planned"/> Planned/Partially</label>
+<label><input name="q3" type="radio" value="no"/> No</label>
+</div>
+</div>
+<div class="form-row">
+<label class="q-label">Is waste managed and recycled? (Selective sorting, % recycled, evidence packs)</label>
+<div class="inline">
+<label><input name="q4" required="" type="radio" value="yes"/> Yes</label>
+<label><input name="q4" type="radio" value="planned"/> Planned/Partially</label>
+<label><input name="q4" type="radio" value="no"/> No</label>
+</div>
+</div>
+<div class="form-row">
+<label class="q-label">Are materials and resources managed? (EPDs for steel, concrete, asphalt etc.; recycled content where feasible)</label>
+<div class="inline">
+<label><input name="q5" required="" type="radio" value="yes"/> Yes</label>
+<label><input name="q5" type="radio" value="planned"/> Planned/Partially</label>
+<label><input name="q5" type="radio" value="no"/> No</label>
+</div>
+</div>
+<div class="form-row">
+<label class="q-label">Is Scope 3 data from suppliers collected and reported? (Transport, packaging, purchased materials)</label>
+<div class="inline">
+<label><input name="q6" required="" type="radio" value="yes"/> Yes</label>
+<label><input name="q6" type="radio" value="planned"/> Planned/Partially</label>
+<label><input name="q6" type="radio" value="no"/> No</label>
+</div>
+</div>
+<div class="form-row">
+<label class="q-label">Does the company manage occupational health and safety? (OHS policy, TRIR/LTIFR, audits, certifications)</label>
+<div class="inline">
+<label><input name="q7" required="" type="radio" value="yes"/> Yes</label>
+<label><input name="q7" type="radio" value="planned"/> Planned/Partially</label>
+<label><input name="q7" type="radio" value="no"/> No</label>
+</div>
+</div>
+<div class="form-row">
+<label class="q-label">Are employee surveys or engagement assessments conducted? (Satisfaction, retention, culture)</label>
+<div class="inline">
+<label><input name="q8" required="" type="radio" value="yes"/> Yes</label>
+<label><input name="q8" type="radio" value="planned"/> Planned/Partially</label>
+<label><input name="q8" type="radio" value="no"/> No</label>
+</div>
+</div>
+<div class="form-row">
+<label class="q-label">Are equality, diversity and inclusion addressed? (Guidelines, recruitment, gender/age/ethnicity KPIs)</label>
+<div class="inline">
+<label><input name="q9" required="" type="radio" value="yes"/> Yes</label>
+<label><input name="q9" type="radio" value="planned"/> Planned/Partially</label>
+<label><input name="q9" type="radio" value="no"/> No</label>
+</div>
+</div>
+<div class="form-row">
+<label class="q-label">Does the company have a Supplier Code of Conduct (CoC)? (Coverage %, documented acceptance, right-to-audit)</label>
+<div class="inline">
+<label><input name="q10" required="" type="radio" value="yes"/> Yes</label>
+<label><input name="q10" type="radio" value="planned"/> Planned/Partially</label>
+<label><input name="q10" type="radio" value="no"/> No</label>
+</div>
+</div>
+<div class="form-row">
+<label class="q-label">Is there a whistleblower system in place? (Anonymous, accessible, staff and suppliers)</label>
+<div class="inline">
+<label><input name="q11" required="" type="radio" value="yes"/> Yes</label>
+<label><input name="q11" type="radio" value="planned"/> Planned/Partially</label>
+<label><input name="q11" type="radio" value="no"/> No</label>
+</div>
+</div>
+<div class="form-row">
+<label class="q-label">Does the company have an anti-corruption and ethics policy? (Organisation-wide, subcontractors included)</label>
+<div class="inline">
+<label><input name="q12" required="" type="radio" value="yes"/> Yes</label>
+<label><input name="q12" type="radio" value="planned"/> Planned/Partially</label>
+<label><input name="q12" type="radio" value="no"/> No</label>
+</div>
+</div>
+<div class="form-row">
+<label class="q-label">Are ESG risks assessed at management/board level? (Annual risk assessments, board oversight, documented outcomes)</label>
+<div class="inline">
+<label><input name="q13" required="" type="radio" value="yes"/> Yes</label>
+<label><input name="q13" type="radio" value="planned"/> Planned/Partially</label>
+<label><input name="q13" type="radio" value="no"/> No</label>
+</div>
+</div>
+</div>
+<div class="form-row" style="margin-top:12px">
+<button class="btn" id="see-result" type="button">See result</button>
+<button class="btn btn-outline" type="reset">Reset</button>
+</div>
+</form>
+</div>
+<div id="error-banner" style="display:none;margin-top:10px;padding:10px;border-radius:10px;background:#ffecec;color:#b00020;font-weight:600;"></div>
+<div id="result-wrap"><div class="report-card" id="result-card"></div></div>
+</div>
+</section>
 </main>
-
 <footer class="site-footer">
+<div class="footer-logo">
+<img alt="Orvenzia – Trusted ESG Partner" height="auto" src="assets/img/logo-orvenzia.png" width="140"/>
+<p class="tagline">Trusted ESG Partner</p>
+</div>
+
 <div class="container footer-grid">
 <div class="footer-brand">
 <div class="brand-row">
@@ -265,10 +248,8 @@
 </div>
 </div>
 </footer>
-
 <!-- Skjult iframe så submit ikke loader siden -->
 <iframe name="hidden_iframe" style="display:none;"></iframe>
-
 <script src="assets/js/screening.js?v=1.0"></script>
 </body>
 </html>
