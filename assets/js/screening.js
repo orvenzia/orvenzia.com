@@ -2,13 +2,24 @@
 
 // 1) Scoring-vægte (matcher backend)
 const W = {
-  q1:{yes:4,planned:0,no:0},   q2:{yes:4,planned:0,no:0},
-  q3:{yes:7,planned:3.5,no:0}, q4:{yes:3,planned:1.5,no:0},
-  q5:{yes:12,planned:0,no:0},  q6:{yes:8,planned:0,no:0},
-  q7:{yes:2,planned:1,no:0},   q8:{yes:4,planned:0,no:0},
-  q9:{yes:6,planned:3,no:0},   q10:{yes:10,planned:0,no:0},
-  q11:{yes:12,planned:0,no:0}, q12:{yes:18,planned:9,no:0},
-  q13:{yes:10,planned:0,no:0}
+  // Environmental (47)
+  q1:  { yes: 8,  planned: 4, no: 0 }, 
+  q2:  { yes: 10, planned: 5, no: 0 },
+  q3:  { yes: 6,  planned: 3, no: 0 },
+  q4:  { yes: 8,  planned: 4, no: 0 },
+  q5:  { yes: 6,  planned: 3, no: 0 },
+  q6:  { yes: 11, planned: 5, no: 0 },
+
+  // Social (20)
+  q7:  { yes: 8,  planned: 4, no: 0 },
+  q8:  { yes: 5,  planned: 2, no: 0 },
+  q9:  { yes: 6,  planned: 3, no: 0 },
+
+  // Governance (33)
+  q10: { yes: 10, planned: 5, no: 0 },
+  q11: { yes: 8,  planned: 4, no: 0 },
+  q12: { yes: 8,  planned: 4, no: 0 },
+  q13: { yes: 7,  planned: 3, no: 0 }
 };
 
 // 2) Tekster (mini-rapport)
