@@ -1237,3 +1237,17 @@ article.card.hover-card[data-tooltip]:focus-within::after,
   .site-footer .container.footer-grid { grid-template-columns: 1fr; }
 }
 
+
+
+/* Footer-bottom links on one line */
+.site-footer .footer-bottom-links {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start; /* left aligned like corporate sites */
+  gap: 32px;
+  margin-top: 8px;
+}
+.site-footer .footer-bottom-links a {
+  white-space: nowrap;
+}
+
