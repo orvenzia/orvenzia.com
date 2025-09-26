@@ -1583,3 +1583,24 @@ article.card.hover-card[data-tooltip]:focus-within::after,
   font-weight: 400;
   opacity: 0.85;
 }
+
+
+/* === Offer cards final: show only service before hover, SLA+price in green box on hover === */
+.offer-card .card-header {
+  display: none;
+  background: #004d26;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin-top: 15px;
+  transition: all 0.3s ease;
+}
+.offer-card:hover .card-header {
+  display: block;
+}
+.offer-card .card-header .price {
+  margin-left: 8px;
+  font-weight: 400;
+  opacity: 0.85;
+}
