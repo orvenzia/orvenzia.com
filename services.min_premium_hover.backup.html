@@ -4,8 +4,8 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>ESG Services for SMEs — Baseline, Core Gap Analysis, Enterprise Plan, Scope‑3 | Orvenzia</title>
-<meta content="Four SME‑ready ESG services with clear deliverables and SLAs. From 30‑min baseline to full execution. Designed for buyer acceptance." name="description"/>
+<title>Services — Baseline, Core, Enterprise, Scope 3 | Orvenzia</title>
+<meta content="SME‑ready ESG deliverables for buyer acceptance: baseline, core gap analysis, enterprise execution, scope‑3." name="description"/>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;family=Newsreader:wght@600;700&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
@@ -26,132 +26,12 @@
     .link{background-image:linear-gradient(currentColor,currentColor);background-size:0% 1px;background-repeat:no-repeat;background-position:0 100%;transition:background-size .2s ease}
     .link:hover{background-size:100% 1px}
     .btn-primary{background:#0B0B0B;color:#FCFCFA;border-radius:1rem;padding:.85rem 1.25rem;display:inline-block}
-    .btn-primary{background:#0B0B0B;color:#FCFCFA;border-radius:1rem;padding:.85rem 1.25rem;display:inline-block;transition:transform .2s ease,box-shadow .2s ease,background-color .2s ease,color .2s ease}
-.btn-primary:hover{background:#D6C7A1;color:#0B0B0B;box-shadow:0 10px 40px rgba(214,199,161,.35);transform:translateY(-1px)}
+    .btn-primary:hover{box-shadow:var(--glow, 0 10px 40px rgba(214,199,161,.35))}
     .btn-ghost{border:1px solid #D6C7A1;border-radius:1rem;padding:.85rem 1.25rem;display:inline-block}
-    .btn-ghost{border:1px solid #D6C7A1;border-radius:1rem;padding:.85rem 1.25rem;display:inline-block;transition:transform .2s ease,box-shadow .2s ease,background-color .2s ease,color .2s ease,border-color .2s ease}
-.btn-ghost:hover{background:rgba(214,199,161,.08);border-color:#D6C7A1;box-shadow:0 10px 32px rgba(214,199,161,.22);color:#0B0B0B;transform:translateY(-1px)}
+    .btn-ghost:hover{background:#D6C7A1;color:#0B0B0B}
   </style>
-<style>
-/* === Services High-Contrast Overlay === */
-.services-contrast-layer{
-  position: fixed; inset: 0; z-index: 0; pointer-events: none;
-  background:
-    radial-gradient(120% 90% at 50% 30%, rgba(0,0,0,.54) 0%, rgba(0,0,0,.42) 45%, rgba(0,0,0,.38) 70%, rgba(0,0,0,.36) 100%);
-  mix-blend-mode: normal;
-}
-/* Ensure content sits above the overlay */
-header, footer, section, .section-wrap{ position: relative; z-index: 1; }
-/* Gentle text halo for legibility on complex backgrounds */
-.display, .svc-title{ text-shadow: 0 1px 10px rgba(0,0,0,.35), 0 1px 0 rgba(0,0,0,.25); }
-.kicker, .svc-sub, .meta, .svc-pvo, .badges span, .link-arrow{
-  text-shadow: 0 1px 6px rgba(0,0,0,.28);
-}
-/* Hairlines remain visible on darkened bg */
-.rule{ border-top-color: rgba(255,255,255,.28) !important; }
-.hair{ border-color: rgba(255,255,255,.28) !important; }
-</style>
-<style>
-/* === Global ALL-WHITE TEXT OVERRIDE === */
-:root { --ink: #fff; --ink-dim: rgba(255,255,255,.92); --hair: rgba(255,255,255,.28); }
-html, body, * { color: #fff !important; }
-.rule { border-top-color: var(--hair) !important; }
-.hair { border-color: var(--hair) !important; }
-
-/* Dots and small UI */
-.svc-dot { background: #fff !important; }
-.badges span { border-color: rgba(255,255,255,.45) !important; color: #fff !important; }
-.link-arrow { color: #fff !important; }
-a { color: #fff !important; text-decoration: none; }
-a:hover { opacity: .9; }
-
-/* Buttons: white text + transparent bg + white border */
-.btn-primary, .btn-ghost {
-  color: #fff !important;
-  background: transparent !important;
-  border: 1px solid rgba(255,255,255,.65) !important;
-  border-radius: .75rem !important;
-}
-.btn-primary:hover, .btn-ghost:hover {
-  background: rgba(255,255,255,.10) !important;
-  border-color: rgba(255,255,255,.9) !important;
-}
-
-/* Hover meta strip */
-.svc-meta { color: #fff !important; border-color: rgba(255,255,255,.25) !important; background: rgba(255,255,255,.08) !important; }
-</style>
-<style>
-/* --- White Text Override (editorial minimal) --- */
-:root {
-  --ink: rgba(255,255,255,.92);
-  --ink-dim: rgba(255,255,255,.74);
-  --hair: rgba(255,255,255,.18);
-}
-.section-wrap, .svc-row, .svc-grid, .svc-pvo,
-.svc-title, .svc-sub, .display, .kicker, .meta { color: var(--ink); }
-.kicker, .meta, .svc-sub, .svc-pvo .label { color: var(--ink-dim); }
-.rule { border-top-color: var(--hair); }
-.hair { border-color: var(--hair) !important; }
-
-/* Links & badges */
-.link-arrow { color: #fff; }
-.badges span { border-color: rgba(255,255,255,.28); color: rgba(255,255,255,.86); }
-
-/* CTA buttons */
-.btn-primary{ border:1px solid #fff; background:#fff; color:#0B0B0B; }
-.btn-primary:hover{ opacity:.94 }
-.btn-ghost{ border:1px solid rgba(255,255,255,.32); color:#fff; }
-.btn-ghost:hover{ border-color: rgba(255,255,255,.5); }
-
-/* Meta strip & labels */
-.svc-meta{ color: rgba(255,255,255,.8); }
-.svc-pvo .label{ color: var(--ink-dim); }
-</style>
 <link href="global.css" rel="stylesheet"/><link href="assets/css/mobile.safe.css" rel="stylesheet"/>
-<style id="services-white-text">
-/* Services page — force white typography within content sections */
-#services-page .section-wrap, 
-#services-page .section-wrap h1, 
-#services-page .section-wrap h2, 
-#services-page .section-wrap h3, 
-#services-page .section-wrap h4, 
-#services-page .section-wrap h5, 
-#services-page .section-wrap h6, 
-#services-page .section-wrap p, 
-#services-page .section-wrap li, 
-#services-page .section-wrap .kicker, 
-#services-page .section-wrap .display, 
-#services-page .section-wrap a,
-#services-page .rule, 
-#services-page .rule h2, 
-#services-page .rule h3, 
-#services-page .rule p, 
-#services-page .rule li, 
-#services-page .rule a {
-  color:#fff !important;
-}
-
-/* Muted elements that previously used dark rgba — invert to light rgba */
-#services-page .section-wrap .muted, 
-#services-page .rule .muted { color: rgba(255,255,255,.78) !important; }
-
-/* Hairlines / badge borders on dark */
-#services-page .badges span { 
-  color: rgba(255,255,255,.85) !important; 
-  border-color: rgba(255,255,255,.28) !important; 
-}
-#services-page .hairline, 
-#services-page .rule { border-color: rgba(255,255,255,.18) !important; }
-
-/* Ghost buttons on dark */
-#services-page .btn-ghost{ border-color: rgba(255,255,255,.35) !important; color:#fff !important }
-#services-page .btn-ghost:hover{ background: rgba(255,255,255,.08) !important }
-/* Primary stays readable; ensure text white */
-#services-page .btn-primary{ color:#fff !important }
-
-/* Links underline keep currentColor */
-#services-page .link{ color:#fff !important }
-</style><meta content="ESG Services for SMEs — Baseline, Core Gap Analysis, Enterprise Plan, Scope‑3 | Orvenzia" property="og:title"/><meta content="Four SME‑ready ESG services with clear deliverables and SLAs. From 30‑min baseline to full execution. Designed for buyer acceptance." property="og:description"/><meta content="website" property="og:type"/><meta content="https://www.orvenzia.com/services.html" property="og:url"/><meta content="https://www.orvenzia.com/assets/esg-global-bg.jpg" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><meta content="ESG Services for SMEs — Baseline, Core Gap Analysis, Enterprise Plan, Scope‑3 | Orvenzia" name="twitter:title"/><meta content="Four SME‑ready ESG services with clear deliverables and SLAs. From 30‑min baseline to full execution. Designed for buyer acceptance." name="twitter:description"/><meta content="https://www.orvenzia.com/assets/esg-global-bg.jpg" name="twitter:image"/><script type="application/ld+json">{
+<meta content="Services — Baseline, Core, Enterprise, Scope 3 | Orvenzia" property="og:title"/><meta content="SME‑ready ESG deliverables for buyer acceptance: baseline, core gap analysis, enterprise execution, scope‑3." property="og:description"/><meta content="website" property="og:type"/><meta content="https://www.orvenzia.com/services.min_premium_hover.backup.html" property="og:url"/><meta content="https://www.orvenzia.com/assets/esg-global-bg.jpg" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><meta content="Services — Baseline, Core, Enterprise, Scope 3 | Orvenzia" name="twitter:title"/><meta content="SME‑ready ESG deliverables for buyer acceptance: baseline, core gap analysis, enterprise execution, scope‑3." name="twitter:description"/><meta content="https://www.orvenzia.com/assets/esg-global-bg.jpg" name="twitter:image"/><script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "Organization",
   "name": "Orvenzia",
@@ -163,23 +43,6 @@ a:hover { opacity: .9; }
     "@type": "PostalAddress",
     "addressCountry": "DK"
   }
-}</script><script type="application/ld+json">{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": "https://www.orvenzia.com/"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "Services",
-      "item": "https://www.orvenzia.com/services.html"
-    }
-  ]
 }</script><script defer="True" src="lead-config.js"></script><script defer="True" src="assets/js/leadtracker.js"></script><link rel="stylesheet" href="assets/css/mobile.v3.css"/>
 <style>
 /* === MOBILE V11 (2025-10-13) === */
@@ -556,204 +419,295 @@ a:hover { opacity: .9; }
 }
 </style>
 </head>
-<body class="bg-paper text-ink antialiased" id="services-page">
-<header class="sticky top-0 z-50 bg-paper/95 backdrop-blur border-b hairline">
-  <!-- Mobile menu toggle + dropdown -->
-  <button id="mobile-nav-toggle" class="mobile-nav-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
-    <span class="burger" aria-hidden="true"></span>
-  </button>
-  <nav id="mobile-menu" class="mobile-menu" hidden>
-    <a class="mm-item" href="services.html">Services</a>
-    <a class="mm-item" href="cases.html">Cases</a>
-    <a class="mm-item" href="about.html">About</a>
-    <a class="mm-item" href="faq.html">FAQ</a>
-    <a class="mm-item" href="privacy.html">Privacy</a>
-    <a class="mm-item" href="terms.html">Terms</a>
-    <a class="mm-item" href="screening.html">Start Screening</a>
-  </nav>
- <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between"> <a class="font-serif text-xl tracking-tightest" href="index.html">Orvenzia</a> <nav class="hidden md:flex items-center gap-8 text-sm"> <a href="services.html">Services</a> <a href="cases.html#previews">Cases</a> <a href="about.html">About</a> <a class="btn-primary" data-evt="click_screening_cta" href="screening.html">Start Screening</a> </nav> </div>
+<body class="bg-paper text-ink antialiased">
+<header class="sticky top-0 z-50 bg-paper/95 backdrop-blur border-b hairline"> <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between"> <a class="font-serif text-xl tracking-tightest" href="index.html">Orvenzia</a> <nav class="hidden md:flex items-center gap-8 text-sm"> <a href="services.html">Services</a> <a href="cases.html#previews">Cases</a> <a href="about.html">About</a> <a class="btn-primary" data-evt="click_screening_cta" href="screening.html">Start Screening</a> </nav> </div>
 </header>
-<div aria-hidden="true" class="services-contrast-layer"></div>
+<nav class="hidden lg:block fixed left-6 top-1/3 z-40">
+<ul class="space-y-2 text-sm bg-paper/70 backdrop-blur-sm border hairline rounded-xl p-3 shadow-soft">
+<li><a class="hover:text-champagne" href="#top">Hero</a></li>
+<li><a class="hover:text-champagne" href="#baseline">Baseline</a></li>
+<li><a class="hover:text-champagne" href="#core">Core</a></li>
+<li><a class="hover:text-champagne" href="#enterprise">Enterprise</a></li>
+<li><a class="hover:text-champagne" href="#scope3">Scope 3</a></li>
+<li><a class="hover:text-champagne" href="#subscription">Subscription</a></li>
+</ul>
+</nav>
+<section class="relative overflow-hidden" id="top">
+<div class="absolute inset-0 -z-[1] pointer-events-none">
+<div class="absolute -inset-40 opacity-60 blur-3xl" style="background: radial-gradient(60% 60% at 50% 40%, rgba(214,199,161,0.28) 0%, rgba(14,59,46,0.20) 45%, rgba(11,11,11,0.0) 70%);
+                animation: floatGlow 22s ease-in-out infinite alternate;"></div>
+</div>
+<div class="max-w-7xl mx-auto px-6 py-24 lg:py-[10rem] grid lg:grid-cols-12 gap-12 items-end">
+<div class="lg:col-span-8">
+<div class="hero-card rounded-2xl shadow-lg p-8 max-w-3xl bg-paper/95 backdrop-blur-sm border hairline">
+<p class="text-[11px] uppercase tracking-extra text-ash/80">European SMEs • Assurance‑friendly</p>
+<h1 class="mt-3 font-serif text-[64px] md:text-[76px] leading-[1.02] tracking-tightest">
+          ESG services — from diagnostic clarity to audit‑ready execution
+        </h1>
+<p class="mt-5 text-lg text-ash max-w-2xl">
+          Assurance‑ready roadmaps, procurement‑credible materials, and value‑driven implementation. 
+          Select the path that fits your buyer, timeline, and budget.
+        </p>
+<div class="mt-9 flex flex-wrap gap-4">
+<a class="btn-primary" data-evt="click_screening_cta" href="screening.html">Start Free Screening</a>
+<a class="case-button" href="cases.html#previews">See anonymised action cards</a>
+          Pricing
+        </div>
+<div class="mt-6 flex flex-wrap gap-3 text-xs text-ash">
+<span class="px-3 py-1 rounded-full border hairline">OCI ≥ 80 → Buyer‑ready trajectory</span>
+<span class="px-3 py-1 rounded-full border hairline">Assurance‑aligned wording</span>
+<span class="px-3 py-1 rounded-full border hairline">Minimal burden on teams</span>
+</div>
+</div>
+</div>
+</div>
+</section>
 <style>
-/* Ultra-minimal editorial: no boxes, no shadows — whitespace + hairlines */
-.section-wrap{max-width:72rem;margin:0 auto;padding-left:1.5rem;padding-right:1.5rem}
-.hair{border-color:rgba(11,11,11,.08)}
-.kicker{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(11,11,11,.55)}
-.display{font-family: var(--font-serif, ui-serif); letter-spacing:-.02em}
-.meta{font-size:.82rem;color:rgba(11,11,11,.55)}
-.link-arrow{position:relative;display:inline-block}
-.link-arrow::after{content:"→";margin-left:.45rem;transition:transform .25s ease}
-.link-arrow:hover::after{transform:translateX(4px)}
-.svc-row{transition:color .25s ease}
-.svc-row:hover .svc-title{color:#0B0B0B}
-.svc-title{font-size:1.6rem;letter-spacing:-.01em}
-.svc-sub{color:rgba(11,11,11,.55)}
-.svc-grid{display:grid;grid-template-columns:1fr;gap:1.25rem}
-@media (min-width: 768px){ .svc-grid{grid-template-columns: 4fr 8fr} }
-.svc-pvo{display:grid;gap:.5rem}
-.svc-pvo .label{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(11,11,11,.55)}
-.svc-meta{display:flex;gap:1rem;flex-wrap:wrap;font-size:.82rem;color:rgba(11,11,11,.66);opacity:0;transform:translateY(6px);
-  transition: all .30s ease}
-.svc-row:hover .svc-meta{opacity:1;transform:translateY(0)}
-/* Mobile shows meta by default (no hover) */
-@media (max-width: 768px){ .svc-meta{opacity:1;transform:none} }
-/* Dividers */
-.rule{border-top:1px solid rgba(11,11,11,.08)}
-/* Hero button minimal */
-.btn-primary{padding:.85rem 1.2rem;border:1px solid #0B0B0B;border-radius:.75rem;background:#0B0B0B;color:#fff}
-.btn-primary:hover{opacity:.92}
-.btn-ghost{padding:.85rem 1.2rem;border:1px solid rgba(11,11,11,.14);border-radius:.75rem}
-.badges{display:flex;gap:.5rem;flex-wrap:wrap}
-.badges span{border:1px solid rgba(11,11,11,.12);border-radius:9999px;padding:.3rem .7rem;font-size:.74rem;color:rgba(11,11,11,.7)}
+@keyframes floatGlow { 0% { transform: translateY(0px) scale(1); } 100% { transform: translateY(-18px) scale(1.03); } }
 </style>
-<section class="section-wrap" id="top" style="padding-top:5.5rem;padding-bottom:5rem">
-<div class="kicker">European SMEs • Assurance‑aligned</div>
-<h1 class="display" style="font-size:3.8rem;line-height:1.02;margin-top:.4rem;">ESG your buyers accept.</h1>
-<p style="margin-top:1rem;max-width:42rem;color:rgba(11,11,11,.70);font-size:1.1rem;">
-    From diagnostic clarity to audit‑ready execution — built for procurement and assurance.
-  </p>
-<div style="margin-top:1.4rem;display:flex;gap:.8rem;align-items:center;">
+<section class="py-12">
+<div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-6">
+<div class="rounded-2xl border hairline bg-paper/95 backdrop-blur-sm shadow-soft p-6">
+<div class="font-serif text-2xl">Procurement‑credible deliverables</div>
+<p class="text-sm text-ash mt-2">Structured and worded for buyers and assurance teams — not marketing.</p>
+</div>
+<div class="rounded-2xl border hairline bg-paper/95 backdrop-blur-sm shadow-soft p-6">
+<div class="font-serif text-2xl">Decisive prioritisation</div>
+<p class="text-sm text-ash mt-2">From material risks to sequenced actions with ROI and risk exposure.</p>
+</div>
+<div class="rounded-2xl border hairline bg-paper/95 backdrop-blur-sm shadow-soft p-6">
+<div class="font-serif text-2xl">Minimal burden, maximum speed</div>
+<p class="text-sm text-ash mt-2">We collect, structure, and validate essentials so leadership can decide fast.</p>
+</div>
+</div>
+</section>
+<section class="py-10" id="baseline">
+<div class="max-w-7xl mx-auto px-6">
+<div class="rounded-2xl bg-paper/95 backdrop-blur-sm border hairline shadow-soft p-8 lg:p-10">
+<div class="flex items-start justify-between gap-8 flex-col md:flex-row">
+<div class="md:max-w-2xl">
+<div class="flex items-center gap-3">
+<h2 class="font-serif text-3xl">Baseline — Strategic ESG Snapshot</h2>
+<span class="inline-flex items-center text-xs px-3 py-1 rounded-full border hairline">Clarity in &lt; 10 days</span>
+</div>
+<div class="mt-5 space-y-4">
+<div>
+<div class="text-sm tracking-wide uppercase text-ash/70">Purpose</div>
+<p class="mt-1">Establish an initial diagnostic of the organisation’s ESG position, benchmarked against industry peers to identify material risks and priority gaps.</p>
+</div>
+<div>
+<div class="text-sm tracking-wide uppercase text-ash/70">Deliverables</div>
+<ul class="mt-1 list-disc pl-5 space-y-1"><li>3‑page executive note summarising exposures and benchmark deltas</li><li>Focused list of minimum requirements for credibility with buyers</li><li>Directional recommendations for next steps</li></ul>
+</div>
+<div>
+<div class="text-sm tracking-wide uppercase text-ash/70">Value</div>
+<ul class="mt-1 list-disc pl-5 space-y-1"><li>Clarifies where effort generates the highest impact</li><li>Minimises wasted time by removing guesswork</li><li>Creates alignment on scope and priorities before deeper work</li></ul>
+</div>
+<div>
+<div class="text-sm tracking-wide uppercase text-ash/70">Outcome</div>
+<ul class="mt-1 list-disc pl-5 space-y-1"><li>A strategic ESG “X‑ray” of current state</li><li>Leadership visibility on distance to buyer expectations</li></ul>
+</div>
+</div>
+</div>
+<div class="md:w-72 shrink-0">
+<div class="rounded-xl border hairline p-4">
+<div class="text-sm text-ash">What you get</div>
+<ul class="mt-2 text-sm space-y-1">
+<li>Assurance‑aligned wording</li>
+<li>Buyer‑credible structure</li>
+<li>Actionable prioritisation</li>
+</ul>
+</div>
+<div class="mt-4 flex flex-col gap-3">
+<a class="btn-primary text-center" href="screening.html">Start with Baseline</a>
+<a class="btn-ghost text-center" href="#top">Back to top</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-10" id="core">
+<div class="max-w-7xl mx-auto px-6">
+<div class="rounded-2xl bg-paper/95 backdrop-blur-sm border hairline shadow-soft p-8 lg:p-10">
+<div class="flex items-start justify-between gap-8 flex-col md:flex-row">
+<div class="md:max-w-2xl">
+<div class="flex items-center gap-3">
+<h2 class="font-serif text-3xl">Core — Buyer‑Credible “What to Do” Report</h2>
+<span class="inline-flex items-center text-xs px-3 py-1 rounded-full border hairline">Acceptance in 30–60 days</span>
+</div>
+<div class="mt-5 space-y-4">
+<div>
+<div class="text-sm tracking-wide uppercase text-ash/70">Purpose</div>
+<p class="mt-1">Provide executives with a decisive, assurance‑ready roadmap that answers the central question: “Which actions are required to secure buyer approval?”</p>
+</div>
+<div>
+<div class="text-sm tracking-wide uppercase text-ash/70">Deliverables</div>
+<ul class="mt-1 list-disc pl-5 space-y-1"><li>10‑page executive report translating ESG requirements into initiatives</li><li>Executive Action Card with sequenced steps and ownership</li><li>Dependencies, timing and minimal documentation set</li></ul>
+</div>
+<div>
+<div class="text-sm tracking-wide uppercase text-ash/70">Value</div>
+<ul class="mt-1 list-disc pl-5 space-y-1"><li>Prioritised actions with buyer relevance and risk reduction</li><li>High‑level, indicative ROI and cost‑of‑inaction view</li><li>Clear allocation of responsibilities across functions</li></ul>
+</div>
+<div>
+<div class="text-sm tracking-wide uppercase text-ash/70">Outcome</div>
+<ul class="mt-1 list-disc pl-5 space-y-1"><li>A procurement‑credible “what to do” plan buyers can evaluate</li><li>Visible trajectory from current state to buyer‑approved readiness</li></ul>
+</div>
+</div>
+</div>
+<div class="md:w-72 shrink-0">
+<div class="rounded-xl border hairline p-4">
+<div class="text-sm text-ash">What you get</div>
+<ul class="mt-2 text-sm space-y-1">
+<li>Assurance‑aligned wording</li>
+<li>Buyer‑credible structure</li>
+<li>Actionable prioritisation</li>
+</ul>
+</div>
+<div class="mt-4 flex flex-col gap-3">
+<a class="btn-primary text-center" href="cases.html#previews">See anonymised action card</a>
+<a class="btn-ghost text-center" href="#top">Back to top</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-10" id="enterprise">
+<div class="max-w-7xl mx-auto px-6">
+<div class="rounded-2xl bg-paper/95 backdrop-blur-sm border hairline shadow-soft p-8 lg:p-10">
+<div class="flex items-start justify-between gap-8 flex-col md:flex-row">
+<div class="md:max-w-2xl">
+<div class="flex items-center gap-3">
+<h2 class="font-serif text-3xl">Enterprise — Comprehensive ESG Readiness</h2>
+<span class="inline-flex items-center text-xs px-3 py-1 rounded-full border hairline">Audit‑ready in 60–90 days</span>
+</div>
+<div class="mt-5 space-y-4">
+<div>
+<div class="text-sm tracking-wide uppercase text-ash/70">Purpose</div>
+<p class="mt-1">Embed ESG into the operating model with governance, controls and evidence that withstand buyer audits and regulatory scrutiny.</p>
+</div>
+<div>
+<div class="text-sm tracking-wide uppercase text-ash/70">Deliverables</div>
+<ul class="mt-1 list-disc pl-5 space-y-1"><li>Policies, templates and a three‑year ESG roadmap</li><li>Onsite training and adoption support across functions</li><li>Documented audit trail and evidence pack</li></ul>
+</div>
+<div>
+<div class="text-sm tracking-wide uppercase text-ash/70">Value</div>
+<ul class="mt-1 list-disc pl-5 space-y-1"><li>Enables management to integrate ESG KPIs into operations</li><li>Equips staff with tools and training to achieve compliance</li><li>Detailed, quantified ROI model demonstrating financial return</li></ul>
+</div>
+<div>
+<div class="text-sm tracking-wide uppercase text-ash/70">Outcome</div>
+<ul class="mt-1 list-disc pl-5 space-y-1"><li>Buyer‑trusted and audit‑ready execution</li><li>Prepared to meet full ESG reporting requirements from 2028</li></ul>
+</div>
+</div>
+</div>
+<div class="md:w-72 shrink-0">
+<div class="rounded-xl border hairline p-4">
+<div class="text-sm text-ash">What you get</div>
+<ul class="mt-2 text-sm space-y-1">
+<li>Assurance‑aligned wording</li>
+<li>Buyer‑credible structure</li>
+<li>Actionable prioritisation</li>
+</ul>
+</div>
+<div class="mt-4 flex flex-col gap-3">
+<a class="btn-primary text-center" href="cases.html#previews">Request enterprise sample</a>
+<a class="btn-ghost text-center" href="#top">Back to top</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-10" id="scope3">
+<div class="max-w-7xl mx-auto px-6">
+<div class="rounded-2xl bg-paper/95 backdrop-blur-sm border hairline shadow-soft p-8 lg:p-10">
+<div class="flex items-start justify-between gap-8 flex-col md:flex-row">
+<div class="md:max-w-2xl">
+<div class="flex items-center gap-3">
+<h2 class="font-serif text-3xl">Scope 3 Fast‑Track — Value Chain ESG</h2>
+<span class="inline-flex items-center text-xs px-3 py-1 rounded-full border hairline">Credible footprint in 60–120 days</span>
+</div>
+<div class="mt-5 space-y-4">
+<div>
+<div class="text-sm tracking-wide uppercase text-ash/70">Purpose</div>
+<p class="mt-1">Address the most complex buyer requirement with a credible, assurance‑aligned Scope 3 baseline.</p>
+</div>
+<div>
+<div class="text-sm tracking-wide uppercase text-ash/70">Deliverables</div>
+<ul class="mt-1 list-disc pl-5 space-y-1"><li>Supplier engagement toolkit and data models</li><li>Category hotspot analysis and boundary setting</li><li>Consolidated baseline and buyer‑facing summary</li></ul>
+</div>
+<div>
+<div class="text-sm tracking-wide uppercase text-ash/70">Value</div>
+<ul class="mt-1 list-disc pl-5 space-y-1"><li>Extends credibility across the value chain with minimal internal burden</li><li>Clarifies material categories and data improvements over time</li><li>Supports financing and procurement discussions with evidence</li></ul>
+</div>
+<div>
+<div class="text-sm tracking-wide uppercase text-ash/70">Outcome</div>
+<ul class="mt-1 list-disc pl-5 space-y-1"><li>Assurance‑friendly Scope 3 statement recognised by buyers, banks and regulators</li></ul>
+</div>
+</div>
+</div>
+<div class="md:w-72 shrink-0">
+<div class="rounded-xl border hairline p-4">
+<div class="text-sm text-ash">What you get</div>
+<ul class="mt-2 text-sm space-y-1">
+<li>Assurance‑aligned wording</li>
+<li>Buyer‑credible structure</li>
+<li>Actionable prioritisation</li>
+</ul>
+</div>
+<div class="mt-4 flex flex-col gap-3">
+<a class="btn-primary text-center" href="cases.html#previews">See Scope 3 framework</a>
+<a class="btn-ghost text-center" href="#top">Back to top</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-10" id="subscription">
+<div class="max-w-7xl mx-auto px-6">
+<div class="rounded-2xl border hairline shadow-soft p-[2px]" style="background: linear-gradient(135deg, rgba(214,199,161,.9), rgba(14,59,46,.9));">
+<div class="rounded-[1rem] bg-paper/95 backdrop-blur-sm p-8 lg:p-10">
+<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+<div>
+<h3 class="font-serif text-2xl">Subscription — Continuous ESG Assurance</h3>
+<p class="text-ash mt-2 max-w-2xl">Prevent regression between audits and buyer checks. Ongoing KPI updates, proactive reporting cadence, and buyer‑aligned adjustments — sustaining buyer readiness permanently.</p>
+</div>
+<div class="flex gap-3">
+            See plans
+            <a class="btn-ghost" href="screening.html">Start Free Screening</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-10">
+<div class="max-w-7xl mx-auto px-6 rounded-2xl border hairline bg-paper/95 backdrop-blur-sm shadow-soft p-6">
+<div class="flex items-center justify-between flex-col md:flex-row gap-4">
+<div>
+<div class="font-serif text-2xl">Anonymised materials</div>
+<p class="text-sm text-ash mt-1">Real action cards and extracts, anonymised under NDA.</p>
+</div>
+<div class="flex gap-3">
+<a class="btn-ghost" href="cases.html#previews">View previews</a>
 <a class="btn-primary" href="screening.html">Start Free Screening</a>
-<a class="link-arrow" href="cases.html#previews">See anonymised action cards</a>
-</div>
-<div class="badges" style="margin-top:1rem">
-<span>Assurance‑aligned</span><span>OCI ≥ 80 trajectory</span><span>Minimal burden</span>
-</div>
-</section>
-<section class="section-wrap" style="padding-top:1.2rem;padding-bottom:.8rem">
-<div class="meta">Procurement‑credible · Decisive prioritisation · Minimal burden</div>
-</section>
-<section class="rule" id="baseline">
-<div class="section-wrap svc-row" style="padding-top:2.2rem;padding-bottom:2.2rem">
-<div class="svc-grid">
-<div>
-<div class="svc-title">Baseline — Strategic ESG Snapshot</div>
-<div class="svc-sub">Clarity in &lt; 10 days</div>
-</div>
-<div class="svc-pvo">
-<div><div class="label">Purpose</div><div>Diagnostic clarity on material risks and gaps benchmarked to peers.</div></div>
-<div><div class="label">Value</div><div>Resource focus where impact is highest; alignment on scope before deeper work.</div></div>
-<div><div class="label">Outcome</div><div>Directional view against buyer expectations.</div></div>
-<div class="svc-meta">
-<div>Pages: 3</div>
-<div>SLA: &lt; 10 days</div>
-<div>Price: € from 579</div>
-<div style="margin-left:auto"><a class="link-arrow" href="screening.html">Start with Baseline</a></div>
-</div>
 </div>
 </div>
 </div>
 </section>
-<section class="rule" id="core">
-<div class="section-wrap svc-row" style="padding-top:2.2rem;padding-bottom:2.2rem">
-<div class="svc-grid">
-<div>
-<div class="svc-title">Core — Buyer‑Credible “What to Do” Report</div>
-<div class="svc-sub">Acceptance in 30–60 days</div>
-</div>
-<div class="svc-pvo">
-<div><div class="label">Purpose</div><div>Assurance‑ready roadmap answering: Which actions are required to secure buyer approval?</div></div>
-<div><div class="label">Value</div><div>Prioritised initiatives with buyer impact and **indicative ROI**; owners, timing, dependencies.</div></div>
-<div><div class="label">Outcome</div><div>Procurement‑credible trajectory from current state to approval.</div></div>
-<div class="svc-meta">
-<div>Pages: 10 + action card</div>
-<div>SLA: 30–60 days</div>
-<div>Price: € 2,429</div>
-<div style="margin-left:auto"><a class="link-arrow" href="cases.html#previews">See anonymised action card</a></div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section class="rule" id="enterprise">
-<div class="section-wrap svc-row" style="padding-top:2.2rem;padding-bottom:2.2rem">
-<div class="svc-grid">
-<div>
-<div class="svc-title">Enterprise — Comprehensive ESG Readiness</div>
-<div class="svc-sub">Audit‑ready in 60–90 days</div>
-</div>
-<div class="svc-pvo">
-<div><div class="label">Purpose</div><div>Embed ESG with governance, controls and evidence that withstand audits.</div></div>
-<div><div class="label">Value</div><div>Enable management to integrate KPIs; equip staff to **achieve compliance** with a **quantified ROI** model.</div></div>
-<div><div class="label">Outcome</div><div>Buyer‑trusted execution; prepared for full ESG reporting from 2028.</div></div>
-<div class="svc-meta">
-<div>Pages: 20+</div>
-<div>SLA: 60–90 days</div>
-<div>Price: € 6,429</div>
-<div style="margin-left:auto"><a class="link-arrow" href="cases.html#previews">Request enterprise sample</a></div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section class="rule" id="scope3">
-<div class="section-wrap svc-row" style="padding-top:2.2rem;padding-bottom:2.2rem">
-<div class="svc-grid">
-<div>
-<div class="svc-title">Scope 3 Fast‑Track — Value Chain ESG</div>
-<div class="svc-sub">Credible footprint in 60–120 days</div>
-</div>
-<div class="svc-pvo">
-<div><div class="label">Purpose</div><div>Assurance‑aligned Scope 3 baseline with supplier engagement and hotspot analysis.</div></div>
-<div><div class="label">Value</div><div>Extends credibility across the value chain with minimal internal burden.</div></div>
-<div><div class="label">Outcome</div><div>Statement buyers, banks and regulators recognise.</div></div>
-<div class="svc-meta">
-<div>Pages: ~20</div>
-<div>SLA: 60–120 days</div>
-<div>Price: € 6,139</div>
-<div style="margin-left:auto"><a class="link-arrow" href="cases.html#previews">See Scope 3 framework</a></div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section class="rule" id="subscription">
-<div class="section-wrap svc-row" style="padding-top:2.2rem;padding-bottom:2.2rem">
-<div class="svc-grid">
-<div>
-<div class="svc-title">Subscription — Continuous ESG Assurance</div>
-<div class="svc-sub">Stay buyer‑ready, always</div>
-</div>
-<div class="svc-pvo">
-<div><div class="label">Purpose</div><div>Prevent regression between audits and buyer checks.</div></div>
-<div><div class="label">Value</div><div>KPI maintenance, proactive updates and buyer‑aligned adjustments.</div></div>
-<div><div class="label">Outcome</div><div>Readiness sustained permanently.</div></div>
-<div class="svc-meta">
-<div>Pages: —</div>
-<div>SLA: Monthly cadence</div>
-<div>Price: € from 199/mo</div>
-<div style="margin-left:auto">See plans</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section class="rule">
-<div class="section-wrap" style="padding-top:2rem;padding-bottom:2rem">
-<div class="svc-grid">
-<div class="svc-title">Anonymised materials</div>
-<div>
-<div class="meta">Real action cards and extracts, anonymised under NDA.</div>
-<div style="margin-top:.6rem;display:flex;gap:1rem;flex-wrap:wrap">
-<a class="link-arrow" href="cases.html#previews">View previews</a>
-<a class="link-arrow" href="screening.html">Start Free Screening</a>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section class="rule">
-<div class="section-wrap" style="padding-top:3rem;padding-bottom:4rem;text-align:center">
-<h3 class="display" style="font-size:2.1rem;letter-spacing:-.01em">Ready for a cleaner, buyer‑credible path?</h3>
-<p class="meta" style="margin-top:.4rem">Start with the 5‑minute screening — executive and efficient.</p>
-<div style="margin-top:1rem">
-<a class="btn-primary" href="screening.html">Start Free Screening</a>
+<section class="py-16">
+<div class="max-w-7xl mx-auto px-6 text-center">
+<h3 class="font-serif text-3xl">Ready to move from diagnostic to audit‑ready?</h3>
+<p class="text-ash mt-2">Start with the 5‑minute screening — no commitment.</p>
+<div class="mt-6">
+<a class="btn-primary" data-evt="click_screening_cta_bottom" href="screening.html">Start Free Screening</a>
 </div>
 </div>
 </section>
 <footer class="mt-28 bg-ink text-[#EDEAE3]" id="footer"> <div class="max-w-7xl mx-auto px-6 py-14 grid md:grid-cols-4 gap-10"> <div> <div class="font-serif text-2xl text-paper">Orvenzia</div> <div class="mt-2 text-sm text-[#EDEAE3]/80">European SMEs · Audit-ready · Buyer-accepted</div> </div> <div> <div class="text-paper/80 font-semibold mb-3 tracking-wider text-xs">COMPANY</div> <ul class="space-y-2 text-sm"> <li><a class="hover:text-champagne" href="services.html">Services</a></li> <li><a class="hover:text-champagne" href="cases.html">Cases</a></li> <li><a class="hover:text-champagne" href="about.html">About</a></li> </ul> </div> <div> <div class="text-paper/80 font-semibold mb-3 tracking-wider text-xs">CONTACT</div> <ul class="space-y-2 text-sm"> <li><a class="hover:text-champagne" href="mailto:support@orvenzia.com">support@orvenzia.com</a></li> <li><a class="hover:text-champagne" href="tel:+4520968324">+45 20 96 83 24</a></li> <li>Aalborg, Denmark</li> </ul> </div> <div> <div class="text-paper/80 font-semibold mb-3 tracking-wider text-xs">LEGAL</div> <ul class="space-y-2 text-sm"> <li><a class="hover:text-champagne" href="privacy.html">Privacy</a></li> <li><a class="hover:text-champagne" href="terms.html">Terms</a></li> <li class="text-champagne">CVR 45828697</li> <li class="text-xs text-[#EDEAE3]/60">NDA applies to all anonymised materials.</li> </ul> </div> </div> <div class="text-xs text-[#EDEAE3]/60 text-center pb-6">© Orvenzia</div>
 </footer>
-  <script src="assets/js/mobile-menu.js"></script>
 <script>
 // === MOBILE V11: dropdown autodetect (tap to open/close) ===
 (function(){

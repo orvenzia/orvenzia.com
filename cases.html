@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 
-<html lang="en">
-<head>
+<html><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>ESG Services for SMEs — Baseline, Core Gap Analysis, Enterprise Plan, Scope‑3 | Orvenzia</title>
-<meta content="Four SME‑ready ESG services with clear deliverables and SLAs. From 30‑min baseline to full execution. Designed for buyer acceptance." name="description"/>
+<title>ESG Case Studies (Anonymised) — Buyer‑Credible Outcomes | Orvenzia</title>
+<meta content="See anonymised outcomes: S‑Rating alignment, ISO 14001 pathways, and buyer‑ready documentation delivered in weeks, not months." name="description"/>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;family=Newsreader:wght@600;700&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
@@ -26,132 +25,421 @@
     .link{background-image:linear-gradient(currentColor,currentColor);background-size:0% 1px;background-repeat:no-repeat;background-position:0 100%;transition:background-size .2s ease}
     .link:hover{background-size:100% 1px}
     .btn-primary{background:#0B0B0B;color:#FCFCFA;border-radius:1rem;padding:.85rem 1.25rem;display:inline-block}
-    .btn-primary{background:#0B0B0B;color:#FCFCFA;border-radius:1rem;padding:.85rem 1.25rem;display:inline-block;transition:transform .2s ease,box-shadow .2s ease,background-color .2s ease,color .2s ease}
-.btn-primary:hover{background:#D6C7A1;color:#0B0B0B;box-shadow:0 10px 40px rgba(214,199,161,.35);transform:translateY(-1px)}
+    .btn-primary:hover{box-shadow:var(--glow, 0 10px 40px rgba(214,199,161,.35))}
     .btn-ghost{border:1px solid #D6C7A1;border-radius:1rem;padding:.85rem 1.25rem;display:inline-block}
-    .btn-ghost{border:1px solid #D6C7A1;border-radius:1rem;padding:.85rem 1.25rem;display:inline-block;transition:transform .2s ease,box-shadow .2s ease,background-color .2s ease,color .2s ease,border-color .2s ease}
-.btn-ghost:hover{background:rgba(214,199,161,.08);border-color:#D6C7A1;box-shadow:0 10px 32px rgba(214,199,161,.22);color:#0B0B0B;transform:translateY(-1px)}
-  </style>
-<style>
-/* === Services High-Contrast Overlay === */
-.services-contrast-layer{
-  position: fixed; inset: 0; z-index: 0; pointer-events: none;
-  background:
-    radial-gradient(120% 90% at 50% 30%, rgba(0,0,0,.54) 0%, rgba(0,0,0,.42) 45%, rgba(0,0,0,.38) 70%, rgba(0,0,0,.36) 100%);
-  mix-blend-mode: normal;
+    .btn-ghost:hover{background:#D6C7A1;color:#0B0B0B}
+  
+/* === v32 FIX: Cases intro headline consistent with Services === */
+.section-wrap.intro.hero .display{
+  font-family: var(--font-serif, "Newsreader", ui-serif, Georgia, "Times New Roman", serif) !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.02em;
 }
-/* Ensure content sits above the overlay */
-header, footer, section, .section-wrap{ position: relative; z-index: 1; }
-/* Gentle text halo for legibility on complex backgrounds */
-.display, .svc-title{ text-shadow: 0 1px 10px rgba(0,0,0,.35), 0 1px 0 rgba(0,0,0,.25); }
-.kicker, .svc-sub, .meta, .svc-pvo, .badges span, .link-arrow{
-  text-shadow: 0 1px 6px rgba(0,0,0,.28);
+
+
+/* === v32 FIX: Footer CTA alignment === */
+.ecard-footer{
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1rem 1rem 1rem;
 }
-/* Hairlines remain visible on darkened bg */
-.rule{ border-top-color: rgba(255,255,255,.28) !important; }
-.hair{ border-color: rgba(255,255,255,.28) !important; }
-</style>
-<style>
-/* === Global ALL-WHITE TEXT OVERRIDE === */
-:root { --ink: #fff; --ink-dim: rgba(255,255,255,.92); --hair: rgba(255,255,255,.28); }
-html, body, * { color: #fff !important; }
-.rule { border-top-color: var(--hair) !important; }
-.hair { border-color: var(--hair) !important; }
+.ecard-footer .ecta{ margin-left: auto; }
 
-/* Dots and small UI */
-.svc-dot { background: #fff !important; }
-.badges span { border-color: rgba(255,255,255,.45) !important; color: #fff !important; }
-.link-arrow { color: #fff !important; }
-a { color: #fff !important; text-decoration: none; }
-a:hover { opacity: .9; }
 
-/* Buttons: white text + transparent bg + white border */
-.btn-primary, .btn-ghost {
-  color: #fff !important;
+/* === Custom FIX: Cases intro all white text, transparent bg, left aligned === */
+.cases-main .intro {
   background: transparent !important;
-  border: 1px solid rgba(255,255,255,.65) !important;
-  border-radius: .75rem !important;
+  color: #fff !important;
+  text-align: left !important;
+  padding-left: 2rem;
+  max-width: 72rem;
+  margin: 0 auto;
 }
-.btn-primary:hover, .btn-ghost:hover {
-  background: rgba(255,255,255,.10) !important;
-  border-color: rgba(255,255,255,.9) !important;
+.cases-main .intro h1,
+.cases-main .intro .h1,
+.cases-main .intro p,
+.cases-main .intro .lede,
+.cases-main .intro .kicker,
+.cases-main .intro .meta {
+  color: #fff !important;
 }
 
-/* Hover meta strip */
-.svc-meta { color: #fff !important; border-color: rgba(255,255,255,.25) !important; background: rgba(255,255,255,.08) !important; }
-</style>
-<style>
-/* --- White Text Override (editorial minimal) --- */
-:root {
-  --ink: rgba(255,255,255,.92);
-  --ink-dim: rgba(255,255,255,.74);
-  --hair: rgba(255,255,255,.18);
-}
-.section-wrap, .svc-row, .svc-grid, .svc-pvo,
-.svc-title, .svc-sub, .display, .kicker, .meta { color: var(--ink); }
-.kicker, .meta, .svc-sub, .svc-pvo .label { color: var(--ink-dim); }
-.rule { border-top-color: var(--hair); }
-.hair { border-color: var(--hair) !important; }
-
-/* Links & badges */
-.link-arrow { color: #fff; }
-.badges span { border-color: rgba(255,255,255,.28); color: rgba(255,255,255,.86); }
-
-/* CTA buttons */
-.btn-primary{ border:1px solid #fff; background:#fff; color:#0B0B0B; }
-.btn-primary:hover{ opacity:.94 }
-.btn-ghost{ border:1px solid rgba(255,255,255,.32); color:#fff; }
-.btn-ghost:hover{ border-color: rgba(255,255,255,.5); }
-
-/* Meta strip & labels */
-.svc-meta{ color: rgba(255,255,255,.8); }
-.svc-pvo .label{ color: var(--ink-dim); }
 </style>
 <link href="global.css" rel="stylesheet"/><link href="assets/css/mobile.safe.css" rel="stylesheet"/>
-<style id="services-white-text">
-/* Services page — force white typography within content sections */
-#services-page .section-wrap, 
-#services-page .section-wrap h1, 
-#services-page .section-wrap h2, 
-#services-page .section-wrap h3, 
-#services-page .section-wrap h4, 
-#services-page .section-wrap h5, 
-#services-page .section-wrap h6, 
-#services-page .section-wrap p, 
-#services-page .section-wrap li, 
-#services-page .section-wrap .kicker, 
-#services-page .section-wrap .display, 
-#services-page .section-wrap a,
-#services-page .rule, 
-#services-page .rule h2, 
-#services-page .rule h3, 
-#services-page .rule p, 
-#services-page .rule li, 
-#services-page .rule a {
-  color:#fff !important;
+<style>
+:root{ --ink:#0B0B0B; --ink-dim:rgba(11,11,11,.72); --hair:rgba(11,11,11,.12); }
+.section{ max-width:72rem; margin:0 auto; padding:2rem 1.25rem }
+
+/* Intro like Services (white text) with contrast */
+.intro{ position:relative; color:#fff; }
+.intro .kicker{ color:rgba(255,255,255,.88) }
+.intro .h1{ color:#fff }
+.intro .meta{ color:rgba(255,255,255,.9) }
+.intro::before{
+  content:""; position:absolute; inset:-12px 0 -12px 0; z-index:-1; pointer-events:none;
+  background: radial-gradient(110% 70% at 50% 30%, rgba(0,0,0,.52) 0%, rgba(0,0,0,.44) 45%, rgba(0,0,0,.38) 70%, rgba(0,0,0,.34) 100%);
 }
 
-/* Muted elements that previously used dark rgba — invert to light rgba */
-#services-page .section-wrap .muted, 
-#services-page .rule .muted { color: rgba(255,255,255,.78) !important; }
+/* Text-only executive cards */
+.tcards .grid{ display:grid; grid-template-columns:1fr; gap:1rem }
+@media (min-width: 980px){ .tcards .grid{ grid-template-columns:1fr 1fr } }
 
-/* Hairlines / badge borders on dark */
-#services-page .badges span { 
-  color: rgba(255,255,255,.85) !important; 
-  border-color: rgba(255,255,255,.28) !important; 
+.tcard{
+  background:#fff; color:var(--ink);
+  border:1px solid var(--hair); border-radius:16px; padding:1.1rem 1.15rem 1.2rem 1.15rem;
+  box-shadow:0 18px 42px rgba(0,0,0,.06);
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
 }
-#services-page .hairline, 
-#services-page .rule { border-color: rgba(255,255,255,.18) !important; }
+.tcard:hover{ transform: translateY(-2px); box-shadow:0 22px 60px rgba(0,0,0,.10); border-color: rgba(11,11,11,.18) }
 
-/* Ghost buttons on dark */
-#services-page .btn-ghost{ border-color: rgba(255,255,255,.35) !important; color:#fff !important }
-#services-page .btn-ghost:hover{ background: rgba(255,255,255,.08) !important }
-/* Primary stays readable; ensure text white */
-#services-page .btn-primary{ color:#fff !important }
+.thead{ display:flex; align-items:baseline; justify-content:space-between; gap:.8rem; flex-wrap:wrap }
+.ttitle{ margin:0; font-size:1.18rem; letter-spacing:-.01em }
+.tmeta{ font-size:.86rem; color:var(--ink-dim) }
+.tone{ margin:.55rem 0 0 0; font-size:1rem; color:var(--ink-dim) }
 
-/* Links underline keep currentColor */
-#services-page .link{ color:#fff !important }
-</style><meta content="ESG Services for SMEs — Baseline, Core Gap Analysis, Enterprise Plan, Scope‑3 | Orvenzia" property="og:title"/><meta content="Four SME‑ready ESG services with clear deliverables and SLAs. From 30‑min baseline to full execution. Designed for buyer acceptance." property="og:description"/><meta content="website" property="og:type"/><meta content="https://www.orvenzia.com/services.html" property="og:url"/><meta content="https://www.orvenzia.com/assets/esg-global-bg.jpg" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><meta content="ESG Services for SMEs — Baseline, Core Gap Analysis, Enterprise Plan, Scope‑3 | Orvenzia" name="twitter:title"/><meta content="Four SME‑ready ESG services with clear deliverables and SLAs. From 30‑min baseline to full execution. Designed for buyer acceptance." name="twitter:description"/><meta content="https://www.orvenzia.com/assets/esg-global-bg.jpg" name="twitter:image"/><script type="application/ld+json">{
+.tfacts{ display:flex; gap:.4rem; flex-wrap:wrap; margin-top:.6rem }
+.fact{ background:#fff; color:var(--ink); border:1px solid var(--hair); border-radius:9999px; padding:.22rem .6rem; font-size:.74rem; font-weight:600 }
+
+.tactions{ margin:.7rem 0 0 1rem; padding:0; }
+.tactions li{ margin:.22rem 0; }
+
+.toutcome{ margin:.6rem 0 0 0; font-size:.96rem }
+.tquote{ margin:.55rem 0 0 0; font-style:italic; color:var(--ink-dim) }
+
+.tcta{ display:flex; justify-content:flex-end; margin-top:.9rem }
+.cta{ display:inline-flex; align-items:center; gap:.4rem; font-weight:600; color:var(--ink); text-decoration:none;
+  border:1px solid var(--hair); padding:.5rem .8rem; border-radius:.6rem }
+.cta::after{ content:"→"; transition: transform .2s ease }
+.cta:hover::after{ transform: translateX(3px) }
+</style>
+<style>
+/* v24 C‑suite intro tuning */
+.cases-main .intro .h1{ font-size:3.15rem; letter-spacing:-.02em; line-height:1.08; color:#fff }
+.cases-main .intro .kicker{ font-size:.72rem; letter-spacing:.20em; text-transform:uppercase; color:rgba(255,255,255,.9) }
+.cases-main .intro .meta{ font-size:1rem; color:rgba(255,255,255,.92) }
+.cases-main .intro::before{
+  content:""; position:absolute; inset:-14px 0 -14px 0; z-index:-1; pointer-events:none;
+  background: radial-gradient(115% 75% at 50% 30%, rgba(0,0,0,.50) 0%, rgba(0,0,0,.42) 45%, rgba(0,0,0,.36) 70%, rgba(0,0,0,.32) 100%);
+}
+</style>
+<style>
+/* v24 compact executive cards */
+.tcards .grid{ display:grid; grid-template-columns:1fr; gap:.9rem }
+@media (min-width: 980px){ .tcards .grid{ grid-template-columns:1fr 1fr } }
+
+.tcard.compact{
+  padding:.9rem 1rem 1rem 1rem;
+  border-radius:14px;
+  box-shadow:0 14px 34px rgba(0,0,0,.06);
+}
+.tcard.compact .ttitle{ font-size:1.08rem }
+.tcard.compact .tone{ font-size:.96rem; margin:.45rem 0 0 0 }
+.tcard.compact .tmeta{ font-size:.82rem }
+.tcard.compact .tfacts{ margin-top:.5rem }
+.tcard.compact .fact{ font-size:.7rem; padding:.18rem .5rem }
+.tcard.compact .tactions{ margin:.55rem 0 0 1rem }
+.tcard.compact .tactions li{ margin:.18rem 0 }
+.tcard.compact .toutcome{ margin:.5rem 0 0 0; font-size:.94rem }
+.tcard.compact .tquote{ margin:.45rem 0 0 0; font-size:.92rem }
+.tcard.compact .tcta{ margin-top:.75rem }
+</style>
+<style>
+/* v25: two-column actions/outputs within compact cards */
+.tcard.compact .tcols{ display:grid; grid-template-columns:1fr; gap:.6rem; margin-top:.55rem }
+@media (min-width: 980px){ .tcard.compact .tcols{ grid-template-columns:1fr 1fr } }
+.tsub{ font-size:.76rem; letter-spacing:.10em; text-transform:uppercase; color:rgba(11,11,11,.72); margin-bottom:.2rem }
+.tlist{ margin:.1rem 0 0 1rem; padding:0 }
+.tlist li{ margin:.18rem 0 }
+</style>
+<style>
+/* v27: tighter executive cards */
+.tcards .grid{ gap:.8rem }
+.tcard.compact{ padding:.8rem .9rem .9rem .9rem; border-radius:14px; box-shadow:0 12px 30px rgba(0,0,0,.06) }
+.tcard.compact .ttitle{ font-size:1.06rem }
+.tcard.compact .tone{ font-size:.94rem; margin:.42rem 0 0 0 }
+.tcard.compact .tmeta{ font-size:.80rem }
+.tcard.compact .tfacts{ gap:.35rem; margin-top:.45rem }
+.tcard.compact .fact{ font-size:.68rem; padding:.16rem .46rem }
+.tcard.compact .tlist li{ margin:.14rem 0 }
+.tcard.compact .tcols{ gap:.5rem }
+.tcard.compact .tsub{ font-size:.74rem; letter-spacing:.12em }
+</style>
+<style>
+:root{ --ink:#0B0B0B; --ink-dim:rgba(11,11,11,.72); --hair:rgba(11,11,11,.12); }
+
+.section{ max-width:72rem; margin:0 auto; padding:2rem 1.25rem }
+
+/* Services-like hero */
+.intro.hero{ position:relative; color:#fff; }
+.intro.hero .kicker{ font-size:.74rem; letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.88) }
+.intro.hero .h1{ font-size:3.2rem; letter-spacing:-.02em; line-height:1.06; color:#fff; margin:.6rem 0 0 0 }
+.intro.hero .meta{ font-size:1rem; color:rgba(255,255,255,.92) }
+.intro.hero::before{ content:""; position:absolute; inset:-14px 0 -14px 0; z-index:-1; 
+  background: radial-gradient(115% 75% at 50% 30%, rgba(0,0,0,.52) 0%, rgba(0,0,0,.42) 45%, rgba(0,0,0,.36) 70%, rgba(0,0,0,.30) 100%); }
+
+/* Executive cards */
+.ecards .grid{ display:grid; grid-template-columns:1fr; gap:.9rem }
+@media (min-width: 980px){ .ecards .grid{ grid-template-columns:1fr 1fr } }
+
+.ecard{ background:#fff; border:1px solid var(--hair); border-radius:14px; box-shadow:0 14px 36px rgba(0,0,0,.06);  display:flex; flex-direction:column; }
+
+.ecard .wrap{ display:block; color:inherit; text-decoration:none; padding:.95rem 1rem 1rem 1rem; }
+.ehead{ display:flex; justify-content:space-between; align-items:baseline; gap:1rem; flex-wrap:wrap }
+.etitle{ margin:0; font-size:1.08rem; letter-spacing:-.01em }
+.emeta{ font-size:.82rem; color:var(--ink-dim) }
+.eline{ margin:.42rem 0 0 0; font-size:.96rem; color:var(--ink-dim) }
+.ehighlights{ margin:.42rem 0 0 1rem; padding:0 }
+.ehighlights li{ margin:.14rem 0 }
+.edelivered{ margin:.45rem 0 0 0; font-size:.94rem }
+.equote{ margin:.4rem 0 0 0; font-style:italic; color:var(--ink-dim) }
+.ecta{ margin-top:.6rem; display:inline-block; border:1px solid var(--hair); border-radius:.6rem; padding:.46rem .7rem; font-weight:700 }
+.ecard:hover .ecta{ border-color: rgba(11,11,11,.24) }
+
+/* Subtle hover */
+.ecard{ transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease }
+.ecard:hover{ transform: translateY(-2px); box-shadow:0 20px 50px rgba(0,0,0,.10); border-color: rgba(11,11,11,.18) }
+
+/* Line clamp utility */
+.clamp-2{ display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden }
+</style>
+<style>
+.section-wrap.intro.hero{ position:relative; color:#fff }
+.section-wrap.intro.hero .kicker{ font-size:.74rem; letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.88) }
+.section-wrap.intro.hero .display{ color:#fff }
+.section-wrap.intro.hero .lede{ margin-top:1rem; max-width:42rem; color:rgba(255,255,255,.92); font-size:1.1rem }
+.section-wrap.intro.hero::before{
+  content:""; position:absolute; inset:-14px 0 -14px 0; z-index:-1;
+  background: radial-gradient(115% 75% at 50% 30%, rgba(0,0,0,.52) 0%, rgba(0,0,0,.42) 45%, rgba(0,0,0,.36) 70%, rgba(0,0,0,.30) 100%);
+}
+.cta-row{ display:flex; gap:.6rem; padding:.6rem 1rem 1rem 1rem }
+.btn{ display:inline-block; border:1px solid rgba(11,11,11,.12); border-radius:.6rem; padding:.5rem .85rem; font-weight:700; color:#0B0B0B; text-decoration:none }
+.btn:hover{ border-color: rgba(11,11,11,.24) }
+.btn-primary{ border-color:#0B0B0B }
+</style>
+<style>
+/* Enforce display font similar to Services (fallbacks) */
+.section-wrap.intro.hero .display{
+  font-size:3.8rem; line-height:1.02; margin-top:.4rem;
+  font-weight: 600;
+  font-family: var(--font-serif, "Newsreader", ui-serif, Georgia, "Times New Roman", serif);
+  color:#fff;
+}
+.section-wrap.intro.hero .kicker{ font-size:.74rem; letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.88) }
+.section-wrap.intro.hero .lede{ margin-top:1rem; max-width:42rem; color:rgba(255,255,255,.92); font-size:1.1rem }
+.section-wrap.intro.hero::before{
+  content:""; position:absolute; inset:-14px 0 -14px 0; z-index:-1;
+  background: radial-gradient(115% 75% at 50% 30%, rgba(0,0,0,.52) 0%, rgba(0,0,0,.42) 45%, rgba(0,0,0,.36) 70%, rgba(0,0,0,.30) 100%);
+}
+
+/* Modal */
+.no-scroll{ overflow:hidden }
+.modal[aria-hidden="true"]{ display:none }
+.modal[aria-hidden="false"]{ display:block }
+.modal{ position:fixed; inset:0; z-index:1000 }
+.modal-backdrop{ position:absolute; inset:0; background:rgba(0,0,0,.45); backdrop-filter:blur(2px) }
+.modal-card{ position:relative; z-index:1001; max-width:680px; margin:8vh auto; background:#fff; border:1px solid rgba(11,11,11,.12);
+  border-radius:14px; box-shadow:0 30px 80px rgba(0,0,0,.22); padding:1.1rem 1.15rem 1.1rem 1.15rem }
+.modal-close{ position:absolute; top:.6rem; right:.6rem; border:1px solid rgba(11,11,11,.12); border-radius:.5rem; background:#fff; padding:.2rem .5rem; font-size:1.1rem; cursor:pointer }
+.modal-title{ margin:.2rem 0 0 0; font-size:1.4rem }
+.modal-sub{ margin:.3rem 0 .6rem 0; color:rgba(11,11,11,.72) }
+.grid2{ display:grid; grid-template-columns:1fr; gap:.6rem }
+.grid2 label{ display:flex; flex-direction:column; gap:.25rem; font-size:.9rem }
+.grid2 input{ border:1px solid rgba(11,11,11,.12); border-radius:.5rem; padding:.55rem .6rem }
+@media (min-width: 760px){ .grid2{ grid-template-columns:1fr 1fr } }
+.modal-actions{ display:flex; gap:.6rem; margin-top:.8rem }
+
+/* Buttons */
+.btn{ display:inline-block; border:1px solid rgba(11,11,11,.12); border-radius:.6rem; padding:.5rem .85rem; font-weight:700; color:#0B0B0B; text-decoration:none; background:#fff; cursor:pointer }
+.btn:hover{ border-color: rgba(11,11,11,.24) }
+.btn-primary{ border-color:#0B0B0B }
+</style>
+<style>
+/* === v32 FIX: Card text visibility & clipping (2025-10-02) === */
+/* Ensure all card text is readable (black on white) regardless of inherited colors */
+.ecard, .ecard .wrap, .ecard .wrap *,
+.tcard, .tcard *, .tcards .grid * {
+  color: var(--ink, #0B0B0B) !important;
+}
+
+/* Avoid accidental clipping on cards */
+.ecard, .tcard { overflow: visible !important; }
+
+/* Make clamped lines roomier on desktop to prevent "missing" text */
+@media (min-width: 980px) {
+  .eline.clamp-2, .equote.clamp-2 { -webkit-line-clamp: 3; }
+}
+
+/* Visually indicate truncation better for long one-liners (fallback) */
+.clamp-2 { -webkit-box-orient: vertical; overflow: hidden; }
+
+/* Guard: ensure metadata and highlight bullets are legible */
+.ehead *, .emeta, .ehighlights li, .edelivered, .equote, .ecta {
+  color: var(--ink, #0B0B0B) !important;
+}
+
+/* Keep CTA looking like a button without losing contrast */
+.ecta {
+  border-color: rgba(11,11,11,.18) !important;
+}
+
+/* Fix: any card that happens to sit over a textured/dark background */
+.card, .ecard, .tcard {
+  background: #fff !important;
+  box-shadow: 0 14px 36px rgba(0,0,0,.06);
+  border: 1px solid var(--hair, rgba(11,11,11,.12));
+}
+
+/* Safety: prevent long words/metrics from overflowing */
+.ecard, .tcard { word-wrap: break-word; overflow-wrap: anywhere; }
+</style><style>
+/* === v32 FIX 2: Removed Back to top buttons and adjusted card spacing === */
+.cta-row { display: flex; gap: 1rem; margin-top: 0.8rem; }
+.cta-row .btn + .btn { margin-left: 0; } /* no double spacing */
+</style><style>
+/* === v32 FIX 3: Request button aligned bottom-right in cards === */
+.ecard { position: relative; display: flex; flex-direction: column; }
+.ecard-footer { margin-top: auto; display: flex; justify-content: flex-end; padding: 0.75rem 1rem 1rem 1rem; }
+.ecard-footer .btn-primary { font-size: 0.92rem; padding: 0.6rem 1.2rem; border-radius: 0.5rem; }
+</style><style>
+/* === v32 FIX 4: Align Open PDF and Request buttons inline === */
+.ecard-footer { 
+  margin-top: auto; 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  padding: 0.75rem 1rem 1rem 1rem; 
+}
+.ecard-footer .ecta { 
+  border: 1px solid rgba(11,11,11,.18); 
+  border-radius: 0.5rem; 
+  padding: 0.5rem 0.9rem; 
+  font-weight: 600; 
+  cursor: pointer;
+}
+.ecard-footer .btn-primary { 
+  font-size: 0.92rem; 
+  padding: 0.6rem 1.2rem; 
+  border-radius: 0.5rem; 
+}
+</style><style>
+/* === v32 FIX 5: Request left, Open PDF right === */
+.ecard-footer { 
+  margin-top: auto; 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  padding: 0.75rem 1rem 1rem 1rem; 
+}
+.ecard-footer .ecta { 
+  margin-left: auto;
+}
+</style><style>
+/* === v32 FIX 6: Guarantee Open PDF always bottom-right === */
+.ecard-footer { 
+  margin-top: auto; 
+  display: flex; 
+  justify-content: flex-end; 
+  align-items: center; 
+  padding: 0.75rem 1rem 1rem 1rem; 
+  gap: 1rem;
+}
+
+.ecard-footer .ecta { margin-left: auto; }
+</style><style>
+/* === v32 FIX 7: Intro centered with cards + Services font style === */
+.section-wrap.intro.hero {
+  text-align: center;
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.section-wrap.intro.hero .display {
+  font-family: var(--font-serif, "Newsreader", ui-serif, Georgia, "Times New Roman", serif);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  font-size: 3.4rem;
+  line-height: 1.1;
+}
+.section-wrap.intro.hero .lede {
+  font-family: var(--font-body, "Inter","Helvetica Neue","Arial",sans-serif);
+  font-size: 1.1rem;
+  color: rgba(11,11,11,.85);
+  margin-top: 0.8rem;
+}
+.section-wrap.intro.hero .kicker {
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: rgba(11,11,11,.65);
+  margin-bottom: 0.4rem;
+}
+</style><style>
+/* === v32 FIX 8: Align Cases intro style with Services (minimal changes) === */
+.cases-main .intro .h1 {
+  font-weight: 700; /* lighter than black */
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+}
+.cases-main .intro .lede {
+  font-size: 1.15rem;
+  line-height: 1.4;
+  color: rgba(255,255,255,.92);
+  margin-top: 0.8rem;
+}
+.cases-main .intro .kicker {
+  margin-bottom: 1.2rem;
+  color: rgba(255,255,255,.88);
+}
+</style><style>
+/* === v32 FIX 9: Local Cases intro fix to align with Services === */
+.cases-main .intro .h1 {
+  font-weight: 700; /* semibold, not black */
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+}
+.cases-main .intro .lede {
+  font-size: 1.15rem;
+  line-height: 1.4;
+  color: rgba(255,255,255,.92);
+  margin-top: 0.8rem;
+}
+.cases-main .intro .kicker {
+  margin-bottom: 1.2rem;
+  color: rgba(255,255,255,.88);
+}
+</style><style>
+/* === v32 FIX 10: Correct selector for intro H1 (avoid global impact) === */
+.section-wrap.intro.hero h1.display {
+  font-weight: 600 !important; /* semibold to match Services */
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+}
+</style>
+<style>
+/* === FINAL FIX: Cases intro — white text, transparent overlay, left aligned & aligned to cards === */
+.section-wrap.intro.hero {
+  text-align: left !important;
+  max-width: 72rem !important;
+  margin: 0 auto !important;
+  padding-left: 1.25rem !important;
+  padding-right: 1.25rem !important;
+  color: #fff !important;
+}
+.section-wrap.intro.hero .kicker,
+.section-wrap.intro.hero .display,
+.section-wrap.intro.hero .lede,
+.section-wrap.intro.hero p,
+.section-wrap.intro.hero .meta {
+  color: #fff !important;
+}
+/* Remove the dark gradient overlay box */
+.section-wrap.intro.hero::before {
+  background: transparent !important;
+}
+</style>
+<meta content="ESG Case Studies (Anonymised) — Buyer‑Credible Outcomes | Orvenzia" property="og:title"/><meta content="See anonymised outcomes: S‑Rating alignment, ISO 14001 pathways, and buyer‑ready documentation delivered in weeks, not months." property="og:description"/><meta content="website" property="og:type"/><meta content="https://www.orvenzia.com/cases.html" property="og:url"/><meta content="https://www.orvenzia.com/assets/esg-global-bg.jpg" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><meta content="ESG Case Studies (Anonymised) — Buyer‑Credible Outcomes | Orvenzia" name="twitter:title"/><meta content="See anonymised outcomes: S‑Rating alignment, ISO 14001 pathways, and buyer‑ready documentation delivered in weeks, not months." name="twitter:description"/><meta content="https://www.orvenzia.com/assets/esg-global-bg.jpg" name="twitter:image"/><script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "Organization",
   "name": "Orvenzia",
@@ -176,8 +464,8 @@ a:hover { opacity: .9; }
     {
       "@type": "ListItem",
       "position": 2,
-      "name": "Services",
-      "item": "https://www.orvenzia.com/services.html"
+      "name": "Cases",
+      "item": "https://www.orvenzia.com/cases.html"
     }
   ]
 }</script><script defer="True" src="lead-config.js"></script><script defer="True" src="assets/js/leadtracker.js"></script><link rel="stylesheet" href="assets/css/mobile.v3.css"/>
@@ -555,9 +843,7 @@ a:hover { opacity: .9; }
                 padding:8px 12px 16px; z-index: 9999 !important; }
 }
 </style>
-</head>
-<body class="bg-paper text-ink antialiased" id="services-page">
-<header class="sticky top-0 z-50 bg-paper/95 backdrop-blur border-b hairline">
+</head><body class="theme-dark cases"><header class="sticky top-0 z-50 bg-paper/95 backdrop-blur border-b hairline">
   <!-- Mobile menu toggle + dropdown -->
   <button id="mobile-nav-toggle" class="mobile-nav-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
     <span class="burger" aria-hidden="true"></span>
@@ -573,186 +859,378 @@ a:hover { opacity: .9; }
   </nav>
  <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between"> <a class="font-serif text-xl tracking-tightest" href="index.html">Orvenzia</a> <nav class="hidden md:flex items-center gap-8 text-sm"> <a href="services.html">Services</a> <a href="cases.html#previews">Cases</a> <a href="about.html">About</a> <a class="btn-primary" data-evt="click_screening_cta" href="screening.html">Start Screening</a> </nav> </div>
 </header>
-<div aria-hidden="true" class="services-contrast-layer"></div>
-<style>
-/* Ultra-minimal editorial: no boxes, no shadows — whitespace + hairlines */
-.section-wrap{max-width:72rem;margin:0 auto;padding-left:1.5rem;padding-right:1.5rem}
-.hair{border-color:rgba(11,11,11,.08)}
-.kicker{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(11,11,11,.55)}
-.display{font-family: var(--font-serif, ui-serif); letter-spacing:-.02em}
-.meta{font-size:.82rem;color:rgba(11,11,11,.55)}
-.link-arrow{position:relative;display:inline-block}
-.link-arrow::after{content:"→";margin-left:.45rem;transition:transform .25s ease}
-.link-arrow:hover::after{transform:translateX(4px)}
-.svc-row{transition:color .25s ease}
-.svc-row:hover .svc-title{color:#0B0B0B}
-.svc-title{font-size:1.6rem;letter-spacing:-.01em}
-.svc-sub{color:rgba(11,11,11,.55)}
-.svc-grid{display:grid;grid-template-columns:1fr;gap:1.25rem}
-@media (min-width: 768px){ .svc-grid{grid-template-columns: 4fr 8fr} }
-.svc-pvo{display:grid;gap:.5rem}
-.svc-pvo .label{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(11,11,11,.55)}
-.svc-meta{display:flex;gap:1rem;flex-wrap:wrap;font-size:.82rem;color:rgba(11,11,11,.66);opacity:0;transform:translateY(6px);
-  transition: all .30s ease}
-.svc-row:hover .svc-meta{opacity:1;transform:translateY(0)}
-/* Mobile shows meta by default (no hover) */
-@media (max-width: 768px){ .svc-meta{opacity:1;transform:none} }
-/* Dividers */
-.rule{border-top:1px solid rgba(11,11,11,.08)}
-/* Hero button minimal */
-.btn-primary{padding:.85rem 1.2rem;border:1px solid #0B0B0B;border-radius:.75rem;background:#0B0B0B;color:#fff}
-.btn-primary:hover{opacity:.92}
-.btn-ghost{padding:.85rem 1.2rem;border:1px solid rgba(11,11,11,.14);border-radius:.75rem}
-.badges{display:flex;gap:.5rem;flex-wrap:wrap}
-.badges span{border:1px solid rgba(11,11,11,.12);border-radius:9999px;padding:.3rem .7rem;font-size:.74rem;color:rgba(11,11,11,.7)}
-</style>
-<section class="section-wrap" id="top" style="padding-top:5.5rem;padding-bottom:5rem">
+<section class="section-wrap intro hero" id="top" style="padding-top:5.5rem;padding-bottom:5rem">
 <div class="kicker">European SMEs • Assurance‑aligned</div>
-<h1 class="display" style="font-size:3.8rem;line-height:1.02;margin-top:.4rem;">ESG your buyers accept.</h1>
-<p style="margin-top:1rem;max-width:42rem;color:rgba(11,11,11,.70);font-size:1.1rem;">
-    From diagnostic clarity to audit‑ready execution — built for procurement and assurance.
-  </p>
-<div style="margin-top:1.4rem;display:flex;gap:.8rem;align-items:center;">
-<a class="btn-primary" href="screening.html">Start Free Screening</a>
-<a class="link-arrow" href="cases.html#previews">See anonymised action cards</a>
-</div>
-<div class="badges" style="margin-top:1rem">
-<span>Assurance‑aligned</span><span>OCI ≥ 80 trajectory</span><span>Minimal burden</span>
-</div>
+<h1 class="display">Outcomes your buyers accept.</h1>
+<p class="lede">Preview the deliverables. Click any card to open the anonymised PDF.</p>
 </section>
-<section class="section-wrap" style="padding-top:1.2rem;padding-bottom:.8rem">
-<div class="meta">Procurement‑credible · Decisive prioritisation · Minimal burden</div>
-</section>
-<section class="rule" id="baseline">
-<div class="section-wrap svc-row" style="padding-top:2.2rem;padding-bottom:2.2rem">
-<div class="svc-grid">
-<div>
-<div class="svc-title">Baseline — Strategic ESG Snapshot</div>
-<div class="svc-sub">Clarity in &lt; 10 days</div>
+<section class="section ecards">
+<div class="grid">
+<!-- Baseline -->
+<article class="ecard" id="baseline">
+<a aria-label="Open Baseline — Infrastructure (DK) (PDF)" class="wrap" href="assets/cases/anonymised-baseline-infrastructure.pdf" rel="noopener" target="_blank">
+<header class="ehead">
+<h3 class="etitle">Baseline — Infrastructure (DK)</h3>
+<div class="emeta">Infrastructure · DK · 3 pages</div>
+</header>
+<p class="eline clamp-2">10-day ESG diagnostic delivering immediate buyer-critical visibility and tender-ready compliance status.</p>
+<ul class="ehighlights">
+<li>Verified Stage V compliance check</li>
+<li>EPD coverage benchmark across core materials</li>
+<li>KPI capture for CO₂, fuel and recovery efficiency</li>
+</ul>
+<p class="edelivered"><strong>Delivered:</strong> Executive Baseline brief (3pp), evidence checklist and buyer-critical gap analysis.</p>
+<p class="equote clamp-2">“By consolidating evidence and clarifying compliance, we cut clarification rounds and accelerated tender acceptance.” — COO (anonymised)</p>
+</a>
+<div class="ecard-footer">
+<div class="ecta">Open PDF →</div></div>
+</article>
+<!-- Core -->
+<article class="ecard" id="core">
+<a aria-label="Open Core — Food SME (DE) (PDF)" class="wrap" href="assets/cases/anonymised-core-food-sme.pdf" rel="noopener" target="_blank">
+<header class="ehead">
+<h3 class="etitle">Core — Food SME (DE)</h3>
+<div class="emeta">Food SME · DE · 1 page</div>
+</header>
+<p class="eline clamp-2">30/60/90-day ESG action plan translating directly into buyer acceptance and measurable ROI.</p>
+<ul class="ehighlights">
+<li>≥80% supplier CoC coverage within 8 weeks</li>
+<li>Live whistleblower and compliance channel</li>
+<li>ESG KPI dashboard integrated into ops</li>
+</ul>
+<p class="edelivered"><strong>Delivered:</strong> 1-page action plan with budget/owners, ROI brief, policy pack and SOPs for measurement.</p>
+<p class="equote clamp-2">“Within eight weeks, we secured buyer acceptance with CoC sign-offs and live KPI tracking.” — CEO (anonymised)</p>
+</a>
+<div class="ecard-footer">
+<button class="btn btn-primary js-request" data-case="Core — Food SME (DE)" type="button">Request full report</button>
+<div class="ecta">Open PDF →</div>
 </div>
-<div class="svc-pvo">
-<div><div class="label">Purpose</div><div>Diagnostic clarity on material risks and gaps benchmarked to peers.</div></div>
-<div><div class="label">Value</div><div>Resource focus where impact is highest; alignment on scope before deeper work.</div></div>
-<div><div class="label">Outcome</div><div>Directional view against buyer expectations.</div></div>
-<div class="svc-meta">
-<div>Pages: 3</div>
-<div>SLA: &lt; 10 days</div>
-<div>Price: € from 579</div>
-<div style="margin-left:auto"><a class="link-arrow" href="screening.html">Start with Baseline</a></div>
+</article>
+<!-- Enterprise -->
+<article class="ecard" id="enterprise">
+<a aria-label="Open Enterprise — Automotive Tier-1 (DE) (PDF)" class="wrap" href="assets/cases/anonymised-automotive-action-card.pdf" rel="noopener" target="_blank">
+<header class="ehead">
+<h3 class="etitle">Enterprise — Automotive Tier-1 (DE)</h3>
+<div class="emeta">Automotive · DE · 2 pages</div>
+</header>
+<p class="eline clamp-2">90-day stabilisation program delivering OEM-grade ESG credibility, governance uplift and audit-ready assurance.</p>
+<ul class="ehighlights">
+<li>Governance and risk framework operationalised</li>
+<li>Energy transition roadmap integrated</li>
+<li>Buyer-grade HSE compliance pack</li>
+</ul>
+<p class="edelivered"><strong>Delivered:</strong> 2-page enterprise action card: governance uplift, energy KPIs, safety alignment and audit-ready documentation.</p>
+<p class="equote clamp-2">“Stabilisation allowed us to regain OEM trust and pass audit scrutiny at first attempt.” — VP Operations (anonymised)</p>
+</a>
+<div class="ecard-footer">
+<button class="btn btn-primary js-request" data-case="Enterprise — Automotive Tier-1 (DE)" type="button">Request full report</button>
+<div class="ecta">Open PDF →</div>
 </div>
-</div>
-</div>
-</div>
-</section>
-<section class="rule" id="core">
-<div class="section-wrap svc-row" style="padding-top:2.2rem;padding-bottom:2.2rem">
-<div class="svc-grid">
-<div>
-<div class="svc-title">Core — Buyer‑Credible “What to Do” Report</div>
-<div class="svc-sub">Acceptance in 30–60 days</div>
-</div>
-<div class="svc-pvo">
-<div><div class="label">Purpose</div><div>Assurance‑ready roadmap answering: Which actions are required to secure buyer approval?</div></div>
-<div><div class="label">Value</div><div>Prioritised initiatives with buyer impact and **indicative ROI**; owners, timing, dependencies.</div></div>
-<div><div class="label">Outcome</div><div>Procurement‑credible trajectory from current state to approval.</div></div>
-<div class="svc-meta">
-<div>Pages: 10 + action card</div>
-<div>SLA: 30–60 days</div>
-<div>Price: € 2,429</div>
-<div style="margin-left:auto"><a class="link-arrow" href="cases.html#previews">See anonymised action card</a></div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section class="rule" id="enterprise">
-<div class="section-wrap svc-row" style="padding-top:2.2rem;padding-bottom:2.2rem">
-<div class="svc-grid">
-<div>
-<div class="svc-title">Enterprise — Comprehensive ESG Readiness</div>
-<div class="svc-sub">Audit‑ready in 60–90 days</div>
-</div>
-<div class="svc-pvo">
-<div><div class="label">Purpose</div><div>Embed ESG with governance, controls and evidence that withstand audits.</div></div>
-<div><div class="label">Value</div><div>Enable management to integrate KPIs; equip staff to **achieve compliance** with a **quantified ROI** model.</div></div>
-<div><div class="label">Outcome</div><div>Buyer‑trusted execution; prepared for full ESG reporting from 2028.</div></div>
-<div class="svc-meta">
-<div>Pages: 20+</div>
-<div>SLA: 60–90 days</div>
-<div>Price: € 6,429</div>
-<div style="margin-left:auto"><a class="link-arrow" href="cases.html#previews">Request enterprise sample</a></div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section class="rule" id="scope3">
-<div class="section-wrap svc-row" style="padding-top:2.2rem;padding-bottom:2.2rem">
-<div class="svc-grid">
-<div>
-<div class="svc-title">Scope 3 Fast‑Track — Value Chain ESG</div>
-<div class="svc-sub">Credible footprint in 60–120 days</div>
-</div>
-<div class="svc-pvo">
-<div><div class="label">Purpose</div><div>Assurance‑aligned Scope 3 baseline with supplier engagement and hotspot analysis.</div></div>
-<div><div class="label">Value</div><div>Extends credibility across the value chain with minimal internal burden.</div></div>
-<div><div class="label">Outcome</div><div>Statement buyers, banks and regulators recognise.</div></div>
-<div class="svc-meta">
-<div>Pages: ~20</div>
-<div>SLA: 60–120 days</div>
-<div>Price: € 6,139</div>
-<div style="margin-left:auto"><a class="link-arrow" href="cases.html#previews">See Scope 3 framework</a></div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section class="rule" id="subscription">
-<div class="section-wrap svc-row" style="padding-top:2.2rem;padding-bottom:2.2rem">
-<div class="svc-grid">
-<div>
-<div class="svc-title">Subscription — Continuous ESG Assurance</div>
-<div class="svc-sub">Stay buyer‑ready, always</div>
-</div>
-<div class="svc-pvo">
-<div><div class="label">Purpose</div><div>Prevent regression between audits and buyer checks.</div></div>
-<div><div class="label">Value</div><div>KPI maintenance, proactive updates and buyer‑aligned adjustments.</div></div>
-<div><div class="label">Outcome</div><div>Readiness sustained permanently.</div></div>
-<div class="svc-meta">
-<div>Pages: —</div>
-<div>SLA: Monthly cadence</div>
-<div>Price: € from 199/mo</div>
-<div style="margin-left:auto">See plans</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section class="rule">
-<div class="section-wrap" style="padding-top:2rem;padding-bottom:2rem">
-<div class="svc-grid">
-<div class="svc-title">Anonymised materials</div>
-<div>
-<div class="meta">Real action cards and extracts, anonymised under NDA.</div>
-<div style="margin-top:.6rem;display:flex;gap:1rem;flex-wrap:wrap">
-<a class="link-arrow" href="cases.html#previews">View previews</a>
-<a class="link-arrow" href="screening.html">Start Free Screening</a>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section class="rule">
-<div class="section-wrap" style="padding-top:3rem;padding-bottom:4rem;text-align:center">
-<h3 class="display" style="font-size:2.1rem;letter-spacing:-.01em">Ready for a cleaner, buyer‑credible path?</h3>
-<p class="meta" style="margin-top:.4rem">Start with the 5‑minute screening — executive and efficient.</p>
-<div style="margin-top:1rem">
-<a class="btn-primary" href="screening.html">Start Free Screening</a>
-</div>
+</article>
+<!-- Scope 3 -->
+<article class="ecard" id="scope3">
+<a aria-label="Open Scope 3 — Restaurant Chain (SE) (PDF)" class="wrap" href="assets/cases/anonymised-scope3-restaurant.pdf" rel="noopener" target="_blank">
+<header class="ehead">
+<h3 class="etitle">Scope 3 — Restaurant Chain (DK)</h3>
+<div class="emeta">Restaurant · DK · 20 pages</div>
+</header>
+<p class="eline clamp-2">Full supply-chain emissions model with buyer-grade assurance and reduction pathways prioritised by materiality.</p>
+<ul class="ehighlights">
+<li>Scope 3 emissions mapped across 95% of spend</li>
+<li>Supplier coverage heatmap and engagement model</li>
+<li>Science-based reduction trajectories</li>
+</ul>
+<p class="edelivered"><strong>Delivered:</strong> 20-page Scope 3 report, assurance pack and C-suite buyer presentation.</p>
+<p class="equote clamp-2">“With quantified Scope 3 visibility, we unlocked credible buyer dialogues and positioned for assurance audits.” — CFO (anonymised)</p>
+</a>
+<div class="ecard-footer">
+<div class="ecta">Open PDF →</div></div>
+</article>
 </div>
 </section>
 <footer class="mt-28 bg-ink text-[#EDEAE3]" id="footer"> <div class="max-w-7xl mx-auto px-6 py-14 grid md:grid-cols-4 gap-10"> <div> <div class="font-serif text-2xl text-paper">Orvenzia</div> <div class="mt-2 text-sm text-[#EDEAE3]/80">European SMEs · Audit-ready · Buyer-accepted</div> </div> <div> <div class="text-paper/80 font-semibold mb-3 tracking-wider text-xs">COMPANY</div> <ul class="space-y-2 text-sm"> <li><a class="hover:text-champagne" href="services.html">Services</a></li> <li><a class="hover:text-champagne" href="cases.html">Cases</a></li> <li><a class="hover:text-champagne" href="about.html">About</a></li> </ul> </div> <div> <div class="text-paper/80 font-semibold mb-3 tracking-wider text-xs">CONTACT</div> <ul class="space-y-2 text-sm"> <li><a class="hover:text-champagne" href="mailto:support@orvenzia.com">support@orvenzia.com</a></li> <li><a class="hover:text-champagne" href="tel:+4520968324">+45 20 96 83 24</a></li> <li>Aalborg, Denmark</li> </ul> </div> <div> <div class="text-paper/80 font-semibold mb-3 tracking-wider text-xs">LEGAL</div> <ul class="space-y-2 text-sm"> <li><a class="hover:text-champagne" href="privacy.html">Privacy</a></li> <li><a class="hover:text-champagne" href="terms.html">Terms</a></li> <li class="text-champagne">CVR 45828697</li> <li class="text-xs text-[#EDEAE3]/60">NDA applies to all anonymised materials.</li> </ul> </div> </div> <div class="text-xs text-[#EDEAE3]/60 text-center pb-6">© Orvenzia</div>
+<!-- Request Full Report Modal -->
+<div aria-hidden="true" aria-modal="true" class="modal" id="requestModal" role="dialog">
+<div aria-label="Close" class="modal-backdrop js-close" tabindex="-1"></div>
+<div class="modal-card" role="document">
+<button aria-label="Close" class="modal-close js-close">×</button>
+<h2 class="modal-title">Request full report</h2>
+<p class="modal-sub">Fill in your details and we’ll respond with the anonymised full report under NDA.</p>
+<form id="requestForm" novalidate="">
+<input id="req_case" name="case" type="hidden" value=""/>
+<div class="grid2">
+<label>Full name<input autocomplete="name" id="req_name" name="name" required=""/></label>
+<label>Company<input autocomplete="organization" id="req_company" name="company" required=""/></label>
+<label>Title/Role<input id="req_role" name="role" required=""/></label>
+<label>Phone<input autocomplete="tel" id="req_phone" name="phone"/></label>
+<label>Email<input autocomplete="email" id="req_email" name="email" placeholder="name@company.com" required="" type="email"/></label>
+</div>
+<label class="chk"><input id="req_consent" required="" type="checkbox"/> I agree to be contacted about this material and accept that NDA applies to anonymised reports.</label>
+<div class="modal-actions">
+<button class="btn btn-primary" id="req_submit" type="submit">Send request</button>
+<button class="btn js-close" type="button">Cancel</button>
+</div>
+<p class="modal-footnote">Prefer a company email for faster processing.</p>
+<div aria-live="polite" class="form-msg" id="req_msg"></div>
+</form>
+</div>
+</div>
+<script>
+(function(){
+  const modal = document.getElementById('requestModal');
+  const form = document.getElementById('requestForm');
+  const inputCase = document.getElementById('req_case');
+  const msg = document.getElementById('req_msg');
+  function openModal(caseName){
+    inputCase.value = caseName || '';
+    msg.textContent='';
+    modal.setAttribute('aria-hidden','false');
+    document.documentElement.classList.add('no-scroll');
+    setTimeout(()=>{ document.getElementById('req_name').focus(); }, 40);
+  }
+  function closeModal(){
+    modal.setAttribute('aria-hidden','true');
+    document.documentElement.classList.remove('no-scroll');
+    form.reset();
+  }
+  document.addEventListener('click', function(e){
+    const btn = e.target.closest('.js-request');
+    if(btn){ e.preventDefault(); openModal(btn.getAttribute('data-case') || ''); }
+    if(e.target.closest('.js-close')){ e.preventDefault(); closeModal(); }
+  });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeModal(); });
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    msg.textContent='';
+    const name = form.name.value.trim();
+    const company = form.company.value.trim();
+    const role = form.role.value.trim();
+    const phone = form.phone.value.trim();
+    const email = form.email.value.trim();
+    const casename = inputCase.value.trim();
+    if(!name || !company || !role || !email || !document.getElementById('req_consent').checked){
+      msg.textContent = 'Please complete the required fields and accept the consent.';
+      return;
+    }
+    const subject = 'Request Full Report — ' + (casename || '');
+    const body = 'Case: ' + (casename||'') + '%0D%0A' +
+                 'Name: ' + encodeURIComponent(name) + '%0D%0A' +
+                 'Company: ' + encodeURIComponent(company) + '%0D%0A' +
+                 'Title: ' + encodeURIComponent(role) + '%0D%0A' +
+                 'Phone: ' + encodeURIComponent(phone) + '%0D%0A' +
+                 'Email: ' + encodeURIComponent(email) + '%0D%0A';
+    window.location.href = 'mailto:support@orvenzia.com?subject=' + encodeURIComponent(subject) + '&body=' + body;
+    setTimeout(closeModal, 600);
+  });
+})();
+</script>
+<!-- Request Full Report Modal -->
+<div aria-hidden="true" aria-modal="true" class="modal" id="requestModal" role="dialog">
+<div aria-label="Close" class="modal-backdrop js-close" tabindex="-1"></div>
+<div class="modal-card" role="document">
+<button aria-label="Close" class="modal-close js-close">×</button>
+<h2 class="modal-title">Request full report</h2>
+<p class="modal-sub">Fill in your details and we’ll respond with the anonymised full report under NDA.</p>
+<form id="requestForm" novalidate="">
+<input id="req_case" name="case" type="hidden" value=""/>
+<div class="grid2">
+<label>Full name<input autocomplete="name" id="req_name" name="name" required=""/></label>
+<label>Company<input autocomplete="organization" id="req_company" name="company" required=""/></label>
+<label>Title/Role<input id="req_role" name="role" required=""/></label>
+<label>Phone<input autocomplete="tel" id="req_phone" name="phone"/></label>
+<label>Email<input autocomplete="email" id="req_email" name="email" placeholder="name@company.com" required="" type="email"/></label>
+</div>
+<label class="chk"><input id="req_consent" required="" type="checkbox"/> I agree to be contacted about this material and accept that NDA applies to anonymised reports.</label>
+<div class="modal-actions">
+<button class="btn btn-primary" id="req_submit" type="submit">Send request</button>
+<button class="btn js-close" type="button">Cancel</button>
+</div>
+<p class="modal-footnote">Prefer a company email for faster processing.</p>
+<div aria-live="polite" class="form-msg" id="req_msg"></div>
+</form>
+</div>
+</div>
+<script>
+(function(){
+  const modal = document.getElementById('requestModal');
+  const form = document.getElementById('requestForm');
+  const inputCase = document.getElementById('req_case');
+  const msg = document.getElementById('req_msg');
+  function openModal(caseName){
+    inputCase.value = caseName || '';
+    msg.textContent='';
+    modal.setAttribute('aria-hidden','false');
+    document.documentElement.classList.add('no-scroll');
+    setTimeout(()=>{ document.getElementById('req_name').focus(); }, 40);
+  }
+  function closeModal(){
+    modal.setAttribute('aria-hidden','true');
+    document.documentElement.classList.remove('no-scroll');
+    form.reset();
+  }
+  document.addEventListener('click', function(e){
+    const btn = e.target.closest('.js-request');
+    if(btn){ e.preventDefault(); openModal(btn.getAttribute('data-case') || ''); }
+    if(e.target.closest('.js-close')){ e.preventDefault(); closeModal(); }
+  });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeModal(); });
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    msg.textContent='';
+    const name = form.name.value.trim();
+    const company = form.company.value.trim();
+    const role = form.role.value.trim();
+    const phone = form.phone.value.trim();
+    const email = form.email.value.trim();
+    const casename = inputCase.value.trim();
+    if(!name || !company || !role || !email || !document.getElementById('req_consent').checked){
+      msg.textContent = 'Please complete the required fields and accept the consent.';
+      return;
+    }
+    const subject = 'Request Full Report — ' + (casename || '');
+    const body = 'Case: ' + (casename||'') + '%0D%0A' +
+                 'Name: ' + encodeURIComponent(name) + '%0D%0A' +
+                 'Company: ' + encodeURIComponent(company) + '%0D%0A' +
+                 'Title: ' + encodeURIComponent(role) + '%0D%0A' +
+                 'Phone: ' + encodeURIComponent(phone) + '%0D%0A' +
+                 'Email: ' + encodeURIComponent(email) + '%0D%0A';
+    window.location.href = 'mailto:support@orvenzia.com?subject=' + encodeURIComponent(subject) + '&body=' + body;
+    setTimeout(closeModal, 600);
+  });
+})();
+</script>
 </footer>
+<style id="fix-ecard-50">
+/* FINAL — Only the four case cards: 50% transparent; keep modal opaque */
+.section.ecards article.ecard{
+  background: rgba(255,255,255,0.50) !important;
+  border-color: rgba(0,0,0,0.14) !important;
+  -webkit-backdrop-filter: blur(4px) saturate(110%);
+  backdrop-filter: blur(4px) saturate(110%);
+}
+.modal-card{ background: #fff; }
+</style>
+<style id="fix-ecard-100-white">
+/* FINAL — Four case cards: 100% transparent bg, white border & white text (keep modal opaque) */
+.section.ecards article.ecard{
+  background: transparent !important;
+  border: 1px solid rgba(255,255,255,0.9) !important;
+  color: #fff !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.10);
+}
+/* make all text inside cards white */
+.section.ecards article.ecard .ehead,
+.section.ecards article.ecard .etitle,
+.section.ecards article.ecard .emeta,
+.section.ecards article.ecard .eline,
+.section.ecards article.ecard .edelivered,
+.section.ecards article.ecard .equote,
+.section.ecards article.ecard .ehighlights,
+.section.ecards article.ecard .ehighlights li,
+.section.ecards article.ecard p,
+.section.ecards article.ecard li,
+.section.ecards article.ecard small,
+.section.ecards article.ecard strong,
+.section.ecards article.ecard em{ color: #fff !important; }
+/* ensure link text inherits white */
+.section.ecards article.ecard a{ color: inherit !important; }
+/* CTA look: white text & border, transparent bg */
+.section.ecards article.ecard .ecard-footer .ecta{
+  color: #fff !important;
+  border: 1px solid rgba(255,255,255,0.9) !important;
+  padding: 0.55rem 1.0rem;
+  border-radius: 0.7rem;
+  background: transparent !important;
+  display: inline-flex; align-items: center; gap: .35rem;
+}
+.section.ecards article.ecard .ecard-footer .ecta:hover{
+  background: rgba(255,255,255,0.08) !important;
+  transform: translateY(-1px);
+}
+/* keep modal cards and other white panels opaque */
+.modal-card{ background:#fff; color:#111; }
+</style>
+<style id="fix-ecard-100white-emeta">
+/* Make the small white meta strips (Baseline/Core/Enterprise/Scope 3 line) transparent too */
+.section.ecards article.ecard .emeta{
+  background: transparent !important;
+  color: #fff !important;
+  border: 1px solid rgba(255,255,255,0.75) !important;
+  border-radius: 8px;
+  padding: .25rem .5rem;
+  display: inline-block;
+}
+/* If there are inner spans/chips inside .emeta that still carry a white bg, reset them */
+.section.ecards article.ecard .emeta *{
+  background: transparent !important;
+  color: inherit !important;
+}
+</style>
+<style id="fix-ecard-100white-nuke">
+/* FINAL NUKE — Ensure nothing inside the four ecard boxes stays white */
+.section.ecards article.ecard{
+  background: transparent !important;
+  border: 1px solid rgba(255,255,255,0.9) !important;
+  color: #fff !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.10);
+}
+/* Make descendants inherit white text and drop any white backgrounds */
+.section.ecards article.ecard *{
+  color: #fff !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Keep helpful outlines for small labels/strips if present */
+.section.ecards article.ecard :is(.ehead,.emeta,.etitle,.kicker,.meta,.label,.badge,.chip,.pill){
+  border: 1px solid rgba(255,255,255,0.75) !important;
+  border-radius: 8px;
+  padding: .2rem .5rem;
+  display: inline-block;
+}
+
+/* Form-like elements if used */
+.section.ecards article.ecard :is(input,select,textarea){
+  color:#fff !important;
+  border:1px solid rgba(255,255,255,0.75) !important;
+}
+
+/* CTA buttons */
+.section.ecards article.ecard .ecard-footer .ecta{
+  color:#fff !important;
+  border:1px solid rgba(255,255,255,0.95) !important;
+  background: transparent !important;
+}
+.section.ecards article.ecard .ecard-footer .ecta:hover{
+  background: rgba(255,255,255,0.10) !important;
+  transform: translateY(-1px);
+}
+
+/* Keep modal card opaque and readable */
+.modal-card{ background:#fff !important; color:#111 !important; }
+</style>
+<style id="fix-ecard-no-inner-borders">
+/* Remove the inner white lines on the four case cards (keep outer card border) */
+.section.ecards article.ecard :is(.ehead,.emeta,.etitle,.kicker,.meta,.label,.badge,.chip,.pill){
+  border: none !important;
+  outline: none !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  display: inline !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+/* Remove any <hr> style inside cards just in case */
+.section.ecards article.ecard hr{
+  border: 0 !important;
+  height: 0 !important;
+  background: transparent !important;
+  margin: 0 !important;
+}
+</style>
   <script src="assets/js/mobile-menu.js"></script>
 <script>
 // === MOBILE V11: dropdown autodetect (tap to open/close) ===
@@ -1221,5 +1699,4 @@ a:hover { opacity: .9; }
   });
 })();
 </script>
-</body>
-</html>
+</body></html>

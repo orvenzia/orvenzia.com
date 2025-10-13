@@ -1,0 +1,26 @@
+
+
+/* Mobile BG/Overflow stack fix — desktop untouched */
+@media (max-width: 767.98px){
+  html, body{ background-color: transparent !important; overflow-x: hidden !important; }
+  /* Ensure the highway background (on body::before) is visible on mobile */
+  body::before{
+    position: fixed !important;
+    inset: 0 !important;
+    display: block !important;
+    z-index: 0 !important;              /* from negative -> stable stack */
+    background-attachment: scroll !important; /* iOS fix */
+    opacity: 1 !important;
+  }
+  /* Keep mesh/lines overlay but never block content */
+  body::after{
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 0 !important;
+    pointer-events: none !important;
+  }
+  /* Lift the actual page above background layers */
+  body > *{ position: relative !important; z-index: 1 !important; }
+  /* Media never overflow */
+  img, video, svg{ max-width: 100% !important; height: auto !important; }
+}

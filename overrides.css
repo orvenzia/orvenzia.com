@@ -1,0 +1,82 @@
+
+/* --- Orvenzia FIXES (2025-10-10) --- */
+
+/* Make primary/ghost/case buttons lighten on hover instead of darken */
+.btn-primary:hover,
+.btn-ghost:hover,
+.case-button:hover,
+.case-solid:hover,
+.link-arrow:hover {
+  filter: brightness(1.12);
+  transition: filter .2s ease-in-out;
+}
+
+/* Ensure 'case solid' doesn't turn black on hover if any previous rules exist */
+.btn-primary:hover { background: inherit !important; }
+
+/* Keep PDF/action links aligned right when in card footers */
+.card .btn-open-pdf,
+.card .link-arrow { margin-left: auto; }
+
+/* Ensure transparent black utility (50%) exists */
+.transparent-50 { background: rgba(0,0,0,.5); }
+
+/* Improve tap targets and mobile spacing */
+button, .btn, .case-button { min-height: 44px; }
+
+/* Prevent accidental invisible text on dark images */
+.on-image, .on-image * { color: #fff !important; text-shadow: 0 1px 2px rgba(0,0,0,.3); }
+
+/* Smooth scroll to footer + offset for sticky header */
+html { scroll-behavior: smooth; }
+#footer { scroll-margin-top: 96px; }
+
+
+
+/* === MOBILE HEADER: left logo + dropdown (2025-10-13) === */
+@media (max-width: 768px){
+  /* Ensure brand sits left */
+  header { text-align: left !important; }
+  header a.font-serif.text-xl.tracking-tightest,
+  header .logo, header .brand, header .navbar-brand {
+    display: inline-block !important;
+    margin-left: 16px !important;
+  }
+
+  /* Hamburger toggle */
+  .mobile-nav-toggle{
+    position: absolute; right: 16px; top: 14px;
+    width: 40px; height: 40px; border: 1px solid rgba(0,0,0,.12);
+    border-radius: 10px; background: #fff;
+    display: inline-flex; align-items: center; justify-content: center;
+    z-index: 3;
+  }
+  .mobile-nav-toggle:focus{ outline: 2px solid rgba(0,0,0,.2); outline-offset: 2px; }
+  .mobile-nav-toggle .burger, .mobile-nav-toggle .burger::before, .mobile-nav-toggle .burger::after{
+    content:""; display:block; width: 20px; height: 2px; background:#000;
+    position: relative;
+  }
+  .mobile-nav-toggle .burger::before{ position:absolute; top:-6px; }
+  .mobile-nav-toggle .burger::after{ position:absolute; top:6px; }
+
+  /* Dropdown menu */
+  .mobile-menu{
+    position: absolute; left: 0; right: 0; top: 100%;
+    background: #fff; border-top: 1px solid rgba(0,0,0,.08);
+    box-shadow: 0 8px 24px rgba(0,0,0,.08);
+    padding: 10px 14px 12px; z-index: 2;
+  }
+  .mobile-menu .mm-item{
+    display: block; padding: 12px 8px; border-radius: 10px;
+    text-decoration: none; color: #000; font-size: 15px;
+  }
+  .mobile-menu .mm-item:active, .mobile-menu .mm-item:hover{
+    background: rgba(0,0,0,.04);
+  }
+}
+
+/* Keep desktop untouched */
+@media (min-width: 769px){
+  .mobile-nav-toggle{ display:none !important; }
+  #mobile-menu{ display:none !important; }
+}
