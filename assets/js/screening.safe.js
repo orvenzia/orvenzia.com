@@ -139,7 +139,7 @@
     var phoneEl = q('#phone');
     var phoneVal = (phoneEl && phoneEl.value || '').trim();
     if(!phoneVal || !/^\+?[0-9\s\-()]{6,20}$/.test(phoneVal)){
-      showError('Please enter a valid phone number (e.g., +45 20968324).');
+      showError('Please enter a valid phone number (e.g., +45 20 00 00 00).');
       try{ phoneEl && phoneEl.focus(); }catch(e){}
       return;
     }
