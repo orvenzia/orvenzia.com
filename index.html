@@ -804,84 +804,92 @@
 }
 </style>
 
-<!-- MOBILE-ONLY INLINE PATCH V12 — 2025-10-14 -->
-<style id="mobile-inline-patch-v12">
+<!-- MOBILE-ONLY INLINE PATCH V13 — 2025-10-14 -->
+<style id="mobile-inline-patch-v13">
+/* Scope to mobile only */
 @media (max-width: 768px){
-  html, body { margin:0; padding:0; overflow-x:hidden !important; }
-  /* Sticky header sizing & layout */
-  header{ background: rgba(252,252,250,.92) !important; backdrop-filter: saturate(120%) blur(8px) !important; border-bottom:1px solid rgba(0,0,0,.08) !important; }
-  body{ padding-top:64px !important; } /* avoid overlap under sticky header */
+  html, body { background: transparent !important; overflow-x: hidden !important; margin:0; padding:0; }
 
-  /* Header row becomes 3 items: logo (left), CTA (middle-left), burger (right) */
-  header .m-header-row, header .container, header .inner, header .row {
+  /* 1) Restore DESKTOP background on mobile (override base64 in mobile.v3.css) */
+  body::before{
+    content:"" !important; position:fixed !important; inset:0 !important; display:block !important;
+    background-image: url("./assets/esg-global-bg.jpg") !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    background-size: cover !important;
+    background-attachment: fixed !important;
+    z-index: -2 !important;
+  }
+  body::after{
+    content:"" !important; position:fixed !important; inset:0 !important;
+    background-image: url("./assets/mesh.svg") !important;
+    background-repeat: repeat !important; opacity: .15 !important;
+    mix-blend-mode: multiply !important; pointer-events: none !important;
+    z-index: -1 !important;
+  }
+  body > *{ position:relative; z-index: 1; } /* keep content above bg layers */
+
+  /* 2) Kill duplicate injected burger/menu from m.nav.v4.js to avoid conflicts */
+  .m-burger, #m-panel{ display: none !important; }
+
+  /* 3) Header: sticky, readable, correct order */
+  header{ position: sticky !important; top:0 !important; z-index: 1000 !important;
+          background: rgba(252,252,250,0.92) !important;
+          -webkit-backdrop-filter: saturate(120%) blur(8px) !important;
+          backdrop-filter: saturate(120%) blur(8px) !important;
+          border-bottom: 1px solid rgba(0,0,0,.08) !important;
+  }
+  body{ padding-top: 64px !important; } /* prevent overlap under sticky header */
+
+  header .m-header-row, header .container, header .inner, header .row{
     display:flex !important; align-items:center !important; gap:12px !important; min-height:64px !important;
   }
-  header .brand, header .logo { order:1 !important; margin-right:auto !important; }
-  header .cta-free, header a[href*="screening"].btn-primary {
-    order:2 !important; font-size:14px !important; line-height:1 !important; padding:9px 12px !important; border-radius:9999px !important; white-space:nowrap !important;
-  }
-  /* Keep "Free Screening" text white on mobile */
-  header .cta-free, header .cta-free *,
-  header a[href*="screening"].btn-primary, header a[href*="screening"].btn-primary *{
+  .desktop-nav, header nav:not(#mobile-menu){ display:none !important; } /* hide desktop nav */
+  header .brand, header .logo{ order:1 !important; margin-right:auto !important; }
+  header .cta-free, header a[href*="screening"].btn-primary{
+    order:2 !important; font-size:14px !important; line-height:1 !important;
+    padding:9px 12px !important; border-radius:9999px !important; white-space:nowrap !important;
     color:#ffffff !important; -webkit-text-fill-color:#ffffff !important;
   }
-  /* Burger button on the far right; always visible on mobile */
   #mobile-nav-toggle, .mobile-nav-toggle{
-    order:3 !important; display:inline-flex !important; align-items:center; justify-content:center;
+    order:3 !important; display:inline-flex !important; align-items:center !important; justify-content:center !important;
     width:42px; height:42px; border-radius:10px; border:1px solid rgba(0,0,0,.12); background:#fff;
     cursor:pointer; user-select:none; -webkit-tap-highlight-color: transparent;
   }
-  /* Hide desktop nav when on mobile */
-  .desktop-nav, header nav:not(#mobile-menu){ display:none !important; }
 
-  /* Mobile menu panel */
+  /* 4) Mobile menu panel (the one in HTML: #mobile-menu) */
   #mobile-menu{
     position:fixed !important; right:12px !important; top:64px !important;
     width:min(88vw,360px) !important; max-height:calc(100vh - 84px) !important; overflow:auto !important;
     padding:12px !important; border-radius:14px !important; background:rgba(11,11,11,0.96) !important; color:#fff !important;
-    box-shadow:0 20px 40px rgba(0,0,0,0.45) !important; z-index:1002 !important;
+    box-shadow:0 20px 40px rgba(0,0,0,0.45) !important; z-index: 1002 !important;
   }
   #mobile-menu[hidden]{ display:none !important; }
   #mobile-menu a{ display:block; padding:10px 12px; border-radius:10px; text-decoration:none; color:#fff !important; }
   #mobile-menu a:hover{ background:rgba(255,255,255,0.06); }
 
-  /* Hero sizes and readability */
+  /* 5) Readable hero */
   .hero h1, .hero .title, h1.hero, .page-hero h1{ font-size:clamp(22px,6vw,34px) !important; line-height:1.15 !important; letter-spacing:-0.01em !important; }
   .hero p, .hero .subtitle{ font-size:clamp(14px,3.6vw,18px) !important; line-height:1.55 !important; }
   body.page-screening .hero h1{ font-size:clamp(20px,5.2vw,30px) !important; }
   body.page-screening .hero p{ font-size:clamp(13px,3.2vw,17px) !important; }
 
-  /* Containers & spacing */
+  /* 6) Layout safety + readability on background */
   main, section{ padding-inline:16px !important; }
   section .container, .container{ padding-inline:0 !important; }
+  .grid, [class*="grid-cols-"], .columns, .row, .cards, .card-grid, .cases-grid, .services-grid{
+    display:grid !important; grid-template-columns:1fr !important; gap:16px !important;
+  }
   .hero{ padding:16px !important; }
-
-  /* Grids collapse to single column */
-  .grid, .grid.grid-cols-2, .grid.grid-cols-3, .grid.grid-cols-4, [class*="grid-cols-"]{
-    display:grid !important; grid-template-columns:1fr !important; gap:16px !important;
-  }
-  .columns, .row, .cards, .card-grid, .cases-grid, .services-grid{
-    display:grid !important; grid-template-columns:1fr !important; gap:16px !important;
-  }
-
-  /* Cards readability over background */
   .card, .case-card, article.rounded-2xl.border.hairline, .hero-card{
     background:rgba(255,255,255,.50) !important; color:#0B0B0B !important; border-color:rgba(0,0,0,.08) !important;
     backdrop-filter:saturate(120%) blur(3px) !important;
   }
-  .card *, .case-card *{ color:inherit !important; }
-
-  /* Safe background visibility — kill hard white blocks */
   section, .section, .container, .bg-white, .bg-[#ffffff], .bg-paper, .paper{ 
     background:transparent !important; box-shadow:none !important;
   }
 
-  /* Images responsive; prevent horizontal scroll */
-  img, video{ max-width:100% !important; height:auto !important; }
-  *, *::before, *::after{ box-sizing:border-box; }
-  p, li{ overflow-wrap:anywhere; }
-
-  /* Footer: single column tidy */
+  /* 7) Footer tidy */
   footer .columns, footer .grid, footer .row{ display:grid !important; grid-template-columns:1fr !important; gap:12px !important; }
   footer{ padding:20px 16px !important; }
 }
