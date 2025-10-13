@@ -610,6 +610,33 @@
   header a, header button{ line-height: 1.2 !important; }
 }
 </style>
+<style id="mobile-only-fix">
+@media (max-width: 860px){
+  html,body{overflow-x:hidden !important;}
+  header,.site-header{position:sticky;top:0;z-index:1000;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);}
+  /* Recommended: hide big CTA pill in header on mobile to avoid clash with logo */
+  header a[href*="screening"]{ display:none !important; }
+  /* Burger button */
+  .m-burger{position:fixed;right:12px;top:10px;width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;background:rgba(0,0,0,.86);color:#fff;border:1px solid rgba(255,255,255,.18);border-radius:12px;z-index:1002;}
+  .m-burger .bar{width:22px;height:2px;background:#fff;display:block;margin:3px 0;}
+  /* Overlay panel */
+  #m-panel{position:fixed;right:12px;top:64px;width:min(88vw,340px);max-height:calc(100vh - 84px);overflow-y:auto;display:none;flex-direction:column;gap:8px;padding:12px;background:rgba(0,0,0,.92);border:1px solid rgba(255,255,255,.12);border-radius:14px;box-shadow:0 20px 40px rgba(0,0,0,.45);z-index:1001;}
+  #m-panel.open{display:flex;}
+  #m-panel a{color:#fff;text-decoration:none;padding:10px 12px;border-radius:10px;display:block;}
+  #m-panel a:hover{background:rgba(255,255,255,.06);}
+  #m-panel a.cta{font-weight:700;border:1px solid rgba(255,255,255,.2);text-align:center;}
+  /* Hero & forms */
+  .hero h1,.hero .title{font-size:clamp(22px,6vw,34px) !important;line-height:1.12;}
+  .hero p,.hero .subtitle{font-size:clamp(14px,3.6vw,18px) !important;line-height:1.55;opacity:.92;}
+  body.page-screening .hero h1{font-size:clamp(20px,5.2vw,30px) !important;}
+  body.page-screening .hero p{font-size:clamp(13px,3.2vw,17px) !important;}
+  input[type=text],input[type=email],input[type=tel],select,textarea{width:100% !important;max-width:100% !important;font-size:16px;}
+  .form-row,.grid,.row{display:grid !important;grid-template-columns:1fr !important;gap:12px;}
+  /* Footer stack */
+  footer .columns,footer .grid,footer .row{display:grid !important;grid-template-columns:1fr !important;gap:16px;}
+  footer p,footer a{font-size:14px;}
+}
+</style>
 </head>
 <body class="bg-paper text-ink antialiased">
 <header class="sticky top-0 z-50 bg-paper/95 backdrop-blur border-b hairline"> <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between"> <a class="font-serif text-xl tracking-tightest" href="index.html">Orvenzia</a> <nav class="hidden md:flex items-center gap-8 text-sm"> <a href="services.html">Services</a> <a href="cases.html#previews">Cases</a> <a href="about.html">About</a> <a class="btn-primary" data-evt="click_screening_cta" href="screening.html">Start Screening</a> </nav> </div>
@@ -1405,5 +1432,41 @@
 </script>
   <script src="assets/js/mobile-menu.js"></script>
   <script src="assets/js/m.nav.v4.js"></script>
+<script id="mobile-only-fix">
+(function(){
+  function ready(fn){ if(document.readyState!=='loading'){fn()} else {document.addEventListener('DOMContentLoaded', fn)} }
+  ready(function(){
+    if (window.innerWidth > 860) return;                 // desktop untouched
+    if (document.getElementById('m-panel')) return;      // already injected
+
+    // Burger
+    var b=document.createElement('button');
+    b.className='m-burger';
+    b.setAttribute('aria-expanded','false');
+    b.setAttribute('aria-controls','m-panel');
+    b.setAttribute('aria-label','Toggle menu');
+    b.innerHTML='<span class="bar"></span><span class="bar"></span><span class="bar"></span>';
+    document.body.appendChild(b);
+
+    // Panel
+    var p=document.createElement('nav');
+    p.id='m-panel';
+    p.innerHTML=[
+      '<a href="services.html">Services</a>',
+      '<a href="cases.html">Cases</a>',
+      '<a href="about.html">About</a>',
+      '<a class="cta" href="screening.html">Free Screening</a>'
+    ].join('');
+    document.body.appendChild(p);
+
+    function open(){ p.classList.add('open'); b.setAttribute('aria-expanded','true'); }
+    function close(){ p.classList.remove('open'); b.setAttribute('aria-expanded','false'); }
+
+    b.addEventListener('click', function(e){ e.stopPropagation(); p.classList.contains('open')?close():open(); });
+    document.addEventListener('click', function(e){ if(!p.contains(e.target) && !b.contains(e.target)) close(); });
+    window.addEventListener('resize', function(){ if(window.innerWidth>860) close(); });
+  });
+})();
+</script>
 </body>
 </html>
