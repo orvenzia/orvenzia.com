@@ -598,60 +598,64 @@
 
 
 
-<!-- MOBILE-ONLY INLINE PATCH V16 — 2025-10-14 -->
-<style id="mobile-inline-patch-v16">
+
+<!-- MOBILE-ONLY INLINE PATCH V18 — 2025-10-14 (Absolute background paths + header/menu) -->
+<style id="mobile-inline-patch-v18">
 @media (max-width: 768px){
   html, body { background: transparent !important; overflow-x:hidden !important; margin:0; padding:0; }
 
-  /* Ensure the real desktop background is visible (not the base64 placeholder) */
+  /* Absolut root paths so it works from ALL folders */
   body::before{
     content:"" !important; position:fixed !important; inset:0 !important; display:block !important;
-    background-image: url("./assets/esg-global-bg.jpg") !important;
+    background-image: url("/assets/esg-global-bg.jpg") !important;
     background-repeat: no-repeat !important;
     background-position: center center !important;
     background-size: cover !important;
     background-attachment: fixed !important;
     z-index: -2 !important;
+    pointer-events:none !important;
   }
   body::after{
     content:"" !important; position:fixed !important; inset:0 !important;
-    background-image: url("./assets/mesh.svg") !important;
+    background-image: url("/assets/mesh.svg") !important;
     background-repeat: repeat !important; opacity: .15 !important;
     mix-blend-mode: multiply !important; pointer-events: none !important;
     z-index: -1 !important;
   }
   body > *{ position:relative; z-index:1; }
 
-  /* Kill duplicate injected burger/menu */
+  /* One mobile menu only */
   .m-burger, #m-panel{ display:none !important; }
 
-  /* Header layout — brand left, CTA mid-left, burger right; keep nav visible */
-  header{ position: sticky !important; top:0 !important; z-index:1000 !important;
-          background: rgba(252,252,250,0.92) !important;
-          -webkit-backdrop-filter: saturate(120%) blur(8px) !important;
-          backdrop-filter: saturate(120%) blur(8px) !important;
-          border-bottom: 1px solid rgba(0,0,0,.08) !important; }
+  /* Cases-style header (dark glass), burger right */
+  header, .site-header{
+    position: sticky !important; top:0 !important; z-index:1000 !important;
+    background: rgba(19,19,19,0.86) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    backdrop-filter: blur(8px) !important;
+    border-bottom: 1px solid rgba(255,255,255,0.10) !important;
+  }
+  header, header * { color:#fff !important; }
   body{ padding-top:64px !important; }
 
   header .m-header-row, header .container, header .inner, header .row, header nav{
     position:relative !important; display:flex !important; align-items:center !important; gap:12px !important; min-height:64px !important;
-    padding-right:58px !important; /* reserve space for burger */
+    padding-right:58px !important; /* space for burger */
   }
-  .desktop-nav{ display:none !important; }  /* only hide the desktop group, NOT nav itself */
+  .desktop-nav{ display:none !important; } /* keep nav visible; only hide desktop group */
 
-  header .brand, header .logo{ order:1 !important; margin-right:auto !important; }
   header nav .cta-free, header nav a[href*="screening"].btn-primary{
-    order:2 !important; display:inline-flex !important; font-size:14px !important; line-height:1 !important;
+    display:inline-flex !important; font-size:14px !important; line-height:1 !important;
     padding:9px 12px !important; border-radius:9999px !important; white-space:nowrap !important;
     color:#ffffff !important; -webkit-text-fill-color:#ffffff !important;
     max-width:calc(100vw - 120px) !important; overflow:hidden !important; text-overflow:ellipsis !important;
   }
 
   #mobile-nav-toggle, .mobile-nav-toggle{
-    order:3 !important; display:inline-flex !important; align-items:center !important; justify-content:center !important;
-    width:42px; height:42px; border-radius:10px; border:1px solid rgba(0,0,0,.12); background:#fff;
-    cursor:pointer; user-select:none; -webkit-tap-highlight-color: transparent;
     position:absolute !important; right:12px !important; top:11px !important; z-index:1003 !important;
+    width:42px; height:42px; border-radius:12px !important;
+    border:1px solid rgba(255,255,255,.18) !important;
+    background: rgba(255,255,255,.10) !important;
   }
 
   #mobile-menu{
@@ -664,26 +668,9 @@
   #mobile-menu a{ display:block; padding:10px 12px; border-radius:10px; text-decoration:none; color:#fff !important; }
   #mobile-menu a:hover{ background:rgba(255,255,255,0.06); }
 
-  .hero h1, .hero .title, h1.hero, .page-hero h1{ font-size:clamp(22px,6vw,34px) !important; line-height:1.15 !important; letter-spacing:-0.01em !important; }
-  .hero p, .hero .subtitle{ font-size:clamp(14px,3.6vw,18px) !important; line-height:1.55 !important; }
-  body.page-screening .hero h1{ font-size:clamp(20px,5.2vw,30px) !important; }
-  body.page-screening .hero p{ font-size:clamp(13px,3.2vw,17px) !important; }
-
-  main, section{ padding-inline:16px !important; }
-  section .container, .container{ padding-inline:0 !important; }
-  .grid, [class*="grid-cols-"], .columns, .row, .cards, .card-grid, .cases-grid, .services-grid{
-    display:grid !important; grid-template-columns:1fr !important; gap:16px !important;
-  }
-  .hero{ padding:16px !important; }
-  .card, .case-card, article.rounded-2xl.border.hairline, .hero-card{
-    background:rgba(255,255,255,.50) !important; color:#0B0B0B !important; border-color:rgba(0,0,0,.08) !important;
-    backdrop-filter:saturate(120%) blur(3px) !important;
-  }
-  section, .section, .container, .bg-white, .bg-[#ffffff], .bg-paper, .paper{ 
-    background:transparent !important; box-shadow:none !important;
-  }
-  footer .columns, footer .grid, footer .row{ display:grid !important; grid-template-columns:1fr !important; gap:12px !important; }
-  footer{ padding:20px 16px !important; }
+  /* Put the "See anonymised action cards" under the heading on home */
+  #home-page .flex.items-end.justify-between{ flex-direction:column !important; align-items:flex-start !important; gap:12px !important; }
+  #home-page .case-button{ display:inline-block !important; margin-top:4px !important; }
 }
 </style>
 

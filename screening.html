@@ -744,10 +744,36 @@ html.no-scroll, body.modal-open{overflow:hidden!important}
 
 
 
-<!-- MOBILE-ONLY INLINE PATCH V17 — 2025-10-14 (Unify headers like cases + CTA position) -->
-<style id="mobile-inline-patch-v17">
+
+<!-- MOBILE-ONLY INLINE PATCH V18 — 2025-10-14 (Absolute background paths + header/menu) -->
+<style id="mobile-inline-patch-v18">
 @media (max-width: 768px){
-  /* Unify header to cases style (dark glass) */
+  html, body { background: transparent !important; overflow-x:hidden !important; margin:0; padding:0; }
+
+  /* Absolut root paths so it works from ALL folders */
+  body::before{
+    content:"" !important; position:fixed !important; inset:0 !important; display:block !important;
+    background-image: url("/assets/esg-global-bg.jpg") !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    background-size: cover !important;
+    background-attachment: fixed !important;
+    z-index: -2 !important;
+    pointer-events:none !important;
+  }
+  body::after{
+    content:"" !important; position:fixed !important; inset:0 !important;
+    background-image: url("/assets/mesh.svg") !important;
+    background-repeat: repeat !important; opacity: .15 !important;
+    mix-blend-mode: multiply !important; pointer-events: none !important;
+    z-index: -1 !important;
+  }
+  body > *{ position:relative; z-index:1; }
+
+  /* One mobile menu only */
+  .m-burger, #m-panel{ display:none !important; }
+
+  /* Cases-style header (dark glass), burger right */
   header, .site-header{
     position: sticky !important; top:0 !important; z-index:1000 !important;
     background: rgba(19,19,19,0.86) !important;
@@ -756,23 +782,41 @@ html.no-scroll, body.modal-open{overflow:hidden!important}
     border-bottom: 1px solid rgba(255,255,255,0.10) !important;
   }
   header, header * { color:#fff !important; }
-  header a[href*="screening"]{ font-size:14px !important; padding:9px 12px !important; border-radius:999px !important; }
+  body{ padding-top:64px !important; }
 
-  /* Reserve space for burger; keep it pinned right */
   header .m-header-row, header .container, header .inner, header .row, header nav{
     position:relative !important; display:flex !important; align-items:center !important; gap:12px !important; min-height:64px !important;
-    padding-right:58px !important;
+    padding-right:58px !important; /* space for burger */
   }
+  .desktop-nav{ display:none !important; } /* keep nav visible; only hide desktop group */
+
+  header nav .cta-free, header nav a[href*="screening"].btn-primary{
+    display:inline-flex !important; font-size:14px !important; line-height:1 !important;
+    padding:9px 12px !important; border-radius:9999px !important; white-space:nowrap !important;
+    color:#ffffff !important; -webkit-text-fill-color:#ffffff !important;
+    max-width:calc(100vw - 120px) !important; overflow:hidden !important; text-overflow:ellipsis !important;
+  }
+
   #mobile-nav-toggle, .mobile-nav-toggle{
     position:absolute !important; right:12px !important; top:11px !important; z-index:1003 !important;
     width:42px; height:42px; border-radius:12px !important;
     border:1px solid rgba(255,255,255,.18) !important;
     background: rgba(255,255,255,.10) !important;
   }
-  body{ padding-top:64px !important; }
 
-  /* Index: ensure CTA sits UNDER the heading block */
-  #home-page .case-button{ display:inline-block !important; margin-top:12px !important; width:auto !important; }
+  #mobile-menu{
+    position:fixed !important; right:12px !important; top:64px !important;
+    width:min(88vw,360px) !important; max-height:calc(100vh - 84px) !important; overflow:auto !important;
+    padding:12px !important; border-radius:14px !important; background:rgba(11,11,11,0.96) !important; color:#fff !important;
+    box-shadow:0 20px 40px rgba(0,0,0,0.45) !important; z-index:1002 !important;
+  }
+  #mobile-menu[hidden]{ display:none !important; }
+  #mobile-menu a{ display:block; padding:10px 12px; border-radius:10px; text-decoration:none; color:#fff !important; }
+  #mobile-menu a:hover{ background:rgba(255,255,255,0.06); }
+
+  /* Put the "See anonymised action cards" under the heading on home */
+  #home-page .flex.items-end.justify-between{ flex-direction:column !important; align-items:flex-start !important; gap:12px !important; }
+  #home-page .case-button{ display:inline-block !important; margin-top:4px !important; }
 }
 </style>
 
