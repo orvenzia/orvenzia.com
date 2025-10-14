@@ -596,49 +596,51 @@
 }
 </style>
 
-<!-- MOBILE-ONLY INLINE PATCH V20 — 2025-10-14 (Unified m-burger menu + closing fix) -->
-<style id="mobile-inline-patch-v20">
-@media (max-width: 860px){
-  html, body { background: transparent !important; overflow-x:hidden !important; margin:0; padding:0; }
 
-  /* Background layers use absolute paths (works from all folders) */
+<!-- MOBILE-ONLY INLINE PATCH V21 — 2025-10-14 (Header pill + menu close + CTA in menu) -->
+<style id="mobile-inline-patch-v21">
+@media (max-width: 860px){
+  /* Background (absolute paths) */
   body::before{
     content:"" !important; position:fixed !important; inset:0 !important;
-    background-image: url("/assets/esg-global-bg.jpg") !important;
+    background-image:url("/assets/esg-global-bg.jpg") !important;
     background-repeat:no-repeat !important; background-position:center center !important;
-    background-size:cover !important; background-attachment: fixed !important;
+    background-size:cover !important; background-attachment:fixed !important;
     z-index:-2 !important; pointer-events:none !important;
   }
   body::after{
     content:"" !important; position:fixed !important; inset:0 !important;
-    background-image: url("/assets/mesh.svg") !important;
+    background-image:url("/assets/mesh.svg") !important;
     background-repeat:repeat !important; opacity:.15 !important; mix-blend-mode:multiply !important;
     z-index:-1 !important; pointer-events:none !important;
   }
   body > *{ position:relative; z-index:1; }
 
-  /* Dark glass header like cases */
-  header,.site-header{ position:sticky !important; top:0 !important; z-index:1000 !important;
+  /* Dark header like cases, but NO rounded "pill" */
+  header, .site-header{
+    position:sticky !important; top:0 !important; z-index:1000 !important;
     background:rgba(19,19,19,0.86) !important; -webkit-backdrop-filter:blur(8px) !important; backdrop-filter:blur(8px) !important;
-    border-bottom:1px solid rgba(255,255,255,0.10) !important;
+    border-bottom:1px solid rgba(255,255,255,0.10) !important; border-radius:0 !important;
+    box-shadow:none !important;
   }
-  header, header *{ color:#fff !important; }
+  /* Remove any accidental pill/background on inner wrappers or brand link */
+  header .container, header .inner, header .row, header nav, header .brand, header .logo, header .brand a, header .logo a{
+    background:transparent !important; box-shadow:none !important; border:none !important; border-radius:0 !important;
+    padding-left:0 !important; padding-right:0 !important;
+  }
+  header .brand a, header .logo a{ display:inline-block !important; }
+
   body{ padding-top:64px !important; }
-  header .m-header-row, header .container, header .inner, header .row, header nav{
-    min-height:64px !important;
-  }
 
-  /* Unify on m.nav.v4.js menu across all pages */
-  #mobile-nav-toggle, .mobile-nav-toggle, #mobile-menu{ display:none !important; } /* hide our old system */
-
-  /* m-burger & panel (close works via .open class) */
+  /* m-burger unified */
+  #mobile-nav-toggle, .mobile-nav-toggle, #mobile-menu{ display:none !important; } /* retire old system */
   .m-burger{ position:fixed !important; right:12px !important; top:10px !important; width:40px !important; height:40px !important;
     display:flex !important; align-items:center !important; justify-content:center !important;
     border:1px solid rgba(255,255,255,0.2) !important; border-radius:12px !important; z-index:1002 !important;
     background:rgba(255,255,255,0.10) !important;
   }
-  .m-burger .bar{ width:22px; height:2px; background:#fff; display:block; margin:3px 0; }
 
+  /* Panel closed by default; only visible with .open */
   #m-panel{ position:fixed !important; right:12px !important; top:64px !important; width:min(88vw,340px) !important;
     display:none !important; flex-direction:column !important; gap:6px !important; padding:12px !important;
     background:rgba(11,11,11,0.96) !important; color:#fff !important; border-radius:14px !important;
@@ -648,6 +650,10 @@
   #m-panel a{ color:#fff !important; text-decoration:none !important; padding:10px 12px !important; border-radius:10px !important; display:block !important; }
   #m-panel a:hover{ background:rgba(255,255,255,0.06) !important; }
   #m-panel a.cta{ font-weight:700 !important; border:1px solid rgba(255,255,255,0.2) !important; text-align:center !important; }
+
+  /* Index hero CTA under heading */
+  #home-page .flex.items-end.justify-between{ flex-direction:column !important; align-items:flex-start !important; gap:12px !important; }
+  #home-page .case-button{ display:inline-block !important; margin-top:4px !important; }
 }
 </style>
 
@@ -1335,6 +1341,56 @@
       var a = document.querySelector('#m-panel a.cta');
       if(a){ a.textContent = 'Start Screening →'; }
     }catch(e){}
+  });
+})();
+</script>
+
+
+<script id="mobile-menu-helper-v21">
+(function(){
+  function ready(fn){ if(document.readyState!='loading'){fn()} else {document.addEventListener('DOMContentLoaded', fn)} }
+  ready(function(){
+    var burger = document.querySelector('.m-burger');
+    var panel  = document.querySelector('#m-panel');
+    if(!burger || !panel) return;
+
+    // Ensure starts closed
+    panel.classList.remove('open');
+
+    // Toggle on burger
+    burger.addEventListener('click', function(ev){
+      ev.stopPropagation();
+      panel.classList.toggle('open');
+    });
+
+    // Close on outside click / escape
+    document.addEventListener('click', function(ev){
+      if(!panel.classList.contains('open')) return;
+      if(!panel.contains(ev.target) && ev.target !== burger){ panel.classList.remove('open'); }
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape'){ panel.classList.remove('open'); }
+    });
+    window.addEventListener('resize', function(){ panel.classList.remove('open'); });
+
+    // Ensure a CTA exists as last item, text = Start Screening ->
+    var cta = panel.querySelector('a.cta');
+    if(!cta){
+      cta = document.createElement('a');
+      cta.className = 'cta';
+      cta.href = '/screening.html';
+      cta.textContent = 'Start Screening ->';
+      panel.appendChild(cta);
+    }else{
+      cta.textContent = 'Start Screening ->';
+      if(!cta.getAttribute('href')) cta.href = '/screening.html';
+    }
+
+    // Close panel when any link is clicked
+    panel.addEventListener('click', function(ev){
+      var a = ev.target.closest('a');
+      if(a){ panel.classList.remove('open'); }
+    });
   });
 })();
 </script>
