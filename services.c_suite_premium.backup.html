@@ -638,67 +638,83 @@
 }
 </style>
 
-<!-- MOBILE-ONLY INLINE PATCH V24 — bulletproof -->
-<style id="mobile-inline-patch-v24">
+
+<!-- MOBILE-ONLY INLINE PATCH V26 — bulletproof background + menu -->
+<style id="mobile-inline-patch-v26">
 @media (max-width: 860px){
   :root{ --m-header-h: 60px; }
   html, body{ margin:0; padding:0; overflow-x:hidden !important; }
-  body{
-    background-image: url("/assets/mesh.svg"), url("/assets/esg-global-bg.jpg");
-    background-repeat: repeat, no-repeat;
-    background-position: center top, center center;
-    background-size: auto, cover;
-    background-attachment: scroll, fixed;
-    background-color: transparent !important;
-  }
-  body > *{ position:relative; z-index:1; }
-  body{ padding-top: var(--m-header-h) !important; }
 
+  /* Background: absolute + relative fallbacks on BODY/HTML */
+  html, body{
+    background-image:
+      url("/assets/mesh.svg"),
+      url("./assets/mesh.svg"),
+      url("/assets/esg-global-bg.jpg"),
+      url("./assets/esg-global-bg.jpg");
+    background-repeat: repeat, repeat, no-repeat, no-repeat !important;
+    background-position: center top, center top, center center, center center !important;
+    background-size: auto, auto, cover, cover !important;
+    background-attachment: scroll, scroll, fixed, fixed !important;
+    background-color: #0b0b0b !important;
+  }
+
+  body{ padding-top: var(--m-header-h) !important; }
+  body > *{ position:relative; z-index:1; }
+
+  /* Header fixed at top, remove accidental "pill" styles */
   header, .site-header{
-    position:fixed !important; top:0 !important; left:0 !important; right:0 !important; z-index:1000 !important;
+    position:fixed !important; top:0 !important; left:0 !important; right:0 !important; z-index:10000 !important;
     min-height: var(--m-header-h) !important;
     background: rgba(19,19,19,0.86) !important;
     -webkit-backdrop-filter: blur(8px) !important; backdrop-filter: blur(8px) !important;
-    border-bottom: 1px solid rgba(255,255,255,0.10) !important; border-radius:0 !important; box-shadow:none !important;
+    border-bottom: 1px solid rgba(255,255,255,0.10) !important;
+    border-radius:0 !important; box-shadow:none !important;
   }
   header .container, header .inner, header .row, header nav, header .brand, header .logo, header .brand a, header .logo a{
     background:transparent !important; border:none !important; border-radius:0 !important; box-shadow:none !important;
+  }
+  header [class*="rounded"], header [class*="pill"], header [class*="badge"]{
+    border-radius:0 !important; background:transparent !important; box-shadow:none !important;
   }
   header .m-header-row, header .container, header .inner, header .row, header nav{
     min-height: var(--m-header-h) !important; display:flex !important; align-items:center !important; gap:12px !important;
     padding-right:64px !important;
   }
-  .desktop-nav{ display:none !important; }
+  .desktop-nav{ display:none !important; } /* Keep desktop-only groups hidden on mobile */
 
+  /* Show at least one burger always */
   .m-burger, #mobile-nav-toggle{
-    position:fixed !important; right:12px !important; top:12px !important; z-index:1002 !important;
-    width:40px !important; height:40px !important; display:inline-flex !important; align-items:center !important; justify-content:center !important;
-    border:1px solid rgba(255,255,255,0.2) !important; border-radius:12px !important; background:rgba(255,255,255,0.12) !important;
+    position:fixed !important; right:12px !important; top:12px !important; z-index:10001 !important;
+    width:40px !important; height:40px !important; display:flex !important; align-items:center !important; justify-content:center !important;
+    border:1px solid rgba(255,255,255,0.2) !important; border-radius:12px !important;
+    background:rgba(255,255,255,0.12) !important;
   }
+  /* If both exist, prefer .m-burger to avoid duplicate buttons */
   .m-burger ~ #mobile-nav-toggle, .m-burger + #mobile-nav-toggle{ display:none !important; }
 
-  #m-panel{
+  /* Panels anchored below fixed header */
+  #m-panel, #mobile-menu{
     position:fixed !important; right:12px !important; top: calc(var(--m-header-h) + 6px) !important;
-    width:min(88vw,340px) !important; display:none !important;
-    flex-direction:column !important; gap:6px !important; padding:12px !important;
-    background:rgba(11,11,11,0.96) !important; color:#fff !important; border-radius:14px !important;
-    box-shadow:0 20px 40px rgba(0,0,0,0.45) !important; z-index:1001 !important;
+    width:min(88vw,340px) !important; background:rgba(11,11,11,0.96) !important; color:#fff !important;
+    border-radius:14px !important; box-shadow:0 20px 40px rgba(0,0,0,0.45) !important;
+    padding:12px !important; overflow:auto !important; max-height: calc(100vh - var(--m-header-h) - 24px) !important; z-index:10000 !important;
   }
-  #m-panel.open{ display:flex !important; }
-  #m-panel a{ color:#fff !important; text-decoration:none !important; padding:10px 12px !important; border-radius:10px !important; display:block !important; }
-  #m-panel a:hover{ background:rgba(255,255,255,0.06) !important; }
-  #m-panel a.cta{ font-weight:700 !important; border:1px solid rgba(255,255,255,0.2) !important; text-align:center !important; }
+  #m-panel{ display:none !important; }
+  #m-panel.open,
+  body.menu-open #m-panel,
+  .menu-open #m-panel,
+  #m-panel[aria-hidden="false"],
+  #m-panel[aria-expanded="true"],
+  #m-panel[data-open="true"],
+  #m-panel.is-open{ display:flex !important; flex-direction:column !important; gap:6px !important; }
 
-  #mobile-menu{
-    position:fixed !important; right:12px !important; top: calc(var(--m-header-h) + 6px) !important;
-    width:min(88vw,340px) !important; max-height:calc(100vh - var(--m-header-h) - 24px) !important; overflow:auto !important;
-    padding:12px !important; border-radius:14px !important; background:rgba(11,11,11,0.96) !important; color:#fff !important;
-    box-shadow:0 20px 40px rgba(0,0,0,0.45) !important; z-index:1001 !important;
-  }
   #mobile-menu[hidden]{ display:none !important; }
-  #mobile-menu a{ color:#fff !important; display:block !important; padding:10px 12px !important; border-radius:10px !important; text-decoration:none !important; }
-  #mobile-menu a:hover{ background:rgba(255,255,255,0.06) !important; }
+  #mobile-menu a, #m-panel a{ color:#fff !important; display:block !important; padding:10px 12px !important; border-radius:10px !important; text-decoration:none !important; }
+  #mobile-menu a:hover, #m-panel a:hover{ background:rgba(255,255,255,0.06) !important; }
+  #m-panel a.cta, #mobile-menu a.cta{ font-weight:700 !important; border:1px solid rgba(255,255,255,0.2) !important; text-align:center !important; }
 
+  /* Home hero CTA below heading */
   #home-page .flex.items-end.justify-between{ flex-direction:column !important; align-items:flex-start !important; gap:12px !important; }
   #home-page .case-button{ display:inline-block !important; margin-top:4px !important; }
 }
@@ -1463,30 +1479,46 @@
 })();
 </script>
 
-<script id="mobile-final-helper-v24">
+
+<script id="mobile-final-helper-v26">
 (function(){
   function ready(fn){ if(document.readyState!='loading'){fn()} else {document.addEventListener('DOMContentLoaded', fn)} }
   ready(function(){
     if (window.matchMedia && !window.matchMedia('(max-width: 860px)').matches) return;
 
+    // A) exact body offset = header height
     var header = document.querySelector('header');
     function setH(){ var h = header ? Math.max(header.offsetHeight, 56) : 56;
       document.documentElement.style.setProperty('--m-header-h', h + 'px'); }
     setH(); window.addEventListener('resize', setH);
 
-    var burger = document.querySelector('.m-burger');
+    // B) Ensure we have a working menu, no matter what
+    var burger = document.querySelector('.m-burger') || document.querySelector('[data-burger]');
     var panel  = document.querySelector('#m-panel');
-    var legacyBtn = document.querySelector('#mobile-nav-toggle');
+    var legacyBtn   = document.querySelector('#mobile-nav-toggle');
     var legacyPanel = document.querySelector('#mobile-menu');
+
+    // If none exist, build a minimal burger + panel from header links
+    if (!burger && !legacyBtn){
+      burger = document.createElement('button'); burger.className = 'm-burger'; burger.setAttribute('aria-label','Menu');
+      burger.innerHTML = '<span class="bar"></span><span class="bar"></span><span class="bar"></span>';
+      document.body.appendChild(burger);
+    }
+    if (!panel && !legacyPanel){
+      panel = document.createElement('nav'); panel.id = 'm-panel'; document.body.appendChild(panel);
+      var srcLinks = Array.prototype.slice.call(document.querySelectorAll('header nav a, header .nav a, header .menu a'));
+      if (srcLinks.length){
+        srcLinks.forEach(function(a){
+          var c = document.createElement('a'); c.textContent = a.textContent.trim(); c.href = a.getAttribute('href') || '#'; panel.appendChild(c);
+        });
+      }
+    }
 
     function ensureCTA(container){
       if(!container) return;
       var cta = container.querySelector('a.cta');
       if(!cta){
-        cta = document.createElement('a');
-        cta.className = 'cta';
-        cta.href = '/screening.html';
-        cta.textContent = 'Start Screening →';
+        cta = document.createElement('a'); cta.className = 'cta'; cta.href = '/screening.html'; cta.textContent = 'Start Screening →';
         container.appendChild(cta);
       } else {
         cta.textContent = 'Start Screening →';
@@ -1494,18 +1526,42 @@
       }
     }
 
+    // Wire modern panel if present
     if (panel && burger){
       ensureCTA(panel);
-      panel.classList.remove('open');
-      burger.addEventListener('click', function(ev){ ev.stopPropagation(); panel.classList.toggle('open'); });
-      document.addEventListener('click', function(ev){
-        if(!panel.classList.contains('open')) return;
-        if(!panel.contains(ev.target) && ev.target !== burger){ panel.classList.remove('open'); }
-      });
-      document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ panel.classList.remove('open'); } });
-      panel.addEventListener('click', function(ev){ var a=ev.target.closest('a'); if(a){ panel.classList.remove('open'); } });
-    } else if (legacyPanel){
+      if (!panel.dataset.wired){
+        panel.dataset.wired = '1';
+        panel.classList.remove('open');
+        burger.addEventListener('click', function(ev){ ev.stopPropagation(); panel.classList.toggle('open'); });
+        document.addEventListener('click', function(ev){ if(!panel.classList.contains('open')) return;
+          if(!panel.contains(ev.target) && ev.target !== burger){ panel.classList.remove('open'); } });
+        document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ panel.classList.remove('open'); } });
+        panel.addEventListener('click', function(ev){ var a=ev.target.closest('a'); if(a){ panel.classList.remove('open'); } });
+      }
+      return; // prefer modern flow
+    }
+
+    // Otherwise wire legacy if present (in case its own JS isn't active on some pages)
+    if (legacyBtn && legacyPanel){
       ensureCTA(legacyPanel);
+      if (!legacyBtn.dataset.wired){
+        legacyBtn.dataset.wired = '1';
+        legacyBtn.addEventListener('click', function(ev){
+          ev.stopPropagation();
+          var isHidden = legacyPanel.hasAttribute('hidden');
+          if (isHidden) legacyPanel.removeAttribute('hidden'); else legacyPanel.setAttribute('hidden','');
+        });
+        document.addEventListener('click', function(ev){
+          if(legacyPanel.hasAttribute('hidden')) return;
+          if(!legacyPanel.contains(ev.target) && ev.target !== legacyBtn){ legacyPanel.setAttribute('hidden',''); }
+        });
+        document.addEventListener('keydown', function(e){
+          if(e.key==='Escape'){ legacyPanel.setAttribute('hidden',''); }
+        });
+        legacyPanel.addEventListener('click', function(ev){
+          var a = ev.target.closest('a'); if(a){ legacyPanel.setAttribute('hidden',''); }
+        });
+      }
     }
   });
 })();
