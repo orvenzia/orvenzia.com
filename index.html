@@ -805,12 +805,13 @@
 </style>
 
 
-<!-- MOBILE-ONLY INLINE PATCH V14 — 2025-10-14 -->
-<style id="mobile-inline-patch-v14">
-@media (max-width: 768px){
-  html, body { background: transparent !important; overflow-x: hidden !important; margin:0; padding:0; }
 
-  /* Background = desktop source on mobile (visible under content) */
+<!-- MOBILE-ONLY INLINE PATCH V16 — 2025-10-14 -->
+<style id="mobile-inline-patch-v16">
+@media (max-width: 768px){
+  html, body { background: transparent !important; overflow-x:hidden !important; margin:0; padding:0; }
+
+  /* Ensure the real desktop background is visible (not the base64 placeholder) */
   body::before{
     content:"" !important; position:fixed !important; inset:0 !important; display:block !important;
     background-image: url("./assets/esg-global-bg.jpg") !important;
@@ -827,36 +828,33 @@
     mix-blend-mode: multiply !important; pointer-events: none !important;
     z-index: -1 !important;
   }
-  body > *{ position:relative; z-index: 1; }
+  body > *{ position:relative; z-index:1; }
 
-  /* Remove duplicate injected burger/panel (avoid conflicts) */
-  .m-burger, #m-panel{ display: none !important; }
+  /* Kill duplicate injected burger/menu */
+  .m-burger, #m-panel{ display:none !important; }
 
-  /* Header */
-  header{
-    position: sticky !important; top:0 !important; z-index: 1000 !important;
-    background: rgba(252,252,250,0.92) !important;
-    -webkit-backdrop-filter: saturate(120%) blur(8px) !important;
-    backdrop-filter: saturate(120%) blur(8px) !important;
-    border-bottom: 1px solid rgba(0,0,0,.08) !important;
-  }
-  body{ padding-top: 64px !important; } /* offset for sticky header */
+  /* Header layout — brand left, CTA mid-left, burger right; keep nav visible */
+  header{ position: sticky !important; top:0 !important; z-index:1000 !important;
+          background: rgba(252,252,250,0.92) !important;
+          -webkit-backdrop-filter: saturate(120%) blur(8px) !important;
+          backdrop-filter: saturate(120%) blur(8px) !important;
+          border-bottom: 1px solid rgba(0,0,0,.08) !important; }
+  body{ padding-top:64px !important; }
 
-  /* Keep header row visible, do NOT hide nav; only hide desktop-only group */
-  .desktop-nav{ display:none !important; }
   header .m-header-row, header .container, header .inner, header .row, header nav{
-    display:flex !important; align-items:center !important; gap:12px !important; min-height:64px !important;
+    position:relative !important; display:flex !important; align-items:center !important; gap:12px !important; min-height:64px !important;
+    padding-right:58px !important; /* reserve space for burger */
   }
+  .desktop-nav{ display:none !important; }  /* only hide the desktop group, NOT nav itself */
 
-  /* Order: brand left, CTA next, burger far right */
   header .brand, header .logo{ order:1 !important; margin-right:auto !important; }
   header nav .cta-free, header nav a[href*="screening"].btn-primary{
     order:2 !important; display:inline-flex !important; font-size:14px !important; line-height:1 !important;
     padding:9px 12px !important; border-radius:9999px !important; white-space:nowrap !important;
     color:#ffffff !important; -webkit-text-fill-color:#ffffff !important;
+    max-width:calc(100vw - 120px) !important; overflow:hidden !important; text-overflow:ellipsis !important;
   }
 
-  /* Burger toggle must be visible even if placed inside nav */
   #mobile-nav-toggle, .mobile-nav-toggle{
     order:3 !important; display:inline-flex !important; align-items:center !important; justify-content:center !important;
     width:42px; height:42px; border-radius:10px; border:1px solid rgba(0,0,0,.12); background:#fff;
@@ -864,18 +862,16 @@
     position:absolute !important; right:12px !important; top:11px !important; z-index:1003 !important;
   }
 
-  /* Mobile menu panel (HTML one) */
   #mobile-menu{
     position:fixed !important; right:12px !important; top:64px !important;
     width:min(88vw,360px) !important; max-height:calc(100vh - 84px) !important; overflow:auto !important;
     padding:12px !important; border-radius:14px !important; background:rgba(11,11,11,0.96) !important; color:#fff !important;
-    box-shadow:0 20px 40px rgba(0,0,0,0.45) !important; z-index: 1002 !important;
+    box-shadow:0 20px 40px rgba(0,0,0,0.45) !important; z-index:1002 !important;
   }
   #mobile-menu[hidden]{ display:none !important; }
   #mobile-menu a{ display:block; padding:10px 12px; border-radius:10px; text-decoration:none; color:#fff !important; }
   #mobile-menu a:hover{ background:rgba(255,255,255,0.06); }
 
-  /* Hero & layout */
   .hero h1, .hero .title, h1.hero, .page-hero h1{ font-size:clamp(22px,6vw,34px) !important; line-height:1.15 !important; letter-spacing:-0.01em !important; }
   .hero p, .hero .subtitle{ font-size:clamp(14px,3.6vw,18px) !important; line-height:1.55 !important; }
   body.page-screening .hero h1{ font-size:clamp(20px,5.2vw,30px) !important; }
@@ -894,7 +890,6 @@
   section, .section, .container, .bg-white, .bg-[#ffffff], .bg-paper, .paper{ 
     background:transparent !important; box-shadow:none !important;
   }
-
   footer .columns, footer .grid, footer .row{ display:grid !important; grid-template-columns:1fr !important; gap:12px !important; }
   footer{ padding:20px 16px !important; }
 }
@@ -1160,16 +1155,10 @@
   });
 
   // 3) Hide typical desktop nav containers on mobile
-  $all('nav, .desktop-nav, .menu, .menu-list, .nav-links, .header-links', header).forEach(function(el){
+  $all('.desktop-nav, .menu, .menu-list, .nav-links, .header-links', header).forEach(function(el){
     if (!el.closest('#mobile-menu')) el.style.display = 'none';
   });
-
-  // 4) If there is a black square CTA as last child, hide it (keep burger)
-  var last = header.lastElementChild;
-  if (last && last !== burger && !last.closest('#mobile-menu')){
-    last.style.display = 'none';
-  }
-
+  // 4) (removed) keep CTA; proceed to 5)
   // 5) Hook burger -> #mobile-menu toggle (attribute hidden)
   var menu = document.getElementById('mobile-menu');
   if (burger && menu){
@@ -1357,26 +1346,7 @@
   } else {
     cta.href = ctaHref;
   }
-
-  // 4) Burger on the right (resilient)
-  var burger = header.querySelector('.mobile-nav-toggle') || document.getElementById('mobile-nav-toggle');
-  if (!burger){
-    burger = document.createElement('button'); burger.className = 'mobile-nav-toggle'; burger.id = 'mobile-nav-toggle';
-  }
-  if (!burger.querySelector('.burger')){
-    var span = document.createElement('span'); span.className = 'burger'; burger.appendChild(span);
-  }
-
-  // Mount trio into the row: brand | CTA | burger
-  row.innerHTML = '';
-  row.appendChild(brand);
-  row.appendChild(cta);
-  row.appendChild(burger);
-
-  // Hide original desktop nav row on mobile
-  var desktopRow = header.querySelector('.max-w-7xl');
-  if (desktopRow) desktopRow.style.display = 'none';
-
+  // 4) (removed) keep CTA; proceed to 5)
   // 5) Build burger menu items EXACTLY: Services, Cases, About
   var servicesHref = 'services.html', casesHref = 'cases.html', aboutHref = 'about.html';
   // Try to harvest hrefs from any desktop nav links
