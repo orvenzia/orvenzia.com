@@ -775,13 +775,13 @@ a:hover { opacity: .9; }
 }
 </style>
 
-<!-- MOBILE-ONLY INLINE PATCH V13 — 2025-10-14 -->
-<style id="mobile-inline-patch-v13">
-/* Scope to mobile only */
+
+<!-- MOBILE-ONLY INLINE PATCH V14 — 2025-10-14 -->
+<style id="mobile-inline-patch-v14">
 @media (max-width: 768px){
   html, body { background: transparent !important; overflow-x: hidden !important; margin:0; padding:0; }
 
-  /* 1) Restore DESKTOP background on mobile (override base64 in mobile.v3.css) */
+  /* Background = desktop source on mobile (visible under content) */
   body::before{
     content:"" !important; position:fixed !important; inset:0 !important; display:block !important;
     background-image: url("./assets/esg-global-bg.jpg") !important;
@@ -798,37 +798,44 @@ a:hover { opacity: .9; }
     mix-blend-mode: multiply !important; pointer-events: none !important;
     z-index: -1 !important;
   }
-  body > *{ position:relative; z-index: 1; } /* keep content above bg layers */
+  body > *{ position:relative; z-index: 1; }
 
-  /* 2) Kill duplicate injected burger/menu from m.nav.v4.js to avoid conflicts */
+  /* Remove duplicate injected burger/panel (avoid conflicts) */
   .m-burger, #m-panel{ display: none !important; }
 
-  /* 3) Header: sticky, readable, correct order */
-  header{ position: sticky !important; top:0 !important; z-index: 1000 !important;
-          background: rgba(252,252,250,0.92) !important;
-          -webkit-backdrop-filter: saturate(120%) blur(8px) !important;
-          backdrop-filter: saturate(120%) blur(8px) !important;
-          border-bottom: 1px solid rgba(0,0,0,.08) !important;
+  /* Header */
+  header{
+    position: sticky !important; top:0 !important; z-index: 1000 !important;
+    background: rgba(252,252,250,0.92) !important;
+    -webkit-backdrop-filter: saturate(120%) blur(8px) !important;
+    backdrop-filter: saturate(120%) blur(8px) !important;
+    border-bottom: 1px solid rgba(0,0,0,.08) !important;
   }
-  body{ padding-top: 64px !important; } /* prevent overlap under sticky header */
+  body{ padding-top: 64px !important; } /* offset for sticky header */
 
-  header .m-header-row, header .container, header .inner, header .row{
+  /* Keep header row visible, do NOT hide nav; only hide desktop-only group */
+  .desktop-nav{ display:none !important; }
+  header .m-header-row, header .container, header .inner, header .row, header nav{
     display:flex !important; align-items:center !important; gap:12px !important; min-height:64px !important;
   }
-  .desktop-nav, header nav:not(#mobile-menu){ display:none !important; } /* hide desktop nav */
+
+  /* Order: brand left, CTA next, burger far right */
   header .brand, header .logo{ order:1 !important; margin-right:auto !important; }
-  header .cta-free, header a[href*="screening"].btn-primary{
-    order:2 !important; font-size:14px !important; line-height:1 !important;
+  header nav .cta-free, header nav a[href*="screening"].btn-primary{
+    order:2 !important; display:inline-flex !important; font-size:14px !important; line-height:1 !important;
     padding:9px 12px !important; border-radius:9999px !important; white-space:nowrap !important;
     color:#ffffff !important; -webkit-text-fill-color:#ffffff !important;
   }
+
+  /* Burger toggle must be visible even if placed inside nav */
   #mobile-nav-toggle, .mobile-nav-toggle{
     order:3 !important; display:inline-flex !important; align-items:center !important; justify-content:center !important;
     width:42px; height:42px; border-radius:10px; border:1px solid rgba(0,0,0,.12); background:#fff;
     cursor:pointer; user-select:none; -webkit-tap-highlight-color: transparent;
+    position:absolute !important; right:12px !important; top:11px !important; z-index:1003 !important;
   }
 
-  /* 4) Mobile menu panel (the one in HTML: #mobile-menu) */
+  /* Mobile menu panel (HTML one) */
   #mobile-menu{
     position:fixed !important; right:12px !important; top:64px !important;
     width:min(88vw,360px) !important; max-height:calc(100vh - 84px) !important; overflow:auto !important;
@@ -839,13 +846,12 @@ a:hover { opacity: .9; }
   #mobile-menu a{ display:block; padding:10px 12px; border-radius:10px; text-decoration:none; color:#fff !important; }
   #mobile-menu a:hover{ background:rgba(255,255,255,0.06); }
 
-  /* 5) Readable hero */
+  /* Hero & layout */
   .hero h1, .hero .title, h1.hero, .page-hero h1{ font-size:clamp(22px,6vw,34px) !important; line-height:1.15 !important; letter-spacing:-0.01em !important; }
   .hero p, .hero .subtitle{ font-size:clamp(14px,3.6vw,18px) !important; line-height:1.55 !important; }
   body.page-screening .hero h1{ font-size:clamp(20px,5.2vw,30px) !important; }
   body.page-screening .hero p{ font-size:clamp(13px,3.2vw,17px) !important; }
 
-  /* 6) Layout safety + readability on background */
   main, section{ padding-inline:16px !important; }
   section .container, .container{ padding-inline:0 !important; }
   .grid, [class*="grid-cols-"], .columns, .row, .cards, .card-grid, .cases-grid, .services-grid{
@@ -860,7 +866,6 @@ a:hover { opacity: .9; }
     background:transparent !important; box-shadow:none !important;
   }
 
-  /* 7) Footer tidy */
   footer .columns, footer .grid, footer .row{ display:grid !important; grid-template-columns:1fr !important; gap:12px !important; }
   footer{ padding:20px 16px !important; }
 }
