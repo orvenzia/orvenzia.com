@@ -579,3 +579,26 @@ body.theme-dark section.on-image::after{
 @media (min-width: 861px){
   .mobile-nav-toggle, .m-burger, #mobile-menu, #m-panel{ display: none !important; }
 }
+
+
+/* === PAGE-SPECIFIC PRESERVE (MOBILE) === */
+@media (max-width: 860px){
+  /* Keep 'paper' backgrounds on ABOUT/PRIVACY/TERMS (body has bg-paper) */
+  body.bg-paper section,
+  body.bg-paper .section,
+  body.bg-paper .container,
+  body.bg-paper .card,
+  body.bg-paper .paper,
+  body.bg-paper .bg-white,
+  body.bg-paper .bg-[#ffffff],
+  body.bg-paper .bg-[#FCFCFA]{
+    background: var(--paper, #FCFCFA) !important;
+  }
+
+  /* Keep card-style blocks on CASES readable (tcards, article, etc.) */
+  body.cases .tcards .tcard,
+  body.cases article,
+  body.cases .card{
+    background: #fff !important;
+  }
+}
