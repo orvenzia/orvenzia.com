@@ -638,74 +638,58 @@
 }
 </style>
 
-
-<!-- MOBILE-ONLY INLINE PATCH V19 — 2025-10-14 (Fix Cases header) -->
-<style id="mobile-inline-patch-v19">
-@media (max-width: 768px){
+<!-- MOBILE-ONLY INLINE PATCH V20 — 2025-10-14 (Unified m-burger menu + closing fix) -->
+<style id="mobile-inline-patch-v20">
+@media (max-width: 860px){
   html, body { background: transparent !important; overflow-x:hidden !important; margin:0; padding:0; }
 
-  /* Use absolute background paths on every page */
+  /* Background layers use absolute paths (works from all folders) */
   body::before{
-    content:"" !important; position:fixed !important; inset:0 !important; display:block !important;
+    content:"" !important; position:fixed !important; inset:0 !important;
     background-image: url("/assets/esg-global-bg.jpg") !important;
-    background-repeat: no-repeat !important; background-position: center center !important;
-    background-size: cover !important; background-attachment: fixed !important;
-    z-index: -2 !important; pointer-events:none !important;
+    background-repeat:no-repeat !important; background-position:center center !important;
+    background-size:cover !important; background-attachment: fixed !important;
+    z-index:-2 !important; pointer-events:none !important;
   }
   body::after{
     content:"" !important; position:fixed !important; inset:0 !important;
     background-image: url("/assets/mesh.svg") !important;
-    background-repeat: repeat !important; opacity: .15 !important;
-    mix-blend-mode: multiply !important; pointer-events: none !important;
-    z-index: -1 !important;
+    background-repeat:repeat !important; opacity:.15 !important; mix-blend-mode:multiply !important;
+    z-index:-1 !important; pointer-events:none !important;
   }
   body > *{ position:relative; z-index:1; }
 
-  /* Header (dark glass like cases) */
-  header, .site-header{
-    position: sticky !important; top:0 !important; z-index:1000 !important;
-    background: rgba(19,19,19,0.86) !important;
-    -webkit-backdrop-filter: blur(8px) !important;
-    backdrop-filter: blur(8px) !important;
-    border-bottom: 1px solid rgba(255,255,255,0.10) !important;
+  /* Dark glass header like cases */
+  header,.site-header{ position:sticky !important; top:0 !important; z-index:1000 !important;
+    background:rgba(19,19,19,0.86) !important; -webkit-backdrop-filter:blur(8px) !important; backdrop-filter:blur(8px) !important;
+    border-bottom:1px solid rgba(255,255,255,0.10) !important;
   }
+  header, header *{ color:#fff !important; }
   body{ padding-top:64px !important; }
-
   header .m-header-row, header .container, header .inner, header .row, header nav{
-    position:relative !important; display:flex !important; align-items:center !important; gap:12px !important; min-height:64px !important;
-    padding-right:58px !important;
+    min-height:64px !important;
   }
 
-  /* Default: use our burger (#mobile-nav-toggle) and our #mobile-menu */
-  #mobile-nav-toggle, .mobile-nav-toggle{
-    position:absolute !important; right:12px !important; top:11px !important; z-index:1003 !important;
-    width:42px; height:42px; border-radius:12px !important;
-    border:1px solid rgba(255,255,255,.18) !important;
-    background: rgba(255,255,255,.10) !important;
+  /* Unify on m.nav.v4.js menu across all pages */
+  #mobile-nav-toggle, .mobile-nav-toggle, #mobile-menu{ display:none !important; } /* hide our old system */
+
+  /* m-burger & panel (close works via .open class) */
+  .m-burger{ position:fixed !important; right:12px !important; top:10px !important; width:40px !important; height:40px !important;
+    display:flex !important; align-items:center !important; justify-content:center !important;
+    border:1px solid rgba(255,255,255,0.2) !important; border-radius:12px !important; z-index:1002 !important;
+    background:rgba(255,255,255,0.10) !important;
   }
-  #mobile-menu{
-    position:fixed !important; right:12px !important; top:64px !important;
-    width:min(88vw,360px) !important; max-height:calc(100vh - 84px) !important; overflow:auto !important;
-    padding:12px !important; border-radius:14px !important; background:rgba(11,11,11,0.96) !important; color:#fff !important;
-    box-shadow:0 20px 40px rgba(0,0,0,0.45) !important; z-index:1002 !important;
+  .m-burger .bar{ width:22px; height:2px; background:#fff; display:block; margin:3px 0; }
+
+  #m-panel{ position:fixed !important; right:12px !important; top:64px !important; width:min(88vw,340px) !important;
+    display:none !important; flex-direction:column !important; gap:6px !important; padding:12px !important;
+    background:rgba(11,11,11,0.96) !important; color:#fff !important; border-radius:14px !important;
+    box-shadow:0 20px 40px rgba(0,0,0,0.45) !important; z-index:1001 !important;
   }
-  #mobile-menu[hidden]{ display:none !important; }
-  #mobile-menu a{ display:block; padding:10px 12px; border-radius:10px; text-decoration:none; color:#fff !important; }
-  #mobile-menu a:hover{ background:rgba(255,255,255,0.06); }
-
-  /* Non-cases: hide any injected duplicate menu/burger */
-  body:not(.cases) .m-burger, 
-  body:not(.cases) #m-panel{ display:none !important; }
-
-  /* CASES PAGE: use original .m-burger/#m-panel and hide our own */
-  body.cases #mobile-nav-toggle,
-  body.cases .mobile-nav-toggle{ display:none !important; }
-  body.cases #mobile-menu{ display:none !important; }
-  body.cases .m-burger{ display:flex !important; position:fixed !important; right:12px !important; top:10px !important; z-index:1003 !important; }
-  body.cases #m-panel{ display:block !important; } /* it's hidden until opened by script */
-
-  /* Keep nav content visible; hide only explicit desktop groups */
-  .desktop-nav{ display:none !important; }
+  #m-panel.open{ display:flex !important; }
+  #m-panel a{ color:#fff !important; text-decoration:none !important; padding:10px 12px !important; border-radius:10px !important; display:block !important; }
+  #m-panel a:hover{ background:rgba(255,255,255,0.06) !important; }
+  #m-panel a.cta{ font-weight:700 !important; border:1px solid rgba(255,255,255,0.2) !important; text-align:center !important; }
 }
 </style>
 
@@ -1540,5 +1524,18 @@
   });
 })();
 </script>
+
+<script id="menu-cta-text-v20">
+(function(){
+  function ready(fn){ if(document.readyState!='loading'){fn()} else {document.addEventListener('DOMContentLoaded', fn)} }
+  ready(function(){
+    try{
+      var a = document.querySelector('#m-panel a.cta');
+      if(a){ a.textContent = 'Start Screening →'; }
+    }catch(e){}
+  });
+})();
+</script>
+
 </body>
 </html>
