@@ -898,25 +898,15 @@
 </style>
 
 
-<!-- ORV-ABOUT-MOBILE-FIX v6a -->
+<!-- ORV-ABOUT-MOBILE-FIX v6b -->
 <style id="orv-about-mobile-fix">
 @media (max-width: 768px) {
-  /* Remove white title/breadcrumb bars on About */
   .page-title, .page-header, .title-bar, .section-title,
   .banner--title, .breadcrumb, .breadcrumbs, .header-spacer, .topbar {
     display: none !important;
   }
-
-  /* Make hero behave like index (starts right under header) */
-  .hero, .hero .container, main, .section {
-    margin-top: 0 !important;
-    padding-top: 0 !important;
-  }
-
-  /* Guard against horizontal overflow */
   html, body { max-width: 100vw; overflow-x: hidden; }
-
-  /* If any element with exact text "Orvenzia" sits under the header, hide it */
+  main, .hero, .hero .container, .section { margin-top: 0 !important; padding-top: 0 !important; }
   .orv-about-hide { display: none !important; }
 }
 </style>
@@ -1771,39 +1761,61 @@
 </style>
 
 
-<!-- ORV-ABOUT-MOBILE-FIX JS v6a -->
-<script id="orv-about-mobile-fix-js">
+<!-- ORV-ABOUT-MOBILE-FIX v6b JS -->
+<script id="orv-about-mobile-fix-js2">
 (function(){
   const isMobile = () => matchMedia('(max-width: 768px)').matches;
-  function isLight(rgb){
+  function cssPxToNum(v){ if(!v) return 0; const m=v.match(/-?\d+(?:\.\d+)?/); return m?parseFloat(m[0]):0; }
+  function readVarPx(name){ const v = getComputedStyle(document.documentElement).getPropertyValue(name); return cssPxToNum(v) || 0; }
+  function isLightColor(rgb){
     if(!rgb) return false;
     const m = rgb.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/i);
     if(!m) return false;
-    const r = parseInt(m[1],10), g = parseInt(m[2],10), b = parseInt(m[3],10);
+    const r = +m[1], g = +m[2], b = +m[3];
     const luma = 0.2126*r + 0.7152*g + 0.0722*b;
-    return luma > 200; // fairly bright
+    return luma > 200;
   }
-  function fixAbout(){
-    if(!isMobile()) return;
-    try {
-      // Find first heading near the top that equals "Orvenzia" on bright background
-      const cands = Array.from(document.querySelectorAll('h1, h2, .title, .heading')).slice(0, 8);
-      for(const el of cands){
-        const txt = (el.textContent || '').trim();
-        const rect = el.getBoundingClientRect();
-        const bg = getComputedStyle(el).backgroundColor;
-        if(txt === 'Orvenzia' && rect.top < 260 && isLight(bg)){
-          const box = el.closest('section, header, div') || el;
-          box.classList.add('orv-about-hide');
-          break;
+  function removeTopWhiteBar(){
+    const topBlocks = Array.from(document.body.children).slice(0, 10);
+    for(const el of topBlocks){
+      if(!(el instanceof HTMLElement)) continue;
+      if(/^(SCRIPT|STYLE|LINK|META|NOSCRIPT)$/.test(el.tagName)) continue;
+      const style = getComputedStyle(el);
+      const rect = el.getBoundingClientRect();
+      const text = (el.textContent || '').trim();
+      if(rect.height < 220 && rect.top < 260 && isLightColor(style.backgroundColor)){
+        if (text === 'Orvenzia' || /^Orvenzia\s*$/i.test(text)) {
+          el.classList.add('orv-about-hide');
+          return rect.height;
         }
       }
-    } catch(e){}
+    }
+    return 0;
+  }
+  function pullUpFirstContent(){
+    const candidates = document.querySelectorAll('main .hero, .hero, main > section, main > div, .section');
+    const el = candidates[0];
+    if(!el) return;
+    const headerH = readVarPx('--orv-header-h') || 56;
+    const rect = el.getBoundingClientRect();
+    const desiredTop = Math.max(headerH, 0);
+    const gap = Math.round(rect.top - desiredTop);
+    if(gap > 8){
+      const mt = cssPxToNum(getComputedStyle(el).marginTop);
+      el.style.marginTop = (mt - gap) + 'px';
+    }
+  }
+  function fix(){
+    if(!isMobile()) return;
+    removeTopWhiteBar();
+    pullUpFirstContent();
+    setTimeout(pullUpFirstContent, 150);
+    setTimeout(pullUpFirstContent, 350);
   }
   function onReady(fn){ if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',fn);} else { fn(); } }
-  onReady(fixAbout);
-  addEventListener('resize', fixAbout);
-  addEventListener('orientationchange', fixAbout);
+  onReady(fix);
+  addEventListener('resize', fix);
+  addEventListener('orientationchange', fix);
 })();
 </script>
 
