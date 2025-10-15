@@ -1,0 +1,55 @@
+/* Orvenzia Mobile Header (namespaced) */
+@media (max-width: 768px) {
+  .orv-hidden-mobile { display: none !important; }
+
+  #orv-mobile-header { 
+    position: sticky; top: 0; left: 0; right: 0; z-index: 9999;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 14px; background: #111; color: #fff;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  #orv-mobile-header .orv-mob-logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+  #orv-mobile-header .orv-mob-logo img { height: 24px; width: auto; display: block; }
+  #orv-mobile-header .orv-mob-logo span { font-weight: 700; letter-spacing: 0.5px; font-size: 18px; }
+
+  .orv-mob-burger { 
+    background: transparent; border: none; padding: 6px; cursor: pointer; display: inline-flex; flex-direction: column; gap: 4px;
+  }
+  .orv-mob-burger span { width: 22px; height: 2px; background: #fff; display: block; transition: transform 200ms ease, opacity 200ms ease; }
+
+  body.orv-nav-open .orv-mob-burger span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  body.orv-nav-open .orv-mob-burger span:nth-child(2) { opacity: 0; }
+  body.orv-nav-open .orv-mob-burger span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+  #orv-mob-menu {
+    position: fixed; top: 56px; left: 0; right: 0;
+    background: #111; color: #fff; padding: 16px; display: none;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  #orv-mob-menu.open { display: block; }
+  #orv-mob-menu ul { list-style: none; margin: 0; padding: 0; }
+  #orv-mob-menu li { margin: 8px 0; }
+  #orv-mob-menu a { color: #fff; text-decoration: none; font-size: 16px; display: inline-block; padding: 8px 0; }
+  #orv-mob-menu a:active, #orv-mob-menu a:focus, #orv-mob-menu a:hover { text-decoration: underline; }
+
+  .orv-mob-cta {
+    display: inline-block; margin-top: 8px; padding: 10px 14px; 
+    font-weight: 700; text-align: center; border-radius: 8px; text-decoration: none;
+    color: #fff; background: #43A047;
+  }
+  .orv-mob-cta:focus, .orv-mob-cta:hover { filter: brightness(1.08); }
+
+  #orv-mob-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.35);
+    display: none; z-index: 9998;
+  }
+  #orv-mob-overlay.open { display: block; }
+
+  /* Prevent body scroll when nav open */
+  body.orv-nav-open { overflow: hidden; }
+
+  /* Hide our injected components on larger screens to avoid any desktop impact */
+}
+@media (min-width: 769px) {
+  #orv-mobile-header, #orv-mob-menu, #orv-mob-overlay { display: none !important; }
+}
