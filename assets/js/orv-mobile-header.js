@@ -1,11 +1,9 @@
-// Orvenzia Mobile Header Injection v2 (robust, desktop-safe)
+// Orvenzia Mobile Header Injection v3 (fixed top + CSS var padding)
 (function() {
   const MAX_MOBILE = 768;
-
   const isMobile = () => window.matchMedia('(max-width: ' + MAX_MOBILE + 'px)').matches;
 
   function selectExistingNav() {
-    // Try common nav containers
     const selectors = ['header nav', 'header .nav', 'nav[role="navigation"]', 'nav'];
     for (const sel of selectors) {
       const el = document.querySelector(sel);
@@ -16,7 +14,6 @@
 
   function normalizeHref(href) {
     try {
-      // Resolve against current document to keep repo/subdir compatibility
       const u = new URL(href, document.baseURI || location.href);
       return u.pathname + u.search + u.hash;
     } catch (e) {
@@ -34,17 +31,13 @@
         if (!text || !href || href === '#') return;
         items.push({ text, href });
       });
-      // Deduplicate by text/href while preserving order
-      const seen = new Set();
-      const dedup = [];
+      const seen = new Set(), dedup = [];
       for (const it of items) {
         const key = it.text + '|' + it.href;
         if (!seen.has(key)) { seen.add(key); dedup.push(it); }
       }
       if (dedup.length) return dedup;
     }
-
-    // Fallback set
     return [
       { text: 'Services', href: normalizeHref('services.html') },
       { text: 'Cases', href: normalizeHref('cases.html') },
@@ -58,16 +51,18 @@
       const img = header.querySelector('img[src*="logo"], img[alt*="logo" i], img[alt*="Orvenzia" i]');
       if (img && img.getAttribute('src')) return normalizeHref(img.getAttribute('src'));
     }
-    return null; // fall back to text
+    return null;
+  }
+
+  function setHeaderHeightVar(headerEl) {
+    const h = headerEl.getBoundingClientRect().height;
+    document.documentElement.style.setProperty('--orv-header-h', h + 'px');
   }
 
   function inject() {
     if (!isMobile()) return;
-
-    // Avoid duplicate injection
     if (document.getElementById('orv-mobile-header')) return;
 
-    // Hide existing header only on mobile
     const firstHeader = document.querySelector('header');
     if (firstHeader) firstHeader.classList.add('orv-hidden-mobile');
 
@@ -75,7 +70,6 @@
     const logoSrc = findLogoSrc();
     const menuItems = buildMenuList();
 
-    // Create elements
     const headerEl = document.createElement('div');
     headerEl.id = 'orv-mobile-header';
     headerEl.className = 'orv-mob-header';
@@ -119,7 +113,6 @@
     });
     menu.appendChild(ul);
 
-    // Ensure Start screening CTA is always present
     const cta = document.createElement('a');
     cta.className = 'orv-mob-cta';
     cta.href = normalizeHref('screening.html');
@@ -130,24 +123,18 @@
     overlay.id = 'orv-mob-overlay';
     overlay.setAttribute('hidden', 'hidden');
 
-    // Insert in DOM
+    // Insert
     body.insertBefore(overlay, body.firstChild);
     body.insertBefore(menu, body.firstChild);
     body.insertBefore(headerEl, body.firstChild);
 
-    // Reserve space (avoid content jump under sticky header)
-    const reserve = () => {
-      const h = headerEl.getBoundingClientRect().height;
-      document.documentElement.style.setProperty('--orv-header-h', h + 'px');
-      // Add padding-top to first element if not already reserved
-      const firstChild = body.children[3]; // after overlay, menu, header
-      if (firstChild && !firstChild.classList.contains('orv-reserved')) {
-        firstChild.style.scrollMarginTop = h + 'px';
-        firstChild.classList.add('orv-reserved');
-      }
+    // Compute header height CSS var and ensure body padding matches
+    const setVars = () => {
+      setHeaderHeightVar(headerEl);
     };
-    reserve();
-    window.addEventListener('resize', reserve);
+    setVars();
+    window.addEventListener('resize', setVars);
+    window.addEventListener('orientationchange', setVars);
 
     function openNav() {
       document.documentElement.classList.add('orv-lock');
@@ -176,21 +163,17 @@
       const expanded = burger.getAttribute('aria-expanded') === 'true';
       if (expanded) closeNav(); else openNav();
     });
-
     overlay.addEventListener('click', function(e) { e.stopPropagation(); closeNav(); });
     window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeNav(); });
 
-    // Close on any nav link click
     menu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
 
-    // Safety: close on resize to desktop
     window.addEventListener('resize', () => { if (!isMobile()) closeNav(); });
   }
 
   function ensure() {
     if (isMobile()) inject();
   }
-
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', ensure);
   } else {

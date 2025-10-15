@@ -1,11 +1,17 @@
-/* Orvenzia Mobile Header v2 (namespaced) */
+/* Orvenzia Mobile Header v3 (fixed top + safe-area + CSS var) */
 @media (max-width: 768px) {
+  /* Reset stray top spacing on mobile */
+  html, body { margin: 0 !important; padding: 0 !important; }
+  body { padding-top: var(--orv-header-h, 56px) !important; } /* ensure content starts below header */
+
   .orv-hidden-mobile { display: none !important; }
+  .preheader, .topbar, .announcement, .site-topbar, .header-spacer { display: none !important; }
 
   #orv-mobile-header { 
-    position: sticky; top: 0; left: 0; right: 0; z-index: 999999;
+    position: fixed; top: env(safe-area-inset-top, 0px); left: 0; right: 0; z-index: 2147483000;
     display: flex; align-items: center; justify-content: space-between;
-    padding: 10px 14px; background: #111; color: #fff;
+    padding: calc(env(safe-area-inset-top, 0px) + 8px) 14px 8px 14px;
+    background: #111; color: #fff;
     border-bottom: 1px solid rgba(255,255,255,0.08);
     -webkit-backdrop-filter: saturate(140%) blur(6px);
     backdrop-filter: saturate(140%) blur(6px);
@@ -24,10 +30,10 @@
   body.orv-nav-open .orv-mob-burger span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
   #orv-mob-menu {
-    position: fixed; top: 56px; left: 0; right: 0;
+    position: fixed; top: var(--orv-header-h, 56px); left: 0; right: 0;
     background: #111; color: #fff; padding: 16px; display: none;
     border-top: 1px solid rgba(255,255,255,0.08);
-    z-index: 999998;
+    z-index: 2147482999;
   }
   #orv-mob-menu.open { display: block; }
   #orv-mob-menu ul { list-style: none; margin: 0; padding: 0; }
@@ -44,7 +50,7 @@
 
   #orv-mob-overlay {
     position: fixed; inset: 0; background: rgba(0,0,0,0.45);
-    display: none; z-index: 999997;
+    display: none; z-index: 2147482998;
     -webkit-tap-highlight-color: transparent;
     touch-action: none;
   }
@@ -52,8 +58,8 @@
 
   /* Prevent body scroll when nav open */
   html.orv-lock, body.orv-lock { height: 100%; overflow: hidden; }
-
 }
+
 @media (min-width: 769px) {
   #orv-mobile-header, #orv-mob-menu, #orv-mob-overlay { display: none !important; }
 }
