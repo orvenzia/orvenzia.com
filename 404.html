@@ -5,9 +5,8 @@
 <style>body{font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:#fff;color:#111;margin:0;display:grid;place-items:center;height:100vh}
 .card{max-width:720px;margin:auto;padding:1.25rem;border:1px solid #eee;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.06)}
 h1{margin:.25rem 0 1rem}</style>
+<link rel="stylesheet" href="assets/css/mobile.v3.css"/>
 <style>
-@media (min-width: 861px){
-
 /* === MOBILE V22: header rebuild + background + transparency + burger menu === */
 @media (max-width: 767.98px){
   html, body{ background:transparent !important; overflow-x:hidden !important; }
@@ -58,12 +57,8 @@ h1{margin:.25rem 0 1rem}</style>
 @media (min-width: 768px){
   body{ padding-top: 0 !important; }
 }
-
-}
 </style>
 <style>
-@media (min-width: 861px){
-
 /* === MOBILE V23: refined header look (56px), safe-area, spacing === */
 @media (max-width: 767.98px){
   :root{ --safe-top: env(safe-area-inset-top, 0px); }
@@ -122,12 +117,8 @@ h1{margin:.25rem 0 1rem}</style>
   /* hero h1 balance */
   .hero-card h1{ font-size: clamp(28px, 6.2vw, 42px) !important; line-height: 1.06 !important; }
 }
-
-}
 </style>
 <style>
-@media (min-width: 861px){
-
 /* === MOBILE V26: consistent 56px header + visible footer === */
 @media (max-width: 767.98px){
   :root{ --safe-top: env(safe-area-inset-top, 0px); }
@@ -170,8 +161,6 @@ h1{margin:.25rem 0 1rem}</style>
   #mobile-menu.is-open, #mobile-menu[aria-hidden="false"]{ display:block !important; }
   #mobile-menu[hidden]{ display:none !important; }
 }
-
-}
 </style>
 <style>
 /* === DESKTOP V27: compact, consistent header on >=768px, mobile unchanged === */
@@ -207,8 +196,35 @@ h1{margin:.25rem 0 1rem}</style>
   header a, header button{ line-height: 1.2 !important; }
 }
 </style>
-  <link rel="stylesheet" href="assets/css/m.hotfix.v4.css">
-
+  <link rel="stylesheet" href="assets/css/mobile.safe.css">
+<link rel="stylesheet" href="assets/css/m.hotfix.v4.css">
+<style id="mobile-only-fix">
+@media (max-width: 860px){
+  html,body{overflow-x:hidden !important;}
+  header,.site-header{position:sticky;top:0;z-index:1000;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);}
+  /* Recommended: hide big CTA pill in header on mobile to avoid clash with logo */
+  header a[href*="screening"]{ display:none !important; }
+  /* Burger button */
+  .m-burger{position:fixed;right:12px;top:10px;width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;background:rgba(0,0,0,.86);color:#fff;border:1px solid rgba(255,255,255,.18);border-radius:12px;z-index:1002;}
+  .m-burger .bar{width:22px;height:2px;background:#fff;display:block;margin:3px 0;}
+  /* Overlay panel */
+  #m-panel{position:fixed;right:12px;top:64px;width:min(88vw,340px);max-height:calc(100vh - 84px);overflow-y:auto;display:none;flex-direction:column;gap:8px;padding:12px;background:rgba(0,0,0,.92);border:1px solid rgba(255,255,255,.12);border-radius:14px;box-shadow:0 20px 40px rgba(0,0,0,.45);z-index:1001;}
+  #m-panel.open{display:flex;}
+  #m-panel a{color:#fff;text-decoration:none;padding:10px 12px;border-radius:10px;display:block;}
+  #m-panel a:hover{background:rgba(255,255,255,.06);}
+  #m-panel a.cta{font-weight:700;border:1px solid rgba(255,255,255,.2);text-align:center;}
+  /* Hero & forms */
+  .hero h1,.hero .title{font-size:clamp(22px,6vw,34px) !important;line-height:1.12;}
+  .hero p,.hero .subtitle{font-size:clamp(14px,3.6vw,18px) !important;line-height:1.55;opacity:.92;}
+  body.page-screening .hero h1{font-size:clamp(20px,5.2vw,30px) !important;}
+  body.page-screening .hero p{font-size:clamp(13px,3.2vw,17px) !important;}
+  input[type=text],input[type=email],input[type=tel],select,textarea{width:100% !important;max-width:100% !important;font-size:16px;}
+  .form-row,.grid,.row{display:grid !important;grid-template-columns:1fr !important;gap:12px;}
+  /* Footer stack */
+  footer .columns,footer .grid,footer .row{display:grid !important;grid-template-columns:1fr !important;gap:16px;}
+  footer p,footer a{font-size:14px;}
+}
+</style>
 
 
 
