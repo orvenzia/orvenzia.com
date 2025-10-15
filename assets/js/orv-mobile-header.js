@@ -1,16 +1,7 @@
-// Orvenzia Mobile Header Injection v3 (fixed top + CSS var padding)
+// Orvenzia Mobile Header Injector v4 (desktop-safe)
 (function() {
   const MAX_MOBILE = 768;
   const isMobile = () => window.matchMedia('(max-width: ' + MAX_MOBILE + 'px)').matches;
-
-  function selectExistingNav() {
-    const selectors = ['header nav', 'header .nav', 'nav[role="navigation"]', 'nav'];
-    for (const sel of selectors) {
-      const el = document.querySelector(sel);
-      if (el && el.querySelectorAll('a').length) return el;
-    }
-    return null;
-  }
 
   function normalizeHref(href) {
     try {
@@ -21,22 +12,26 @@
     }
   }
 
+  function selectExistingNavLinks() {
+    const containers = Array.from(document.querySelectorAll('header nav, header .nav, nav[role="navigation"], nav'));
+    for (const c of containers) {
+      const links = Array.from(c.querySelectorAll('a')).filter(a => (a.textContent || '').trim());
+      if (links.length) return links;
+    }
+    return null;
+  }
+
   function buildMenuList() {
-    const nav = selectExistingNav();
-    if (nav) {
-      const items = [];
-      nav.querySelectorAll('a').forEach(a => {
-        const text = (a.textContent || '').trim();
-        const href = normalizeHref(a.getAttribute('href'));
-        if (!text || !href || href === '#') return;
-        items.push({ text, href });
-      });
-      const seen = new Set(), dedup = [];
-      for (const it of items) {
-        const key = it.text + '|' + it.href;
-        if (!seen.has(key)) { seen.add(key); dedup.push(it); }
-      }
-      if (dedup.length) return dedup;
+    const links = selectExistingNavLinks();
+    if (links) {
+      const items = links.map(a => ({
+        text: (a.textContent || '').trim(),
+        href: normalizeHref(a.getAttribute('href') || '#')
+      })).filter(it => it.text && it.href && it.href !== '#');
+      // Dedup
+      const seen = new Set(), out = [];
+      for (const it of items) { const k = it.text + "|" + it.href; if (!seen.has(k)) { seen.add(k); out.push(it); } }
+      if (out.length) return out;
     }
     return [
       { text: 'Services', href: normalizeHref('services.html') },
@@ -46,11 +41,10 @@
   }
 
   function findLogoSrc() {
-    const header = document.querySelector('header') || document.querySelector('nav');
-    if (header) {
-      const img = header.querySelector('img[src*="logo"], img[alt*="logo" i], img[alt*="Orvenzia" i]');
-      if (img && img.getAttribute('src')) return normalizeHref(img.getAttribute('src'));
-    }
+    const h = document.querySelector('header') || document.querySelector('nav');
+    if (!h) return null;
+    const img = h.querySelector('img[src*="logo"], img[alt*="logo" i], img[alt*="Orvenzia" i]');
+    if (img && img.getAttribute('src')) return normalizeHref(img.getAttribute('src'));
     return null;
   }
 
@@ -59,12 +53,16 @@
     document.documentElement.style.setProperty('--orv-header-h', h + 'px');
   }
 
+  function hideLegacyHeaders() {
+    document.querySelectorAll('header, .site-header, .topbar, .preheader, .announcement, .header-spacer')
+      .forEach(el => el.style.setProperty('display', 'none', 'important'));
+  }
+
   function inject() {
     if (!isMobile()) return;
     if (document.getElementById('orv-mobile-header')) return;
 
-    const firstHeader = document.querySelector('header');
-    if (firstHeader) firstHeader.classList.add('orv-hidden-mobile');
+    hideLegacyHeaders();
 
     const body = document.body;
     const logoSrc = findLogoSrc();
@@ -123,15 +121,11 @@
     overlay.id = 'orv-mob-overlay';
     overlay.setAttribute('hidden', 'hidden');
 
-    // Insert
     body.insertBefore(overlay, body.firstChild);
     body.insertBefore(menu, body.firstChild);
     body.insertBefore(headerEl, body.firstChild);
 
-    // Compute header height CSS var and ensure body padding matches
-    const setVars = () => {
-      setHeaderHeightVar(headerEl);
-    };
+    const setVars = () => setHeaderHeightVar(headerEl);
     setVars();
     window.addEventListener('resize', setVars);
     window.addEventListener('orientationchange', setVars);
@@ -146,7 +140,6 @@
       overlay.removeAttribute('hidden');
       burger.setAttribute('aria-expanded', 'true');
     }
-
     function closeNav() {
       document.documentElement.classList.remove('orv-lock');
       document.body.classList.remove('orv-lock');
@@ -165,18 +158,16 @@
     });
     overlay.addEventListener('click', function(e) { e.stopPropagation(); closeNav(); });
     window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeNav(); });
-
     menu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
 
     window.addEventListener('resize', () => { if (!isMobile()) closeNav(); });
+
+    // MutationObserver: if legacy headers are injected later, hide them on mobile
+    const mo = new MutationObserver(() => { if (isMobile()) hideLegacyHeaders(); });
+    mo.observe(document.documentElement, { childList: true, subtree: true });
   }
 
-  function ensure() {
-    if (isMobile()) inject();
-  }
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', ensure);
-  } else {
-    ensure();
-  }
+  function ensure() { if (isMobile()) inject(); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ensure);
+  else ensure();
 })();
