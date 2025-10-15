@@ -1,12 +1,14 @@
-/* Orvenzia Mobile Header (namespaced) */
+/* Orvenzia Mobile Header v2 (namespaced) */
 @media (max-width: 768px) {
   .orv-hidden-mobile { display: none !important; }
 
   #orv-mobile-header { 
-    position: sticky; top: 0; left: 0; right: 0; z-index: 9999;
+    position: sticky; top: 0; left: 0; right: 0; z-index: 999999;
     display: flex; align-items: center; justify-content: space-between;
     padding: 10px 14px; background: #111; color: #fff;
     border-bottom: 1px solid rgba(255,255,255,0.08);
+    -webkit-backdrop-filter: saturate(140%) blur(6px);
+    backdrop-filter: saturate(140%) blur(6px);
   }
   #orv-mobile-header .orv-mob-logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
   #orv-mobile-header .orv-mob-logo img { height: 24px; width: auto; display: block; }
@@ -25,6 +27,7 @@
     position: fixed; top: 56px; left: 0; right: 0;
     background: #111; color: #fff; padding: 16px; display: none;
     border-top: 1px solid rgba(255,255,255,0.08);
+    z-index: 999998;
   }
   #orv-mob-menu.open { display: block; }
   #orv-mob-menu ul { list-style: none; margin: 0; padding: 0; }
@@ -40,15 +43,16 @@
   .orv-mob-cta:focus, .orv-mob-cta:hover { filter: brightness(1.08); }
 
   #orv-mob-overlay {
-    position: fixed; inset: 0; background: rgba(0,0,0,0.35);
-    display: none; z-index: 9998;
+    position: fixed; inset: 0; background: rgba(0,0,0,0.45);
+    display: none; z-index: 999997;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: none;
   }
   #orv-mob-overlay.open { display: block; }
 
   /* Prevent body scroll when nav open */
-  body.orv-nav-open { overflow: hidden; }
+  html.orv-lock, body.orv-lock { height: 100%; overflow: hidden; }
 
-  /* Hide our injected components on larger screens to avoid any desktop impact */
 }
 @media (min-width: 769px) {
   #orv-mobile-header, #orv-mob-menu, #orv-mob-overlay { display: none !important; }
