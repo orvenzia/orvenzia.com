@@ -1,4 +1,4 @@
-// Orvenzia Mobile Header Injector v4 (desktop-safe)
+// Orvenzia Mobile Header Injector v5 (desktop-safe + About fix)
 (function() {
   const MAX_MOBILE = 768;
   const isMobile = () => window.matchMedia('(max-width: ' + MAX_MOBILE + 'px)').matches;
@@ -7,9 +7,7 @@
     try {
       const u = new URL(href, document.baseURI || location.href);
       return u.pathname + u.search + u.hash;
-    } catch (e) {
-      return href || '#';
-    }
+    } catch (e) { return href || '#'; }
   }
 
   function selectExistingNavLinks() {
@@ -24,11 +22,8 @@
   function buildMenuList() {
     const links = selectExistingNavLinks();
     if (links) {
-      const items = links.map(a => ({
-        text: (a.textContent || '').trim(),
-        href: normalizeHref(a.getAttribute('href') || '#')
-      })).filter(it => it.text && it.href && it.href !== '#');
-      // Dedup
+      const items = links.map(a => ({ text: (a.textContent || '').trim(), href: normalizeHref(a.getAttribute('href') || '#') }))
+        .filter(it => it.text && it.href && it.href !== '#');
       const seen = new Set(), out = [];
       for (const it of items) { const k = it.text + "|" + it.href; if (!seen.has(k)) { seen.add(k); out.push(it); } }
       if (out.length) return out;
@@ -151,23 +146,44 @@
       burger.setAttribute('aria-expanded', 'false');
     }
 
-    burger.addEventListener('click', function(e) {
-      e.stopPropagation();
-      const expanded = burger.getAttribute('aria-expanded') === 'true';
-      if (expanded) closeNav(); else openNav();
-    });
+    burger.addEventListener('click', function(e) { e.stopPropagation(); (burger.getAttribute('aria-expanded')==='true') ? closeNav() : openNav(); });
     overlay.addEventListener('click', function(e) { e.stopPropagation(); closeNav(); });
     window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeNav(); });
     menu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
 
     window.addEventListener('resize', () => { if (!isMobile()) closeNav(); });
 
-    // MutationObserver: if legacy headers are injected later, hide them on mobile
-    const mo = new MutationObserver(() => { if (isMobile()) hideLegacyHeaders(); });
-    mo.observe(document.documentElement, { childList: true, subtree: true });
+    // About fix
+    (function __orvFixAboutPage(){
+      try {
+        const isAbout = /(?:^|\/)about(?:\.html)?(?:$|\?|\#)/i.test(location.pathname);
+        if (!isAbout) return;
+        document.body.classList.add('orv-about');
+        const selectors = ['.page-title','.page-header','.title-bar','.section-title','.banner--title','.breadcrumb','.breadcrumbs','.header-spacer','.topbar'];
+        selectors.forEach(sel => document.querySelectorAll(sel).forEach(el => el.style.setProperty('display','none','important')));
+        const candidates = Array.from(document.querySelectorAll('h1, h2, .title, .heading')).slice(0, 6);
+        const isLight = (rgb) => {
+          const m = rgb && rgb.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/i);
+          if (!m) return false;
+          const [r,g,b] = [parseInt(m[1],10), parseInt(m[2],10), parseInt(m[3],10)];
+          const luma = 0.2126*r + 0.7152*g + 0.0722*b;
+          return luma > 200;
+        };
+        for (const el of candidates) {
+          const txt = (el.textContent || '').trim();
+          const rect = el.getBoundingClientRect();
+          const bg = getComputedStyle(el).backgroundColor;
+          if (txt === 'Orvenzia' && rect.top < 220 && isLight(bg)) {
+            const container = el.closest('section, header, div') || el;
+            container.style.setProperty('display','none','important');
+            break;
+          }
+        }
+      } catch(e) {}
+    })();
   }
 
-  function ensure() { if (isMobile()) inject(); }
+  function ensure(){ if (isMobile()) inject(); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ensure);
   else ensure();
 })();
