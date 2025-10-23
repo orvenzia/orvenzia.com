@@ -1,0 +1,145 @@
+/* Orvenzia — Mobile header: white + visible burger icon
+   Drop-in override, no desktop impact. Paste as assets/css/m-burger-quickfix.css
+*/
+
+/* === Global mobile header becomes white (up to tablets) === */
+@media (max-width: 1024px) {
+  /* Header shells */
+  header,
+  .header,
+  .mobile-header,
+  .nav,
+  .nav-shell,
+  .nav-mobile,
+  .nav-bar,
+  .topbar {
+    background: #ffffff !important;
+    color: #0A0D0F !important; /* ink */
+  }
+
+  /* Links/tekst i header */
+  header a,
+  .header a,
+  .nav a,
+  .nav li a,
+  .nav .menu a,
+  .mobile-menu a {
+    color: #0A0D0F !important;
+  }
+
+  /* SVG ikoner i header/bars */
+  header svg,
+  .header svg,
+  .nav svg,
+  .hamburger svg,
+  .menu-toggle svg {
+    color: #0A0D0F !important;
+    fill: #0A0D0F !important;
+    stroke: #0A0D0F !important;
+  }
+  header svg path,
+  .header svg path,
+  .nav svg path,
+  .hamburger svg path,
+  .menu-toggle svg path {
+    fill: none !important;
+    stroke: #0A0D0F !important;
+    stroke-width: 2px;
+  }
+
+  /* “Start Screening” skal forblive sort – også ved hover */
+  .start-screening,
+  .btn-start-screening,
+  a[href*="screening"].header_cta,
+  .nav .btn-primary {
+    background: #0A0D0F !important;
+    color: #ffffff !important;
+  }
+  .start-screening:hover,
+  .btn-start-screening:hover,
+  a[href*="screening"].header_cta:hover,
+  .nav .btn-primary:hover {
+    background: #0A0D0F !important;
+    color: #ffffff !important;
+  }
+
+  /* Åbnet mobilmenu-panel */
+  .nav-panel,
+  .menu-panel,
+  .mobile-menu,
+  .m-nav,
+  .drawer,
+  .offcanvas {
+    background: #ffffff !important;
+    color: #0A0D0F !important;
+    border-color: #E6E6E6 !important;
+  }
+}
+
+/* === JS-injected burger (.m-burger from assets/js/m.nav.v4.js) === */
+@media (max-width: 860px) {
+  /* Selve knappen */
+  .m-burger{
+    background: #ffffff !important;
+    border: 1.5px solid #0A0D0F !important;
+    border-radius: 12px !important;
+    box-shadow: none !important;
+    opacity: 1 !important;
+    mix-blend-mode: normal !important;
+  }
+  /* De tre linjer */
+  .m-burger .bar{
+    width: 22px !important;
+    height: 2px !important;
+    background: #0A0D0F !important; /* sorte linjer */
+    display: block !important;
+    margin: 3px 0 !important;
+    opacity: 1 !important;
+  }
+
+  /* Slideout-panel fra m.nav.v4.js */
+  #m-panel{
+    background: #ffffff !important;
+    color: #0A0D0F !important;
+    border: 1px solid #E6E6E6 !important;
+  }
+  #m-panel a{ color: #0A0D0F !important; }
+  #m-panel a.cta{ border-color: #0A0D0F33 !important; }
+}
+
+/* === Fallbacks til andre burger-varianter (span/SVG/pseudo) === */
+@media (max-width: 1024px) {
+  /* Klassiske "hamburger" varianter */
+  .hamburger,
+  .menu-toggle,
+  .mobile-toggle,
+  .nav-toggle {
+    background: #ffffff !important;
+    border: 1.5px solid #0A0D0F !important;
+    border-radius: 14px !important;
+    box-shadow: none !important;
+  }
+
+  .hamburger span,
+  .hamburger .line,
+  .menu-toggle span,
+  .nav-toggle span,
+  .mobile-toggle span,
+  .hamburger::before,
+  .hamburger::after,
+  .menu-toggle::before,
+  .menu-toggle::after {
+    background: #0A0D0F !important;
+    border-color: #0A0D0F !important;
+    opacity: 1 !important;
+  }
+
+  /* Image-baserede ikoner (PNG/SVG som <img>) */
+  .hamburger img,
+  .menu-toggle img,
+  .nav-toggle img,
+  .mobile-toggle img {
+    filter: invert(0) brightness(0) contrast(1.2) !important; /* gør sort */
+    opacity: 1 !important;
+  }
+}
