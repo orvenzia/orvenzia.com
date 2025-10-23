@@ -8,550 +8,28 @@
 <meta content="See anonymised outcomes: S‑Rating alignment, ISO 14001 pathways, and buyer‑ready documentation delivered in weeks, not months." name="description"/>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;family=Newsreader:wght@600;700&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com"></script>
-<script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: { sans: ['Manrope','ui-sans-serif','system-ui'], serif: ['Newsreader','ui-serif','Georgia'] },
-          colors: { paper:'#FCFCFA', ink:'#0B0B0B', champagne:'#D6C7A1', ash:'#6B6B6B', evergreen:'#0E3B2E' },
-          boxShadow: { hair:'0 1px 0 rgba(11,11,11,.08)', soft:'0 18px 60px rgba(11,11,11,.08)', glow:'0 10px 40px rgba(214,199,161,.35)' },
-          letterSpacing: { extra:'0.18em', tightest:'-.02em' },
-          borderRadius: { xl2:'1.25rem' }
-        }
-      }
-    };
-  </script>
-<style>
-    .hairline{border-color:rgba(11,11,11,.12)}
-    .link{background-image:linear-gradient(currentColor,currentColor);background-size:0% 1px;background-repeat:no-repeat;background-position:0 100%;transition:background-size .2s ease}
-    .link:hover{background-size:100% 1px}
-    .btn-primary{background:#0B0B0B;color:#FCFCFA;border-radius:1rem;padding:.85rem 1.25rem;display:inline-block}
-    .btn-primary:hover{box-shadow:var(--glow, 0 10px 40px rgba(214,199,161,.35))}
-    .btn-ghost{border:1px solid #D6C7A1;border-radius:1rem;padding:.85rem 1.25rem;display:inline-block}
-    .btn-ghost:hover{background:#D6C7A1;color:#0B0B0B}
-  
-/* === v32 FIX: Cases intro headline consistent with Services === */
-.section-wrap.intro.hero .display{
-  font-family: var(--font-serif, "Newsreader", ui-serif, Georgia, "Times New Roman", serif) !important;
-  font-weight: 600 !important;
-  letter-spacing: -0.02em;
-}
-
-
-/* === v32 FIX: Footer CTA alignment === */
-.ecard-footer{
-  margin-top: auto;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 0.75rem 1rem 1rem 1rem;
-}
-.ecard-footer .ecta{ margin-left: auto; }
-
-
-/* === Custom FIX: Cases intro all white text, transparent bg, left aligned === */
-.cases-main .intro {
-  background: transparent !important;
-  color: #fff !important;
-  text-align: left !important;
-  padding-left: 2rem;
-  max-width: 72rem;
-  margin: 0 auto;
-}
-.cases-main .intro h1,
-.cases-main .intro .h1,
-.cases-main .intro p,
-.cases-main .intro .lede,
-.cases-main .intro .kicker,
-.cases-main .intro .meta {
-  color: #fff !important;
-}
-
-</style>
+<script src="assets/js/pages/root/cases/cases__inline_1.js"></script>
+<link rel="stylesheet" href="assets/css/pages/root/cases/cases__inline_1.css">
 <link href="global.css" rel="stylesheet"/><link rel="stylesheet" href="overrides.css">
 <link rel="stylesheet" href="assets/css/m.hotfix.v4.css">
-<style>
-:root{ --ink:#0B0B0B; --ink-dim:rgba(11,11,11,.72); --hair:rgba(11,11,11,.12); }
-.section{ max-width:72rem; margin:0 auto; padding:2rem 1.25rem }
-
-/* Intro like Services (white text) with contrast */
-.intro{ position:relative; color:#fff; }
-.intro .kicker{ color:rgba(255,255,255,.88) }
-.intro .h1{ color:#fff }
-.intro .meta{ color:rgba(255,255,255,.9) }
-.intro::before{
-  content:""; position:absolute; inset:-12px 0 -12px 0; z-index:-1; pointer-events:none;
-  background: radial-gradient(110% 70% at 50% 30%, rgba(0,0,0,.52) 0%, rgba(0,0,0,.44) 45%, rgba(0,0,0,.38) 70%, rgba(0,0,0,.34) 100%);
-}
-
-/* Text-only executive cards */
-.tcards .grid{ display:grid; grid-template-columns:1fr; gap:1rem }
-@media (min-width: 980px){ .tcards .grid{ grid-template-columns:1fr 1fr } }
-
-.tcard{
-  background:#fff; color:var(--ink);
-  border:1px solid var(--hair); border-radius:16px; padding:1.1rem 1.15rem 1.2rem 1.15rem;
-  box-shadow:0 18px 42px rgba(0,0,0,.06);
-  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
-}
-.tcard:hover{ transform: translateY(-2px); box-shadow:0 22px 60px rgba(0,0,0,.10); border-color: rgba(11,11,11,.18) }
-
-.thead{ display:flex; align-items:baseline; justify-content:space-between; gap:.8rem; flex-wrap:wrap }
-.ttitle{ margin:0; font-size:1.18rem; letter-spacing:-.01em }
-.tmeta{ font-size:.86rem; color:var(--ink-dim) }
-.tone{ margin:.55rem 0 0 0; font-size:1rem; color:var(--ink-dim) }
-
-.tfacts{ display:flex; gap:.4rem; flex-wrap:wrap; margin-top:.6rem }
-.fact{ background:#fff; color:var(--ink); border:1px solid var(--hair); border-radius:9999px; padding:.22rem .6rem; font-size:.74rem; font-weight:600 }
-
-.tactions{ margin:.7rem 0 0 1rem; padding:0; }
-.tactions li{ margin:.22rem 0; }
-
-.toutcome{ margin:.6rem 0 0 0; font-size:.96rem }
-.tquote{ margin:.55rem 0 0 0; font-style:italic; color:var(--ink-dim) }
-
-.tcta{ display:flex; justify-content:flex-end; margin-top:.9rem }
-.cta{ display:inline-flex; align-items:center; gap:.4rem; font-weight:600; color:var(--ink); text-decoration:none;
-  border:1px solid var(--hair); padding:.5rem .8rem; border-radius:.6rem }
-.cta::after{ content:"→"; transition: transform .2s ease }
-.cta:hover::after{ transform: translateX(3px) }
-</style>
-<style>
-/* v24 C‑suite intro tuning */
-.cases-main .intro .h1{ font-size:3.15rem; letter-spacing:-.02em; line-height:1.08; color:#fff }
-.cases-main .intro .kicker{ font-size:.72rem; letter-spacing:.20em; text-transform:uppercase; color:rgba(255,255,255,.9) }
-.cases-main .intro .meta{ font-size:1rem; color:rgba(255,255,255,.92) }
-.cases-main .intro::before{
-  content:""; position:absolute; inset:-14px 0 -14px 0; z-index:-1; pointer-events:none;
-  background: radial-gradient(115% 75% at 50% 30%, rgba(0,0,0,.50) 0%, rgba(0,0,0,.42) 45%, rgba(0,0,0,.36) 70%, rgba(0,0,0,.32) 100%);
-}
-</style>
-<style>
-/* v24 compact executive cards */
-.tcards .grid{ display:grid; grid-template-columns:1fr; gap:.9rem }
-@media (min-width: 980px){ .tcards .grid{ grid-template-columns:1fr 1fr } }
-
-.tcard.compact{
-  padding:.9rem 1rem 1rem 1rem;
-  border-radius:14px;
-  box-shadow:0 14px 34px rgba(0,0,0,.06);
-}
-.tcard.compact .ttitle{ font-size:1.08rem }
-.tcard.compact .tone{ font-size:.96rem; margin:.45rem 0 0 0 }
-.tcard.compact .tmeta{ font-size:.82rem }
-.tcard.compact .tfacts{ margin-top:.5rem }
-.tcard.compact .fact{ font-size:.7rem; padding:.18rem .5rem }
-.tcard.compact .tactions{ margin:.55rem 0 0 1rem }
-.tcard.compact .tactions li{ margin:.18rem 0 }
-.tcard.compact .toutcome{ margin:.5rem 0 0 0; font-size:.94rem }
-.tcard.compact .tquote{ margin:.45rem 0 0 0; font-size:.92rem }
-.tcard.compact .tcta{ margin-top:.75rem }
-</style>
-<style>
-/* v25: two-column actions/outputs within compact cards */
-.tcard.compact .tcols{ display:grid; grid-template-columns:1fr; gap:.6rem; margin-top:.55rem }
-@media (min-width: 980px){ .tcard.compact .tcols{ grid-template-columns:1fr 1fr } }
-.tsub{ font-size:.76rem; letter-spacing:.10em; text-transform:uppercase; color:rgba(11,11,11,.72); margin-bottom:.2rem }
-.tlist{ margin:.1rem 0 0 1rem; padding:0 }
-.tlist li{ margin:.18rem 0 }
-</style>
-<style>
-/* v27: tighter executive cards */
-.tcards .grid{ gap:.8rem }
-.tcard.compact{ padding:.8rem .9rem .9rem .9rem; border-radius:14px; box-shadow:0 12px 30px rgba(0,0,0,.06) }
-.tcard.compact .ttitle{ font-size:1.06rem }
-.tcard.compact .tone{ font-size:.94rem; margin:.42rem 0 0 0 }
-.tcard.compact .tmeta{ font-size:.80rem }
-.tcard.compact .tfacts{ gap:.35rem; margin-top:.45rem }
-.tcard.compact .fact{ font-size:.68rem; padding:.16rem .46rem }
-.tcard.compact .tlist li{ margin:.14rem 0 }
-.tcard.compact .tcols{ gap:.5rem }
-.tcard.compact .tsub{ font-size:.74rem; letter-spacing:.12em }
-</style>
-<style>
-:root{ --ink:#0B0B0B; --ink-dim:rgba(11,11,11,.72); --hair:rgba(11,11,11,.12); }
-
-.section{ max-width:72rem; margin:0 auto; padding:2rem 1.25rem }
-
-/* Services-like hero */
-.intro.hero{ position:relative; color:#fff; }
-.intro.hero .kicker{ font-size:.74rem; letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.88) }
-.intro.hero .h1{ font-size:3.2rem; letter-spacing:-.02em; line-height:1.06; color:#fff; margin:.6rem 0 0 0 }
-.intro.hero .meta{ font-size:1rem; color:rgba(255,255,255,.92) }
-.intro.hero::before{ content:""; position:absolute; inset:-14px 0 -14px 0; z-index:-1; 
-  background: radial-gradient(115% 75% at 50% 30%, rgba(0,0,0,.52) 0%, rgba(0,0,0,.42) 45%, rgba(0,0,0,.36) 70%, rgba(0,0,0,.30) 100%); }
-
-/* Executive cards */
-.ecards .grid{ display:grid; grid-template-columns:1fr; gap:.9rem }
-@media (min-width: 980px){ .ecards .grid{ grid-template-columns:1fr 1fr } }
-
-.ecard{ background:#fff; border:1px solid var(--hair); border-radius:14px; box-shadow:0 14px 36px rgba(0,0,0,.06);  display:flex; flex-direction:column; }
-
-.ecard .wrap{ display:block; color:inherit; text-decoration:none; padding:.95rem 1rem 1rem 1rem; }
-.ehead{ display:flex; justify-content:space-between; align-items:baseline; gap:1rem; flex-wrap:wrap }
-.etitle{ margin:0; font-size:1.08rem; letter-spacing:-.01em }
-.emeta{ font-size:.82rem; color:var(--ink-dim) }
-.eline{ margin:.42rem 0 0 0; font-size:.96rem; color:var(--ink-dim) }
-.ehighlights{ margin:.42rem 0 0 1rem; padding:0 }
-.ehighlights li{ margin:.14rem 0 }
-.edelivered{ margin:.45rem 0 0 0; font-size:.94rem }
-.equote{ margin:.4rem 0 0 0; font-style:italic; color:var(--ink-dim) }
-.ecta{ margin-top:.6rem; display:inline-block; border:1px solid var(--hair); border-radius:.6rem; padding:.46rem .7rem; font-weight:700 }
-.ecard:hover .ecta{ border-color: rgba(11,11,11,.24) }
-
-/* Subtle hover */
-.ecard{ transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease }
-.ecard:hover{ transform: translateY(-2px); box-shadow:0 20px 50px rgba(0,0,0,.10); border-color: rgba(11,11,11,.18) }
-
-/* Line clamp utility */
-.clamp-2{ display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden }
-</style>
-<style>
-.section-wrap.intro.hero{ position:relative; color:#fff }
-.section-wrap.intro.hero .kicker{ font-size:.74rem; letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.88) }
-.section-wrap.intro.hero .display{ color:#fff }
-.section-wrap.intro.hero .lede{ margin-top:1rem; max-width:42rem; color:rgba(255,255,255,.92); font-size:1.1rem }
-.section-wrap.intro.hero::before{
-  content:""; position:absolute; inset:-14px 0 -14px 0; z-index:-1;
-  background: radial-gradient(115% 75% at 50% 30%, rgba(0,0,0,.52) 0%, rgba(0,0,0,.42) 45%, rgba(0,0,0,.36) 70%, rgba(0,0,0,.30) 100%);
-}
-.cta-row{ display:flex; gap:.6rem; padding:.6rem 1rem 1rem 1rem }
-.btn{ display:inline-block; border:1px solid rgba(11,11,11,.12); border-radius:.6rem; padding:.5rem .85rem; font-weight:700; color:#0B0B0B; text-decoration:none }
-.btn:hover{ border-color: rgba(11,11,11,.24) }
-.btn-primary{ border-color:#0B0B0B }
-</style>
-<style>
-/* Enforce display font similar to Services (fallbacks) */
-.section-wrap.intro.hero .display{
-  font-size:3.8rem; line-height:1.02; margin-top:.4rem;
-  font-weight: 600;
-  font-family: var(--font-serif, "Newsreader", ui-serif, Georgia, "Times New Roman", serif);
-  color:#fff;
-}
-.section-wrap.intro.hero .kicker{ font-size:.74rem; letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.88) }
-.section-wrap.intro.hero .lede{ margin-top:1rem; max-width:42rem; color:rgba(255,255,255,.92); font-size:1.1rem }
-.section-wrap.intro.hero::before{
-  content:""; position:absolute; inset:-14px 0 -14px 0; z-index:-1;
-  background: radial-gradient(115% 75% at 50% 30%, rgba(0,0,0,.52) 0%, rgba(0,0,0,.42) 45%, rgba(0,0,0,.36) 70%, rgba(0,0,0,.30) 100%);
-}
-
-/* Modal */
-.no-scroll{ overflow:hidden }
-.modal[aria-hidden="true"]{ display:none }
-.modal[aria-hidden="false"]{ display:block }
-.modal{ position:fixed; inset:0; z-index:1000 }
-.modal-backdrop{ position:absolute; inset:0; background:rgba(0,0,0,.45); backdrop-filter:blur(2px) }
-.modal-card{ position:relative; z-index:1001; max-width:680px; margin:8vh auto; background:#fff; border:1px solid rgba(11,11,11,.12);
-  border-radius:14px; box-shadow:0 30px 80px rgba(0,0,0,.22); padding:1.1rem 1.15rem 1.1rem 1.15rem }
-.modal-close{ position:absolute; top:.6rem; right:.6rem; border:1px solid rgba(11,11,11,.12); border-radius:.5rem; background:#fff; padding:.2rem .5rem; font-size:1.1rem; cursor:pointer }
-.modal-title{ margin:.2rem 0 0 0; font-size:1.4rem }
-.modal-sub{ margin:.3rem 0 .6rem 0; color:rgba(11,11,11,.72) }
-.grid2{ display:grid; grid-template-columns:1fr; gap:.6rem }
-.grid2 label{ display:flex; flex-direction:column; gap:.25rem; font-size:.9rem }
-.grid2 input{ border:1px solid rgba(11,11,11,.12); border-radius:.5rem; padding:.55rem .6rem }
-@media (min-width: 760px){ .grid2{ grid-template-columns:1fr 1fr } }
-.modal-actions{ display:flex; gap:.6rem; margin-top:.8rem }
-
-/* Buttons */
-.btn{ display:inline-block; border:1px solid rgba(11,11,11,.12); border-radius:.6rem; padding:.5rem .85rem; font-weight:700; color:#0B0B0B; text-decoration:none; background:#fff; cursor:pointer }
-.btn:hover{ border-color: rgba(11,11,11,.24) }
-.btn-primary{ border-color:#0B0B0B }
-</style>
-<style>
-/* === v32 FIX: Card text visibility & clipping (2025-10-02) === */
-/* Ensure all card text is readable (black on white) regardless of inherited colors */
-.ecard, .ecard .wrap, .ecard .wrap *,
-.tcard, .tcard *, .tcards .grid * {
-  color: var(--ink, #0B0B0B) !important;
-}
-
-/* Avoid accidental clipping on cards */
-.ecard, .tcard { overflow: visible !important; }
-
-/* Make clamped lines roomier on desktop to prevent "missing" text */
-@media (min-width: 980px) {
-  .eline.clamp-2, .equote.clamp-2 { -webkit-line-clamp: 3; }
-}
-
-/* Visually indicate truncation better for long one-liners (fallback) */
-.clamp-2 { -webkit-box-orient: vertical; overflow: hidden; }
-
-/* Guard: ensure metadata and highlight bullets are legible */
-.ehead *, .emeta, .ehighlights li, .edelivered, .equote, .ecta {
-  color: var(--ink, #0B0B0B) !important;
-}
-
-/* Keep CTA looking like a button without losing contrast */
-.ecta {
-  border-color: rgba(11,11,11,.18) !important;
-}
-
-/* Fix: any card that happens to sit over a textured/dark background */
-.card, .ecard, .tcard {
-  background: #fff !important;
-  box-shadow: 0 14px 36px rgba(0,0,0,.06);
-  border: 1px solid var(--hair, rgba(11,11,11,.12));
-}
-
-/* Safety: prevent long words/metrics from overflowing */
-.ecard, .tcard { word-wrap: break-word; overflow-wrap: anywhere; }
-</style><style>
-/* === v32 FIX 2: Removed Back to top buttons and adjusted card spacing === */
-.cta-row { display: flex; gap: 1rem; margin-top: 0.8rem; }
-.cta-row .btn + .btn { margin-left: 0; } /* no double spacing */
-</style><style>
-/* === v32 FIX 3: Request button aligned bottom-right in cards === */
-.ecard { position: relative; display: flex; flex-direction: column; }
-.ecard-footer { margin-top: auto; display: flex; justify-content: flex-end; padding: 0.75rem 1rem 1rem 1rem; }
-.ecard-footer .btn-primary { font-size: 0.92rem; padding: 0.6rem 1.2rem; border-radius: 0.5rem; }
-</style><style>
-/* === v32 FIX 4: Align Request PDF and Request buttons inline === */
-.ecard-footer { 
-  margin-top: auto; 
-  display: flex; 
-  justify-content: space-between; 
-  align-items: center; 
-  padding: 0.75rem 1rem 1rem 1rem; 
-}
-.ecard-footer .ecta { 
-  border: 1px solid rgba(11,11,11,.18); 
-  border-radius: 0.5rem; 
-  padding: 0.5rem 0.9rem; 
-  font-weight: 600; 
-  cursor: pointer;
-}
-.ecard-footer .btn-primary { 
-  font-size: 0.92rem; 
-  padding: 0.6rem 1.2rem; 
-  border-radius: 0.5rem; 
-}
-</style><style>
-/* === v32 FIX 5: Request left, Request PDF right === */
-.ecard-footer { 
-  margin-top: auto; 
-  display: flex; 
-  justify-content: space-between; 
-  align-items: center; 
-  padding: 0.75rem 1rem 1rem 1rem; 
-}
-.ecard-footer .ecta { 
-  margin-left: auto;
-}
-</style><style>
-/* === v32 FIX 6: Guarantee Request PDF always bottom-right === */
-.ecard-footer { 
-  margin-top: auto; 
-  display: flex; 
-  justify-content: flex-end; 
-  align-items: center; 
-  padding: 0.75rem 1rem 1rem 1rem; 
-  gap: 1rem;
-}
-
-.ecard-footer .ecta { margin-left: auto; }
-</style><style>
-/* === v32 FIX 7: Intro centered with cards + Services font style === */
-.section-wrap.intro.hero {
-  text-align: center;
-  max-width: 72rem;
-  margin-left: auto;
-  margin-right: auto;
-}
-.section-wrap.intro.hero .display {
-  font-family: var(--font-serif, "Newsreader", ui-serif, Georgia, "Times New Roman", serif);
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  font-size: 3.4rem;
-  line-height: 1.1;
-}
-.section-wrap.intro.hero .lede {
-  font-family: var(--font-body, "Inter","Helvetica Neue","Arial",sans-serif);
-  font-size: 1.1rem;
-  color: rgba(11,11,11,.85);
-  margin-top: 0.8rem;
-}
-.section-wrap.intro.hero .kicker {
-  text-transform: uppercase;
-  font-size: 0.75rem;
-  letter-spacing: 0.2em;
-  color: rgba(11,11,11,.65);
-  margin-bottom: 0.4rem;
-}
-</style><style>
-/* === v32 FIX 8: Align Cases intro style with Services (minimal changes) === */
-.cases-main .intro .h1 {
-  font-weight: 700; /* lighter than black */
-  letter-spacing: -0.02em;
-  line-height: 1.08;
-}
-.cases-main .intro .lede {
-  font-size: 1.15rem;
-  line-height: 1.4;
-  color: rgba(255,255,255,.92);
-  margin-top: 0.8rem;
-}
-.cases-main .intro .kicker {
-  margin-bottom: 1.2rem;
-  color: rgba(255,255,255,.88);
-}
-</style><style>
-/* === v32 FIX 9: Local Cases intro fix to align with Services === */
-.cases-main .intro .h1 {
-  font-weight: 700; /* semibold, not black */
-  letter-spacing: -0.02em;
-  line-height: 1.08;
-}
-.cases-main .intro .lede {
-  font-size: 1.15rem;
-  line-height: 1.4;
-  color: rgba(255,255,255,.92);
-  margin-top: 0.8rem;
-}
-.cases-main .intro .kicker {
-  margin-bottom: 1.2rem;
-  color: rgba(255,255,255,.88);
-}
-</style><style>
-/* === v32 FIX 10: Correct selector for intro H1 (avoid global impact) === */
-.section-wrap.intro.hero h1.display {
-  font-weight: 600 !important; /* semibold to match Services */
-  letter-spacing: -0.02em;
-  line-height: 1.08;
-}
-</style>
-<style>
-/* === FINAL FIX: Cases intro — white text, transparent overlay, left aligned & aligned to cards === */
-.section-wrap.intro.hero {
-  text-align: left !important;
-  max-width: 72rem !important;
-  margin: 0 auto !important;
-  padding-left: 1.25rem !important;
-  padding-right: 1.25rem !important;
-  color: #fff !important;
-}
-.section-wrap.intro.hero .kicker,
-.section-wrap.intro.hero .display,
-.section-wrap.intro.hero .lede,
-.section-wrap.intro.hero p,
-.section-wrap.intro.hero .meta {
-  color: #fff !important;
-}
-/* Remove the dark gradient overlay box */
-.section-wrap.intro.hero::before {
-  background: transparent !important;
-}
-</style>
-<meta content="ESG Case Studies (Anonymised) — Buyer‑Credible Outcomes | Orvenzia" property="og:title"/><meta content="See anonymised outcomes: S‑Rating alignment, ISO 14001 pathways, and buyer‑ready documentation delivered in weeks, not months." property="og:description"/><meta content="website" property="og:type"/><meta content="https://www.orvenzia.com/cases.html" property="og:url"/><meta content="https://www.orvenzia.com/assets/esg-global-bg.jpg" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><meta content="ESG Case Studies (Anonymised) — Buyer‑Credible Outcomes | Orvenzia" name="twitter:title"/><meta content="See anonymised outcomes: S‑Rating alignment, ISO 14001 pathways, and buyer‑ready documentation delivered in weeks, not months." name="twitter:description"/><meta content="https://www.orvenzia.com/assets/esg-global-bg.jpg" name="twitter:image"/><script type="application/ld+json">{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Orvenzia",
-  "url": "https://www.orvenzia.com/",
-  "logo": "https://www.orvenzia.com/assets/mesh.svg",
-  "email": "mailto:support@orvenzia.com",
-  "telephone": "+45 20 00 00 00",
-  "address": {
-    "@type": "PostalAddress",
-    "addressCountry": "DK"
-  }
-}</script><script type="application/ld+json">{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": "https://www.orvenzia.com/"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "Cases",
-      "item": "https://www.orvenzia.com/cases.html"
-    }
-  ]
-}</script><script defer="True" src="lead-config.js"></script><script defer="True" src="assets/js/leadtracker.js"></script>
+<link rel="stylesheet" href="assets/css/pages/root/cases/cases__inline_2.css">
+<link rel="stylesheet" href="assets/css/pages/root/cases/cases__inline_3.css">
+<link rel="stylesheet" href="assets/css/pages/root/cases/cases__inline_4.css">
+<link rel="stylesheet" href="assets/css/pages/root/cases/cases__inline_5.css">
+<link rel="stylesheet" href="assets/css/pages/root/cases/cases__inline_6.css">
+<link rel="stylesheet" href="assets/css/pages/root/cases/cases__inline_7.css">
+<link rel="stylesheet" href="assets/css/pages/root/cases/cases__inline_8.css">
+<link rel="stylesheet" href="assets/css/pages/root/cases/cases__inline_9.css">
+<link rel="stylesheet" href="assets/css/pages/root/cases/cases__inline_10.css"><link rel="stylesheet" href="assets/css/pages/root/cases/cases__inline_11.css"><link rel="stylesheet" href="assets/css/pages/root/cases/cases__inline_12.css"><link rel="stylesheet" href="assets/css/pages/root/cases/cases__inline_13.css"><link rel="stylesheet" href="assets/css/pages/root/cases/cases__inline_14.css"><link rel="stylesheet" href="assets/css/pages/root/cases/cases__inline_15.css"><link rel="stylesheet" href="assets/css/pages/root/cases/cases__inline_16.css"><link rel="stylesheet" href="assets/css/pages/root/cases/cases__inline_17.css"><link rel="stylesheet" href="assets/css/pages/root/cases/cases__inline_18.css"><link rel="stylesheet" href="assets/css/pages/root/cases/cases__inline_19.css">
+<link rel="stylesheet" href="assets/css/pages/root/cases/cases__inline_20.css">
+<meta content="ESG Case Studies (Anonymised) — Buyer‑Credible Outcomes | Orvenzia" property="og:title"/><meta content="See anonymised outcomes: S‑Rating alignment, ISO 14001 pathways, and buyer‑ready documentation delivered in weeks, not months." property="og:description"/><meta content="website" property="og:type"/><meta content="https://www.orvenzia.com/cases.html" property="og:url"/><meta content="https://www.orvenzia.com/assets/esg-global-bg.jpg" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><meta content="ESG Case Studies (Anonymised) — Buyer‑Credible Outcomes | Orvenzia" name="twitter:title"/><meta content="See anonymised outcomes: S‑Rating alignment, ISO 14001 pathways, and buyer‑ready documentation delivered in weeks, not months." name="twitter:description"/><meta content="https://www.orvenzia.com/assets/esg-global-bg.jpg" name="twitter:image"/><script type="application/ld+json" src="assets/js/pages/root/cases/cases__inline_2.js"></script><script type="application/ld+json" src="assets/js/pages/root/cases/cases__inline_3.js"></script><script defer="True" src="lead-config.js"></script><script defer="True" src="assets/js/leadtracker.js"></script>
 
 
 
 <!-- MOBILE-ONLY INLINE PATCH V30 — 2025-10-14 -->
-<style id="mobile-inline-patch-v30">
-@media (max-width: 860px){
-  :root{ --m-header-h: calc(60px + env(safe-area-inset-top, 0px)); }
-  html, body{ margin:0; padding:0; overflow-x:hidden !important; }
-  body{ padding-top: var(--m-header-h) !important; }
+<link rel="stylesheet" href="assets/css/pages/root/cases/cases__inline_21.css">
 
-  /* V22-like layered background via pseudo-elements with absolute paths */
-  body{ background: transparent !important; }
-  body::before{
-    content:"" !important; position:fixed !important; inset:0 !important; display:block !important;
-    background-image: url("/assets/esg-global-bg.jpg") !important;
-    background-repeat: no-repeat !important;
-    background-position: center center !important;
-    background-size: cover !important;
-    background-attachment: fixed !important;
-    z-index: -2 !important; pointer-events:none !important;
-  }
-  body::after{
-    content:"" !important; position:fixed !important; inset:0 !important; display:block !important;
-    background-image: url("/assets/mesh.svg") !important;
-    background-repeat: repeat !important; opacity: .15 !important;
-    mix-blend-mode: multiply !important; pointer-events: none !important;
-    z-index: -1 !important;
-  }
-  body > *{ position:relative; z-index:1; }
-
-  /* Header fixed to top (no pills) */
-  header, .site-header{
-    position:fixed !important; top:0 !important; left:0 !important; right:0 !important; z-index:10000 !important;
-    min-height: var(--m-header-h) !important;
-    background: rgba(19,19,19,0.86) !important;
-    -webkit-backdrop-filter: blur(8px) !important; backdrop-filter: blur(8px) !important;
-    border-bottom: 1px solid rgba(255,255,255,0.10) !important; border-radius:0 !important; box-shadow:none !important;
-  }
-  header .container, header .inner, header .row, header nav, header .brand, header .logo, header .brand a, header .logo a{
-    background:transparent !important; border:none !important; border-radius:0 !important; box-shadow:none !important;
-  }
-  header [class*="rounded"], header [class*="pill"], header [class*="badge"]{ border-radius:0 !important; background:transparent !important; box-shadow:none !important; }
-  header .m-header-row, header .container, header .inner, header .row, header nav{
-    min-height: var(--m-header-h) !important; display:flex !important; align-items:center !important; gap:12px !important;
-    padding-right:64px !important;
-  }
-  .desktop-nav{ display:none !important; } /* hide desktop-only groups on mobile */
-
-  /* Use ONLY the m-burger/#m-panel system on mobile; hide legacy to avoid conflicts */
-  #mobile-nav-toggle, #mobile-menu{ display:none !important; }
-
-  .m-burger{
-    position:fixed !important; right:12px !important; 
-    top: calc(10px + env(safe-area-inset-top, 0px)) !important;
-    z-index:10002 !important; width:40px !important; height:40px !important;
-    display:flex !important; align-items:center !important; justify-content:center !important;
-    border:1px solid rgba(255,255,255,0.2) !important; border-radius:12px !important;
-    background:rgba(255,255,255,0.12) !important; pointer-events:auto !important;
-  }
-  .m-burger .bar{ width:22px; height:2px; background:#fff; display:block; margin:3px 0; }
-
-  #m-panel{
-    position:fixed !important; right:12px !important; top: calc(var(--m-header-h) + 6px) !important;
-    width:min(88vw,340px) !important; padding:12px !important; border-radius:14px !important;
-    background:rgba(11,11,11,0.96) !important; color:#fff !important;
-    box-shadow:0 20px 40px rgba(0,0,0,0.45) !important; z-index:10001 !important;
-    overflow:auto !important; max-height: calc(100vh - var(--m-header-h) - 24px) !important;
-    display:none !important; flex-direction:column !important; gap:6px !important;
-  }
-  #m-panel.open{ display:flex !important; }
-
-  #m-panel a{ color:#fff !important; text-decoration:none !important; padding:10px 12px !important; border-radius:10px !important; display:block !important; }
-  #m-panel a:hover{ background:rgba(255,255,255,0.06) !important; }
-  #m-panel a.cta{ font-weight:700 !important; border:1px solid rgba(255,255,255,0.2) !important; text-align:center !important; }
-
-  /* Home hero CTA under heading */
-  #home-page .flex.items-end.justify-between{ flex-direction:column !important; align-items:flex-start !important; gap:12px !important; }
-  #home-page .case-button{ display:inline-block !important; margin-top:4px !important; }
-}
-</style>
-
+<link rel="stylesheet" href="assets/css/pages/root/_btn_hover_fix.css">
 </head><body class="theme-dark cases"><header class="sticky top-0 z-50 bg-paper/95 backdrop-blur border-b hairline"> <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between"> <a class="font-serif text-xl tracking-tightest" href="index.html">Orvenzia</a> <nav class="hidden md:flex items-center gap-8 text-sm"> <a href="services.html">Services</a> <a href="cases.html#previews">Cases</a> <a href="about.html">About</a> <a class="btn-primary" data-evt="click_screening_cta" href="screening.html">Start Screening</a> </nav> </div>
 </header>
 <section class="section-wrap intro hero" id="top" style="padding-top:5.5rem;padding-bottom:5rem">
@@ -565,78 +43,167 @@
 <article class="ecard" id="baseline">
 <a aria-label="Open Baseline — Infrastructure (DK) (PDF)" class="wrap" href="mailto:support@orvenzia.com?subject=Request%20case%20PDF" rel="noopener" target="_blank">
 <header class="ehead">
-<h3 class="etitle">Baseline — Infrastructure (DK)</h3>
-<div class="emeta">Infrastructure · DK · 3 pages</div>
+<h3 class="etitle">Baseline — Motor Vehicles (DE)</h3>
+<div class="emeta">baseline – C29 motor vehicles – manufacturing — DE — 120 FTE — 3 pages</div>
 </header>
-<p class="eline clamp-2">10-day ESG diagnostic delivering immediate buyer-critical visibility and tender-ready compliance status.</p>
-<ul class="ehighlights">
-<li>Verified Stage V compliance check</li>
-<li>EPD coverage benchmark across core materials</li>
-<li>KPI capture for CO₂, fuel and recovery efficiency</li>
-</ul>
-<p class="edelivered"><strong>Delivered:</strong> Executive Baseline brief (3pp), evidence checklist and buyer-critical gap analysis.</p>
-<p class="equote clamp-2">“By consolidating evidence and clarifying compliance, we cut clarification rounds and accelerated tender acceptance.” — COO (anonymised)</p>
+<p class="eline clamp-2">10-day ESG readiness screening with branch-specific priorities — no data pull.</p>
+<ul class="ehighlights"><li>Status: Scope 1+2 No; supplier CoC acceptance log No</li><li>Buyer pack to prepare: CoC rollout note; refrigerant leak-log; KPI placeholders</li><li>Board focus: decision options with quantified downside (lost RFI points)</li></ul>
+<p class="edelivered"><strong>Delivered:</strong> Executive Baseline brief (3pp), priority plan, RFI prep sheet — no data pull. <br> <strong>Output:</strong> Company started Scope 1+2 collection and issued CoC acceptance requests to Tier-1 suppliers.</p>
+<p class="equote clamp-2">Comment — Plant Manager: “Orvenzia’s 3-pager landed Friday; by Tuesday we’d used their CoC email template and got 7/9 Tier-1 sign-offs.”</p>
 </a>
 <div class="ecard-footer">
 <div class="ecta">Request PDF →</div></div>
 </article>
-<!-- Core -->
-<article class="ecard" id="core">
-<a aria-label="Open Core — Food SME (DE) (PDF)" class="wrap" href="mailto:support@orvenzia.com?subject=Request%20case%20PDF" rel="noopener" target="_blank">
+<article class="ecard" id="baseline">
+<a aria-label="Open Baseline — Infrastructure (DK) (PDF)" class="wrap" href="mailto:support@orvenzia.com?subject=Request%20case%20PDF" rel="noopener" target="_blank">
 <header class="ehead">
-<h3 class="etitle">Core — Food SME (DE)</h3>
-<div class="emeta">Food SME · DE · 1 page</div>
+<h3 class="etitle">Baseline — Accommodation (ES)</h3>
+<div class="emeta">baseline – I55 accommodation – hospitality — ES — 60 FTE — 3 pages</div>
 </header>
-<p class="eline clamp-2">30/60/90-day ESG action plan translating directly into buyer acceptance and measurable ROI.</p>
-<ul class="ehighlights">
-<li>≥80% supplier CoC coverage within 8 weeks</li>
-<li>Live whistleblower and compliance channel</li>
-<li>ESG KPI dashboard integrated into ops</li>
-</ul>
-<p class="edelivered"><strong>Delivered:</strong> 1-page action plan with budget/owners, ROI brief, policy pack and SOPs for measurement.</p>
-<p class="equote clamp-2">“Within eight weeks, we secured buyer acceptance with CoC sign-offs and live KPI tracking.” — CEO (anonymised)</p>
+<p class="eline clamp-2">10-day ESG readiness screening — no data pull.</p>
+<ul class="ehighlights"><li>Status: site-level energy/water metering Partial; waste policy/system No</li><li>Buyer pack: LED retrofit rationale; waste-sorting policy; KPI shells</li><li>Pilot sequence agreed: lobby → corridors → rooms</li></ul>
+<p class="edelivered"><strong>Delivered:</strong> Executive Baseline brief (3pp), priority plan, RFI prep sheet — no data pull. <br> <strong>Output:</strong> LED pilot approved at two hotels; housekeeping waste-sorting policy adopted.</p>
+<p class="equote clamp-2">Comment — CFO: “We pasted Orvenzia’s LED business case into the capex deck and the board approved in the same meeting.”</p>
 </a>
 <div class="ecard-footer">
-<button class="btn btn-primary js-request" data-case="Core — Food SME (DE)" type="button">Request full report</button>
-<div class="ecta">Request PDF →</div>
-</div>
+<div class="ecta">Request PDF →</div></div>
 </article>
-<!-- Enterprise -->
-<article class="ecard" id="enterprise">
-<a aria-label="Open Enterprise — Automotive Tier-1 (DE) (PDF)" class="wrap" href="mailto:support@orvenzia.com?subject=Request%20case%20PDF" rel="noopener" target="_blank">
+<article class="ecard" id="baseline">
+<a aria-label="Open Baseline — Infrastructure (DK) (PDF)" class="wrap" href="mailto:support@orvenzia.com?subject=Request%20case%20PDF" rel="noopener" target="_blank">
 <header class="ehead">
-<h3 class="etitle">Enterprise — Automotive Tier-1 (DE)</h3>
-<div class="emeta">Automotive · DE · 2 pages</div>
+<h3 class="etitle">Baseline — Computers (CZ)</h3>
+<div class="emeta">baseline – C26 computers &amp; peripherals – manufacturing — CZ — 80 FTE — 3 pages</div>
 </header>
-<p class="eline clamp-2">90-day stabilisation program delivering OEM-grade ESG credibility, governance uplift and audit-ready assurance.</p>
-<ul class="ehighlights">
-<li>Governance and risk framework operationalised</li>
-<li>Energy transition roadmap integrated</li>
-<li>Buyer-grade HSE compliance pack</li>
-</ul>
-<p class="edelivered"><strong>Delivered:</strong> 2-page enterprise action card: governance uplift, energy KPIs, safety alignment and audit-ready documentation.</p>
-<p class="equote clamp-2">“Stabilisation allowed us to regain OEM trust and pass audit scrutiny at first attempt.” — VP Operations (anonymised)</p>
+<p class="eline clamp-2">10-day ESG readiness screening — no data pull.</p>
+<ul class="ehighlights"><li>Status: Scope 1+2 No; packaging recycled-content policy No</li><li>Buyer pack: supplier transport ask; packaging policy outline; method note</li><li>RFI checklist: what’s ready vs. what to prepare pre-submission</li></ul>
+<p class="edelivered"><strong>Delivered:</strong> Executive Baseline brief (3pp), priority plan, RFI prep sheet — no data pull. <br> <strong>Output:</strong> Company rescheduled a Core analysis and approved a packaging policy with recycled-content thresholds.</p>
+<p class="equote clamp-2">Comment — Production Manager: “We answered a live buyer RFI in week two using Orvenzia’s checklist—three clarifications closed.”</p>
 </a>
 <div class="ecard-footer">
-<button class="btn btn-primary js-request" data-case="Enterprise — Automotive Tier-1 (DE)" type="button">Request full report</button>
-<div class="ecta">Request PDF →</div>
-</div>
+<div class="ecta">Request PDF →</div></div>
 </article>
-<!-- Scope 3 -->
-<article class="ecard" id="scope3">
-<a aria-label="Open Scope 3 — Restaurant Chain (SE) (PDF)" class="wrap" href="mailto:support@orvenzia.com?subject=Request%20case%20PDF" rel="noopener" target="_blank">
+<article class="ecard" id="baseline">
+<a aria-label="Open Baseline — Infrastructure (DK) (PDF)" class="wrap" href="mailto:support@orvenzia.com?subject=Request%20case%20PDF" rel="noopener" target="_blank">
 <header class="ehead">
-<h3 class="etitle">Scope 3 — Restaurant Chain (DK)</h3>
-<div class="emeta">Restaurant · DK · 20 pages</div>
+<h3 class="etitle">Core — Road Freight (NL)</h3>
+<div class="emeta">core – H49 road freight – transport — NL — 150 FTE — 8–10 pages</div>
 </header>
-<p class="eline clamp-2">Full supply-chain emissions model with buyer-grade assurance and reduction pathways prioritised by materiality.</p>
-<ul class="ehighlights">
-<li>Scope 3 emissions mapped across 95% of spend</li>
-<li>Supplier coverage heatmap and engagement model</li>
-<li>Science-based reduction trajectories</li>
-</ul>
-<p class="edelivered"><strong>Delivered:</strong> 20-page Scope 3 report, assurance pack and C-suite buyer presentation.</p>
-<p class="equote clamp-2">“With quantified Scope 3 visibility, we unlocked credible buyer dialogues and positioned for assurance audits.” — CFO (anonymised)</p>
+<p class="eline clamp-2">30–60 day Core analysis using internal data only.</p>
+<ul class="ehighlights"><li>Fuel-card exports & telematics summaries reviewed — ESRS-compatible mapping</li><li>Estimated ROI per action: anti-idling, tyre pressure, maintenance cadence</li><li>Buyer evidence compiled: fleet compliance pack + KPI extract</li></ul>
+<p class="edelivered"><strong>Delivered:</strong> Action plan (8–10pp), buyer evidence pack — internal data only. <br> <strong>Output:</strong> Anti-idling policy approved; driver brief issued; compliance dossier submitted to two buyers.</p>
+<p class="equote clamp-2">Comment — Logistics Director: “Orvenzia pulled clear wins from our CSVs—idle time down 11% in the first month with our own team executing.”</p>
+</a>
+<div class="ecard-footer">
+<div class="ecta">Request PDF →</div></div>
+</article>
+<article class="ecard" id="baseline">
+<a aria-label="Open Baseline — Infrastructure (DK) (PDF)" class="wrap" href="mailto:support@orvenzia.com?subject=Request%20case%20PDF" rel="noopener" target="_blank">
+<header class="ehead">
+<h3 class="etitle">Core — Food Products (IT)</h3>
+<div class="emeta">core – C10 food products – manufacturing — IT — 90 FTE — 8–10 pages</div>
+</header>
+<p class="eline clamp-2">30–60 day Core analysis using internal data only.</p>
+<ul class="ehighlights"><li>Utilities & production reviewed; framework for refrigerant maintenance log defined</li><li>Estimated ROI per action: freezer setpoints, door discipline, leak-log adoption</li><li>Buyer evidence compiled: policy set, KPI extract, method note</li></ul>
+<p class="edelivered"><strong>Delivered:</strong> Action plan (8–10pp), buyer evidence pack — internal data only. <br> <strong>Output:</strong> Leak-log adopted; PO raised for two metered points in cold rooms; energy actions scheduled.</p>
+<p class="equote clamp-2">Comment — Operations Director: “Finance signed the meters after seeing Orvenzia’s payback table—we didn’t need extra studies.”</p>
+</a>
+<div class="ecard-footer">
+<div class="ecta">Request PDF →</div></div>
+</article>
+<article class="ecard" id="baseline">
+<a aria-label="Open Baseline — Infrastructure (DK) (PDF)" class="wrap" href="mailto:support@orvenzia.com?subject=Request%20case%20PDF" rel="noopener" target="_blank">
+<header class="ehead">
+<h3 class="etitle">Core — Computers (DE)</h3>
+<div class="emeta">core – C26 computers &amp; peripherals – manufacturing — DE — 110 FTE — 8–10 pages</div>
+</header>
+<p class="eline clamp-2">30–60 day Core analysis using internal data only.</p>
+<ul class="ehighlights"><li>Electricity/gas vs. output reviewed; SMT idle-time hotspots flagged</li><li>Estimated ROI per action: oven standby reductions; compressed-air leaks</li><li>Buyer evidence compiled: refreshed policies; KPI shell; method note</li></ul>
+<p class="edelivered"><strong>Delivered:</strong> Action plan (8–10pp), buyer evidence pack — internal data only. <br> <strong>Output:</strong> Budget released for LED on SMT lines; owners assigned; first maintenance tickets closed.</p>
+<p class="equote clamp-2">Comment — Engineering Lead: “Orvenzia named the exact ovens and compressors—five leak tickets closed by Friday.”</p>
+</a>
+<div class="ecard-footer">
+<div class="ecta">Request PDF →</div></div>
+</article>
+<article class="ecard" id="baseline">
+<a aria-label="Open Baseline — Infrastructure (DK) (PDF)" class="wrap" href="mailto:support@orvenzia.com?subject=Request%20case%20PDF" rel="noopener" target="_blank">
+<header class="ehead">
+<h3 class="etitle">Enterprise — Basic Metals (DK)</h3>
+<div class="emeta">enterprise – C24 basic metals – manufacturing — DK — 140 FTE — 15+ pages</div>
+</header>
+<p class="eline clamp-2">60-day enterprise program — implementation starts upon SLA.</p>
+<ul class="ehighlights"><li>Pre-SLA: controls design, training syllabus, KPI model, governance cadence</li><li>SLA executed: rollout plan agreed; pilot line scheduled</li><li>Post-SLA: pilot deployment & weekly KPI board under SLA</li></ul>
+<p class="edelivered"><strong>Delivered:</strong> Execution pack (15+pp), SLA scope &amp; KPIs, rollout plan — supplier as needed. <br> <strong>Output:</strong> SLA signed; pilot line live under SLA; energy/waste KPIs reviewed weekly.</p>
+<p class="equote clamp-2">Comment — Site Director: “Once the SLA was signed, Orvenzia ran the pilot with our supervisors—same week, no disruption.”</p>
+</a>
+<div class="ecard-footer">
+<div class="ecta">Request PDF →</div></div>
+</article>
+<article class="ecard" id="baseline">
+<a aria-label="Open Baseline — Infrastructure (DK) (PDF)" class="wrap" href="mailto:support@orvenzia.com?subject=Request%20case%20PDF" rel="noopener" target="_blank">
+<header class="ehead">
+<h3 class="etitle">Enterprise — Electronic Components (CZ)</h3>
+<div class="emeta">enterprise – C26 electronic components – manufacturing — CZ — 120 FTE — 15+ pages</div>
+</header>
+<p class="eline clamp-2">60-day enterprise rollout — implementation starts upon SLA.</p>
+<ul class="ehighlights"><li>Pre-SLA: templates, commissioning checks, exception handling</li><li>SLA executed: commissioning window & service SLAs agreed</li><li>Post-SLA: Line-1 go-live scheduled; Line-2 migration plan set</li></ul>
+<p class="edelivered"><strong>Delivered:</strong> Execution pack (15+pp), SLA package, governance schedule — supplier as needed. <br> <strong>Output:</strong> SLA signed; Line-1 dashboards feeding the weekly ops review under SLA.</p>
+<p class="equote clamp-2">Comment — VP Manufacturing: “Energy KPIs now sit next to throughput in our Monday deck—Orvenzia’s cadence stuck.”</p>
+</a>
+<div class="ecard-footer">
+<div class="ecta">Request PDF →</div></div>
+</article>
+<article class="ecard" id="baseline">
+<a aria-label="Open Baseline — Infrastructure (DK) (PDF)" class="wrap" href="mailto:support@orvenzia.com?subject=Request%20case%20PDF" rel="noopener" target="_blank">
+<header class="ehead">
+<h3 class="etitle">Enterprise — Crop &amp; Animal (ES)</h3>
+<div class="emeta">enterprise – A01 crop &amp; animal – production — ES — 70 FTE — 15+ pages</div>
+</header>
+<p class="eline clamp-2">90-day deployment — implementation starts upon SLA.</p>
+<ul class="ehighlights"><li>Pre-SLA: procedures, KPI model, training plan (irrigation & waste)</li><li>SLA executed: cadence & escalation paths agreed</li><li>Post-SLA: Farm-1 deployment week set; Farm-2 queued</li></ul>
+<p class="edelivered"><strong>Delivered:</strong> Execution pack (15+pp), SLA scope &amp; cadence, training schedule — supplier as needed. <br> <strong>Output:</strong> SLA signed; Farm-1 tracking under SLA; exceptions routed via the agreed process.</p>
+<p class="equote clamp-2">Comment — Operations Lead: “We stopped debating and started logging. The 10-minute checklist changed our mornings.”</p>
+</a>
+<div class="ecard-footer">
+<div class="ecta">Request PDF →</div></div>
+</article>
+<article class="ecard" id="baseline">
+<a aria-label="Open Baseline — Infrastructure (DK) (PDF)" class="wrap" href="mailto:support@orvenzia.com?subject=Request%20case%20PDF" rel="noopener" target="_blank">
+<header class="ehead">
+<h3 class="etitle">Scope 3 — Motor Vehicles (DK)</h3>
+<div class="emeta">scope 3 – C29 motor vehicles – manufacturing — DK — 160 FTE — 15+ pages</div>
+</header>
+<p class="eline clamp-2">Supplier engagement for purchased goods &amp; transport — starts upon SLA.</p>
+<ul class="ehighlights"><li>Pre-SLA: request kit (EF hierarchy, templates, method note), cadence proposal</li><li>SLA executed: supplier response SLAs & onboarding calendar agreed</li><li>Post-SLA: Wave-1 invites issued; tracker active</li></ul>
+<p class="edelivered"><strong>Delivered:</strong> Scope 3 engagement pack, SLA cadence, tracker — supplier as needed. <br> <strong>Output:</strong> SLA signed; top-10 suppliers onboarded under SLA; first datasets received.</p>
+<p class="equote clamp-2">Comment — Procurement Lead: “We used Orvenzia’s emails verbatim—steel and plastics responded within 72 hours.”</p>
+</a>
+<div class="ecard-footer">
+<div class="ecta">Request PDF →</div></div>
+</article>
+<article class="ecard" id="baseline">
+<a aria-label="Open Baseline — Infrastructure (DK) (PDF)" class="wrap" href="mailto:support@orvenzia.com?subject=Request%20case%20PDF" rel="noopener" target="_blank">
+<header class="ehead">
+<h3 class="etitle">Scope 3 — Food Products (DK)</h3>
+<div class="emeta">scope 3 – C10 food products – manufacturing — DK — 95 FTE — 15+ pages</div>
+</header>
+<p class="eline clamp-2">Ingredients/packaging/logistics engagement — starts upon SLA.</p>
+<ul class="ehighlights"><li>Standard asks & evidence rules; buyer method summary</li><li>Cadence & tracker defined with procurement</li><li>Wave-1 suppliers targeted on priority SKUs</li></ul>
+<p class="edelivered"><strong>Delivered:</strong> Scope 3 kit, SLA schedule, method note, tracker — supplier as needed. <br> <strong>Output:</strong> SLA signed; packaging data flowing under SLA; logistics estimates logged.</p>
+<p class="equote clamp-2">Comment — Category Manager: “Orvenzia’s upload template cut five emails down to one—responses are finally on time.”</p>
+</a>
+<div class="ecard-footer">
+<div class="ecta">Request PDF →</div></div>
+</article>
+<article class="ecard" id="baseline">
+<a aria-label="Open Baseline — Infrastructure (DK) (PDF)" class="wrap" href="mailto:support@orvenzia.com?subject=Request%20case%20PDF" rel="noopener" target="_blank">
+<header class="ehead">
+<h3 class="etitle">Scope 3 — Computers (SE)</h3>
+<div class="emeta">scope 3 – C26 computers &amp; peripherals – manufacturing — SE — 130 FTE — 15+ pages</div>
+</header>
+<p class="eline clamp-2">Components/PCB/freight engagement — starts upon SLA.</p>
+<ul class="ehighlights"><li>EF hierarchy & evidence rules; logistics ask template</li><li>Priority components list agreed; response check-ins set</li><li>Buyer-evidence summary built (boundaries, assumptions)</li></ul>
+<p class="edelivered"><strong>Delivered:</strong> Scope 3 kit, SLA cadence, method note, tracker — supplier as needed. <br> <strong>Output:</strong> SLA signed; key suppliers responding under SLA; preliminary estimates ready for buyer Q&amp;A.</p>
+<p class="equote clamp-2">Comment — Sustainability Manager: “We dropped Orvenzia’s method note into a live portal—Q&amp;A dropped from 11 to 2 questions.”</p>
 </a>
 <div class="ecard-footer">
 <div class="ecta">Request PDF →</div></div>
@@ -670,56 +237,7 @@
 </form>
 </div>
 </div>
-<script>
-(function(){
-  const modal = document.getElementById('requestModal');
-  const form = document.getElementById('requestForm');
-  const inputCase = document.getElementById('req_case');
-  const msg = document.getElementById('req_msg');
-  function openModal(caseName){
-    inputCase.value = caseName || '';
-    msg.textContent='';
-    modal.setAttribute('aria-hidden','false');
-    document.documentElement.classList.add('no-scroll');
-    setTimeout(()=>{ document.getElementById('req_name').focus(); }, 40);
-  }
-  function closeModal(){
-    modal.setAttribute('aria-hidden','true');
-    document.documentElement.classList.remove('no-scroll');
-    form.reset();
-  }
-  document.addEventListener('click', function(e){
-    const btn = e.target.closest('.js-request');
-    if(btn){ e.preventDefault(); openModal(btn.getAttribute('data-case') || ''); }
-    if(e.target.closest('.js-close')){ e.preventDefault(); closeModal(); }
-  });
-  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeModal(); });
-
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
-    msg.textContent='';
-    const name = form.name.value.trim();
-    const company = form.company.value.trim();
-    const role = form.role.value.trim();
-    const phone = form.phone.value.trim();
-    const email = form.email.value.trim();
-    const casename = inputCase.value.trim();
-    if(!name || !company || !role || !email || !document.getElementById('req_consent').checked){
-      msg.textContent = 'Please complete the required fields and accept the consent.';
-      return;
-    }
-    const subject = 'Request Full Report — ' + (casename || '');
-    const body = 'Case: ' + (casename||'') + '%0D%0A' +
-                 'Name: ' + encodeURIComponent(name) + '%0D%0A' +
-                 'Company: ' + encodeURIComponent(company) + '%0D%0A' +
-                 'Title: ' + encodeURIComponent(role) + '%0D%0A' +
-                 'Phone: ' + encodeURIComponent(phone) + '%0D%0A' +
-                 'Email: ' + encodeURIComponent(email) + '%0D%0A';
-    window.location.href = 'mailto:support@orvenzia.com?subject=' + encodeURIComponent(subject) + '&body=' + body;
-    setTimeout(closeModal, 600);
-  });
-})();
-</script>
+<script src="assets/js/pages/root/cases/cases__inline_4.js"></script>
 <!-- Request Full Report Modal -->
 <div aria-hidden="true" aria-modal="true" class="modal" id="requestModal" role="dialog">
 <div aria-label="Close" class="modal-backdrop js-close" tabindex="-1"></div>
@@ -746,308 +264,47 @@
 </form>
 </div>
 </div>
-<script>
-(function(){
-  const modal = document.getElementById('requestModal');
-  const form = document.getElementById('requestForm');
-  const inputCase = document.getElementById('req_case');
-  const msg = document.getElementById('req_msg');
-  function openModal(caseName){
-    inputCase.value = caseName || '';
-    msg.textContent='';
-    modal.setAttribute('aria-hidden','false');
-    document.documentElement.classList.add('no-scroll');
-    setTimeout(()=>{ document.getElementById('req_name').focus(); }, 40);
-  }
-  function closeModal(){
-    modal.setAttribute('aria-hidden','true');
-    document.documentElement.classList.remove('no-scroll');
-    form.reset();
-  }
-  document.addEventListener('click', function(e){
-    const btn = e.target.closest('.js-request');
-    if(btn){ e.preventDefault(); openModal(btn.getAttribute('data-case') || ''); }
-    if(e.target.closest('.js-close')){ e.preventDefault(); closeModal(); }
-  });
-  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeModal(); });
-
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
-    msg.textContent='';
-    const name = form.name.value.trim();
-    const company = form.company.value.trim();
-    const role = form.role.value.trim();
-    const phone = form.phone.value.trim();
-    const email = form.email.value.trim();
-    const casename = inputCase.value.trim();
-    if(!name || !company || !role || !email || !document.getElementById('req_consent').checked){
-      msg.textContent = 'Please complete the required fields and accept the consent.';
-      return;
-    }
-    const subject = 'Request Full Report — ' + (casename || '');
-    const body = 'Case: ' + (casename||'') + '%0D%0A' +
-                 'Name: ' + encodeURIComponent(name) + '%0D%0A' +
-                 'Company: ' + encodeURIComponent(company) + '%0D%0A' +
-                 'Title: ' + encodeURIComponent(role) + '%0D%0A' +
-                 'Phone: ' + encodeURIComponent(phone) + '%0D%0A' +
-                 'Email: ' + encodeURIComponent(email) + '%0D%0A';
-    window.location.href = 'mailto:support@orvenzia.com?subject=' + encodeURIComponent(subject) + '&body=' + body;
-    setTimeout(closeModal, 600);
-  });
-})();
-</script>
+<script src="assets/js/pages/root/cases/cases__inline_5.js"></script>
 </footer>
-<style id="fix-ecard-50">
-/* FINAL — Only the four case cards: 50% transparent; keep modal opaque */
-.section.ecards article.ecard{
-  background: rgba(255,255,255,0.50) !important;
-  border-color: rgba(0,0,0,0.14) !important;
-  -webkit-backdrop-filter: blur(4px) saturate(110%);
-  backdrop-filter: blur(4px) saturate(110%);
-}
-.modal-card{ background: #fff; }
-</style>
-<style id="fix-ecard-100-white">
-/* FINAL — Four case cards: 100% transparent bg, white border & white text (keep modal opaque) */
-.section.ecards article.ecard{
-  background: transparent !important;
-  border: 1px solid rgba(255,255,255,0.9) !important;
-  color: #fff !important;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.10);
-}
-/* make all text inside cards white */
-.section.ecards article.ecard .ehead,
-.section.ecards article.ecard .etitle,
-.section.ecards article.ecard .emeta,
-.section.ecards article.ecard .eline,
-.section.ecards article.ecard .edelivered,
-.section.ecards article.ecard .equote,
-.section.ecards article.ecard .ehighlights,
-.section.ecards article.ecard .ehighlights li,
-.section.ecards article.ecard p,
-.section.ecards article.ecard li,
-.section.ecards article.ecard small,
-.section.ecards article.ecard strong,
-.section.ecards article.ecard em{ color: #fff !important; }
-/* ensure link text inherits white */
-.section.ecards article.ecard a{ color: inherit !important; }
-/* CTA look: white text & border, transparent bg */
-.section.ecards article.ecard .ecard-footer .ecta{
-  color: #fff !important;
-  border: 1px solid rgba(255,255,255,0.9) !important;
-  padding: 0.55rem 1.0rem;
-  border-radius: 0.7rem;
-  background: transparent !important;
-  display: inline-flex; align-items: center; gap: .35rem;
-}
-.section.ecards article.ecard .ecard-footer .ecta:hover{
-  background: rgba(255,255,255,0.08) !important;
-  transform: translateY(-1px);
-}
-/* keep modal cards and other white panels opaque */
-.modal-card{ background:#fff; color:#111; }
-</style>
-<style id="fix-ecard-100white-emeta">
-/* Make the small white meta strips (Baseline/Core/Enterprise/Scope 3 line) transparent too */
-.section.ecards article.ecard .emeta{
-  background: transparent !important;
-  color: #fff !important;
-  border: 1px solid rgba(255,255,255,0.75) !important;
-  border-radius: 8px;
-  padding: .25rem .5rem;
-  display: inline-block;
-}
-/* If there are inner spans/chips inside .emeta that still carry a white bg, reset them */
-.section.ecards article.ecard .emeta *{
-  background: transparent !important;
-  color: inherit !important;
-}
-</style>
-<style id="fix-ecard-100white-nuke">
-/* FINAL NUKE — Ensure nothing inside the four ecard boxes stays white */
-.section.ecards article.ecard{
-  background: transparent !important;
-  border: 1px solid rgba(255,255,255,0.9) !important;
-  color: #fff !important;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.10);
-}
-/* Make descendants inherit white text and drop any white backgrounds */
-.section.ecards article.ecard *{
-  color: #fff !important;
-  background: transparent !important;
-  background-color: transparent !important;
-  box-shadow: none !important;
-}
-
-/* Keep helpful outlines for small labels/strips if present */
-.section.ecards article.ecard :is(.ehead,.emeta,.etitle,.kicker,.meta,.label,.badge,.chip,.pill){
-  border: 1px solid rgba(255,255,255,0.75) !important;
-  border-radius: 8px;
-  padding: .2rem .5rem;
-  display: inline-block;
-}
-
-/* Form-like elements if used */
-.section.ecards article.ecard :is(input,select,textarea){
-  color:#fff !important;
-  border:1px solid rgba(255,255,255,0.75) !important;
-}
-
-/* CTA buttons */
-.section.ecards article.ecard .ecard-footer .ecta{
-  color:#fff !important;
-  border:1px solid rgba(255,255,255,0.95) !important;
-  background: transparent !important;
-}
-.section.ecards article.ecard .ecard-footer .ecta:hover{
-  background: rgba(255,255,255,0.10) !important;
-  transform: translateY(-1px);
-}
-
-/* Keep modal card opaque and readable */
-.modal-card{ background:#fff !important; color:#111 !important; }
-</style>
-<style id="fix-ecard-no-inner-borders">
-/* Remove the inner white lines on the four case cards (keep outer card border) */
-.section.ecards article.ecard :is(.ehead,.emeta,.etitle,.kicker,.meta,.label,.badge,.chip,.pill){
-  border: none !important;
-  outline: none !important;
-  background: transparent !important;
-  background-color: transparent !important;
-  display: inline !important;
-  padding: 0 !important;
-  box-shadow: none !important;
-}
-/* Remove any <hr> style inside cards just in case */
-.section.ecards article.ecard hr{
-  border: 0 !important;
-  height: 0 !important;
-  background: transparent !important;
-  margin: 0 !important;
-}
-</style>
+<link rel="stylesheet" href="assets/css/pages/root/cases/cases__inline_22.css">
+<link rel="stylesheet" href="assets/css/pages/root/cases/cases__inline_23.css">
+<link rel="stylesheet" href="assets/css/pages/root/cases/cases__inline_24.css">
+<link rel="stylesheet" href="assets/css/pages/root/cases/cases__inline_25.css">
+<link rel="stylesheet" href="assets/css/pages/root/cases/cases__inline_26.css">
   <script src="assets/js/m.nav.v4.js"></script>
-<script id="mobile-only-fix">
-(function(){
-  function ready(fn){ if(document.readyState!=='loading'){fn()} else {document.addEventListener('DOMContentLoaded', fn)} }
-  ready(function(){
-    if (window.innerWidth > 860) return;                 // desktop untouched
-    if (document.getElementById('m-panel')) return;      // already injected
-
-    // Burger
-    var b=document.createElement('button');
-    b.className='m-burger';
-    b.setAttribute('aria-expanded','false');
-    b.setAttribute('aria-controls','m-panel');
-    b.setAttribute('aria-label','Toggle menu');
-    b.innerHTML='<span class="bar"></span><span class="bar"></span><span class="bar"></span>';
-    document.body.appendChild(b);
-
-    // Panel
-    var p=document.createElement('nav');
-    p.id='m-panel';
-    p.innerHTML=[
-      '<a href="services.html">Services</a>',
-      '<a href="cases.html">Cases</a>',
-      '<a href="about.html">About</a>',
-      '<a class="cta" href="screening.html">Free Screening</a>'
-    ].join('');
-    document.body.appendChild(p);
-
-    function open(){ p.classList.add('open'); b.setAttribute('aria-expanded','true'); }
-    function close(){ p.classList.remove('open'); b.setAttribute('aria-expanded','false'); }
-
-    b.addEventListener('click', function(e){ e.stopPropagation(); p.classList.contains('open')?close():open(); });
-    document.addEventListener('click', function(e){ if(!p.contains(e.target) && !b.contains(e.target)) close(); });
-    window.addEventListener('resize', function(){ if(window.innerWidth>860) close(); });
-  });
-})();
-</script>
+<script id="mobile-only-fix" src="assets/js/pages/root/cases/cases__inline_6.js"></script>
 
 
 
-<script id="mobile-menu-helper-v30">
-(function(){
-  function ready(fn){ if(document.readyState!='loading'){fn()} else {document.addEventListener('DOMContentLoaded', fn)} }
-  ready(function(){
-    if (window.matchMedia && !window.matchMedia('(max-width: 860px)').matches) return;
-
-    /* Body offset equals header height */
-    var header = document.querySelector('header');
-    function setH(){ var h = header ? Math.max(header.offsetHeight, 56) : 56;
-      document.documentElement.style.setProperty('--m-header-h', h + 'px'); }
-    setH(); window.addEventListener('resize', setH);
-
-    /* Ensure burger + panel exist */
-    var burger = document.querySelector('.m-burger');
-    var panel  = document.querySelector('#m-panel');
-    if(!burger){
-      burger = document.createElement('button');
-      burger.className = 'm-burger';
-      burger.setAttribute('aria-label','Menu');
-      burger.innerHTML = '<span class="bar"></span><span class="bar"></span><span class="bar"></span>';
-      document.body.appendChild(burger);
-    }
-    if(!panel){
-      panel = document.createElement('nav'); panel.id = 'm-panel'; document.body.appendChild(panel);
-      var links = Array.prototype.slice.call(document.querySelectorAll('header nav a, header .nav a, header .menu a'));
-      if(links.length){
-        links.forEach(function(a){
-          var c = document.createElement('a');
-          c.textContent = (a.textContent||'').trim();
-          c.href = a.getAttribute('href') || '#';
-          panel.appendChild(c);
-        });
-      }
-    }
-
-    /* Inject/rename CTA at bottom */
-    (function ensureCTA(){
-      var cta = panel.querySelector('a.cta');
-      if(!cta){
-        cta = document.createElement('a'); cta.className = 'cta'; cta.href = '/screening.html'; cta.textContent = 'Start Screening ->';
-        panel.appendChild(cta);
-      }else{
-        cta.textContent = 'Start Screening ->'; if(!cta.getAttribute('href')) cta.href = '/screening.html';
-      }
-    })();
-
-    /* Capture-phase click to suppress conflicting handlers and ensure consistent toggle */
-    function openPanel(){ panel.classList.add('open'); }
-    function closePanel(){ panel.classList.remove('open'); }
-    function togglePanel(){ panel.classList.toggle('open'); }
-
-    function onBurgerCapture(ev){
-      ev.preventDefault(); ev.stopPropagation(); ev.stopImmediatePropagation();
-      togglePanel();
-    }
-    if(!burger.dataset.wired){
-      burger.dataset.wired = '1';
-      burger.addEventListener('click', onBurgerCapture, true); /* capture */
-    }
-
-    /* Close on outside click / ESC / link select */
-    if(!panel.dataset.wired){
-      panel.dataset.wired = '1';
-      document.addEventListener('click', function(ev){
-        if(!panel.classList.contains('open')) return;
-        if(!panel.contains(ev.target) && ev.target !== burger){ closePanel(); }
-      }, true); /* capture to beat other handlers */
-      document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ closePanel(); } });
-      panel.addEventListener('click', function(ev){ var a = ev.target.closest('a'); if(a){ closePanel(); } });
-    }
-  });
-})();
-</script>
+<script id="mobile-menu-helper-v30" src="assets/js/pages/root/cases/cases__inline_7.js"></script>
 
 <script src="assets/js/mobile_fix_unified.js"></script>
 
-<style id="MOBILE_CLEAN_V30_FINAL">
-/* Hard precedence: loaded at end of body */
-@media (max-width: 860px){
-  header nav, header .desktop-nav, header .menu, header .menu-list, header .nav-links, header .header-links{ display:none !important; }
-  .mobile-nav-toggle, .m-burger{ display:inline-flex !important; }
-}
-</style>
+<link rel="stylesheet" href="assets/css/pages/root/cases/cases__inline_27.css">
 
+<script>
+(function(){
+  function ready(fn){ if(document.readyState!=='loading'){ fn(); } else { document.addEventListener('DOMContentLoaded', fn); } }
+  ready(function(){
+    var ectas = Array.prototype.slice.call(document.querySelectorAll('.ecta'));
+    ectas.forEach(function(el){
+      el.classList.add('js-request');
+      if(!el.hasAttribute('data-case')){
+        var art = el.closest('article');
+        var title = art && art.querySelector('.etitle') ? art.querySelector('.etitle').textContent.trim() : '';
+        el.setAttribute('data-case', title);
+      }
+      // ensure it's focusable/clickable for keyboard users too
+      if(!el.hasAttribute('tabindex')){ el.setAttribute('tabindex','0'); }
+      el.setAttribute('role','button');
+      el.addEventListener('keydown', function(e){
+        if(e.key==='Enter' || e.key===' '){
+          e.preventDefault();
+          el.click();
+        }
+      });
+    });
+  });
+})();
+</script>
 </body></html>
