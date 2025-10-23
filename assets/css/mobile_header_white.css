@@ -50,3 +50,28 @@
     opacity: 1 !important;
   }
 }
+
+/* --- Force visibility for the JS-injected mobile burger (.m-burger) --- */
+@media (max-width: 860px){
+  .m-burger{
+    background:#ffffff !important;
+    border:1.5px solid #0A0D0F !important;
+    border-radius:12px !important;
+    box-shadow:none !important;
+  }
+  .m-burger .bar{
+    background:#0A0D0F !important;
+    height:2px !important;
+    opacity:1 !important;
+  }
+  /* Ensure the slide-out panel matches the white header */
+  #m-panel{
+    background:#ffffff !important;
+    color:#0A0D0F !important;
+    border:1px solid #E6E6E6 !important;
+  }
+  #m-panel a{ color:#0A0D0F !important; }
+  #m-panel a.cta{
+    border-color:#0A0D0F33 !important;
+  }
+}
