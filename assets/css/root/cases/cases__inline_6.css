@@ -1,0 +1,12 @@
+
+/* v27: tighter executive cards */
+.tcards .grid{ gap:.8rem }
+.tcard.compact{ padding:.8rem .9rem .9rem .9rem; border-radius:14px; box-shadow:0 12px 30px rgba(0,0,0,.06) }
+.tcard.compact .ttitle{ font-size:1.06rem }
+.tcard.compact .tone{ font-size:.94rem; margin:.42rem 0 0 0 }
+.tcard.compact .tmeta{ font-size:.80rem }
+.tcard.compact .tfacts{ gap:.35rem; margin-top:.45rem }
+.tcard.compact .fact{ font-size:.68rem; padding:.16rem .46rem }
+.tcard.compact .tlist li{ margin:.14rem 0 }
+.tcard.compact .tcols{ gap:.5rem }
+.tcard.compact .tsub{ font-size:.74rem; letter-spacing:.12em }

@@ -1,0 +1,15 @@
+
+/* Make the small white meta strips (Baseline/Core/Enterprise/Scope 3 line) transparent too */
+.section.ecards article.ecard .emeta{
+  background: transparent !important;
+  color: #fff !important;
+  border: 1px solid rgba(255,255,255,0.75) !important;
+  border-radius: 8px;
+  padding: .25rem .5rem;
+  display: inline-block;
+}
+/* If there are inner spans/chips inside .emeta that still carry a white bg, reset them */
+.section.ecards article.ecard .emeta *{
+  background: transparent !important;
+  color: inherit !important;
+}

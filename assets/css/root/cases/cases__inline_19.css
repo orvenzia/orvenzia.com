@@ -1,0 +1,7 @@
+
+/* === v32 FIX 10: Correct selector for intro H1 (avoid global impact) === */
+.section-wrap.intro.hero h1.display {
+  font-weight: 600 !important; /* semibold to match Services */
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+}
