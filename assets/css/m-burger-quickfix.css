@@ -143,3 +143,28 @@
     opacity: 1 !important;
   }
 }
+
+/* --- Ensure 'Start Screening' text is visible inside the mobile slideout panel --- */
+@media (max-width: 860px){
+  #m-panel a.cta,
+  #m-panel a[href*="screening"],
+  #m-panel .btn,
+  #m-panel .btn-primary,
+  #m-panel .start-screening {
+    background:#0A0D0F !important;
+    color:#ffffff !important;
+    -webkit-text-fill-color:#ffffff !important;
+    text-shadow:none !important;
+    opacity:1 !important;
+    mix-blend-mode:normal !important;
+  }
+  #m-panel a.cta:hover,
+  #m-panel a[href*="screening"]:hover,
+  #m-panel .btn:hover,
+  #m-panel .btn-primary:hover,
+  #m-panel .start-screening:hover {
+    background:#0A0D0F !important;
+    color:#ffffff !important;
+    -webkit-text-fill-color:#ffffff !important;
+  }
+}
