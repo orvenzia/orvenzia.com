@@ -1,0 +1,67 @@
+
+@media (min-width: 861px){
+
+/* === MOBILE V12: Header fixed top + desktop nav visible === */
+@media (max-width: 767.98px){
+  /* Pin header at very top, above hero */
+  header{
+    position: fixed !important;
+    top: 0; left: 0; right: 0;
+    z-index: 10000 !important;
+    background: var(--paper, #FCFCFA) !important;
+    border-bottom: 1px solid rgba(0,0,0,.08) !important;
+    box-shadow: 0 2px 6px rgba(0,0,0,.03) !important;
+  }
+  /* Offset page so header doesn't overlap content */
+  body{ padding-top: 64px !important; } /* adjust if your header is taller */
+
+  /* Reveal any nav that was hidden by utility classes like 'hidden md:flex' */
+  header nav, header .desktop-nav, header .nav, header .menu, header .menu-list{
+    display: flex !important;
+    align-items: center !important;
+    gap: 16px !important;
+    margin-left: auto !important;
+  }
+  /* Common UL/LIs to layout horizontally */
+  header nav ul{ display: flex !important; gap: 16px !important; margin: 0 !important; padding: 0 !important; list-style: none !important; }
+  header nav li{ display: inline-flex !important; align-items: center !important; }
+
+  /* Brand left, nav right */
+  header .brand, header .logo{ margin-right: auto !important; }
+
+  /* Hide burger/mobile menu */
+  .mobile-nav-toggle, #mobile-menu{ display: none !important; }
+
+  /* Dropdown panel (desktop-like) */
+  .has-dd{ position: relative !important; }
+  .has-dd.open > .nav-dd,
+  .has-dd.open > .dropdown,
+  .has-dd.open > .submenu,
+  .has-dd.open > [role="menu"],
+  .has-dd.open > ul{
+    display: block !important;
+  }
+  .nav-dd, .dropdown, .submenu, [role="menu"], .has-dd > ul{
+    position: absolute !important;
+    top: 100%; left: 0;
+    min-width: 230px;
+    background: #fff !important;
+    border: 1px solid rgba(0,0,0,.08) !important;
+    border-radius: 12px !important;
+    padding: 8px !important;
+    z-index: 10001 !important;
+    box-shadow: 0 12px 32px rgba(0,0,0,.12) !important;
+    display: none;
+  }
+  .nav-dd a, .dropdown a, .submenu a, [role="menu"] a, .has-dd > ul a{
+    display: block; padding: 10px 12px; color: var(--ink, #0B0B0B) !important; text-decoration: none; border-radius: 10px;
+  }
+  .nav-dd a:hover, .dropdown a:hover, .submenu a:hover, [role="menu"] a:hover, .has-dd > ul a:hover{
+    background: rgba(0,0,0,.04) !important;
+  }
+  .has-dd > a::after, .has-dd > button::after{
+    content: "▾"; margin-left: 6px; font-size: .9em; opacity: .7;
+  }
+}
+
+}
