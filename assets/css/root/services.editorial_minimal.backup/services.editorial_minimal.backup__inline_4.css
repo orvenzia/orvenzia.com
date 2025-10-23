@@ -1,6 +1,0 @@
-
-/* === DESKTOP RESET V13: keep header height identical to original on >=768px === */
-@media (min-width: 768px){
-  body{ padding-top: 0 !important; }
-  header{ position: sticky !important; top: 0 !important; height: auto !important; }
-}

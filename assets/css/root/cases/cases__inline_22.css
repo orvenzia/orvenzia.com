@@ -1,9 +1,0 @@
-
-/* FINAL — Only the four case cards: 50% transparent; keep modal opaque */
-.section.ecards article.ecard{
-  background: rgba(255,255,255,0.50) !important;
-  border-color: rgba(0,0,0,0.14) !important;
-  -webkit-backdrop-filter: blur(4px) saturate(110%);
-  backdrop-filter: blur(4px) saturate(110%);
-}
-.modal-card{ background: #fff; }

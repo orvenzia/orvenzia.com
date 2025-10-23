@@ -1,6 +1,0 @@
-
-/* Hard precedence: loaded at end of body */
-@media (max-width: 860px){
-  header nav, header .desktop-nav, header .menu, header .menu-list, header .nav-links, header .header-links{ display:none !important; }
-  .mobile-nav-toggle, .m-burger{ display:inline-flex !important; }
-}

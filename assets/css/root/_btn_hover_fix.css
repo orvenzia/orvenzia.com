@@ -1,9 +1,0 @@
-
-/* ORV FIX: keep primary button black on hover (header "Start Screening") */
-.btn-primary:hover,
-a.btn-primary:hover,
-button.btn-primary:hover {
-  background: #0B0B0B !important;
-  color: #FCFCFA !important;
-  box-shadow: var(--glow, 0 10px 40px rgba(214,199,161,.35));
-}
