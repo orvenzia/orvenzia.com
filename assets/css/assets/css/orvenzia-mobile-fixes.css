@@ -1,0 +1,134 @@
+/* Orvenzia — Mobile-only fixes (no desktop impact)
+   Save as: assets/css/orvenzia-mobile-fixes.css
+*/
+
+/* ====== Header: white on mobile/tablet ====== */
+@media (max-width: 1024px) {
+  header, .header, .mobile-header, .nav, .nav-shell, .nav-mobile, .nav-bar, .topbar {
+    background: #ffffff !important;
+    color: #0A0D0F !important;
+  }
+  header a, .header a, .nav a, .nav li a, .nav .menu a, .mobile-menu a {
+    color: #0A0D0F !important;
+  }
+  header svg, .header svg, .nav svg { color:#0A0D0F !important; fill:#0A0D0F !important; stroke:#0A0D0F !important; }
+  header svg path, .header svg path, .nav svg path { fill:none !important; stroke:#0A0D0F !important; stroke-width:2px; }
+}
+
+/* ====== Burger/drawer visibility ====== */
+@media (max-width: 860px){
+  .m-burger{
+    background:#ffffff !important;
+    border:1.5px solid #0A0D0F !important;
+    border-radius:12px !important;
+    box-shadow:none !important;
+    opacity:1 !important;
+    mix-blend-mode:normal !important;
+    color:#0A0D0F !important;
+  }
+  .m-burger .bar{
+    width:22px !important;
+    height:2px !important;
+    background:#0A0D0F !important;
+    display:block !important;
+    margin:3px 0 !important;
+    opacity:1 !important;
+  }
+  #m-panel{
+    background:#ffffff !important;
+    color:#0A0D0F !important;
+    border:1px solid #E6E6E6 !important;
+  }
+  #m-panel a{ color:#0A0D0F !important; }
+  #m-panel a.cta,
+  #m-panel a[href*="screening"],
+  #m-panel .btn,
+  #m-panel .btn-primary,
+  #m-panel .start-screening{
+    background:#0A0D0F !important;
+    color:#ffffff !important;
+    -webkit-text-fill-color:#ffffff !important;
+    text-shadow:none !important;
+    opacity:1 !important;
+    mix-blend-mode:normal !important;
+  }
+}
+
+/* ====== CARD TEXT OVERLAP FIX (only mobile) ====== */
+@media (max-width: 600px){
+  .card, .case-card, .hero-card, .case { position: relative; }
+
+  .card .eyebrow, .case-card .eyebrow, .hero-card .eyebrow,
+  .card .kicker,  .case-card .kicker,  .hero-card .kicker,
+  .card .subtitle,.case-card .subtitle,.hero-card .subtitle,
+  .card small.eyebrow, .case-card small.eyebrow, .hero-card small.eyebrow {
+    position: static !important;
+    transform: none !important;
+    display: block !important;
+    margin: 0 0 6px !important;
+    line-height: 1.2 !important;
+    white-space: normal !important;
+    text-decoration: none !important;
+    background: transparent !important;
+    background-image: none !important;
+    border: 0 !important;
+  }
+
+  .card h1, .card h2, .card h3,
+  .case-card h1, .case-card h2, .case-card h3,
+  .hero-card h1, .hero-card h2, .hero-card h3 {
+    font-size: clamp(20px, 5.5vw, 28px);
+    line-height: 1.22 !important;
+    margin: 0 0 10px !important;
+    text-decoration: none !important;
+    text-decoration-line: none !important;
+    text-underline-offset: 0 !important;
+    text-decoration-thickness: initial !important;
+    border: 0 !important;
+    background-image: none !important;
+    transform: none !important;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    hyphens: auto;
+  }
+
+  .card h1 a, .card h2 a, .card h3 a,
+  .case-card h1 a, .case-card h2 a, .case-card h3 a,
+  .hero-card h1 a, .hero-card h2 a, .hero-card h3 a,
+  .card h1 u, .card h2 u, .card h3 u,
+  .case-card h1 u, .case-card h2 u, .case-card h3 u,
+  .hero-card h1 u, .hero-card h2 u, .hero-card h3 u,
+  .card h1 s, .card h2 s, .card h3 s,
+  .case-card h1 s, .case-card h2 s, .case-card h3 s,
+  .hero-card h1 s, .hero-card h2 s, .hero-card h3 s,
+  .card h1 del, .card h2 del, .card h3 del,
+  .case-card h1 del, .case-card h2 del, .case-card h3 del,
+  .hero-card h1 del, .hero-card h2 del, .hero-card h3 del {
+    text-decoration: none !important; border: 0 !important; background-image: none !important;
+  }
+
+  .card h1::before, .card h1::after,
+  .card h2::before, .card h2::after,
+  .card h3::before, .card h3::after,
+  .case-card h1::before, .case-card h1::after,
+  .case-card h2::before, .case-card h2::after,
+  .case-card h3::before, .case-card h3::after,
+  .hero-card h1::before, .hero-card h1::after,
+  .hero-card h2::before, .hero-card h2::after,
+  .hero-card h3::before, .hero-card h3::after {
+    content: none !important; display: none !important;
+  }
+
+  .card .lead, .case-card .lead, .hero-card .lead,
+  .card p.lead, .case-card p.lead, .hero-card p.lead {
+    margin-top: 8px !important;
+    line-height: 1.4 !important;
+  }
+
+  .card .eyebrow, .case-card .eyebrow, .hero-card .eyebrow,
+  .card h1, .card h2, .card h3,
+  .case-card h1, .case-card h2, .case-card h3,
+  .hero-card h1, .hero-card h2, .hero-card h3 {
+    margin-top: max(0px, var(--heading-mt, 0)) !important;
+  }
+}
