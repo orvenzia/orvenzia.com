@@ -43,7 +43,32 @@
                  'Title: ' + encodeURIComponent(role) + '%0D%0A' +
                  'Phone: ' + encodeURIComponent(phone) + '%0D%0A' +
                  'Email: ' + encodeURIComponent(email) + '%0D%0A';
-    window.location.href = 'mailto:support@orvenzia.com?subject=' + encodeURIComponent(subject) + '&body=' + body;
-    setTimeout(closeModal, 600);
-  });
+    
+    try {
+      form.action = 'https://formsubmit.co/support@orvenzia.com';
+      form.method = 'POST';
+      // Ensure helper hidden inputs exist
+      var ensure = function(name, value){
+        if(!form.querySelector('input[name="'+name+'"]')){
+          var i=document.createElement('input'); i.type='hidden'; i.name=name; i.value=value; form.appendChild(i);
+        }
+      };
+      ensure('_subject', 'Orvenzia website: Request Full Report — ' + (casename||''));
+      ensure('_template','table');
+      ensure('_captcha','false');
+      ensure('form_name', (document.title||'') + ' — requestForm');
+      if(!form.querySelector('input[name="_next"]')){
+        var nx=document.createElement('input'); nx.type='hidden'; nx.name='_next'; nx.value=location.origin + '/thank-you.html'; form.appendChild(nx);
+      }
+      // map email if field id req_email exists but name is not 'email'
+      var reqEmail=document.getElementById('req_email');
+      if(reqEmail && reqEmail.name !== 'email' && !form.querySelector('input[name="email"]')){
+        var em=document.createElement('input'); em.type='hidden'; em.name='email'; em.value=reqEmail.value; form.appendChild(em);
+      }
+      form.submit();
+    } catch(e) {
+      console.error('Fallback submit', e);
+      form.submit();
+    }
+    });
 })();
