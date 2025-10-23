@@ -1,0 +1,63 @@
+/* Orvenzia — Mobile case/hero card readability fix
+   Prevents title/eyebrow overlap and removes underline lines on small screens.
+   Scoped to card-like containers to avoid global side-effects.
+*/
+@media (max-width: 540px){
+  /* Eyebrow/overline labels should flow above the title, not overlay it */
+  .case-card .eyebrow,
+  .hero-card .eyebrow,
+  .card .eyebrow,
+  .case .eyebrow,
+  .hero .eyebrow {
+    position: static !important;
+    display: block !important;
+    margin: 0 0 6px !important;
+  }
+
+  /* Headings inside cards/heroes: more line-height and no decorative underline */
+  .case-card h1, .case-card h2, .case-card h3,
+  .hero-card h1, .hero-card h2, .hero-card h3,
+  .card h1, .card h2, .card h3,
+  .case h1, .case h2, .case h3,
+  .hero h1, .hero h2, .hero h3 {
+    line-height: 1.18 !important;
+    margin: 0 0 8px !important;
+    text-decoration: none !important;
+    text-decoration-thickness: initial !important;
+    text-underline-offset: initial !important;
+    word-break: normal !important;
+    overflow-wrap: anywhere !important;
+    hyphens: auto !important;
+  }
+
+  /* If headings are links or wrapped in <u>, remove underline/border */
+  .case-card h1 a, .case-card h2 a, .case-card h3 a,
+  .hero-card h1 a, .hero-card h2 a, .hero-card h3 a,
+  .card h1 a, .card h2 a, .card h3 a,
+  .case h1 a, .case h2 a, .case h3 a,
+  .hero h1 a, .hero h2 a, .hero h3 a,
+  .case-card h1 u, .case-card h2 u, .case-card h3 u,
+  .hero-card h1 u, .hero-card h2 u, .hero-card h3 u,
+  .card h1 u, .card h2 u, .card h3 u,
+  .case h1 u, .case h2 u, .case h3 u,
+  .hero h1 u, .hero h2 u, .hero h3 u {
+    text-decoration: none !important;
+    border: 0 !important;
+  }
+
+  /* If underline is added via ::after pseudo-elements, remove it */
+  .case-card h1::after, .case-card h2::after, .case-card h3::after,
+  .hero-card h1::after, .hero-card h2::after, .hero-card h3::after,
+  .card h1::after, .card h2::after, .card h3::after,
+  .case h1::after, .case h2::after, .case h3::after,
+  .hero h1::after, .hero h2::after, .hero h3::after {
+    content: none !important;
+  }
+
+  /* Lead/subtitle spacing */
+  .case-card .lead, .hero-card .lead, .card .lead,
+  .case .lead, .hero .lead, .lead {
+    margin-top: 6px !important;
+    line-height: 1.35 !important;
+  }
+}
