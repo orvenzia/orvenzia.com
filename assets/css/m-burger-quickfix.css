@@ -168,3 +168,48 @@
     -webkit-text-fill-color:#ffffff !important;
   }
 }
+
+/* --- Mobile case/hero card readability: prevent text overlap --- */
+@media (max-width: 540px){
+  /* Eyebrow/kicker/subtitle must stack above the title */
+  .case-card .eyebrow,
+  .case .eyebrow,
+  .card .eyebrow,
+  .case-card .kicker,
+  .card .kicker,
+  .case-card .subtitle,
+  .card .subtitle,
+  .case-card small.eyebrow,
+  .card small.eyebrow {
+    position: static !important;
+    transform: none !important;
+    display: block !important;
+    margin: 0 0 6px !important;
+  }
+
+  /* Title: increase line-height and remove underline/border/pseudo lines */
+  .case-card h1, .case-card h2, .case-card h3,
+  .card h1, .card h2, .card h3 {
+    line-height: 1.18 !important;
+    margin: 0 0 10px !important;
+    text-decoration: none !important;
+    border: 0 !important;
+  }
+  .case-card h1 a, .case-card h2 a, .case-card h3 a,
+  .card h1 a, .card h2 a, .card h3 a,
+  .case-card h1 u, .case-card h2 u, .case-card h3 u,
+  .card h1 u, .card h2 u, .card h3 u {
+    text-decoration: none !important;
+    border: 0 !important;
+  }
+  .case-card h1::after, .case-card h2::after, .case-card h3::after,
+  .card h1::after, .card h2::after, .card h3::after {
+    content: none !important;
+  }
+
+  /* Lead/strapline below the title should have breathing room */
+  .case-card .lead, .card .lead, .case-card p.lead, .card p.lead {
+    margin-top: 8px !important;
+    line-height: 1.4 !important;
+  }
+}
