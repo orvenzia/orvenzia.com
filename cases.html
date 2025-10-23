@@ -87,6 +87,85 @@
   }
 }
 </style>
+<style>
+/* Cases – mobilfix mod tekst-overlap i kort (kun ≤600px) */
+@media (max-width: 600px){
+  .cases-page .card,
+  .cases-page .case-card,
+  .cases-page .hero-card { position: relative; }
+
+  .cases-page .case-card .eyebrow,
+  .cases-page .case-card .kicker,
+  .cases-page .case-card .subtitle,
+  .cases-page .case-card .meta,
+  .cases-page .case-card small.eyebrow,
+  .cases-page .case-card [class*="eyebrow"],
+  .cases-page .case-card [class*="kicker"],
+  .cases-page .case-card [class*="subtitle"],
+  .cases-page .case-card [class*="strap"]{
+    position: static !important;
+    transform: none !important;
+    display: block !important;
+    margin: 0 0 6px !important;
+    line-height: 1.2 !important;
+    white-space: normal !important;
+    background: transparent !important;
+    background-image: none !important;
+    text-decoration: none !important;
+    border: 0 !important;
+    mix-blend-mode: normal !important;
+    filter: none !important;
+  }
+
+  .cases-page .case-card [style*="position:absolute"]{
+    position: static !important;
+    top: auto !important; left: auto !important; right: auto !important;
+  }
+
+  .cases-page .case-card h1,
+  .cases-page .case-card h2,
+  .cases-page .case-card h3{
+    font-size: clamp(20px, 5.5vw, 28px);
+    line-height: 1.22 !important;
+    margin: 0 0 10px !important;
+    text-decoration: none !important;
+    text-decoration-line: none !important;
+    text-underline-offset: 0 !important;
+    text-decoration-thickness: initial !important;
+    border: 0 !important;
+    background-image: none !important;
+    transform: none !important;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    hyphens: auto;
+    mix-blend-mode: normal !important;
+  }
+
+  .cases-page .case-card h1 a,
+  .cases-page .case-card h2 a,
+  .cases-page .case-card h3 a,
+  .cases-page .case-card h1 u,
+  .cases-page .case-card h2 u,
+  .cases-page .case-card h3 u,
+  .cases-page .case-card h1 s,
+  .cases-page .case-card h2 s,
+  .cases-page .case-card h3 s,
+  .cases-page .case-card h1 del,
+  .cases-page .case-card h2 del,
+  .cases-page .case-card h3 del{
+    text-decoration: none !important; border: 0 !important; background-image: none !important;
+  }
+  .cases-page .case-card h1::before, .cases-page .case-card h1::after,
+  .cases-page .case-card h2::before, .cases-page .case-card h2::after,
+  .cases-page .case-card h3::before, .cases-page .case-card h3::after{
+    content: none !important; display: none !important;
+  }
+
+  .cases-page .case-card .lead,
+  .cases-page .case-card p.lead,
+  .cases-page .case-card > p:first-of-type{
+    margin-top: 8px !important;
+    line-height: 1.4 !important;
 </head><body class="theme-dark cases"><header class="sticky top-0 z-50 bg-paper/95 backdrop-blur border-b hairline"> <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between"> <a class="font-serif text-xl tracking-tightest" href="index.html">Orvenzia</a> <nav class="hidden md:flex items-center gap-8 text-sm"> <a href="services.html">Services</a> <a href="cases.html#previews">Cases</a> <a href="about.html">About</a> <a class="btn-primary" data-evt="click_screening_cta" href="screening.html">Start Screening</a> </nav> </div>
 </header>
 <section class="section-wrap intro hero" id="top" style="padding-top:5.5rem;padding-bottom:5rem">
