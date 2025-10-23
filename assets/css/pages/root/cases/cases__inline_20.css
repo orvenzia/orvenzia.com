@@ -1,0 +1,21 @@
+
+/* === FINAL FIX: Cases intro — white text, transparent overlay, left aligned & aligned to cards === */
+.section-wrap.intro.hero {
+  text-align: left !important;
+  max-width: 72rem !important;
+  margin: 0 auto !important;
+  padding-left: 1.25rem !important;
+  padding-right: 1.25rem !important;
+  color: #fff !important;
+}
+.section-wrap.intro.hero .kicker,
+.section-wrap.intro.hero .display,
+.section-wrap.intro.hero .lede,
+.section-wrap.intro.hero p,
+.section-wrap.intro.hero .meta {
+  color: #fff !important;
+}
+/* Remove the dark gradient overlay box */
+.section-wrap.intro.hero::before {
+  background: transparent !important;
+}

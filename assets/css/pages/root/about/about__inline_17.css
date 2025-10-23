@@ -1,0 +1,10 @@
+
+@media (max-width: 768px) {
+  .page-title, .page-header, .title-bar, .section-title,
+  .banner--title, .breadcrumb, .breadcrumbs, .header-spacer, .topbar {
+    display: none !important;
+  }
+  html, body { max-width: 100vw; overflow-x: hidden; }
+  main, .hero, .hero .container, .section { margin-top: 0 !important; padding-top: 0 !important; }
+  .orv-about-hide { display: none !important; }
+}

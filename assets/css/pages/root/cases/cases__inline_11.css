@@ -1,0 +1,4 @@
+
+/* === v32 FIX 2: Removed Back to top buttons and adjusted card spacing === */
+.cta-row { display: flex; gap: 1rem; margin-top: 0.8rem; }
+.cta-row .btn + .btn { margin-left: 0; } /* no double spacing */

@@ -1,0 +1,17 @@
+
+/* === v32 FIX 9: Local Cases intro fix to align with Services === */
+.cases-main .intro .h1 {
+  font-weight: 700; /* semibold, not black */
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+}
+.cases-main .intro .lede {
+  font-size: 1.15rem;
+  line-height: 1.4;
+  color: rgba(255,255,255,.92);
+  margin-top: 0.8rem;
+}
+.cases-main .intro .kicker {
+  margin-bottom: 1.2rem;
+  color: rgba(255,255,255,.88);
+}
