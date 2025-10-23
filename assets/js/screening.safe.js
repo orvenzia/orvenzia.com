@@ -80,6 +80,38 @@
       '<div class="report-actions">' +
         '<button type="button" class="ecta js-request" data-case="Screening — '+company+'">Request a call</button>' +
       '</div>';
+    try {
+      var answersObj = {};
+      qq('input[type="radio"][name^="q"]').forEach(function(i){
+        if(i.checked){ answersObj[i.name] = i.value; }
+      });
+      var summaryLine = [
+        'Name: ' + (form.name && form.name.value ? form.name.value.trim() : ''),
+        'Company: ' + (form.company && form.company.value ? form.company.value.trim() : ''),
+        'Email: ' + (getEmailEl() ? getEmailEl().value.trim() : ''),
+        'Score: ' + (res.pct + '%'),
+        'Answered: ' + (res.answered + '/' + res.possible)
+      ].join(' | ');
+      if (window.saveOrvenziaScreening) {
+        window.saveOrvenziaScreening({
+          score: res.pct,
+          summary: summaryLine,
+          answers: answersObj
+        });
+      }
+      // If request call form exists, also prefill hidden fields there
+      var rf = document.getElementById('requestForm') || document.getElementById('request-call-form');
+      if (rf) {
+        var ensure = function(name, value){
+          var el = rf.querySelector('input[name="'+name+'"]');
+          if(!el){ el = document.createElement('input'); el.type='hidden'; el.name=name; rf.appendChild(el); }
+          el.value = value;
+        };
+        ensure('Screening Score', String(res.pct));
+        ensure('Screening Summary', summaryLine);
+      }
+    } catch(e) { console.warn('saveOrvenziaScreening failed', e); }
+
 
     resultWrap.style.display = 'block';
     try{ resultWrap.scrollIntoView({behavior:'smooth', block:'start'}); }catch(e){}
