@@ -1,0 +1,54 @@
+
+@media (min-width: 861px){
+
+/* === MOBILE V17: Rebuilt header row (brand left, burger right) === */
+@media (max-width: 767.98px){
+  /* Hide the original wide desktop container row on mobile */
+  header .max-w-7xl{ display: none !important; }
+  /* Header row we inject */
+  header .m-header-row{
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    height: 64px !important;
+    padding: 0 24px !important;
+    max-width: 72rem !important;
+    margin: 0 auto !important;
+    gap: 12px !important;
+  }
+  header .m-brand{
+    margin-right: auto !important;
+    font-weight: 700; letter-spacing: -.02em;
+    color: var(--ink, #0B0B0B) !important;
+    text-decoration: none !important;
+  }
+  header .mobile-nav-toggle{
+    display: inline-flex !important;
+    align-items: center; justify-content: center;
+    width: 44px; height: 44px; background: transparent !important; border:none !important;
+    border-radius: 10px; padding: 0; margin-left: 12px;
+  }
+  header .mobile-nav-toggle .burger{
+    position: relative; display:inline-block; width:22px; height:2px; background: var(--ink, #0B0B0B);
+  }
+  header .mobile-nav-toggle .burger::before,
+  header .mobile-nav-toggle .burger::after{
+    content:""; position:absolute; left:0; width:22px; height:2px; background: var(--ink, #0B0B0B);
+  }
+  header .mobile-nav-toggle .burger::before{ top:-7px; }
+  header .mobile-nav-toggle .burger::after{ top: 7px; }
+
+  /* Mobile dropdown panel */
+  #mobile-menu[hidden]{ display:none !important; }
+  #mobile-menu{
+    position: fixed !important; top: 64px; left: 0; right: 0;
+    background: #ffffff !important; border-top:1px solid rgba(0,0,0,.08); box-shadow:0 10px 30px rgba(0,0,0,.1);
+    padding: 8px 12px 16px; z-index: 9999 !important;
+  }
+  #mobile-menu a, #mobile-menu .mm-item{
+    display:block; padding:12px 10px; border-radius:10px; color:#0B0B0B !important; text-decoration:none;
+  }
+  #mobile-menu a:hover, #mobile-menu .mm-item:hover{ background: rgba(0,0,0,.05); }
+}
+
+}

@@ -1,0 +1,18 @@
+
+/* === Services High-Contrast Overlay === */
+.services-contrast-layer{
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(120% 90% at 50% 30%, rgba(0,0,0,.54) 0%, rgba(0,0,0,.42) 45%, rgba(0,0,0,.38) 70%, rgba(0,0,0,.36) 100%);
+  mix-blend-mode: normal;
+}
+/* Ensure content sits above the overlay */
+header, footer, section, .section-wrap{ position: relative; z-index: 1; }
+/* Gentle text halo for legibility on complex backgrounds */
+.display, .svc-title{ text-shadow: 0 1px 10px rgba(0,0,0,.35), 0 1px 0 rgba(0,0,0,.25); }
+.kicker, .svc-sub, .meta, .svc-pvo, .badges span, .link-arrow{
+  text-shadow: 0 1px 6px rgba(0,0,0,.28);
+}
+/* Hairlines remain visible on darkened bg */
+.rule{ border-top-color: rgba(255,255,255,.28) !important; }
+.hair{ border-color: rgba(255,255,255,.28) !important; }
