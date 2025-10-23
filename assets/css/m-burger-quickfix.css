@@ -213,3 +213,70 @@
     line-height: 1.4 !important;
   }
 }
+
+/* --- MOBILE CARD FIX: ensure headings, eyebrow and lead don't overlap in cards --- */
+@media (max-width: 600px){
+  /* Target common card wrappers */
+  .card, .case-card, .hero-card, .case {
+    position: relative;
+  }
+
+  /* Eyebrow/kicker/subtitle must sit above title, not overlap */
+  .card .eyebrow, .case-card .eyebrow, .hero-card .eyebrow,
+  .card .kicker,  .case-card .kicker,  .hero-card .kicker,
+  .card .subtitle,.case-card .subtitle,.hero-card .subtitle,
+  .card small.eyebrow, .case-card small.eyebrow, .hero-card small.eyebrow {
+    position: static !important;
+    transform: none !important;
+    display: block !important;
+    margin: 0 0 6px !important;
+  }
+
+  /* Headings: more line-height & spacing, kill underline/borders/pseudo lines */
+  .card h1, .card h2, .card h3,
+  .case-card h1, .case-card h2, .case-card h3,
+  .hero-card h1, .hero-card h2, .hero-card h3 {
+    line-height: 1.22 !important;
+    margin: 0 0 10px !important;
+    text-decoration: none !important;
+    border: 0 !important;
+    background-image: none !important;
+  }
+  .card h1 a, .card h2 a, .card h3 a,
+  .case-card h1 a, .case-card h2 a, .case-card h3 a,
+  .hero-card h1 a, .hero-card h2 a, .hero-card h3 a,
+  .card h1 u, .card h2 u, .card h3 u,
+  .case-card h1 u, .case-card h2 u, .case-card h3 u,
+  .hero-card h1 u, .hero-card h2 u, .hero-card h3 u {
+    text-decoration: none !important;
+    border: 0 !important;
+    text-underline-offset: 0 !important;
+    text-decoration-thickness: auto !important;
+  }
+  .card h1::before, .card h1::after,
+  .card h2::before, .card h2::after,
+  .card h3::before, .card h3::after,
+  .case-card h1::before, .case-card h1::after,
+  .case-card h2::before, .case-card h2::after,
+  .case-card h3::before, .case-card h3::after,
+  .hero-card h1::before, .hero-card h1::after,
+  .hero-card h2::before, .hero-card h2::after,
+  .hero-card h3::before, .hero-card h3::after {
+    content: none !important;
+  }
+
+  /* Lead/strapline should not crash into title */
+  .card .lead, .case-card .lead, .hero-card .lead,
+  .card p.lead, .case-card p.lead, .hero-card p.lead {
+    margin-top: 8px !important;
+    line-height: 1.4 !important;
+  }
+
+  /* Safety: remove negative margins on heading & eyebrow within cards */
+  .card h1, .card h2, .card h3,
+  .case-card h1, .case-card h2, .case-card h3,
+  .hero-card h1, .hero-card h2, .hero-card h3,
+  .card .eyebrow, .case-card .eyebrow, .hero-card .eyebrow {
+    margin-top: max(0px, var(--heading-mt, 0)) !important;
+  }
+}
