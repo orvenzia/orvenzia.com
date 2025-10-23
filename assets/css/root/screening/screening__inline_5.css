@@ -1,0 +1,20 @@
+
+/* Question boxes -> black 50% transparent */
+#screening-page .hairline.bg-white{
+  background: rgba(0,0,0,.50) !important;
+  border-color: rgba(255,255,255,.22) !important;
+  color:#fff !important;
+}
+#screening-page .hairline.bg-white *{ color:#fff !important; }
+
+/* Inputs/selects/textarea as black glass */
+#screening-page input,
+#screening-page select,
+#screening-page textarea{
+  background: rgba(0,0,0,.50) !important;
+  color:#fff !important;
+  border:1px solid rgba(255,255,255,.28) !important;
+  border-radius:12px !important;
+}
+#screening-page input::placeholder,
+#screening-page textarea::placeholder{ color: rgba(255,255,255,.65) !important; }

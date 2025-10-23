@@ -1,0 +1,21 @@
+#result-wrap{margin-top:2rem}
+.report-card{border-radius:16px;border:1px solid rgba(255,255,255,.22);padding:18px;background:rgba(0,0,0,.25);backdrop-filter:saturate(110%) blur(6px);color:#fff}
+.report-card h3{margin:0 0 .5rem 0;font-size:1.1rem}
+.report-kpis{display:flex;gap:12px;flex-wrap:wrap;margin-top:.5rem}
+.report-kpis .kpi{border:1px solid rgba(255,255,255,.25);border-radius:10px;padding:.5rem .65rem;font-size:.9rem}
+.report-meter{height:10px;border-radius:999px;background:rgba(255,255,255,.18);overflow:hidden;margin-top:10px}
+.report-meter>span{display:block;height:100%;background:linear-gradient(90deg,#72e6a0,#55b8ff);width:0%}
+#error-banner{display:none}
+/* ensure .ecta looks good here too */
+.report-actions .ecta{
+  display:inline-flex;align-items:center;gap:.35rem;
+  padding:.55rem 1.0rem;border-radius:.7rem;
+  border:1px solid rgba(255,255,255,.95);
+  color:#fff;text-decoration:none;background:transparent
+}
+.report-actions .ecta:hover{ background:rgba(255,255,255,.08); transform:translateY(-1px) }
+.report-rec{margin-top:.65rem;opacity:.95}
+.report-rec h4{margin:0 0 .35rem 0;font-size:1rem}
+.report-rec ul{margin:.25rem 0 0 1.1rem}
+.report-rec li{list-style:disc;margin:.15rem 0}
+.report-actions{margin-top:.9rem}
