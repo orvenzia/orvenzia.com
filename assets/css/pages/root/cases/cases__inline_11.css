@@ -2,3 +2,37 @@
 /* === v32 FIX 2: Removed Back to top buttons and adjusted card spacing === */
 .cta-row { display: flex; gap: 1rem; margin-top: 0.8rem; }
 .cta-row .btn + .btn { margin-left: 0; } /* no double spacing */
+
+
+/* === ORVENZIA FIX: Keep "Start screening" black on hover/focus === */
+a[href*="screening"].btn:hover,
+a[href*="screening"].btn:focus,
+a[href*="screening"].cta:hover,
+a[href*="screening"].cta:focus,
+a[href*="screening"]:hover,
+a[href*="screening"]:focus,
+#start-screening:hover,
+#start-screening:focus,
+.start-screening:hover,
+.start-screening:focus,
+button.start-screening:hover,
+button.start-screening:focus {
+  background: #000 !important;
+  color: #fff !important;
+  border-color: #000 !important;
+  filter: none !important;
+  text-decoration: none !important;
+}
+
+a[href*="screening"].btn,
+a[href*="screening"].cta,
+a[href*="screening"],
+#start-screening,
+.start-screening,
+button.start-screening {
+  background: #000 !important;
+  color: #fff !important;
+  border: 1px solid #000 !important;
+}
+/* === END FIX === */
+
