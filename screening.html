@@ -29,7 +29,9 @@
 <!-- MOBILE-ONLY INLINE PATCH V30 — 2025-10-14 -->
 <link href="assets/css/pages/root/screening/screening__inline_19.css" rel="stylesheet"/>
 <link href="assets/css/pages/root/_btn_hover_fix.css" rel="stylesheet"/>
-</link></meta></head>
+</link></meta>
+<link rel="stylesheet" href="assets/css/mobile_header_white.css">
+</head>
 <body class="page-screening page-screening bg-paper text-ink antialiased" id="screening-page">
 <header class="sticky top-0 z-50 bg-paper/95 backdrop-blur border-b hairline"> <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between"> <a class="font-serif text-xl tracking-tightest" href="index.html">Orvenzia</a> <nav class="hidden md:flex items-center gap-8 text-sm"> <a href="services.html">Services</a> <a href="cases.html#previews">Cases</a> <a href="about.html">About</a> <a class="btn-primary" data-evt="click_screening_cta" href="screening.html">Start Screening</a> </nav> </div>
 </header>
@@ -178,7 +180,7 @@
 <button aria-label="Close" class="modal-close js-close">×</button>
 <h2 class="modal-title">Request a call</h2>
 <p class="modal-sub">Share your details and a preferred time — we’ll call you under NDA.</p>
-<form action="https://formsubmit.co/support@orvenzia.com" id="requestForm" method="POST" novalidate="" data-request-call="true"><input autocomplete="off" name="_honey" style="display:none" tabindex="-1" type="text"/><input name="form_name" type="hidden" value="screening.html — form#2"/><input name="_next" type="hidden" value="https://www.orvenzia.com/thank-you.html"/><input name="_captcha" type="hidden" value="false"/><input name="_template" type="hidden" value="table"/><input name="_subject" type="hidden" value="Orvenzia website: New submission — screening.html"/>
+<form action="https://formsubmit.co/support@orvenzia.com" id="requestForm" method="POST" novalidate=""><input autocomplete="off" name="_honey" style="display:none" tabindex="-1" type="text"/><input name="form_name" type="hidden" value="screening.html — form#2"/><input name="_next" type="hidden" value="https://www.orvenzia.com/thank-you.html"/><input name="_captcha" type="hidden" value="false"/><input name="_template" type="hidden" value="table"/><input name="_subject" type="hidden" value="Orvenzia website: New submission — screening.html"/>
 <input id="req_case" name="case" type="hidden" value=""/>
 <div class="grid2">
 <label>Full name<input autocomplete="name" id="req_name" name="name" required=""/></label>
@@ -187,14 +189,14 @@
 <label>Phone<input autocomplete="tel" id="req_phone" name="phone"/></label>
 <label>Email<input autocomplete="email" id="req_email" name="email" placeholder="name@company.com" required="" type="email"/></label><div class="grid2"><label>Preferred time — from<input id="rqPreferredFrom" name="preferred_time_from" placeholder="HH:MM" step="300" type="time"/></label><label>Preferred time — to<input id="rqPreferredTo" name="preferred_time_to" placeholder="HH:MM" step="300" type="time"/></label></div>
 </div><label>Timezone (Europe)<select id="rqTz" name="timezone"><option selected="selected" value="Europe/Copenhagen">Copenhagen (DK)</option><option value="Europe/Stockholm">Stockholm (SE)</option><option value="Europe/Oslo">Oslo (NO)</option><option value="Europe/Berlin">Berlin (DE)</option><option value="Europe/Paris">Paris (FR)</option><option value="Europe/Amsterdam">Amsterdam (NL)</option><option value="Europe/Madrid">Madrid (ES)</option><option value="Europe/Rome">Rome (IT)</option><option value="Europe/Warsaw">Warsaw (PL)</option><option value="Europe/Prague">Prague (CZ)</option><option value="Europe/Vienna">Vienna (AT)</option><option value="Europe/Zurich">Zurich (CH)</option><option value="Europe/London">London (UK)</option><option value="Europe/Dublin">Dublin (IE)</option><option value="Europe/Lisbon">Lisbon (PT)</option><option value="Europe/Athens">Athens (GR)</option><option value="Europe/Helsinki">Helsinki (FI)</option><option value="Europe/Bucharest">Bucharest (RO)</option><option value="Europe/Sofia">Sofia (BG)</option><option value="Europe/Kyiv">Kyiv (UA)</option><option value="Europe/Istanbul">Istanbul (TR)</option></select></label><div id="rqTzNote">Current offset: calculating…</div>
-<label class="chk"><input type="checkbox" id="req_consent" required> I agree to be contacted by Orvenzia regarding this call request and accept that NDA applies to anonymised materials.</label>
+<label class="chk">I agree to be contacted by Orvenzia regarding this call request and accept that NDA applies to anonymised materials.</label>
 <div class="modal-actions">
 <button class="btn btn-primary" id="req_submit" type="submit">Request call</button>
 <button class="btn js-close" type="button">Cancel</button>
 </div>
 <p class="modal-footnote">Prefer a company email for faster processing.</p>
 <div aria-live="polite" class="form-msg" id="req_msg"></div>
-<script src="assets/js/pages/root/screening/screening__inline_5.js"></script><script src="assets/js/pages/root/screening/screening__inline_6.js"></script></form></form>
+<script src="assets/js/pages/root/screening/screening__inline_5.js"></script><script src="assets/js/pages/root/screening/screening__inline_6.js"></script></form>
 </div>
 </div><script src="assets/js/pages/root/screening/screening__inline_7.js"></script> <script src="assets/js/mobile-menu.js"></script>
 <script src="assets/js/pages/root/screening/screening__inline_8.js"></script>
@@ -211,7 +213,5 @@
 <script id="mobile-menu-helper-v30" src="assets/js/pages/root/screening/screening__inline_18.js"></script>
 <script src="assets/js/mobile_fix_unified.js"></script>
 <link href="assets/css/pages/root/screening/screening__inline_20.css" rel="stylesheet"/>
-  <script src="assets/js/request_call_email.js"></script>
-  <script src="assets/js/screening_store.js"></script>
 </body>
 </html>
