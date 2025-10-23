@@ -1,64 +1,52 @@
-/* Orvenzia – Mobile header = white (no desktop impact) */
+/* --- Ensure burger icon visible on mobile --- */
 @media (max-width: 1024px) {
-  header,
-  .header,
-  .mobile-header,
-  .nav,
-  .nav-shell,
-  .nav-mobile,
-  .nav-bar,
-  .topbar {
-    background: #ffffff !important;
-    color: #0A0D0F !important;
-  }
-  header a,
-  .header a,
-  .nav a,
-  .nav li a,
-  .nav .menu a,
-  .mobile-menu a {
-    color: #0A0D0F !important;
-  }
-  header svg,
-  .header svg,
-  .nav svg,
-  .hamburger svg,
-  .menu-toggle svg {
-    color: #0A0D0F !important;
-    fill: #0A0D0F !important;
-    stroke: #0A0D0F !important;
-  }
   .hamburger,
-  .hamburger span,
-  .burger,
-  .burger-line,
   .menu-toggle,
-  .menu-toggle span {
+  .mobile-toggle,
+  .nav-toggle,
+  button[aria-label*="menu" i],
+  button[aria-controls*="menu" i] {
+    background: #ffffff !important;
+    border: 1.5px solid #0A0D0F !important;
+    border-radius: 14px !important;
+    box-shadow: none !important;
+    opacity: 1 !important;
+    mix-blend-mode: normal !important;
+  }
+  .hamburger span,
+  .hamburger .line,
+  .menu-toggle span,
+  .nav-toggle span,
+  .mobile-toggle span,
+  .hamburger::before,
+  .hamburger::after,
+  .menu-toggle::before,
+  .menu-toggle::after {
     background: #0A0D0F !important;
     border-color: #0A0D0F !important;
+    opacity: 1 !important;
   }
-  .nav-panel,
-  .menu-panel,
-  .mobile-menu,
-  .m-nav,
-  .drawer,
-  .offcanvas {
-    background: #ffffff !important;
-    color: #0A0D0F !important;
-    border-color: #E6E6E6 !important;
+  .hamburger svg,
+  .menu-toggle svg,
+  .nav-toggle svg,
+  .mobile-toggle svg {
+    stroke: #0A0D0F !important;
+    fill: none !important;
   }
-  .start-screening,
-  .btn-start-screening,
-  a[href*="screening"].header_cta,
-  .nav .btn-primary {
-    background: #0A0D0F !important;
-    color: #ffffff !important;
+  .hamburger svg path,
+  .menu-toggle svg path,
+  .nav-toggle svg path,
+  .mobile-toggle svg path {
+    stroke: #0A0D0F !important;
+    fill: none !important;
+    vector-effect: non-scaling-stroke;
+    stroke-width: 2px;
   }
-  .start-screening:hover,
-  .btn-start-screening:hover,
-  a[href*="screening"].header_cta:hover,
-  .nav .btn-primary:hover {
-    background: #0A0D0F !important;
-    color: #ffffff !important;
+  .hamburger img,
+  .menu-toggle img,
+  .nav-toggle img,
+  .mobile-toggle img {
+    filter: invert(0) brightness(0) contrast(1.2) !important;
+    opacity: 1 !important;
   }
 }
