@@ -1,11 +1,3 @@
-/* Mobile: halve size of the ESRS hero phrase */
-@media (max-width: 768px) {
-  h1.mt-3.font-serif.text-[64px].md:text-[76px].leading-[1.02].tracking-tightest {
-    font-size: clamp(16px, 4.5vw, 22px) !important;
-    line-height: 1.15 !important;
-  }
-}
-
 /* Mobile: match ESRS heading size to the C-suite line */
 @media (max-width: 768px) {
   .hero-card h1.mt-3.font-serif {
