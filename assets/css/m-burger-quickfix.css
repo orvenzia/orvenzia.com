@@ -280,3 +280,6 @@
     margin-top: max(0px, var(--heading-mt, 0)) !important;
   }
 }
+
+/* Hide skip link globally */
+.skip-link{display:none!important}
