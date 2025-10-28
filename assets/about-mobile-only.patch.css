@@ -65,3 +65,26 @@
     margin-top: 0 !important;
   }
 }
+
+
+/* === ORV: About-only mobile burger visibility + header spacing fixes (v1) === */
+@media (max-width: 860px){
+  /* Bring content closer to top, avoid double header spacing */
+  #top{ padding-top: 1rem !important; }
+
+  /* Ensure the mobile menu uses dark text on light background */
+  #mobile-menu, #m-panel{
+    background:#fff !important;
+    color:#0A0D0F !important;
+    border:1px solid #E6E6E6 !important;
+  }
+  #mobile-menu a, #m-panel a{
+    color:#0A0D0F !important;
+    -webkit-text-fill-color:#0A0D0F !important;
+  }
+  #mobile-menu a.cta, #m-panel a.cta{
+    background:#0A0D0F !important;
+    color:#fff !important;
+    border-color:#0A0D0F33 !important;
+  }
+}
