@@ -142,17 +142,6 @@ html { scroll-behavior: smooth; }
     background: transparent !important; box-shadow: none !important; backdrop-filter: none !important;
   }
 
-  /* Preserve readability on ABOUT/PRIVACY/TERMS (bg-paper body) */
-  body.bg-paper section,
-  body.bg-paper .section,
-  body.bg-paper .container,
-  body.bg-paper .paper,
-  body.bg-paper .bg-white,
-  body.bg-paper .bg-[#ffffff],
-  body.bg-paper .bg-[#FCFCFA]{
-    background: var(--paper) !important;
-  }
-
   /* Preserve CASE cards */
   body.cases .tcards .tcard,
   body.cases article,
@@ -343,34 +332,14 @@ body.theme-dark .section-wrap#top::after {
   }
 }
 
-/* 0) Neutralize global fixed-header body gap for About only */
-  body.page-about{ padding-top: 0 !important; }
-
-  /* 1) Header visuals disabled on About; keep DOM for menu */
-  .page-about header, .page-about .site-header{
-    background: transparent !important;
-    border: 0 !important;
-    box-shadow: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    height: 0 !important;
-    min-height: 0 !important;
-    overflow: visible !important;
-  }
-  /* Hide potential brand text inside header on About (we add our own titlebar) */
-  .page-about header a.font-serif{ display: none !important; }
-
-  /* 2) Burger pinned to top */
+/* 2) Burger pinned to top */
   .page-about .m-burger, .page-about .menu-toggle, .page-about .hamburger, .page-about .nav-toggle{
     position: fixed !important;
     top: 0 !important; right: 12px !important;
     z-index: 7000 !important;
   }
 
-  /* 3) New About titlebar directly under burger */
-  .page-about .about-titlebar{
-    position: sticky;
-    top: 48px;                 /* burger height */
+  /* burger height */
     z-index: 6900;
     background: #fff;
     color: #0b0b0b;
@@ -396,12 +365,27 @@ body.theme-dark .section-wrap#top::after {
   }
 }
 
-/* ===== ABOUT (mobile) — brandbar i toppen + burger på linje ===== */
-@media (max-width: 860px){
-  /* Skjul den gamle hvide titelboks i heroen */
+/* Skjul den gamle hvide titelboks i heroen */
   .page-about .site-title{ display: none !important; }
 
   /* Hvid top-bar med Orvenzia (venstre) */
+  .page-about .about-brandbar{
+    position: sticky;
+    top: 0;
+    z-index: 6900;
+    display: flex; align-items: center; justify-content: flex-start;
+    gap: 12px;
+    min-height: 56px;
+    padding: 10px 16px;
+    background: #fff;
+    border-bottom: 1px solid rgba(0,0,0,.06);
+  }
+  .page-about .about-brandbar .brandbar__logo{
+    font-weight: 700; font-size: 22px; line-height: 1.2;
+    color: #0b0b0b; text-decoration: none;
+  }
+
+  /* Burger fast, flugter med brandbarens indhold */
   .page-about .m-burger, .page-about .menu-toggle, .page-about .hamburger, .page-about .nav-toggle{
     position: fixed !important;
     top: 14px !important;    /* justér 12–16px hvis den ikke flugter 1:1 */
@@ -424,21 +408,15 @@ body.theme-dark .section-wrap#top::after {
   }
 }
 
-/* ===== ABOUT (mobile) — Orvenzia + burger i samme header med hvid baggrund ===== */
+/* ===== ABOUT (mobile) — Orvenzia + burger aligned in white header ===== */
 @media (max-width: 860px){
-  /* Skjul den gamle hvide 'title-box' i heroen */
-  .page-about .site-title{ display: none !important; }
-
-  /* Header ser ud som Services og bærer brand + burger */
   .page-about header, .page-about .site-header{
     position: sticky !important;
-    top: 0; z-index: 70;
+    top: 0; z-index: 7000;
     background: #fff !important;
     border-bottom: 1px solid rgba(0,0,0,.06);
-    margin-top: 0 !important; padding: 0 !important;
+    margin: 0 !important; padding: 0 !important;
   }
-
-  /* Indre topbar-element med brandnavn */
   .page-about header .about-topbar{
     display: flex; align-items: center; justify-content: flex-start;
     min-height: 56px; padding: 10px 16px;
@@ -447,26 +425,32 @@ body.theme-dark .section-wrap#top::after {
     font-weight: 700; font-size: 22px; line-height: 1.2;
     color: #0b0b0b; text-decoration: none;
   }
-
-  /* Burger placeres inde i header-linjen (absolut i headeren) */
-  .page-about header .m-burger, 
-  .page-about header .menu-toggle, 
-  .page-about header .hamburger, 
+  /* Burger inside header line */
+  .page-about header .m-burger,
+  .page-about header .menu-toggle,
+  .page-about header .hamburger,
   .page-about header .nav-toggle{
     position: absolute !important;
     top: 14px !important; right: 12px !important;
-    z-index: 75 !important;
+    z-index: 7050 !important;
   }
-
-  /* Fallback hvis burgeren ikke er i header-DOM (placer den visuelt samme sted) */
+  /* Fallback if burger isn't in header DOM */
   .page-about .m-burger, .page-about .menu-toggle, .page-about .hamburger, .page-about .nav-toggle{
     position: fixed !important;
     top: 14px !important; right: 12px !important;
-    z-index: 75 !important;
+    z-index: 7050 !important;
   }
-
-  /* Ingen ekstra top-luft i heroen */
+  /* Remove any duplicate branding in hero */
+  .page-about .site-title,
+  .page-about .hero .site-title,
+  .page-about .hero [class*="brandbar"],
+  .page-about .hero [class*="brand"]{
+    display: none !important;
+  }
   .page-about #top, .page-about .page-hero, .page-about .hero, .page-about .hero-wrap{
     margin-top: 0 !important; padding-top: 0 !important;
+  }
+  .page-about .hero-overlay, .page-about .header-overlay, .page-about .cover::before, .page-about .cover::after{
+    pointer-events: none !important;
   }
 }
