@@ -286,3 +286,8 @@ button.start-screening {
 }
 /* === END FIX === */
 
+
+/* === ABOUT desktop top padding preserved after inline removal === */
+@media (min-width: 861px){
+  #top{ padding-top: 5.5rem !important; }
+}
