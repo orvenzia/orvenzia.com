@@ -287,41 +287,6 @@ button.start-screening {
 /* === END FIX === */
 
 
-/* === ABOUT desktop top padding preserved after inline removal === */
-@media (min-width: 861px){
-  #top{ padding-top: 5.5rem !important; }
-}
-
-/* === Top-of-page order: burger foremost, then title (global, minimal change) === */
-:root{ --orv-z-burger: 7000; --orv-z-title: 6900; --orv-z-header: 6800; --orv-z-menu: 8000; }
-
-/* Burger button classes covered */
-.m-burger, .menu-toggle, .hamburger, .nav-toggle {
-  position: relative;
-  z-index: var(--orv-z-burger) !important;
-  pointer-events: auto;
-}
-
-/* Clickable title/link just beneath burger */
-.site-title, .site-title a, .site-brand, .brand .site-title a {
-  position: relative;
-  z-index: var(--orv-z-title) !important;
-  pointer-events: auto;
-}
-
-/* Header base below title (but above content) */
-header, .site-header {
-  position: sticky;
-  top: 0;
-  z-index: var(--orv-z-header) !important;
-}
-
-/* Mobile menu panel above everything when open */
-#mobile-menu, #m-panel, .mobile-nav, .nav--mobile, .offcanvas, .drawer {
-  z-index: var(--orv-z-menu) !important;
-  position: fixed;
-}
-
 /* Prevent hero/overlays from blocking clicks near the top */
 .hero-overlay, .header-overlay, .cover::before, .cover::after,
 body.theme-dark .section-wrap#top::before,
@@ -329,9 +294,7 @@ body.theme-dark .section-wrap#top::after {
   pointer-events: none !important;
 }
 
-/* ===== ABOUT (mobile) — minimal, edit-in-place ===== */
-@media (max-width: 860px){
-  /* Burger helt i top, klikbar og øverst i lag (kun About) */
+/* Burger helt i top, klikbar og øverst i lag (kun About) */
   .page-about .m-burger, .page-about .menu-toggle, .page-about .hamburger, .page-about .nav-toggle{
     position: fixed !important;
     top: 0 !important; right: 12px !important;
@@ -364,4 +327,34 @@ body.theme-dark .section-wrap#top::after {
   .page-about .hero-overlay, .page-about .header-overlay, .page-about .cover::before, .page-about .cover::after{
     pointer-events: none !important;
   }
+}
+
+/* ===== ABOUT (mobile) — top stack v2 (edit-in-place) ===== */
+@media (max-width: 860px){
+  .page-about .m-burger, .page-about .menu-toggle, .page-about .hamburger, .page-about .nav-toggle{
+    position: fixed !important;
+    top: 0 !important; right: 12px !important;
+    z-index: 7000 !important;
+  }
+  .page-about header, .page-about .site-header{
+    position: sticky !important;
+    top: 0; z-index: 6800 !important;
+    margin-top: 0 !important; padding-top: 56px !important; /* header reserves burger height */
+    border: 0;
+    background: rgba(0,0,0,.65);
+    -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    min-height: 56px;
+    display:flex; align-items:center;
+  }
+  .page-about .site-title{
+    position: sticky !important;
+    top: 56px !important;
+    z-index: 6900 !important;
+    background: #fff;
+    margin: 0 !important; padding: 8px 16px !important;
+    border-bottom: 1px solid rgba(0,0,0,.06);
+  }
+  .page-about .site-title a{ color:#0b0b0b !important; text-decoration:none; display:inline-block; }
+  .page-about #top{ padding-top: calc(56px + 36px + 8px) !important; } /* header + title + breathing */
+  .page-about .hero-overlay, .page-about .header-overlay, .page-about .cover::before, .page-about .cover::after{ pointer-events: none !important; }
 }
