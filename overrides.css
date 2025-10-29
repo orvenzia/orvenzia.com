@@ -343,9 +343,7 @@ body.theme-dark .section-wrap#top::after {
   }
 }
 
-/* ===== ABOUT (mobile) — final: header neutralized, burger top, titlebar under burger ===== */
-@media (max-width: 860px){
-  /* 0) Neutralize global fixed-header body gap for About only */
+/* 0) Neutralize global fixed-header body gap for About only */
   body.page-about{ padding-top: 0 !important; }
 
   /* 1) Header visuals disabled on About; keep DOM for menu */
@@ -393,6 +391,51 @@ body.theme-dark .section-wrap#top::after {
   }
 
   /* 5) Overlays cannot block taps near the top */
+  .page-about .hero-overlay, .page-about .header-overlay, .page-about .cover::before, .page-about .cover::after{
+    pointer-events: none !important;
+  }
+}
+
+/* ===== ABOUT (mobile) — brandbar i toppen + burger på linje ===== */
+@media (max-width: 860px){
+  /* Skjul den gamle hvide titelboks i heroen */
+  .page-about .site-title{ display: none !important; }
+
+  /* Hvid top-bar med Orvenzia (venstre) */
+  .page-about .about-brandbar{
+    position: sticky;
+    top: 0;
+    z-index: 6900;
+    display: flex; align-items: center; justify-content: flex-start;
+    gap: 12px;
+    min-height: 56px;
+    padding: 10px 16px;
+    background: #fff;
+    border-bottom: 1px solid rgba(0,0,0,.06);
+  }
+  .page-about .about-brandbar .brandbar__logo{
+    font-weight: 700; font-size: 22px; line-height: 1.2;
+    color: #0b0b0b; text-decoration: none;
+  }
+
+  /* Burger fast, flugter med brandbarens indhold */
+  .page-about .m-burger, .page-about .menu-toggle, .page-about .hamburger, .page-about .nav-toggle{
+    position: fixed !important;
+    top: 14px !important;    /* justér 12–16px hvis den ikke flugter 1:1 */
+    right: 12px !important;
+    z-index: 7000 !important;
+  }
+
+  /* Fjern top-luft i hero */
+  .page-about header, .page-about .site-header{
+    padding-top: 0 !important; margin-top: 0 !important; border: 0;
+    background: transparent;
+  }
+  .page-about #top, .page-about .page-hero, .page-about .hero, .page-about .hero-wrap{
+    margin-top: 0 !important; padding-top: 0 !important;
+  }
+
+  /* Overlays må ikke blokere klik på toppen */
   .page-about .hero-overlay, .page-about .header-overlay, .page-about .cover::before, .page-about .cover::after{
     pointer-events: none !important;
   }
