@@ -32,4 +32,4 @@
   }
 }
 
-@media (max-width: 860px){ #top{ padding-top:0!important; } }
+@media (max-width: 860px){ #top{ padding-top:0 !important; } }

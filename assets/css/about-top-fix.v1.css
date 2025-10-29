@@ -1,0 +1,49 @@
+/* ===== ABOUT — Top stack fix (mobile only) ===== */
+@media (max-width: 860px){
+  .page-about{ --orv-z-burger:7000; --orv-z-title:6900; --orv-z-header:6800; --orv-z-menu:8000; --burgerH:48px; }
+
+  .page-about .m-burger, .page-about .menu-toggle, .page-about .hamburger, .page-about .nav-toggle{
+    position: fixed !important;
+    top: 0 !important; right: 12px !important;
+    z-index: var(--orv-z-burger) !important;
+  }
+
+  .page-about header, .page-about .site-header{
+    position: sticky !important;
+    top: 0;
+    z-index: var(--orv-z-header) !important;
+    padding-top: var(--burgerH) !important;
+    margin-top: 0 !important;
+    border: 0;
+    background: rgba(0,0,0,.65);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
+
+  .page-about .site-title{
+    position: relative;
+    display: block;
+    z-index: var(--orv-z-title) !important;
+    background: #fff;
+    margin: 0 !important;
+    padding: 8px 16px !important;
+    border-bottom: 1px solid rgba(0,0,0,.06);
+  }
+  .page-about .site-title a{
+    color: #0b0b0b !important;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .page-about #mobile-menu, .page-about #m-panel, .page-about .mobile-nav, .page-about .nav--mobile, .page-about .offcanvas, .page-about .drawer{
+    position: fixed;
+    z-index: var(--orv-z-menu) !important;
+    background: #fff;
+  }
+  .page-about #mobile-menu a, .page-about #m-panel a, .page-about .mobile-nav a{
+    color:#0b0b0b !important; -webkit-text-fill-color:#0b0b0b !important;
+  }
+
+  .page-about .hero-overlay, .page-about .header-overlay, .page-about .cover::before, .page-about .cover::after{ pointer-events: none !important; }
+  .page-about #top, .page-about .page-hero, .page-about .hero, .page-about .hero-wrap{ margin-top: 0 !important; padding-top: 0 !important; }
+}
