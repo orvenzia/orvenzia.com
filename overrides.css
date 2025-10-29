@@ -291,3 +291,11 @@ button.start-screening {
 @media (min-width: 861px){
   #top{ padding-top: 5.5rem !important; }
 }
+
+/* === Mobile header: sticky on small screens to avoid layout gaps & overlaps === */
+@media (max-width: 860px){
+  header, .site-header{
+    position: sticky !important;
+    top: 0; left: auto; right: auto;
+  }
+}
