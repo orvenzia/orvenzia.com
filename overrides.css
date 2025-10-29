@@ -292,10 +292,39 @@ button.start-screening {
   #top{ padding-top: 5.5rem !important; }
 }
 
-/* === Mobile header: sticky on small screens to avoid layout gaps & overlaps === */
-@media (max-width: 860px){
-  header, .site-header{
-    position: sticky !important;
-    top: 0; left: auto; right: auto;
-  }
+/* === Top-of-page order: burger foremost, then title (global, minimal change) === */
+:root{ --orv-z-burger: 7000; --orv-z-title: 6900; --orv-z-header: 6800; --orv-z-menu: 8000; }
+
+/* Burger button classes covered */
+.m-burger, .menu-toggle, .hamburger, .nav-toggle {
+  position: relative;
+  z-index: var(--orv-z-burger) !important;
+  pointer-events: auto;
+}
+
+/* Clickable title/link just beneath burger */
+.site-title, .site-title a, .site-brand, .brand .site-title a {
+  position: relative;
+  z-index: var(--orv-z-title) !important;
+  pointer-events: auto;
+}
+
+/* Header base below title (but above content) */
+header, .site-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--orv-z-header) !important;
+}
+
+/* Mobile menu panel above everything when open */
+#mobile-menu, #m-panel, .mobile-nav, .nav--mobile, .offcanvas, .drawer {
+  z-index: var(--orv-z-menu) !important;
+  position: fixed;
+}
+
+/* Prevent hero/overlays from blocking clicks near the top */
+.hero-overlay, .header-overlay, .cover::before, .cover::after,
+body.theme-dark .section-wrap#top::before,
+body.theme-dark .section-wrap#top::after {
+  pointer-events: none !important;
 }
