@@ -34,3 +34,8 @@
     stroke: #000 !important;
   }
 }
+
+@media (max-width: 860px){
+  #mobile-menu, #m-panel{ background:#fff !important; color:#0b0b0b !important; }
+  #mobile-menu a, #m-panel a{ color:#0b0b0b !important; -webkit-text-fill-color:#0b0b0b !important; }
+}
