@@ -1,0 +1,26 @@
+@media (max-width: 768px) {
+  .mobile-header{
+    position:fixed;top:0;left:0;right:0;height:48px;background:#fff;
+    border-bottom:1px solid rgba(0,0,0,.06);
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 12px;z-index:1000
+  }
+  body.has-mobile-header{padding-top:48px}
+  .mobile-header .brand{
+    font-weight:700;font-size:16px;color:#000;letter-spacing:.2px;text-decoration:none
+  }
+  .mobile-header .mobile-nav-toggle{
+    appearance:none;background:transparent;border:0;width:36px;height:36px;
+    display:inline-flex;align-items:center;justify-content:center
+  }
+  .mobile-header .burger,
+  .mobile-header .burger::before,
+  .mobile-header .burger::after{
+    content:"";display:block;width:20px;height:2px;background:#000;position:relative
+  }
+  .mobile-header .burger::before{position:absolute;top:-6px}
+  .mobile-header .burger::after{position:absolute;top:6px}
+  /* Skjul about-topbar/brand-ghost på mobil */
+  .about-topbar,.m-topbar,.brand-top,.header-brand-ghost{display:none!important}
+  #mobile-menu{top:48px!important}
+}
