@@ -1,170 +1,60 @@
 /* === about.header.mobile.clean.css ===
-   Consolidated mobile header/menu rules for ABOUT only.
-   Source files merged: m.hotfix.v4.css, m-burger-quickfix.css, about-mobile-only.patch.css
-   NOTE: This file is intended to remove overlap and keep a single point of control on ABOUT.
+   About-only mobile header & menu alignment
+   - Keep burger in <body>
+   - Create body-level topbar where header content and burger are inline
+   - iOS safe area aware
 */
-
-/* Extracted from assets/css/m.hotfix.v4.css */
-@media (max-width: 860px){
-  header,.site-header{position:sticky;top:0;z-index:1000;background:rgba(255,255,255,0.9);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
-  header a[href*="screening"]{font-size:14px !important;padding:6px 12px !important;border-radius:999px !important;margin-left:auto !important;}
-  .m-burger{position:fixed;right:12px;top:10px;width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.85);color:#fff;border:1px solid rgba(255,255,255,0.2);border-radius:12px;z-index:1002;}
-  .m-burger .bar{width:22px;height:2px;background:#fff;display:block;margin:3px 0;}
-  #m-panel{position:fixed;right:12px;top:64px;width:min(88vw,340px);max-height:calc(100vh - 84px);overflow-y:auto;display:none;flex-direction:column;gap:8px;padding:12px;background:rgba(0,0,0,0.92);border:1px solid rgba(255,255,255,0.12);border-radius:14px;box-shadow:0 20px 40px rgba(0,0,0,0.45);z-index:1001;}
-  #m-panel.open{display:flex;}
-  #m-panel a{color:#fff;text-decoration:none;padding:10px 12px;border-radius:10px;display:block;}
-  #m-panel a:hover{background:rgba(255,255,255,0.06);}
-  #m-panel a.cta{font-weight:700;border:1px solid rgba(255,255,255,0.2);text-align:center;}
-  .hero h1,.hero .title{font-size:clamp(22px,6vw,34px) !important;line-height:1.12;letter-spacing:-0.01em;}
-  .hero p,.hero .subtitle{font-size:clamp(14px,3.6vw,18px) !important;line-height:1.55;opacity:.92;}
-  body.page-screening .hero h1{font-size:clamp(20px,5.2vw,30px) !important;}
-  body.page-screening .hero p{font-size:clamp(13px,3.2vw,17px) !important;}
-  input[type="text"],input[type="email"],input[type="tel"],select,textarea{width:100% !important;max-width:100% !important;font-size:16px;}
-  .form-row,.grid,.row{display:grid !important;grid-template-columns:1fr !important;gap:12px;}
-  ::placeholder{color:rgba(0,0,0,0.60) !important;opacity:1;}
-  footer .columns,footer .grid,footer .row{display:grid !important;grid-template-columns:1fr !important;gap:16px;}
-  footer p,footer a{font-size:14px;}
-}
-}
-
-
-/* Extracted from assets/css/m-burger-quickfix.css */
-/* Orvenzia — Mobile header: white + visible burger icon
-/* === Global mobile header becomes white (up to tablets) === */
-@media (max-width: 1024px) {
-}
-/* === JS-injected burger (.m-burger from assets/js/m.nav.v4.js) === */
-@media (max-width: 860px) {
-  .m-burger{
-    background: #ffffff !important;
-    border: 1.5px solid #0A0D0F !important;
-    border-radius: 12px !important;
-    box-shadow: none !important;
-    opacity: 1 !important;
-    mix-blend-mode: normal !important;
-  }
-  /* De tre linjer */
-  .m-burger .bar{
-    width: 22px !important;
-    height: 2px !important;
-    background: #0A0D0F !important; /* sorte linjer */
-    display: block !important;
-    margin: 3px 0 !important;
-    opacity: 1 !important;
+@media (max-width: 767.98px){
+  :root{
+    --safe-top: env(safe-area-inset-top, 0px);
+    --hdr-h: 56px;
+    --burger-size: 40px;
   }
 
-  /* Slideout-panel fra m.nav.v4.js */
+  /* Hide original header on mobile (we're using a body-level topbar) */
+  header{ display: none !important; }
+
+  /* Topbar that hosts brand, optional CTA, and the burger */
+  .topbar{
+    position: fixed; top: 0; left: 0; right: 0;
+    display: flex; align-items: center; gap: 12px;
+    min-height: calc(var(--hdr-h) + var(--safe-top));
+    padding: var(--safe-top) 12px 0 12px;
+    background: #FFFFFF;
+    border-bottom: 1px solid rgba(0,0,0,.06);
+    z-index: 1000;
+  }
+  .topbar .m-brand, .topbar .brand{
+    text-decoration:none; color:#0A0D0F; font-weight:600;
+    margin-right: auto;
+  }
+  .topbar .topbar-cta{
+    margin-left: 8px; font-size: 14px; line-height: 1;
+    padding: 10px 12px; border-radius: 999px;
+    border: 1px solid rgba(0,0,0,.08); color:#0A0D0F; text-decoration:none;
+  }
+
+  /* Burger participates in the row */
+  .topbar .m-burger, .topbar .mobile-nav-toggle{
+    position: static !important;
+    width: var(--burger-size); height: var(--burger-size);
+    display: inline-flex; align-items: center; justify-content: center;
+    background: transparent !important; box-shadow: none !important;
+    margin-left: 8px;
+  }
+
+  /* Panel opens under the topbar */
   #m-panel{
-    background: #ffffff !important;
-    color: #0A0D0F !important;
-    border: 1px solid #E6E6E6 !important;
-  }
-  #m-panel a{ color: #0A0D0F !important; }
-  #m-panel a.cta{ border-color: #0A0D0F33 !important; }
-}
-}
-@media (max-width: 1024px) {
-}
-@media (max-width: 860px){
-  #m-panel .start-screening {
-    background:#0A0D0F !important;
-    color:#ffffff !important;
-    -webkit-text-fill-color:#ffffff !important;
-    text-shadow:none !important;
-    opacity:1 !important;
-    mix-blend-mode:normal !important;
-  }
-  #m-panel a.cta:hover,
-  #m-panel a[href*="screening"]:hover,
-  #m-panel .btn:hover,
-  #m-panel .btn-primary:hover,
-  #m-panel .start-screening:hover {
-    background:#0A0D0F !important;
-    color:#ffffff !important;
-    -webkit-text-fill-color:#ffffff !important;
-  }
-}
-}
-@media (max-width: 540px){
-}
-@media (max-width: 600px){
-}
-
-
-/* Extracted from assets/about-mobile-only.patch.css */
-/* ABOUT — Mobile-only header + burger menu fixes */
-@media (max-width: 768px) {
-  header > *:first-child {
-    margin-top: 0 !important;
-    padding-top: 0 !important;
+    position: fixed !important;
+    top: calc(var(--safe-top) + var(--hdr-h)) !important;
+    right: 12px !important;
+    max-width: min(88vw, 340px);
+    width: auto;
+    border-radius: 14px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.45);
+    z-index: 1001;
   }
 
-  /* 2) BURGER MENU: readable content and on top */
-  .menu-drawer,
-  .mobile-menu,
-  .mobile-nav,
-  .nav-drawer,
-  .menu-panel,
-  .offcanvas,
-  nav[aria-label="Mobile"] {
-    z-index: 2000 !important;        /* above flyout/hero */
-    background: #fff !important;     /* solid background for readability */
-    color: #000 !important;          /* default text color */
-  }
-  /* ensure descendants override tailwind text-white etc. */
-  .menu-drawer *,
-  .mobile-menu *,
-  .mobile-nav *,
-  .nav-drawer *,
-  .menu-panel *,
-  .offcanvas *,
-  nav[aria-label="Mobile"] * {
-    color: #000 !important;
-  }
-  /* icons */
-  .menu-drawer svg,
-  .mobile-menu svg,
-  .mobile-nav svg,
-  .nav-drawer svg,
-  .menu-panel svg,
-  .offcanvas svg,
-  nav[aria-label="Mobile"] svg {
-    fill: #000 !important;
-    stroke: #000 !important;
-  }
-
-  /* 3) FLYOUT: keep it below the menu and nudge down slightly */
-  .hero-flyout,
-  .hero-card-flyout,
-  .cta-flyout {
-    z-index: 300 !important;
-    margin-top: 0.75rem !important;
-  }
-
-  /* 4) First hero/section shouldn't push header down */
-  .page-hero,
-  .hero,
-  .about-hero,
-  main {
-    margin-top: 0 !important;
-  }
-}
-}
-/* === ORV: About-only mobile burger visibility + header spacing fixes (v1) === */
-@media (max-width: 860px){
-  #mobile-menu, #m-panel{
-    background:#fff !important;
-    color:#0A0D0F !important;
-    border:1px solid #E6E6E6 !important;
-  }
-  #mobile-menu a, #m-panel a{
-    color:#0A0D0F !important;
-    -webkit-text-fill-color:#0A0D0F !important;
-  }
-  #mobile-menu a.cta, #m-panel a.cta{
-    background:#0A0D0F !important;
-    color:#fff !important;
-    border-color:#0A0D0F33 !important;
-  }
-}
+  /* Push page content below the topbar */
+  body{ padding-top: calc(var(--safe-top) + var(--hdr-h)) !important; }
 }
