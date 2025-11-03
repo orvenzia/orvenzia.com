@@ -1,60 +1,37 @@
-/* === about.header.mobile.clean.css ===
-   About-only mobile header & menu alignment
-   - Keep burger in <body>
-   - Create body-level topbar where header content and burger are inline
-   - iOS safe area aware
-*/
 @media (max-width: 767.98px){
   :root{
     --safe-top: env(safe-area-inset-top, 0px);
     --hdr-h: 56px;
     --burger-size: 40px;
   }
-
-  /* Hide original header on mobile (we're using a body-level topbar) */
-  header{ display: none !important; }
-
-  /* Topbar that hosts brand, optional CTA, and the burger */
-  .topbar{
-    position: fixed; top: 0; left: 0; right: 0;
-    display: flex; align-items: center; gap: 12px;
-    min-height: calc(var(--hdr-h) + var(--safe-top));
-    padding: var(--safe-top) 12px 0 12px;
-    background: #FFFFFF;
-    border-bottom: 1px solid rgba(0,0,0,.06);
-    z-index: 1000;
+  header{
+    position: sticky !important;
+    top: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    min-height: var(--hdr-h) !important;
+    padding-top: var(--safe-top) !important;
+    background: var(--paper, #FFFFFF) !important;
+    z-index: 1000 !important;
+    margin-top: 0 !important;
+    transform: none !important;
   }
-  .topbar .m-brand, .topbar .brand{
-    text-decoration:none; color:#0A0D0F; font-weight:600;
-    margin-right: auto;
-  }
-  .topbar .topbar-cta{
-    margin-left: 8px; font-size: 14px; line-height: 1;
-    padding: 10px 12px; border-radius: 999px;
-    border: 1px solid rgba(0,0,0,.08); color:#0A0D0F; text-decoration:none;
-  }
-
-  /* Burger participates in the row */
-  .topbar .m-burger, .topbar .mobile-nav-toggle{
-    position: static !important;
-    width: var(--burger-size); height: var(--burger-size);
-    display: inline-flex; align-items: center; justify-content: center;
-    background: transparent !important; box-shadow: none !important;
-    margin-left: 8px;
-  }
-
-  /* Panel opens under the topbar */
-  #m-panel{
+  body{ padding-top: calc(var(--safe-top) + var(--hdr-h)) !important; }
+  .m-burger, .mobile-nav-toggle{
     position: fixed !important;
+    right: 12px !important;
+    top: calc(var(--safe-top) + (var(--hdr-h) - var(--burger-size))/2) !important;
+    width: var(--burger-size) !important;
+    height: var(--burger-size) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    z-index: 1002 !important;
+  }
+  #m-panel{
     top: calc(var(--safe-top) + var(--hdr-h)) !important;
     right: 12px !important;
-    max-width: min(88vw, 340px);
-    width: auto;
-    border-radius: 14px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.45);
-    z-index: 1001;
   }
-
-  /* Push page content below the topbar */
-  body{ padding-top: calc(var(--safe-top) + var(--hdr-h)) !important; }
 }
