@@ -1,0 +1,7 @@
+/* Mobile: match ESRS heading size to the C-suite line */
+@media (max-width: 768px) {
+  .hero-card h1.mt-3.font-serif {
+    font-size: 34px !important;
+    line-height: 1.15 !important;
+  }
+}

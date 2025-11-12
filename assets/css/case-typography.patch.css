@@ -1,0 +1,101 @@
+/* ==========================================================
+   Case Cards – Typography Patch (safe, mobile‑first)
+   Purpose: Make text in case cards fully readable (no overlap),
+            with better line/paragraph spacing—without touching desktop design visibly.
+   How to use:
+     1) Save this file as: assets/css/case-typography.patch.css
+     2) Include it as the LAST stylesheet before </head> on pages with case cards:
+        <link rel="stylesheet" href="assets/css/case-typography.patch.css">
+   Notes:
+     - Targets common selectors: `.cases .card` and `.case-card`.
+     - Adjust numbers to taste; start with small increments.
+   ========================================================== */
+
+/* --- Base (desktop-safe defaults) --- */
+:root {
+  --case-p-size: 1rem;        /* ~16px */
+  --case-p-lh:   1.60;        /* comfortable line-height */
+  --case-p-mb:   0.80rem;     /* paragraph spacing */
+  --case-li-mb:  0.45rem;     /* list item spacing */
+  --case-h3-fs:  1.10rem;
+  --case-h4-fs:  1.00rem;
+  --case-h-lh:   1.35;
+  --case-h-mb:   0.60rem;
+  --case-list-inset: 1.10rem; /* left padding for lists */
+}
+
+/* Paragraphs inside case cards */
+.cases .card p,
+.case-card p {
+  font-size: var(--case-p-size);
+  line-height: var(--case-p-lh);
+  margin: 0 0 var(--case-p-mb);
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  white-space: normal; /* prevent nowrap overlaps */
+}
+
+/* Headings inside cards */
+.cases .card h1,
+.cases .card h2,
+.cases .card h3,
+.cases .card h4,
+.cases .card h5,
+.cases .card h6,
+.case-card h1,
+.case-card h2,
+.case-card h3,
+.case-card h4,
+.case-card h5,
+.case-card h6 {
+  line-height: var(--case-h-lh);
+  margin: 0 0 var(--case-h-mb);
+}
+
+.cases .card h3,
+.case-card h3 { font-size: var(--case-h3-fs); }
+
+.cases .card h4,
+.case-card h4 { font-size: var(--case-h4-fs); }
+
+/* Provide a little breathing room after headings before the first paragraph */
+.cases .card h3 + p,
+.cases .card h4 + p,
+.case-card h3 + p,
+.case-card h4 + p { margin-top: 0.20rem; }
+
+/* Lists inside cards */
+.cases .card ul, .cases .card ol,
+.case-card ul, .case-card ol {
+  padding-left: var(--case-list-inset);
+  margin: 0 0 var(--case-p-mb);
+}
+
+.cases .card li,
+.case-card li { margin-bottom: var(--case-li-mb); }
+
+/* Emphasis weight – keep readable but not too heavy */
+.cases .card strong,
+.case-card strong { font-weight: 600; }
+
+/* --- Mobile tweaks: slightly tighter font-size but more line-height for readability --- */
+@media (max-width: 820px) {
+  :root {
+    --case-p-size: 0.95rem;
+    --case-p-lh:   1.70;
+    --case-p-mb:   0.95rem;
+    --case-li-mb:  0.50rem;
+    --case-h3-fs:  1.00rem;
+    --case-h4-fs:  0.95rem;
+  }
+}
+
+/* --- Ultra-small phones --- */
+@media (max-width: 380px) {
+  :root {
+    --case-p-size: 0.93rem;
+    --case-p-lh:   1.72;
+  }
+}
