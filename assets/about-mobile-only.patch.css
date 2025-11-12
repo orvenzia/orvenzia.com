@@ -1,0 +1,67 @@
+/* ABOUT — Mobile-only header + burger menu fixes */
+@media (max-width: 768px) {
+  /* 1) HEADER closer to the top */
+  header,
+  header.site-header,
+  .site-header,
+  .navbar,
+  .topbar,
+  .masthead {
+    margin-top: 0 !important;
+    padding-top: 0.25rem !important; /* change to 0 for maximum tightness */
+  }
+  header > *:first-child {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  /* 2) BURGER MENU: readable content and on top */
+  .menu-drawer,
+  .mobile-menu,
+  .mobile-nav,
+  .nav-drawer,
+  .menu-panel,
+  .offcanvas,
+  nav[aria-label="Mobile"] {
+    z-index: 2000 !important;        /* above flyout/hero */
+    background: #fff !important;     /* solid background for readability */
+    color: #000 !important;          /* default text color */
+  }
+  /* ensure descendants override tailwind text-white etc. */
+  .menu-drawer *,
+  .mobile-menu *,
+  .mobile-nav *,
+  .nav-drawer *,
+  .menu-panel *,
+  .offcanvas *,
+  nav[aria-label="Mobile"] * {
+    color: #000 !important;
+  }
+  /* icons */
+  .menu-drawer svg,
+  .mobile-menu svg,
+  .mobile-nav svg,
+  .nav-drawer svg,
+  .menu-panel svg,
+  .offcanvas svg,
+  nav[aria-label="Mobile"] svg {
+    fill: #000 !important;
+    stroke: #000 !important;
+  }
+
+  /* 3) FLYOUT: keep it below the menu and nudge down slightly */
+  .hero-flyout,
+  .hero-card-flyout,
+  .cta-flyout {
+    z-index: 300 !important;
+    margin-top: 0.75rem !important;
+  }
+
+  /* 4) First hero/section shouldn't push header down */
+  .page-hero,
+  .hero,
+  .about-hero,
+  main {
+    margin-top: 0 !important;
+  }
+}
