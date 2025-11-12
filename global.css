@@ -617,9 +617,9 @@ a[href*="screening"]:focus,
 .start-screening:focus,
 button.start-screening:hover,
 button.start-screening:focus {
-  background: #000 !important;
-  color: #fff !important;
-  border-color: #000 !important;
+  background: #22C55E !important; /* green */
+  color: #000 !important; /* black text */
+  border-color: #22C55E !important;
   filter: none !important;
   text-decoration: none !important;
 }
@@ -630,9 +630,36 @@ a[href*="screening"],
 #start-screening,
 .start-screening,
 button.start-screening {
-  background: #000 !important;
-  color: #fff !important;
-  border: 1px solid #000 !important;
+  background: #22C55E !important; /* green */
+  color: #000 !important; /* black text */
+  border: 1px solid #22C55E !important;
 }
 /* === END FIX === */
 
+
+/* === BRAND LOGO IN HEADER + FOOTER ===================================== */
+/* Inject the logo before the brand text without changing HTML */
+header .max-w-7xl > a.font-serif[href="index.html"]{
+  display: inline-flex; align-items: center; gap: .5rem;
+}
+header .max-w-7xl > a.font-serif[href="index.html"]::before{
+  content: "";
+  width: 22px; height: 22px;
+  background: url("./assets/logo-orvenzia.svg") no-repeat center/contain;
+  display: inline-block;
+}
+
+#footer .font-serif.text-2xl{
+  display: inline-flex; align-items: center; gap: .6rem;
+}
+#footer .font-serif.text-2xl::before{
+  content: "";
+  width: 26px; height: 26px;
+  background: url("./assets/logo-orvenzia.svg") no-repeat center/contain;
+  display: inline-block;
+}
+
+@media (max-width: 640px){
+  header .max-w-7xl > a.font-serif[href="index.html"]::before{ width: 20px; height: 20px; }
+  #footer .font-serif.text-2xl::before{ width: 24px; height: 24px; }
+}

@@ -34,7 +34,12 @@
 
 <link rel="stylesheet" href="assets/css/mobile_casecard_fix.css">
 
-<link rel="stylesheet" href="/assets/css/mobile-menu-black.patch.css">
+<link rel="stylesheet" href="/orvenzia.com-main/assets/css/mobile-menu-black.patch.css">
+
+  <!-- v4-seo -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Buyer‑ready ESG clarity in 30–60 days. ESRS‑compatible deliverables, action plans and execution support.">
+  <link rel="canonical" href="https://www.orvenzia.com/orvenzia.com-main/screening.html">
 </head>
 <body class="page-screening page-screening bg-paper text-ink antialiased" id="screening-page">
 <header class="sticky top-0 z-50 bg-paper/95 backdrop-blur border-b hairline"> <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between"> <a class="font-serif text-xl tracking-tightest" href="index.html">Orvenzia</a> <nav class="hidden md:flex items-center gap-8 text-sm"> <a href="services.html">Services</a> <a href="cases.html#previews">Cases</a> <a href="about.html">About</a> <a class="btn-primary" data-evt="click_screening_cta" href="screening.html">Start Screening</a> </nav> </div>
@@ -54,6 +59,16 @@
 <input class="mt-1 w-full rounded-xl border hairline bg-white/8 text-white/95 placeholder-white/60 p-3 focus:outline-none focus:ring-2 focus:ring-champagne" id="phone" name="phone" pattern="\+?[0-9\s\-()]{6,20}" placeholder="+45 20 00 00 00" required="" type="tel"/>
 <small class="text-xs text-white/70">Use international format, e.g., +45 20 00 00 00</small>
 </label>
+
+<!-- Added company size & footprint fields -->
+<div class="grid2">
+  <label class="block text-sm mb-3"><span class="font-medium">Employees (FTE)</span>
+    <input class="mt-1 w-full rounded-xl border hairline bg-white/80 px-3 py-2" id="employees_fte" name="employees_fte" type="number" min="0" step="1" placeholder="e.g., 120" />
+  </label>
+  <label class="block text-sm mb-3"><span class="font-medium">Sites</span>
+    <input class="mt-1 w-full rounded-xl border hairline bg-white/80 px-3 py-2" id="sites" name="sites" type="number" min="0" step="1" placeholder="e.g., 3" />
+  </label>
+</div>
 <div class="rounded-2xl border hairline p-5 bg-white">
 <div class="text-sm font-medium">1. Does the company have an environmental and climate policy?</div>
 <div class="text-xs text-ash mt-1">(Covers energy, CO₂, water and waste – documented and updated)</div>
