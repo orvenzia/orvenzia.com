@@ -1,8 +1,0 @@
-/* CASE CARDS – body text top offset (MOBILE ONLY) */
-@media (max-width: 768px) {
-/* CASE CARDS – body text top offset (safe override) */
-article.ecard .wrap { padding-top: 4.5rem !important; }
-article.ecard .ehead { margin-bottom: 0.8rem !important; row-gap: 0.3rem !important; padding-bottom: 0 !important; }
-ul.ehighlights { margin-top: 0 !important; }
-
-}
