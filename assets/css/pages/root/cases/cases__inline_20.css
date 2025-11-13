@@ -1,0 +1,55 @@
+
+/* === FINAL FIX: Cases intro — white text, transparent overlay, left aligned & aligned to cards === */
+.section-wrap.intro.hero {
+  text-align: left !important;
+  max-width: 72rem !important;
+  margin: 0 auto !important;
+  padding-left: 1.25rem !important;
+  padding-right: 1.25rem !important;
+  color: #fff !important;
+}
+.section-wrap.intro.hero .kicker,
+.section-wrap.intro.hero .display,
+.section-wrap.intro.hero .lede,
+.section-wrap.intro.hero p,
+.section-wrap.intro.hero .meta {
+  color: #fff !important;
+}
+/* Remove the dark gradient overlay box */
+.section-wrap.intro.hero::before {
+  background: transparent !important;
+}
+
+
+/* === ORVENZIA FIX: Keep "Start screening" black on hover/focus === */
+a[href*="screening"].btn:hover,
+a[href*="screening"].btn:focus,
+a[href*="screening"].cta:hover,
+a[href*="screening"].cta:focus,
+a[href*="screening"]:hover,
+a[href*="screening"]:focus,
+#start-screening:hover,
+#start-screening:focus,
+.start-screening:hover,
+.start-screening:focus,
+button.start-screening:hover,
+button.start-screening:focus {
+  background: #000 !important;
+  color: #fff !important;
+  border-color: #000 !important;
+  filter: none !important;
+  text-decoration: none !important;
+}
+
+a[href*="screening"].btn,
+a[href*="screening"].cta,
+a[href*="screening"],
+#start-screening,
+.start-screening,
+button.start-screening {
+  background: #000 !important;
+  color: #fff !important;
+  border: 1px solid #000 !important;
+}
+/* === END FIX === */
+

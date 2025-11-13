@@ -1,0 +1,62 @@
+
+/* === v32 FIX 7: Intro centered with cards + Services font style === */
+.section-wrap.intro.hero {
+  text-align: center;
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.section-wrap.intro.hero .display {
+  font-family: var(--font-serif, "Newsreader", ui-serif, Georgia, "Times New Roman", serif);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  font-size: 3.4rem;
+  line-height: 1.1;
+}
+.section-wrap.intro.hero .lede {
+  font-family: var(--font-body, "Inter","Helvetica Neue","Arial",sans-serif);
+  font-size: 1.1rem;
+  color: rgba(11,11,11,.85);
+  margin-top: 0.8rem;
+}
+.section-wrap.intro.hero .kicker {
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: rgba(11,11,11,.65);
+  margin-bottom: 0.4rem;
+}
+
+
+/* === ORVENZIA FIX: Keep "Start screening" black on hover/focus === */
+a[href*="screening"].btn:hover,
+a[href*="screening"].btn:focus,
+a[href*="screening"].cta:hover,
+a[href*="screening"].cta:focus,
+a[href*="screening"]:hover,
+a[href*="screening"]:focus,
+#start-screening:hover,
+#start-screening:focus,
+.start-screening:hover,
+.start-screening:focus,
+button.start-screening:hover,
+button.start-screening:focus {
+  background: #000 !important;
+  color: #fff !important;
+  border-color: #000 !important;
+  filter: none !important;
+  text-decoration: none !important;
+}
+
+a[href*="screening"].btn,
+a[href*="screening"].cta,
+a[href*="screening"],
+#start-screening,
+.start-screening,
+button.start-screening {
+  background: #000 !important;
+  color: #fff !important;
+  border: 1px solid #000 !important;
+}
+/* === END FIX === */
+

@@ -1,0 +1,73 @@
+
+/* FINAL — Four case cards: 100% transparent bg, white border & white text (keep modal opaque) */
+.section.ecards article.ecard{
+  background: transparent !important;
+  border: 1px solid rgba(255,255,255,0.9) !important;
+  color: #fff !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.10);
+}
+/* make all text inside cards white */
+.section.ecards article.ecard .ehead,
+.section.ecards article.ecard .etitle,
+.section.ecards article.ecard .emeta,
+.section.ecards article.ecard .eline,
+.section.ecards article.ecard .edelivered,
+.section.ecards article.ecard .equote,
+.section.ecards article.ecard .ehighlights,
+.section.ecards article.ecard .ehighlights li,
+.section.ecards article.ecard p,
+.section.ecards article.ecard li,
+.section.ecards article.ecard small,
+.section.ecards article.ecard strong,
+.section.ecards article.ecard em{ color: #fff !important; }
+/* ensure link text inherits white */
+.section.ecards article.ecard a{ color: inherit !important; }
+/* CTA look: white text & border, transparent bg */
+.section.ecards article.ecard .ecard-footer .ecta{
+  color: #fff !important;
+  border: 1px solid rgba(255,255,255,0.9) !important;
+  padding: 0.55rem 1.0rem;
+  border-radius: 0.7rem;
+  background: transparent !important;
+  display: inline-flex; align-items: center; gap: .35rem;
+}
+.section.ecards article.ecard .ecard-footer .ecta:hover{
+  background: rgba(255,255,255,0.08) !important;
+  transform: translateY(-1px);
+}
+/* keep modal cards and other white panels opaque */
+.modal-card{ background:#fff; color:#111; }
+
+
+/* === ORVENZIA FIX: Keep "Start screening" black on hover/focus === */
+a[href*="screening"].btn:hover,
+a[href*="screening"].btn:focus,
+a[href*="screening"].cta:hover,
+a[href*="screening"].cta:focus,
+a[href*="screening"]:hover,
+a[href*="screening"]:focus,
+#start-screening:hover,
+#start-screening:focus,
+.start-screening:hover,
+.start-screening:focus,
+button.start-screening:hover,
+button.start-screening:focus {
+  background: #000 !important;
+  color: #fff !important;
+  border-color: #000 !important;
+  filter: none !important;
+  text-decoration: none !important;
+}
+
+a[href*="screening"].btn,
+a[href*="screening"].cta,
+a[href*="screening"],
+#start-screening,
+.start-screening,
+button.start-screening {
+  background: #000 !important;
+  color: #fff !important;
+  border: 1px solid #000 !important;
+}
+/* === END FIX === */
+

@@ -1,0 +1,54 @@
+
+/* v24 compact executive cards */
+.tcards .grid{ display:grid; grid-template-columns:1fr; gap:.9rem }
+@media (min-width: 980px){ .tcards .grid{ grid-template-columns:1fr 1fr } }
+
+.tcard.compact{
+  padding:.9rem 1rem 1rem 1rem;
+  border-radius:14px;
+  box-shadow:0 14px 34px rgba(0,0,0,.06);
+}
+.tcard.compact .ttitle{ font-size:1.08rem }
+.tcard.compact .tone{ font-size:.96rem; margin:.45rem 0 0 0 }
+.tcard.compact .tmeta{ font-size:.82rem }
+.tcard.compact .tfacts{ margin-top:.5rem }
+.tcard.compact .fact{ font-size:.7rem; padding:.18rem .5rem }
+.tcard.compact .tactions{ margin:.55rem 0 0 1rem }
+.tcard.compact .tactions li{ margin:.18rem 0 }
+.tcard.compact .toutcome{ margin:.5rem 0 0 0; font-size:.94rem }
+.tcard.compact .tquote{ margin:.45rem 0 0 0; font-size:.92rem }
+.tcard.compact .tcta{ margin-top:.75rem }
+
+
+/* === ORVENZIA FIX: Keep "Start screening" black on hover/focus === */
+a[href*="screening"].btn:hover,
+a[href*="screening"].btn:focus,
+a[href*="screening"].cta:hover,
+a[href*="screening"].cta:focus,
+a[href*="screening"]:hover,
+a[href*="screening"]:focus,
+#start-screening:hover,
+#start-screening:focus,
+.start-screening:hover,
+.start-screening:focus,
+button.start-screening:hover,
+button.start-screening:focus {
+  background: #000 !important;
+  color: #fff !important;
+  border-color: #000 !important;
+  filter: none !important;
+  text-decoration: none !important;
+}
+
+a[href*="screening"].btn,
+a[href*="screening"].cta,
+a[href*="screening"],
+#start-screening,
+.start-screening,
+button.start-screening {
+  background: #000 !important;
+  color: #fff !important;
+  border: 1px solid #000 !important;
+}
+/* === END FIX === */
+

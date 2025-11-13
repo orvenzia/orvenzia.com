@@ -1,0 +1,156 @@
+
+/* Home — make white cards 50% transparent */
+#home-page .hairline.bg-white,
+#home-page .hairline.bg-paper,
+#home-page article.rounded-2xl.border.hairline.bg-paper,
+#home-page .hero-card.rounded-2xl.shadow-lg.p-8.max-w-3xl {
+  background: rgba(255,255,255,.50) !important;
+  color: #111 !important;
+  border-color: rgba(255,255,255,.55) !important;
+  backdrop-filter: saturate(120%) blur(3px);
+  -webkit-backdrop-filter: saturate(120%) blur(3px);
+}
+
+/* Keep text inside readable (black) */
+#home-page .hairline.bg-white *,
+#home-page .hairline.bg-paper *,
+#home-page article.rounded-2xl.border.hairline.bg-paper *,
+#home-page .hero-card.rounded-2xl.shadow-lg.p-8.max-w-3xl * {
+  color: #111 !important;
+}
+
+/* Lift CTA buttons visibility on semi-white */
+#home-page .hairline.bg-white .btn,
+#home-page .hairline.bg-paper .btn,
+#home-page article.rounded-2xl.border.hairline.bg-paper .btn {
+  background: #111 !important;
+  color:#fff !important;
+  border-color:#111 !important;
+}
+#home-page .hairline.bg-white .btn:hover,
+#home-page .hairline.bg-paper .btn:hover,
+#home-page article.rounded-2xl.border.hairline.bg-paper .btn:hover {
+  background: #222 !important;
+}
+
+
+/* Force CTA text white inside hero/home cards (solid & outline) */
+#home-page .hairline.bg-white .btn,
+#home-page .hairline.bg-paper .btn,
+#home-page .hero-card .btn,
+#home-page .hairline.bg-white .btn-ghost,
+#home-page .hairline.bg-paper .btn-ghost,
+#home-page .hero-card .btn-ghost,
+#home-page .hairline.bg-white .cta,
+#home-page .hairline.bg-paper .cta,
+#home-page .hero-card .cta,
+#home-page .hairline.bg-white .cta-outline,
+#home-page .hairline.bg-paper .cta-outline,
+#home-page .hero-card .cta-outline,
+#home-page .hairline.bg-white a.button,
+#home-page .hairline.bg-paper a.button,
+#home-page .hero-card a.button {
+  color:#fff !important;
+  border-color: rgba(255,255,255,.65) !important;
+}
+#home-page .hairline.bg-white .btn-ghost,
+#home-page .hairline.bg-paper .btn-ghost,
+#home-page .hero-card .btn-ghost,
+#home-page .hairline.bg-white .cta-outline,
+#home-page .hairline.bg-paper .cta-outline,
+#home-page .hero-card .cta-outline {
+  background: transparent !important;
+}
+#home-page .hairline.bg-white .btn-ghost:hover,
+#home-page .hairline.bg-paper .btn-ghost:hover,
+#home-page .hero-card .btn-ghost:hover,
+#home-page .hairline.bg-white .cta-outline:hover,
+#home-page .hairline.bg-paper .cta-outline:hover,
+#home-page .hero-card .cta-outline:hover {
+  background: rgba(255,255,255,.12) !important;
+}
+
+
+/* Start Screening primary button: green with black text */
+#home-page a.btn-primary[href*="screening"] { color:#000 !important; }
+
+/* Restore ghost/outline buttons to dark text inside semi-white cards */
+#home-page .btn-ghost,
+#home-page .cta-outline,
+#home-page .case-button.btn-ghost { 
+  color:#111 !important; 
+  border-color:#111 !important; 
+  background: transparent !important;
+}
+
+/* Second CTA: See anonymised action cards (solid) → 50% white with black text */
+#home-page a.case-button.case-solid{
+  background: rgba(255,255,255,.50) !important;
+  color: #000 !important;
+  border-color: rgba(255,255,255,.55) !important;
+}
+
+
+/* Start Free Screening: white text and top priority */
+#home-page a[href*="screening"].btn-primary,
+#home-page a[href*="screening"].btn,
+#home-page .hero-card a[href*="screening"] {
+  color:#fff !important;
+  position: relative !important;
+  z-index: 5 !important;        /* sit on top of card overlays */
+}
+
+/* Ensure it appears first in the CTA row on wrap (mobile) */
+#home-page .hero-card a[href*="screening"] { order:-1 !important; }
+
+
+/* --- Start Free Screening: green with black text --- */
+#home-page .hero-card a.btn-primary[href*="screening"]{
+  color:#000 !important;
+  background:#22C55E !important;
+  border-color:#22C55E !important;
+  box-shadow: 0 6px 18px rgba(0,0,0,.12) !important;
+}
+#home-page .hero-card a.btn-primary[href*="screening"] *{
+  color:#000 !important;
+}
+#home-page .hero-card a.btn-primary[href*="screening"]:hover,
+#home-page .hero-card a.btn-primary[href*="screening"]:focus{
+  background:#22C55E !important;
+  border-color:#22C55E !important;
+}
+/* Keep it first/left on wrap */
+#home-page .hero-card a.btn-primary[href*="screening"]{ order:-1 !important; z-index:5 !important; position:relative !important; }
+
+
+/* === ORVENZIA FIX: Keep "Start screening" black on hover/focus === */
+a[href*="screening"].btn:hover,
+a[href*="screening"].btn:focus,
+a[href*="screening"].cta:hover,
+a[href*="screening"].cta:focus,
+a[href*="screening"]:hover,
+a[href*="screening"]:focus,
+#start-screening:hover,
+#start-screening:focus,
+.start-screening:hover,
+.start-screening:focus,
+button.start-screening:hover,
+button.start-screening:focus {
+  background: #22C55E !important;
+  color: #000 !important;
+  border-color: #22C55E !important;
+  filter: none !important;
+  text-decoration: none !important;
+}
+
+a[href*="screening"].btn,
+a[href*="screening"].cta,
+a[href*="screening"],
+#start-screening,
+.start-screening,
+button.start-screening {
+  background: #22C55E !important;
+  color: #000 !important;
+  border: 1px solid #22C55E !important;
+}
+/* === END FIX === */

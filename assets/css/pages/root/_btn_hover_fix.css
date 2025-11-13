@@ -1,0 +1,40 @@
+
+/* ORV FIX: keep primary button consistent; Start Screening handled explicitly below */
+.btn-primary:hover,
+a.btn-primary:hover,
+button.btn-primary:hover {
+  box-shadow: var(--glow, 0 10px 40px rgba(214,199,161,.35));
+}
+
+
+/* === ORVENZIA FIX: Keep "Start screening" black on hover/focus === */
+a[href*="screening"].btn:hover,
+a[href*="screening"].btn:focus,
+a[href*="screening"].cta:hover,
+a[href*="screening"].cta:focus,
+a[href*="screening"]:hover,
+a[href*="screening"]:focus,
+#start-screening:hover,
+#start-screening:focus,
+.start-screening:hover,
+.start-screening:focus,
+button.start-screening:hover,
+button.start-screening:focus {
+  background: #22C55E !important; /* green */
+  color: #000 !important; /* black text */
+  border-color: #22C55E !important;
+  filter: none !important;
+  text-decoration: none !important;
+}
+
+a[href*="screening"].btn,
+a[href*="screening"].cta,
+a[href*="screening"],
+#start-screening,
+.start-screening,
+button.start-screening {
+  background: #22C55E !important; /* green */
+  color: #000 !important; /* black text */
+  border: 1px solid #22C55E !important;
+}
+/* === END FIX === */

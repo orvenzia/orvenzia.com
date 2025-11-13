@@ -1,0 +1,52 @@
+
+/* Remove the inner white lines on the four case cards (keep outer card border) */
+.section.ecards article.ecard :is(.ehead,.emeta,.etitle,.kicker,.meta,.label,.badge,.chip,.pill){
+  border: none !important;
+  outline: none !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  display: inline !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+/* Remove any <hr> style inside cards just in case */
+.section.ecards article.ecard hr{
+  border: 0 !important;
+  height: 0 !important;
+  background: transparent !important;
+  margin: 0 !important;
+}
+
+
+/* === ORVENZIA FIX: Keep "Start screening" black on hover/focus === */
+a[href*="screening"].btn:hover,
+a[href*="screening"].btn:focus,
+a[href*="screening"].cta:hover,
+a[href*="screening"].cta:focus,
+a[href*="screening"]:hover,
+a[href*="screening"]:focus,
+#start-screening:hover,
+#start-screening:focus,
+.start-screening:hover,
+.start-screening:focus,
+button.start-screening:hover,
+button.start-screening:focus {
+  background: #000 !important;
+  color: #fff !important;
+  border-color: #000 !important;
+  filter: none !important;
+  text-decoration: none !important;
+}
+
+a[href*="screening"].btn,
+a[href*="screening"].cta,
+a[href*="screening"],
+#start-screening,
+.start-screening,
+button.start-screening {
+  background: #000 !important;
+  color: #fff !important;
+  border: 1px solid #000 !important;
+}
+/* === END FIX === */
+
