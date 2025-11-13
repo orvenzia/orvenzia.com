@@ -1,0 +1,62 @@
+
+/* === Global ALL-WHITE TEXT OVERRIDE === */
+:root { --ink: #fff; --ink-dim: rgba(255,255,255,.92); --hair: rgba(255,255,255,.28); }
+html, body, * { color: #fff !important; }
+.rule { border-top-color: var(--hair) !important; }
+.hair { border-color: var(--hair) !important; }
+
+/* Dots and small UI */
+.svc-dot { background: #fff !important; }
+.badges span { border-color: rgba(255,255,255,.45) !important; color: #fff !important; }
+.link-arrow { color: #fff !important; }
+a { color: #fff !important; text-decoration: none; }
+a:hover { opacity: .9; }
+
+/* Buttons: white text + transparent bg + white border */
+.btn-primary, .btn-ghost {
+  color: #fff !important;
+  background: transparent !important;
+  border: 1px solid rgba(255,255,255,.65) !important;
+  border-radius: .75rem !important;
+}
+.btn-primary:hover, .btn-ghost:hover {
+  background: rgba(255,255,255,.10) !important;
+  border-color: rgba(255,255,255,.9) !important;
+}
+
+/* Hover meta strip */
+.svc-meta { color: #fff !important; border-color: rgba(255,255,255,.25) !important; background: rgba(255,255,255,.08) !important; }
+
+
+/* === ORVENZIA FIX: Keep "Start screening" black on hover/focus === */
+a[href*="screening"].btn:hover,
+a[href*="screening"].btn:focus,
+a[href*="screening"].cta:hover,
+a[href*="screening"].cta:focus,
+a[href*="screening"]:hover,
+a[href*="screening"]:focus,
+#start-screening:hover,
+#start-screening:focus,
+.start-screening:hover,
+.start-screening:focus,
+button.start-screening:hover,
+button.start-screening:focus {
+  background: #000 !important;
+  color: #fff !important;
+  border-color: #000 !important;
+  filter: none !important;
+  text-decoration: none !important;
+}
+
+a[href*="screening"].btn,
+a[href*="screening"].cta,
+a[href*="screening"],
+#start-screening,
+.start-screening,
+button.start-screening {
+  background: #000 !important;
+  color: #fff !important;
+  border: 1px solid #000 !important;
+}
+/* === END FIX === */
+

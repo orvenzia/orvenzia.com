@@ -1,0 +1,50 @@
+
+/* Hard precedence: loaded at end of body */
+@media (max-width: 860px){
+  header nav, header .desktop-nav, header .menu, header .menu-list, header .nav-links, header .header-links{ display:none !important; }
+  .mobile-nav-toggle, .m-burger{ display:inline-flex !important; }
+}
+
+
+/* === ORVENZIA FIX: Keep "Start screening" black on hover/focus === */
+a[href*="screening"].btn:hover,
+a[href*="screening"].btn:focus,
+a[href*="screening"].cta:hover,
+a[href*="screening"].cta:focus,
+a[href*="screening"]:hover,
+a[href*="screening"]:focus,
+#start-screening:hover,
+#start-screening:focus,
+.start-screening:hover,
+.start-screening:focus,
+button.start-screening:hover,
+button.start-screening:focus {
+  background: #22C55E !important;
+  color: #000 !important;
+  border-color: #22C55E !important;
+  filter: none !important;
+  text-decoration: none !important;
+}
+
+a[href*="screening"].btn,
+a[href*="screening"].cta,
+a[href*="screening"],
+#start-screening,
+.start-screening,
+button.start-screening {
+  background: #22C55E !important;
+  color: #000 !important;
+  border: 1px solid #22C55E !important;
+}
+/* Explicit overrides for Services page and header CTA */
+#services-page a.btn-primary[href*="screening"],
+#services-page a.btn-primary[href*="screening"]:hover,
+#services-page a.btn-primary[href*="screening"]:focus,
+header a.btn-primary[href*="screening"],
+header a.btn-primary[href*="screening"]:hover,
+header a.btn-primary[href*="screening"]:focus {
+  background: #22C55E !important;
+  color: #000 !important;
+  border-color: #22C55E !important;
+}
+/* === END FIX === */
