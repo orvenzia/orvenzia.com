@@ -1,0 +1,62 @@
+
+/* One true modal layer — above everything, no duplicate stacking */
+#requestModal{position:fixed;inset:0;display:none;z-index:2147483000}
+#requestModal[aria-hidden="false"]{display:block}
+#requestModal .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.60)}
+#requestModal .modal-card{
+  position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:min(720px,92%);max-height:85vh;overflow:auto;background:#fff;
+  border-radius:16px;padding:24px;box-shadow:0 30px 120px rgba(0,0,0,.5);z-index:2147483001
+}
+html.no-scroll, body.modal-open{overflow:hidden!important}
+
+/* form layout from cases */
+#requestModal .grid2{display:grid;gap:14px;grid-template-columns:1fr}
+@media (min-width: 760px){#requestModal .grid2{grid-template-columns:1fr 1fr}}
+#requestModal label{display:block;font-weight:500;margin:0 0 6px 0;line-height:1.2}
+#requestModal label>input{display:block;width:100%;margin-top:8px;border:1px solid rgba(0,0,0,.15);border-radius:12px;padding:12px 14px;background:#fff}
+#requestModal .chk{display:flex;gap:10px;align-items:flex-start;margin:6px 0 10px 0;font-weight:400}
+#requestModal .modal-actions{display:flex;gap:12px;align-items:center;margin-top:4px}
+#requestModal .btn{padding:.7rem 1.1rem;border-radius:.9rem;border:1px solid rgba(0,0,0,.14);background:#f2f2f2}
+#requestModal .btn.btn-primary{background:#111;color:#fff;border-color:#111}
+#requestModal .modal-close{position:absolute;right:12px;top:12px;border:0;background:#eee;border-radius:10px;width:34px;height:34px;line-height:34px;text-align:center;font-size:18px}
+#requestModal .modal-title{margin:0 0 8px 0;font-size:28px}
+#requestModal .modal-sub{margin:0 0 14px 0;color:rgba(0,0,0,.72)}
+#requestModal .modal-footnote{margin-top:8px;color:rgba(0,0,0,.6)}
+
+#requestModal label>select{display:block;width:100%;margin-top:8px;border:1px solid rgba(0,0,0,.15);border-radius:12px;padding:12px 14px;background:#fff}
+#rqTzNote{margin-top:6px;color:rgba(0,0,0,.6);font-size:.9rem}
+
+
+/* === ORVENZIA FIX: Keep "Start screening" black on hover/focus === */
+a[href*="screening"].btn:hover,
+a[href*="screening"].btn:focus,
+a[href*="screening"].cta:hover,
+a[href*="screening"].cta:focus,
+a[href*="screening"]:hover,
+a[href*="screening"]:focus,
+#start-screening:hover,
+#start-screening:focus,
+.start-screening:hover,
+.start-screening:focus,
+button.start-screening:hover,
+button.start-screening:focus {
+  background: #000 !important;
+  color: #fff !important;
+  border-color: #000 !important;
+  filter: none !important;
+  text-decoration: none !important;
+}
+
+a[href*="screening"].btn,
+a[href*="screening"].cta,
+a[href*="screening"],
+#start-screening,
+.start-screening,
+button.start-screening {
+  background: #000 !important;
+  color: #fff !important;
+  border: 1px solid #000 !important;
+}
+/* === END FIX === */
+
