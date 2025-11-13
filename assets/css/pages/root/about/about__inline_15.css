@@ -1,0 +1,67 @@
+
+/* === DESKTOP V27: compact, consistent header on >=768px, mobile unchanged === */
+@media (min-width: 768px){
+  /* No mobile body offset on desktop */
+  body{ padding-top: 0 !important; }
+
+  /* Hide the mobile-only injected row if present (defensive) */
+  header .m-header-row{ display: none !important; }
+
+  /* Compact vertical rhythm for header */
+  header{
+    position: sticky; top: 0;
+    background: var(--paper, #FCFCFA);
+    border-bottom: 1px solid rgba(0,0,0,.06);
+    z-index: 1000;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    min-height: auto !important;
+    height: auto !important;
+  }
+  /* Normalize inner containers commonly used */
+  header .max-w-7xl, header .container, header .row, header .wrap{
+    display: flex; align-items: center;
+    padding-top: 12px !important;
+    padding-bottom: 12px !important;
+    min-height: auto !important; height: auto !important; margin-top: 0 !important; margin-bottom: 0 !important;
+  }
+  /* Keep nav tight */
+  header nav, header .desktop-nav, header .menu, header .menu-list{
+    margin-top: 0 !important; margin-bottom: 0 !important;
+  }
+  header a, header button{ line-height: 1.2 !important; }
+}
+
+
+/* === ORVENZIA FIX: Keep "Start screening" black on hover/focus === */
+a[href*="screening"].btn:hover,
+a[href*="screening"].btn:focus,
+a[href*="screening"].cta:hover,
+a[href*="screening"].cta:focus,
+a[href*="screening"]:hover,
+a[href*="screening"]:focus,
+#start-screening:hover,
+#start-screening:focus,
+.start-screening:hover,
+.start-screening:focus,
+button.start-screening:hover,
+button.start-screening:focus {
+  background: #000 !important;
+  color: #fff !important;
+  border-color: #000 !important;
+  filter: none !important;
+  text-decoration: none !important;
+}
+
+a[href*="screening"].btn,
+a[href*="screening"].cta,
+a[href*="screening"],
+#start-screening,
+.start-screening,
+button.start-screening {
+  background: #000 !important;
+  color: #fff !important;
+  border: 1px solid #000 !important;
+}
+/* === END FIX === */
+
