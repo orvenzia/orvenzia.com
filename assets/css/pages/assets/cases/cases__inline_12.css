@@ -1,0 +1,77 @@
+
+/* === MOBILE V26: consistent 56px header + visible footer === */
+@media (max-width: 767.98px){
+  :root{ --safe-top: env(safe-area-inset-top, 0px); }
+
+  /* Force exactly 56px header row everywhere */
+  header{ position: fixed !important; top: 0; left: 0; right: 0;
+          background: var(--paper,#FCFCFA) !important; border-bottom:1px solid rgba(0,0,0,.08) !important;
+          z-index: 10000 !important; }
+  header .m-header-row{
+    display:flex !important; align-items:center !important; justify-content:space-between !important;
+    height: calc(56px + var(--safe-top)) !important;
+    padding: calc(var(--safe-top)) 16px 0 16px !important;
+    gap: 10px !important; max-width: 72rem !important; margin: 0 auto !important;
+  }
+  /* Remove any stray extra top padding from older patches */
+  body{ padding-top: calc(56px + var(--safe-top)) !important; }
+
+  /* Keep desktop header content hidden on mobile to avoid double rows */
+  header .max-w-7xl, header nav, header .desktop-nav, header .menu, header .menu-list, header .nav-links, header .header-links{
+    display:none !important;
+  }
+
+  /* Footer (visible on mobile, light background and ink text) */
+  footer{
+    display:block !important;
+    background: var(--paper,#FCFCFA) !important;
+    color: var(--ink,#0B0B0B) !important; -webkit-text-fill-color: var(--ink,#0B0B0B) !important;
+    border-top: 1px solid rgba(0,0,0,.08) !important;
+    padding: 16px 16px 28px !important;
+  }
+  footer a, footer p, footer li, footer small, footer strong, footer span{
+    color: var(--ink,#0B0B0B) !important; -webkit-text-fill-color: var(--ink,#0B0B0B) !important;
+  }
+
+  /* Push content so footer isn't overlapped on short pages */
+  main{ min-height: calc(100vh - (56px + var(--safe-top)) - 120px) !important; }
+
+  /* Mobile menu stays below the 56px header */
+  #mobile-menu{ top: calc(56px + var(--safe-top)) !important; }
+  #mobile-menu.is-open, #mobile-menu[aria-hidden="false"]{ display:block !important; }
+  #mobile-menu[hidden]{ display:none !important; }
+}
+
+
+/* === ORVENZIA FIX: Keep "Start screening" black on hover/focus === */
+a[href*="screening"].btn:hover,
+a[href*="screening"].btn:focus,
+a[href*="screening"].cta:hover,
+a[href*="screening"].cta:focus,
+a[href*="screening"]:hover,
+a[href*="screening"]:focus,
+#start-screening:hover,
+#start-screening:focus,
+.start-screening:hover,
+.start-screening:focus,
+button.start-screening:hover,
+button.start-screening:focus {
+  background: #000 !important;
+  color: #fff !important;
+  border-color: #000 !important;
+  filter: none !important;
+  text-decoration: none !important;
+}
+
+a[href*="screening"].btn,
+a[href*="screening"].cta,
+a[href*="screening"],
+#start-screening,
+.start-screening,
+button.start-screening {
+  background: #000 !important;
+  color: #fff !important;
+  border: 1px solid #000 !important;
+}
+/* === END FIX === */
+
