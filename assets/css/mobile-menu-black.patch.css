@@ -41,43 +41,25 @@
   }
 }
 
-/* 2) Global heading scale-down for mobile (all pages) */
+/* === Global mobile heading size — same for all headings (<= 860px) === */
 @media (max-width: 860px) {
 
-  /* Top-level / hero / display headlines */
+  /* Alle egentlige overskrifter + de custom heading-klasser du bruger */
   h1,
-  .display,
-  .hero-card h1,
-  .hero-card .title {
-    font-size: clamp(22px, 5.2vw, 26px) !important;
-    line-height: 1.15 !important;
-    letter-spacing: -0.02em;
-  }
-
-  /* Section titles (About, Services, Cases, FAQ, etc.) */
   h2,
-  .section-title,
-  .svc-title {
-    font-size: clamp(20px, 4.6vw, 24px) !important;
-    line-height: 1.25 !important;
-  }
-
-  /* Card / value prop titles, small headlines */
   h3,
-  .ttitle {
-    font-size: clamp(18px, 4.2vw, 22px) !important;
-    line-height: 1.3 !important;
-  }
-
   h4,
   h5,
-  h6 {
-    font-size: clamp(16px, 3.8vw, 20px) !important;
-    line-height: 1.35 !important;
-  }
-
-  /* Case-card titles: slightly smaller so they don't dominate */
-  .case-card h3 {
-    font-size: 0.9rem !important;
+  h6,
+  .display,         /* About, Services, Cases m.fl. */
+  .section-title,   /* Sektionstitler (About, Terms, Privacy) */
+  .ttitle,          /* T-cards / value props */
+  .svc-title,       /* Services-titler */
+  .etitle,          /* Case-kort titler */
+  .exec-path-text   /* "Choose your executive path" + subtekst */
+  {
+    font-size: 22px !important;   /* juster tallet hvis du vil have dem større/mindre */
+    line-height: 1.30 !important;
+    letter-spacing: -0.01em;
   }
 }
